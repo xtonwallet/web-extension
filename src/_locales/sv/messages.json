@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON plånbok"
+  },
+  "extShortName": {
+    "message": "Säkert gratis TON plånbok."
+  },
+  "extDescription": {
+    "message": "TON Blockchain Wallet Gör det möjligt att skapa nya konton, göra säkerhetskopior, återställa dem, skicka transaktioner och mycket mer."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Transaktionen är bekräftad"
+  }
+}

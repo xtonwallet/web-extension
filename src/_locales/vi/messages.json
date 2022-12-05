@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON của tôi"
+  },
+  "extShortName": {
+    "message": "Ví TON miễn phí an toàn."
+  },
+  "extDescription": {
+    "message": "Ví miễn phí TON Blockchain cho phép bạn tạo tài khoản mới, hãy sao lưu, khôi phục chúng, gửi giao dịch và nhiều hơn nữa."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Giao dịch được xác nhận"
+  }
+}

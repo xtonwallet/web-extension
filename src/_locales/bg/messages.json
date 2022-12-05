@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON портфейл"
+  },
+  "extShortName": {
+    "message": "Сигурен безплатен TON портфейл."
+  },
+  "extDescription": {
+    "message": "Безплатен Ton Blockchain Wallet ви позволява да създавате нови профили, да направите резервни копия, да ги възстановите, изпращате транзакции и много други."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Транзакцията се потвърждава"
+  }
+}

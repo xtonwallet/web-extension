@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON የኪስ ቦርሳ"
+  },
+  "extShortName": {
+    "message": "ደህንነቱ የተጠበቀ ነፃ TON የኪስ ቦርሳ."
+  },
+  "extDescription": {
+    "message": "ነፃ TON blockchain wallet አዲስ መለያዎች እንዲፈጥሩ, ምትኬ ያዘጋጁ, እነሱን እንደገና ይመልሱ, ግብይቶችን እና ብዙዎችን ይልኩ."
+  },
+  "TransactionIsConfirmed": {
+    "message": "ግብይት ተረጋግ is ል"
+  }
+}

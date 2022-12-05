@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON Brieftasche"
+  },
+  "extShortName": {
+    "message": "Sichern Sie freie TON Brieftasche."
+  },
+  "extDescription": {
+    "message": "Die freie Ton-Blockchain-Brieftasche ermöglicht es Ihnen, neue Konten zu erstellen, Backups zu erstellen, wiederherzustellen, Transaktionen und vieles mehr zu senden."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Transaktion wird bestätigt"
+  }
+}

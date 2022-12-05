@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON maka"
+  },
+  "extShortName": {
+    "message": "Nodrošiniet bezmaksas TON maku."
+  },
+  "extDescription": {
+    "message": "Bezmaksas TON BlockChain maku ļauj izveidot jaunus kontus, veikt backups, atjaunot tos, nosūtīt darījumus un daudz ko citu."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Darījums tiek apstiprināts"
+  }
+}

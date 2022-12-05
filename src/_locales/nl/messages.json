@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON-portemonnee"
+  },
+  "extShortName": {
+    "message": "Beveiligde gratis TON portemonnee."
+  },
+  "extDescription": {
+    "message": "Met TON Blockchain-portemonnee kunt u nieuwe accounts maken, back-ups maken, ze herstellen, transacties verzenden en nog veel meer."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Transactie is bevestigd"
+  }
+}

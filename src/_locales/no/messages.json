@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON lommebok"
+  },
+  "extShortName": {
+    "message": "Sikker gratis TON lommebok."
+  },
+  "extDescription": {
+    "message": "Gratis TON Blockchain Wallet lar deg lage nye kontoer, lage sikkerhetskopier, gjenopprette dem, sende transaksjoner og mye mer."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Transaksjonen er bekreftet"
+  }
+}

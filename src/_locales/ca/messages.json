@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON cartera"
+  },
+  "extShortName": {
+    "message": "Cartera de TON gratuïta segura."
+  },
+  "extDescription": {
+    "message": "La cartera de flors de TON gratuïta us permet crear nous comptes, fer còpies de seguretat, restaurar-les, enviar transaccions i molt més."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Es confirma la transacció"
+  }
+}

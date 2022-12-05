@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON pénztárca"
+  },
+  "extShortName": {
+    "message": "Biztonságos szabad TON pénztárca."
+  },
+  "extDescription": {
+    "message": "Szabad TON blockchain pénztárca lehetővé teszi, hogy hozzon létre új fiókokat, hogy a mentést, állítsa vissza őket, send tranzakciók és még sok más."
+  },
+  "TransactionIsConfirmed": {
+    "message": "A tranzakció megerősítése"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON denarnica"
+  },
+  "extShortName": {
+    "message": "Varno brezplačno TON denarnico."
+  },
+  "extDescription": {
+    "message": "Brezplačna TON Blockchain denarnice vam omogoča, da ustvarite nove račune, naredite varnostne kopije, jih obnovite, pošiljanje transakcij in še veliko več."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Transakcija je potrjena"
+  }
+}

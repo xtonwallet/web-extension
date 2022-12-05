@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON piniginė"
+  },
+  "extShortName": {
+    "message": "Saugi nemokama TON piniginė."
+  },
+  "extDescription": {
+    "message": "Nemokamas TON Blockchain piniginė leidžia jums sukurti naujas sąskaitas, padaryti atsargines kopijas, atkurti juos, siųsti sandorius ir daug daugiau."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Sandoris patvirtinamas"
+  }
+}

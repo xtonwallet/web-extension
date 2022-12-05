@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON cüzdanım"
+  },
+  "extShortName": {
+    "message": "Güvenli ücretsiz TON cüzdanı."
+  },
+  "extDescription": {
+    "message": "Serbest TON Blockchain Cüzdan yeni hesaplar oluşturmanıza, yedekleri oluşturmanıza, geri yüklemenizi, işlemleri ve daha fazlasını göndermenizi sağlar."
+  },
+  "TransactionIsConfirmed": {
+    "message": "İşlem onaylandı"
+  }
+}

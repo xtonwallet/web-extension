@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON lompakko"
+  },
+  "extShortName": {
+    "message": "Suojattu vapaa TON lompakko."
+  },
+  "extDescription": {
+    "message": "Vapaa TON Blockchain Walletin avulla voit luoda uusia tilejä, tehdä varmuuskopioita, palauttaa ne, lähettää tapahtumia ja paljon muuta."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Kauppa vahvistetaan"
+  }
+}

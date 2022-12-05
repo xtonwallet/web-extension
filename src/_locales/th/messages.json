@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON กระเป๋าเงิน"
+  },
+  "extShortName": {
+    "message": "ปลอดภัยฟรี TON กระเป๋าเงิน"
+  },
+  "extDescription": {
+    "message": "ฟรี TON Blockchain กระเป๋าเงินช่วยให้คุณสามารถสร้างบัญชีใหม่ทำการสำรองข้อมูลคืนค่าส่งธุรกรรมและอีกมากมาย"
+  },
+  "TransactionIsConfirmed": {
+    "message": "ยืนยันการทำธุรกรรม"
+  }
+}

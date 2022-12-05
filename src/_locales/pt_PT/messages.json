@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "carteira de XTON"
+  },
+  "extShortName": {
+    "message": "Carteira de TON segura."
+  },
+  "extDescription": {
+    "message": "O Wallet Ton Blockchain permite que você crie novas contas, faça backups, restaurá-los, envie transações e muito mais."
+  },
+  "TransactionIsConfirmed": {
+    "message": "A transação é confirmada"
+  }
+}

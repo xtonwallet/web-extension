@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON peňaženka"
+  },
+  "extShortName": {
+    "message": "Bezpečná voľná TON peňaženka."
+  },
+  "extDescription": {
+    "message": "Bezplatná TON blockchain peňaženka vám umožní vytvárať nové účty, robiť zálohy, obnoviť ich, posielať transakcie a oveľa viac."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Transakcia je potvrdená"
+  }
+}

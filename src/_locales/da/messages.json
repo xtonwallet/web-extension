@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON tegnebog"
+  },
+  "extShortName": {
+    "message": "Sikker fri TON tegnebog."
+  },
+  "extDescription": {
+    "message": "Fri TON BlockChain Wallet giver dig mulighed for at oprette nye konti, lave sikkerhedskopier, genoprette dem, sende transaktioner og meget mere."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Transaktionen er bekræftet"
+  }
+}

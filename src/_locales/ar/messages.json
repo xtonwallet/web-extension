@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "محفظة XTON"
+  },
+  "extShortName": {
+    "message": "محفظة أمنية مجانية TON."
+  },
+  "extDescription": {
+    "message": "يتيح لك محفظة Ton Blockchain Wallet إنشاء حسابات جديدة، وجعل النسخ الاحتياطية واستعادةها وإرسال المعاملات وأكثر من ذلك بكثير."
+  },
+  "TransactionIsConfirmed": {
+    "message": "تم تأكيد المعاملة"
+  }
+}

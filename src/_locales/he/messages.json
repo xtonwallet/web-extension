@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "ארנקXTON"
+  },
+  "extShortName": {
+    "message": "ארנק מאובטח בחינם TON."
+  },
+  "extDescription": {
+    "message": "חינם טון בלוקשין ארנק מאפשר לך ליצור חשבונות חדשים, לבצע גיבויים, לשחזר אותם, לשלוח עסקאות ועוד."
+  },
+  "TransactionIsConfirmed": {
+    "message": "העסקה אושרה"
+  }
+}

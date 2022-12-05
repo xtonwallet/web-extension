@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON Portafoglio"
+  },
+  "extShortName": {
+    "message": "Secure wallet gratuito per TON."
+  },
+  "extDescription": {
+    "message": "Il portafoglio Blockchain GRATUITO consente di creare nuovi account, effettuare backup, ripristinarli, inviare transazioni e molto altro."
+  },
+  "TransactionIsConfirmed": {
+    "message": "La transazione è confermata"
+  }
+}

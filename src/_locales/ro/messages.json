@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "Portofelul de XTON"
+  },
+  "extShortName": {
+    "message": "Secure portofel de TON gratuit."
+  },
+  "extDescription": {
+    "message": "Gratuit TON Blockchain vă permite să creați conturi noi, să faceți backup-uri, să le restabiliți, să trimiteți tranzacții și multe altele."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Tranzacția este confirmată"
+  }
+}

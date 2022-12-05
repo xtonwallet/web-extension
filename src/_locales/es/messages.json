@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON wallet"
+  },
+  "extShortName": {
+    "message": "Cartera segura de TON gratis."
+  },
+  "extDescription": {
+    "message": "La billetera TON Blockchain le permite crear nuevas cuentas, hacer copias de seguridad, restaurarlas, enviar transacciones y mucho más."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Se confirma la transacción"
+  }
+}

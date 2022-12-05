@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON wallet"
+  },
+  "extShortName": {
+    "message": "XTON wallet"
+  },
+  "extDescription": {
+    "message": "TON blockchain wallet allows you to create new accounts, make backups, restore them, send transactions and much more."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Transaction is confirmed"
+  }
+}

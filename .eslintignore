@@ -1,0 +1,8 @@
+!.eslintrc.js
+
+node_modules/**
+dist/**
+builds/**
+docs/**
+
+package-lock.json

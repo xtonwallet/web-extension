@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON portfel"
+  },
+  "extShortName": {
+    "message": "Bezpieczny portfel wolny TON."
+  },
+  "extDescription": {
+    "message": "Wolny portfel BlockChain umożliwia tworzenie nowych kont, tworzenia kopii zapasowych, przywrócić je, wysyłać transakcje i wiele innych."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Transakcja została potwierdzona"
+  }
+}

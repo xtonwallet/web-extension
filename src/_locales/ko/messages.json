@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "엑스톤 지갑"
+  },
+  "extShortName": {
+    "message": "자유로운 톤 지갑을 보호하십시오."
+  },
+  "extDescription": {
+    "message": "무료 Ton 블록 체인 지갑을 사용하면 새 계정을 만들고, 백업을 만들고, 복원, 트랜잭션 전송, 훨씬 더 많이 보낼 수 있습니다."
+  },
+  "TransactionIsConfirmed": {
+    "message": "거래가 확인됩니다"
+  }
+}

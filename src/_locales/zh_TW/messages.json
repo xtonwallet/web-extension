@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "xton錢包"
+  },
+  "extShortName": {
+    "message": "安全免費的噸錢包。"
+  },
+  "extDescription": {
+    "message": "免費的 TON 區塊鏈錢包允許您創建新帳戶、進行備份、恢復它們、發送交易等等。"
+  },
+  "TransactionIsConfirmed": {
+    "message": "交易已確認"
+  }
+}

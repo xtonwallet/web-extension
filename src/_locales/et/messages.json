@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON rahakott"
+  },
+  "extShortName": {
+    "message": "Turvaline vaba TON rahakott."
+  },
+  "extDescription": {
+    "message": "Tasuta Ton Blockchain Wallet võimaldab teil luua uusi kontosid, teha varukoopiaid, taastada need, saadate tehinguid ja palju muud."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Tehing kinnitatakse"
+  }
+}

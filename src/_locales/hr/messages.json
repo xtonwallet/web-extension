@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON novčanik"
+  },
+  "extShortName": {
+    "message": "Siguran TON novčanik."
+  },
+  "extDescription": {
+    "message": "TON Blockchain novčanik omogućuje stvaranje novih računa, napravite sigurnosne kopije, obnovite ih, pošaljite transakcije i još mnogo toga."
+  },
+  "TransactionIsConfirmed": {
+    "message": "Transakcija je potvrđena"
+  }
+}

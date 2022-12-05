@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "クストンウォレット"
+  },
+  "extShortName": {
+    "message": "安全なフリートンの財布。"
+  },
+  "extDescription": {
+    "message": "フリートンブロックチェーンウォレット新しいアカウントを作成したり、バックアップを作成したり、それらを復元したり、トランザクションを送信したりすることができます。"
+  },
+  "TransactionIsConfirmed": {
+    "message": "取引が確認されています"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "XTON portefeuille"
+  },
+  "extShortName": {
+    "message": "Sécurisé Gratuit TON portefeuille."
+  },
+  "extDescription": {
+    "message": "Le portefeuille de blockchain gratuit vous permet de créer de nouveaux comptes, de faire des sauvegardes, de les restaurer, d'envoyer des transactions et bien plus encore."
+  },
+  "TransactionIsConfirmed": {
+    "message": "La transaction est confirmée"
+  }
+}
