@@ -7,12 +7,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="140"
-   height="40"
-   viewBox="0 0 140 40"
+   width="1400"
+   height="400"
+   viewBox="0 0 1400 400"
    version="1.1"
    id="svg12"
-   sodipodi:docname="xton_icon.svg"
+   sodipodi:docname="icon.svg"
    inkscape:version="0.92.1 r15371"
    inkscape:export-filename="C:\Users\kviktorov\Downloads\xton_icon.png"
    inkscape:export-xdpi="371.51334"
@@ -45,65 +45,50 @@
      inkscape:window-height="705"
      id="namedview14"
      showgrid="false"
-     inkscape:zoom="3.6215334"
-     inkscape:cx="101.55444"
-     inkscape:cy="64.195392"
+     inkscape:zoom="0.45269168"
+     inkscape:cx="759.95487"
+     inkscape:cy="146.23856"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg12" />
-  <path
-     d="m 75.367034,31.723874 v -17.792 h -6.848 v -4.768 h 19.6162 v 4.768 h -6.8482 v 17.792 z"
-     id="path2"
-     inkscape:connector-curvature="0"
-     style="fill:#000000;fill-opacity:1" />
-  <path
-     d="m 89.286986,20.427874 c 0,-2.3467 0.458,-4.384 1.376,-6.112 0.917001,-1.7493 2.229004,-3.104 3.936004,-4.064 1.706,-0.96 3.722,-1.44 6.048,-1.44 2.346,0 4.373,0.48 6.08,1.44 1.706,0.96 3.018,2.3147 3.936,4.064 0.938,1.728 1.408,3.7653 1.408,6.112 0,2.3253 -0.47,4.3627 -1.408,6.112 -0.918,1.7493 -2.23,3.1147 -3.936,4.096 -1.707,0.96 -3.734,1.44 -6.08,1.44 -2.326,0 -4.342,-0.48 -6.048,-1.44 -1.686,-0.9813 -2.998003,-2.3467 -3.936004,-4.096 -0.918,-1.7493 -1.376,-3.7867 -1.376,-6.112 z m 6.176004,0 c 0,1.408 0.192,2.6133 0.576,3.616 0.384,1.0027 0.949,1.7707 1.696,2.304 0.768,0.5333 1.738,0.8 2.912,0.8 1.749,0 3.061,-0.5867 3.936,-1.76 0.874,-1.1947 1.312,-2.848 1.312,-4.96 0,-1.408 -0.192,-2.6133 -0.576,-3.616 -0.384,-1.0027 -0.971,-1.76 -1.76,-2.272 -0.768,-0.5333 -1.739,-0.8 -2.912,-0.8 -1.75,0 -3.051,0.5867 -3.904,1.76 -0.854,1.152 -1.28,2.7947 -1.28,4.928 z"
-     id="path4"
-     inkscape:connector-curvature="0"
-     style="fill:#000000;fill-opacity:1" />
-  <path
-     d="m 115.02724,31.723874 v -22.56 h 4.352 l 11.424,14.176 h -0.928 v -14.176 h 5.472 v 22.56 h -4.352 l -11.36,-14.176 h 0.928 v 14.176 z"
-     id="path6"
-     inkscape:connector-curvature="0"
-     style="fill:#000000;fill-opacity:1" />
   <text
      xml:space="preserve"
-     style="font-style:normal;font-weight:normal;font-size:30.46240616px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.76156014px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     x="45.324928"
-     y="31.133656"
+     style="font-style:normal;font-weight:normal;font-size:336.6395874px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:8.41598988px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="477.20837"
+     y="320.3187"
      id="text4535"
-     transform="scale(0.98107064,1.0192946)"><tspan
+     transform="scale(0.97397633,1.026719)"><tspan
        sodipodi:role="line"
        id="tspan4533"
-       x="45.324928"
-       y="31.133656"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke-width:0.76156014px">X</tspan></text>
+       x="477.20837"
+       y="320.3187"
+       style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-family:Mulish;-inkscape-font-specification:'Mulish Heavy';fill:#000000;fill-opacity:1;stroke-width:8.41598988px">XTON</tspan></text>
   <rect
-     style="opacity:1;fill:#0088cc;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.86116028;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+     style="opacity:1;fill:#0088cc;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:30.95769119;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
      id="rect4529"
-     width="33.657646"
-     height="19.70232"
-     x="6.2845259"
-     y="10.574329"
-     ry="1.3860974"
+     width="364.17499"
+     height="213.17868"
+     x="38.200867"
+     y="100.47031"
+     ry="14.997544"
      inkscape:export-xdpi="734.04944"
      inkscape:export-ydpi="734.04944" />
   <rect
-     style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.1466341;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+     style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:34.0465126;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
      id="rect4531"
-     width="4.0708423"
-     height="3.149142"
-     x="32.401077"
-     y="24.054256"
-     ry="0.84296471"
+     width="44.046425"
+     height="34.073647"
+     x="320.78137"
+     y="246.32272"
+     ry="9.1208601"
      inkscape:export-xdpi="734.04944"
      inkscape:export-ydpi="734.04944" />
   <path
-     d="m 10.82425,12.643494 10.832763,-5.5e-5 c 0.383249,0 0.766231,0.05608 1.166421,0.242927 0.479735,0.223509 0.734166,0.576078 0.912406,0.83679 0.01521,0.01992 0.02667,0.04129 0.03881,0.06249 0.209438,0.373168 0.317568,0.775775 0.317568,1.209081 0,0.411633 -0.09786,0.860145 -0.317568,1.251053 -0.0022,0.0046 -0.0038,0.0074 -0.0075,0.01032 l -6.843984,11.756375 c -0.150803,0.259304 -0.42871,0.418318 -0.728683,0.417249 -0.300049,-7.17e-4 -0.576679,-0.162201 -0.725714,-0.422438 L 8.750535,16.275943 c -0.0022,-7.16e-4 -0.0037,-0.0074 -0.0075,-0.0074 C 8.58921,16.01536 8.351491,15.623432 8.309909,15.117794 8.271839,14.652793 8.376139,14.186922 8.609962,13.783001 8.843754,13.378988 9.19528,13.056038 9.618358,12.858306 10.071971,12.646242 10.531635,12.64468 10.821559,12.64468 Z m 4.534628,1.679462 H 10.82425 c -0.297759,0 -0.412261,0.01982 -0.49222,0.05554 -0.11043,0.05152 -0.203335,0.136333 -0.265402,0.243694 -0.06207,0.107195 -0.09024,0.231884 -0.07995,0.356407 0.0078,0.0716 0.03426,0.153177 0.206762,0.436256 0.0037,0.0074 0.0078,0.01033 0.0114,0.01992 l 5.155092,9.001672 z m 1.679513,0 v 10.156279 l 5.274464,-9.060439 c 0.05938,-0.108102 0.09977,-0.264622 0.09977,-0.424046 0,-0.129491 -0.02665,-0.241803 -0.08682,-0.357959 -0.06282,-0.09052 -0.10129,-0.138717 -0.133266,-0.171345 -0.02666,-0.02677 -0.04875,-0.04284 -0.07845,-0.05737 -0.124889,-0.05836 -0.252453,-0.08577 -0.456851,-0.08577 z"
+     d="m 87.320582,122.85845 117.210258,-5.4e-4 c 4.14674,0 8.2906,0.607 12.62065,2.6285 5.19072,2.41826 7.94366,6.23306 9.87221,9.05405 0.16457,0.21532 0.28857,0.44686 0.41992,0.67625 2.26612,4.03758 3.43608,8.39381 3.43608,13.08222 0,4.45382 -1.05884,9.30669 -3.43608,13.53633 -0.0238,0.0541 -0.0411,0.0757 -0.0811,0.11145 l -74.05175,127.20366 c -1.63169,2.80573 -4.63864,4.52622 -7.88434,4.51464 -3.24652,-0.008 -6.23965,-1.755 -7.85221,-4.57068 L 64.883031,162.16148 c -0.0238,-0.008 -0.04003,-0.0757 -0.08115,-0.0757 -1.664383,-2.7394 -4.236497,-6.98007 -4.686414,-12.45109 -0.411916,-5.03129 0.716607,-10.07199 3.246567,-14.4424 2.529624,-4.37137 6.333128,-7.86569 10.910823,-10.00512 4.908083,-2.29459 9.881637,-2.31147 13.018609,-2.31147 z m 49.064568,18.17183 H 87.320582 c -3.221746,0 -4.460655,0.21424 -5.32581,0.60051 -1.19485,0.55723 -2.20008,1.47509 -2.871643,2.63672 -0.671596,1.15979 -0.976395,2.50894 -0.865058,3.85635 0.0844,0.77471 0.370693,1.6573 2.237161,4.72022 0.04003,0.0757 0.0844,0.11144 0.123347,0.21531 l 55.777981,97.39788 z m 18.1723,0 v 109.89073 l 57.06958,-98.03376 c 0.64249,-1.16975 1.07951,-2.86329 1.07951,-4.58821 0,-1.40108 -0.28835,-2.61628 -0.93939,-3.87312 -0.67971,-0.97921 -1.09595,-1.50095 -1.44193,-1.8539 -0.28846,-0.28997 -0.52748,-0.46309 -0.84883,-0.62107 -1.3513,-0.63188 -2.73154,-0.92835 -4.94312,-0.92835 z"
      id="path10"
      inkscape:connector-curvature="0"
-     style="clip-rule:evenodd;fill:#ffffff;fill-rule:evenodd;stroke-width:0.68978995"
+     style="clip-rule:evenodd;fill:#ffffff;fill-rule:evenodd;stroke-width:7.46351242"
      inkscape:export-xdpi="734.04944"
      inkscape:export-ydpi="734.04944" />
 </svg>

@@ -1,7 +1,7 @@
 # XTON wallet
 
 <div align="center">
-  <img src="/src/assets/img/icon-128.png" title="XTON wallet">
+  <img src="/docs/icon.svg" title="XTON wallet">
 </div>
 
 This repository contains source code for web-extension that allow interaction with TON (The Open Network) blockchain from your web browser.
@@ -83,6 +83,7 @@ npm run build
 
 This command will generate a zip file for each browser.
 
+For local the development process you can find comfortable to have [MyLocalTon](https://github.com/neodiX42/MyLocalTon)
 
 # Documentation
 
@@ -155,7 +156,7 @@ If you are native speaker on any other language and can help with translation, p
 
 * Create a commit with a description
 
-* Increase a version in package.json and manifest.json and update [CHANGELOG](CHANGELOG) file
+* Increase a version in package.json and manifest.json and update [CHANGELOG](CHANGELOG.md) file
 
 ```
   npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease [--preid=<prerelease-id>] | from-git]
