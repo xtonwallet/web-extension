@@ -318,5 +318,10 @@
   "Send from XTON wallet": "ከ xton Wallet ይላኩ",
   "Empty list": "ባዶ ዝርዝር",
   "Waiting for the transaction confirmation on the blockchain": "በመያዣው ላይ የግብይት ማረጋገጫ ማረጋገጫ በመጠበቅ ላይ",
-  "Update transactions list": "የግብይቶች ዝርዝርን ያዘምኑ"
+  "Update transactions list": "የግብይቶች ዝርዝርን ያዘምኑ",
+  "Item index": "የእቃ ማውጫ ማውጫ",
+  "Description": "መግለጫ",
+  "External link": "ውጫዊ አገናኝ",
+  "NFT content": "Nft ይዘት",
+  "Owner": "ባለቤት"
 }

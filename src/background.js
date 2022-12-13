@@ -4,13 +4,13 @@ import { controller } from './background/controller.js';
 const devMode = __DEV_MODE__;
 
 let INSTALL_URL = {
-  "en": "https://xtonwallet.com/welcome_page_for_extension",
-  "ru": "https://xtonwallet.com/ru/welcome_page_for_extension",
+  "en": "https://docs.xtonwallet.com/welcome_page_for_extension",
+  "ru": "https://docs.xtonwallet.com/ru/welcome_page_for_extension",
 };
 
 let UNINSTALL_URL = {
-  "en": "https://xtonwallet.com/regret_page_for_extension",
-  "ru": "https://xtonwallet.com/ru/regret_page_for_extension",
+  "en": "https://docs.xtonwallet.com/regret_page_for_extension",
+  "ru": "https://docs.xtonwallet.com/ru/regret_page_for_extension",
 };
 
 if (devMode) {

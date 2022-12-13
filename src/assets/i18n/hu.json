@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Küldje el az XTON pénztárcájától",
   "Empty list": "Üres lista",
   "Waiting for the transaction confirmation on the blockchain": "Várakozás a tranzakció megerősítésére a blokkláncon",
-  "Update transactions list": "Frissítse a tranzakciók listáját"
+  "Update transactions list": "Frissítse a tranzakciók listáját",
+  "Item index": "Tételindex",
+  "Description": "Leírás",
+  "External link": "Külső hivatkozás",
+  "NFT content": "NFT tartalom",
+  "Owner": "Tulajdonos"
 }

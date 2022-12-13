@@ -6,7 +6,7 @@ const defaultNetworksStore = {
     "name": "Main",
     "server": "mainnet",
     "explorer": "https://tonscan.org",
-    "endpoint": "https://toncenter.com/api/v2/jsonRPC",
+    "endpoint": "https://mainnet.xtonwallet.com/api/v2/jsonRPC",
     "coinName": "TONCOIN"
   }
 };

@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Gửi từ ví Xton",
   "Empty list": "Danh sách trống",
   "Waiting for the transaction confirmation on the blockchain": "Chờ xác nhận giao dịch trên blockchain",
-  "Update transactions list": "Cập nhật danh sách giao dịch"
+  "Update transactions list": "Cập nhật danh sách giao dịch",
+  "Item index": "Chỉ mục mục",
+  "Description": "Sự mô tả",
+  "External link": "Liên kết bên ngoài",
+  "NFT content": "NFT nội dung",
+  "Owner": "Người sở hữu"
 }

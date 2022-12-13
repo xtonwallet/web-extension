@@ -5,14 +5,13 @@
   //Components
   import IntroFirstRun from "./IntroFirstRun.svelte";
   import CreatePassword from "./CreatePassword.svelte";
-  import Restore from "./Restore.svelte";
+
   import Tos from "./Tos.svelte";
   import GenerateWallet from "./GenerateWallet.svelte";
   import DeployWallet from "./DeployWallet.svelte";
   import Finishing from "./Finishing.svelte";
 
   import Steps from "../../Elements/Steps.svelte";
-  import Step from "../../Elements/Step.svelte";
   import Logo from "../../Elements/Logo.svelte";
 
   //Context
@@ -45,7 +44,6 @@
   ];
 
   $: currentPage = steps[currentStep].page;
-  $: hideSteps = steps[currentStep].hideSteps;
   $: back = steps[currentStep].back;
   $: hideBack = steps[currentStep].hideBack ? false : true;
 </script>

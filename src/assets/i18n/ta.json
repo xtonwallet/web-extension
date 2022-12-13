@@ -318,5 +318,10 @@
   "Send from XTON wallet": "எக்ஸ்டன் பணப்பையிலிருந்து அனுப்பவும்",
   "Empty list": "வெற்று பட்டியல்",
   "Waiting for the transaction confirmation on the blockchain": "பிளாக்செயினில் பரிவர்த்தனை உறுதிப்படுத்தலுக்காக காத்திருக்கிறது",
-  "Update transactions list": "பரிவர்த்தனை பட்டியலைப் புதுப்பிக்கவும்"
+  "Update transactions list": "பரிவர்த்தனை பட்டியலைப் புதுப்பிக்கவும்",
+  "Item index": "பொருள் அட்டவணை",
+  "Description": "விளக்கம்",
+  "External link": "வெளிப்புற இணைப்பு",
+  "NFT content": "NFT உள்ளடக்கம்",
+  "Owner": "உரிமையாளர்"
 }

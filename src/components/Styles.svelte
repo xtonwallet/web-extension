@@ -1135,9 +1135,11 @@
     background: inherit;
     border: 1px solid transparent;
   }
+
   .options-box:first-child {
     margin-right: 1rem;
   }
+
   .options {
     cursor: pointer;
     box-sizing: border-box;
@@ -1149,6 +1151,7 @@
     padding: 16px 0;
     margin: 0 0.5rem;
   }
+  
   .options-box-primary {
     color: var(--color-white);
     background-color: var(--color-primary);
@@ -1189,5 +1192,9 @@
   .not-overflowed .grouped {
     overflow-x: initial !important;
     overflow-y: initial !important;
+  }
+
+  .hidden {
+    display: none;
   }
 </style>

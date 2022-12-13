@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Wyślij z portfela Xtona",
   "Empty list": "Pusta lista",
   "Waiting for the transaction confirmation on the blockchain": "Czekam na potwierdzenie transakcji na blockchain",
-  "Update transactions list": "Oppdater transaksjonsliste"
+  "Update transactions list": "Oppdater transaksjonsliste",
+  "Item index": "Indeks pozycji",
+  "Description": "Opis",
+  "External link": "Link zewnętrzny",
+  "NFT content": "Treść NFT",
+  "Owner": "Właściciel"
 }

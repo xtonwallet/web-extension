@@ -318,5 +318,10 @@
   "Send from XTON wallet": "ಎಕ್ಸ್‌ಟನ್ ವಾಲೆಟ್‌ನಿಂದ ಕಳುಹಿಸಿ",
   "Empty list": "ಖಾಲಿ ಪಟ್ಟಿ",
   "Waiting for the transaction confirmation on the blockchain": "ಬ್ಲಾಕ್‌ಚೈನ್‌ನಲ್ಲಿ ವಹಿವಾಟು ದೃ mation ೀಕರಣಕ್ಕಾಗಿ ಕಾಯಲಾಗುತ್ತಿದೆ",
-  "Update transactions list": "ವಹಿವಾಟುಗಳ ಪಟ್ಟಿಯನ್ನು ನವೀಕರಿಸಿ"
+  "Update transactions list": "ವಹಿವಾಟುಗಳ ಪಟ್ಟಿಯನ್ನು ನವೀಕರಿಸಿ",
+  "Item index": "ಐಟಂ ಸೂಚ್ಯಂಕ",
+  "Description": "ವಿವರಣೆ",
+  "External link": "ಬಾಹ್ಯ ಸಂಪರ್ಕ",
+  "NFT content": "Nft ವಿಷಯ",
+  "Owner": "ಮಾಲಿಕ"
 }

@@ -4,7 +4,7 @@ import {
 } from "./../common/stores.js";
 import methodsList from "./../common/methodsList.js";
 
-browser.alarms.create("autologoutInterval", { "periodInMinutes": 1 });
+browser.alarms.create("autologoutInterval", { "periodInMinutes": 5 });
 
 export const eventsHandler = (controller) => {
   const fromPage = (sender) => {
@@ -262,6 +262,8 @@ export const eventsHandler = (controller) => {
           if (message.type === 'getFamousTokens') return Promise.resolve(controller.getFamousTokens(message.data));
 
           if (message.type === 'importToken') return Promise.resolve(controller.importToken(message.data));
+          
+          if (message.type === 'getNftContent') return Promise.resolve(controller.getNftContent(message.data));
 
           if (message.type === 'tokenList') return Promise.resolve(controller.getTokenListForUser(message.data));
 

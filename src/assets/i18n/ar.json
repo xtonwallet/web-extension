@@ -318,5 +318,10 @@
   "Send from XTON wallet": "أرسل من محفظة Xton",
   "Empty list": "قائمة فارغة",
   "Waiting for the transaction confirmation on the blockchain": "في انتظار تأكيد المعاملة على blockchain",
-  "Update transactions list": "تحديث قائمة المعاملات"
+  "Update transactions list": "تحديث قائمة المعاملات",
+  "Item index": "مؤشر البند",
+  "Description": "وصف",
+  "External link": "رابط خارجي",
+  "NFT content": "محتوى NFT",
+  "Owner": "صاحب"
 }

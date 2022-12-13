@@ -18,29 +18,39 @@
   import { Checkbox, Field, Input, Button } from "svelte-chota";
 
   //Components
-  import ErrorBox from "../../Elements/ErrorBox.svelte";
   import Select from "../../Elements/Select";
 
   //Context
   const { switchPage } = getContext("app_functions");
 
   //DOM nodes
-  let error, formObj, language, autologout, pincode, retrievingTransactionsPeriod, enableProxy, currency;
-  let currentValue;
-  let complexItems = [];
+  let formObj, language, autologout, pincode, retrievingTransactionsPeriod, enableProxy, currency;
+  let currentCurrencyValue, currentLanguageValue;
+  let currenciesItems = [];
+  let languagesItems = [];
 
   //Props
   onMount(() => {
     language = document.getElementById("language-input");
+    language.dataset.value = $locale;
+    currentLanguageValue = { value: $currentLang, label: $_($currentLang) };
+    for (let i in $locales) {
+      languagesItems.push({
+        value: $locales[i],
+        label: $_($locales[i]),
+      });
+    }
+
     autologout = document.getElementById("autologout-input");
     pincode = document.getElementById("pincode-input");
     retrievingTransactionsPeriod = document.getElementById("retrieving-transactions-period-input");
     enableProxy = document.getElementById("enable-proxy-input");
+
     currency = document.getElementById("currency-input");
     currency.dataset.value = $currentCurrency;
-    currentValue = { value: $currentCurrency, label: CURRENCIES_LIST[$currentCurrency] };
+    currentCurrencyValue = { value: $currentCurrency, label: CURRENCIES_LIST[$currentCurrency] };
     for (let i in CURRENCIES_LIST) {
-      complexItems.push({
+      currenciesItems.push({
         value: i,
         label: CURRENCIES_LIST[i],
       });
@@ -50,7 +60,7 @@
   const handleSubmit = async () => {
     try {
       if (formObj.checkValidity()) {
-        settingsStore.setLang(language.value);
+        settingsStore.setLang(language.dataset.value);
         settingsStore.setAutologout(autologout.value);
         settingsStore.setRetrievingTransactionsPeriod(retrievingTransactionsPeriod.value);
         settingsStore.setEnabledProxy(enableProxy.checked);
@@ -71,20 +81,20 @@
 
         // need to change storage on background
         browser.runtime
-        .sendMessage({ type: "setSettings", data: {
-          "setLang": language.value,
-          "setAutologout": autologout.value,
-          "setRetrievingTransactionsPeriod": retrievingTransactionsPeriod.value,
-          "setEnabledPinPad": settingEnabledPinPad,
-          "setEnabledProxy": enableProxy.checked,
-          "setCurrency": currency.dataset.value,
-          "setRate": currentRate,
-        }})
-        .then(() => {
-          switchPage("AccountMain");
-        }).catch((error) => {
-          console.error("Error on sendMessage:" + JSON.stringify(error));
-        });
+          .sendMessage({ type: "setSettings", data: {
+            "setLang": language.dataset.value,
+            "setAutologout": autologout.value,
+            "setRetrievingTransactionsPeriod": retrievingTransactionsPeriod.value,
+            "setEnabledPinPad": settingEnabledPinPad,
+            "setEnabledProxy": enableProxy.checked,
+            "setCurrency": currency.dataset.value,
+            "setRate": currentRate,
+          }})
+          .then(() => {
+            switchPage("AccountMain");
+          }).catch((error) => {
+            console.error("Error on sendMessage:" + JSON.stringify(error));
+          });
       }
     } catch (e) {
       formObj.reportValidity();
@@ -115,21 +125,23 @@
   <Field grouped class="not-overflowed">
     <div class="input-box-50">
       <Field label={$_('Language')}>
-        <select id="language-input" bind:value={$locale}>
-          {#each $locales as locale}
-            <option selected={locale == $currentLang} value={locale}>
-              {$_(locale)}
-            </option>
-          {/each}
-        </select>
+        <Select
+          id="language-input"
+          items={languagesItems}
+          value={currentLanguageValue}
+          placeholder={$_('Select or enter a new one') + '...'}
+          noOptionsMessage={$_('No matches')}
+          on:select={(event) => {language.dataset.value = event.detail.value; $locale = event.detail.value;}}
+          on:clear={(event) => {language.dataset.value = ""}}
+          />
       </Field>
     </div>
     <div class="input-box-50">
       <Field label={$_('Currency to display asset cost')}>
         <Select
           id="currency-input"
-          items={complexItems}
-          value={currentValue}
+          items={currenciesItems}
+          value={currentCurrencyValue}
           placeholder={$_('Select or enter a new one') + '...'}
           noOptionsMessage={$_('No matches')}
           on:select={(event) => {currency.dataset.value = event.detail.value}}

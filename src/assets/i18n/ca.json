@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Enviar des de Xton Wallet",
   "Empty list": "Llista buida",
   "Waiting for the transaction confirmation on the blockchain": "Esperant la confirmació de la transacció a la blockchain",
-  "Update transactions list": "Actualitzeu la llista de transaccions"
+  "Update transactions list": "Actualitzeu la llista de transaccions",
+  "Item index": "Índex de l'element",
+  "Description": "Descripció",
+  "External link": "Enllaç extern",
+  "NFT content": "Contingut NFT",
+  "Owner": "Propietari"
 }

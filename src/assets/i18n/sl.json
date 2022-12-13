@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Pošlite z Xton Wallet",
   "Empty list": "Prázdny zoznam",
   "Waiting for the transaction confirmation on the blockchain": "Čakanie na potvrdenie transakcie na blockchainu",
-  "Update transactions list": "Posodobite seznam transakcij"
+  "Update transactions list": "Posodobite seznam transakcij",
+  "Item index": "Indeks elementa",
+  "Description": "Opis",
+  "External link": "Zunanja povezava",
+  "NFT content": "NFT vsebina",
+  "Owner": "Lastnik"
 }

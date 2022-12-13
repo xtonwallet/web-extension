@@ -318,5 +318,10 @@
   "Send from XTON wallet": "ارسال از کیف پول xton",
   "Empty list": "لیست خالی",
   "Waiting for the transaction confirmation on the blockchain": "منتظر تأیید معامله در blockchain",
-  "Update transactions list": "لیست معاملات را به روز کنید"
+  "Update transactions list": "لیست معاملات را به روز کنید",
+  "Item index": "فهرست مورد",
+  "Description": "شرح",
+  "External link": "لینک خارجی",
+  "NFT content": "محتوای NFT",
+  "Owner": "صاحب"
 }

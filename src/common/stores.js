@@ -1,7 +1,8 @@
 import { writable} from 'svelte/store';
 import { networksStore } from './stores/networks.js';
 import { accountStore } from './stores/account.js';
-import { sendNotificationToInPageScript } from './utils.js';
+import { settingsStore } from './stores/settings.js';
+import { sendNotificationToInPageScript, broadcastMessage } from './utils.js';
 
 let lastCurrentAccount = null;
 
@@ -9,6 +10,7 @@ let lastCurrentAccount = null;
 accountStore.subscribe(async (current) => {
   if (current.currentAccount && current.currentAccount.address != lastCurrentAccount) {
     sendNotificationToInPageScript('xtonwallet-notification', {"method": "accountChanged", "params": current.currentAccount.address});
+    broadcastMessage("accountChanged", current.currentAccount);
     lastCurrentAccount = current.currentAccount.address;
   }
 });
@@ -19,7 +21,17 @@ let lastCurrentEndpoint = null;
 networksStore.subscribe(async (current) => {
   if (current.currentNetwork && current.currentNetwork.server != lastCurrentEndpoint) {
     sendNotificationToInPageScript('xtonwallet-notification', {"method": "endpointChanged", "params": current.currentNetwork.server});
+    broadcastMessage("endpointChanged", current.currentNetwork);
     lastCurrentEndpoint = current.currentNetwork.server;
+  }
+});
+
+let lastThemeName = null;
+//This is called everytime when settingsStore is updated
+settingsStore.subscribe(async (current) => {
+  if (current.themeName && current.themeName != lastThemeName) {
+    broadcastMessage("themeChanged", current.themeName);
+    lastThemeName = current.themeName;
   }
 });
 

@@ -50,7 +50,7 @@
 	}
 
 	:global(.page .modal) {
-		max-width: 30rem;
+		max-width: 33rem;
 	}
 </style>
 

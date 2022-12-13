@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Nosūtiet no Xton maka",
   "Empty list": "Tukšs saraksts",
   "Waiting for the transaction confirmation on the blockchain": "Gaidot darījuma apstiprinājumu blokķēdē",
-  "Update transactions list": "Atjaunināt darījumu sarakstu"
+  "Update transactions list": "Atjaunināt darījumu sarakstu",
+  "Item index": "Vienumu indekss",
+  "Description": "Apraksts",
+  "External link": "Ārējā saite",
+  "NFT content": "NFT saturs",
+  "Owner": "Īpašnieks"
 }

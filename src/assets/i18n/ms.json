@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Hantar dari Xton Wallet",
   "Empty list": "Senarai kosong",
   "Waiting for the transaction confirmation on the blockchain": "Menunggu pengesahan transaksi di blok block",
-  "Update transactions list": "Kemas kini senarai Transaksi"
+  "Update transactions list": "Kemas kini senarai Transaksi",
+  "Item index": "Indeks item",
+  "Description": "Penerangan",
+  "External link": "Pautan luaran",
+  "NFT content": "Kandungan NFT",
+  "Owner": "Pemilik"
 }

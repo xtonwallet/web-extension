@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Tuma kutoka kwa mkoba wa Xton",
   "Empty list": "Orodha tupu",
   "Waiting for the transaction confirmation on the blockchain": "Kusubiri uthibitisho wa manunuzi kwenye blockchain",
-  "Update transactions list": "Sasisha orodha ya shughuli"
+  "Update transactions list": "Sasisha orodha ya shughuli",
+  "Item index": "Kielelezo cha Bidhaa",
+  "Description": "Maelezo",
+  "External link": "Kiunga cha nje",
+  "NFT content": "Yaliyomo ya NFT",
+  "Owner": "Mmiliki"
 }

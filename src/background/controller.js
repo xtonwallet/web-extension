@@ -598,15 +598,35 @@ export const controller = () => {
         resolve(value.address);
       });
     });
+    
+    let tokenObject;
+    if (data.type == "74") {
+      tokenObject = {
+        "name": data.name,
+        "symbol": data.symbol,
+        "decimals": data.decimals,
+        "address": data.address,
+        "icon": data.icon,
+        "type": data.type
+      };
+    }
+    
+    if (data.type == "64") {
+      tokenObject = {
+        "name": data.name,
+        "itemIndex": data.itemIndex,
+        "description": data.description,
+        "externalLink": data.externalLink,
+        "address": data.address,
+        "icon": data.icon,
+        "type": data.type
+      };
+    }
+    return await accountsController.importToken(account, data.server, tokenObject);
+  };
 
-    return await accountsController.importToken(account, data.server, {
-      "name": data.name,
-      "symbol": data.symbol,
-      "decimals": data.decimals,
-      "address": data.address,
-      "icon": data.icon,
-      "type": data.type
-    });
+  const getNftContent  = async (data) => {
+    return await accountsController.getNftContent(data.server, data.address);
   };
 
   const getTokenListForUser = async (data) => {
@@ -658,6 +678,7 @@ export const controller = () => {
     removeSubscriptionId,
     getFamousTokens,
     importToken,
+    getNftContent,
     getTokenListForUser
   };
 };

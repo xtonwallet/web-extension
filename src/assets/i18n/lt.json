@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Siųsti iš „Xtton“ piniginės",
   "Empty list": "Tuščias sąrašas",
   "Waiting for the transaction confirmation on the blockchain": "Laukia operacijos patvirtinimo „blockchain“",
-  "Update transactions list": "Atnaujinkite operacijų sąrašą"
+  "Update transactions list": "Atnaujinkite operacijų sąrašą",
+  "Item index": "Prekės rodyklė",
+  "Description": "apibūdinimas",
+  "External link": "Išorinė nuoroda",
+  "NFT content": "NFT turinys",
+  "Owner": "Savininkas"
 }

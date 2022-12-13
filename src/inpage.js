@@ -30,7 +30,8 @@ const runSendTransaction = (destination, amount, message) => {
       params: {
         destination: destination,
         amount: amount,
-        message: message
+        message: message,
+        token: "native"
       },
     })
     .then((result) => {
@@ -41,54 +42,65 @@ const runSendTransaction = (destination, amount, message) => {
     });
 }
 
-window.addEventListener('load', (event) => {
-  //Add handler for links like ton://
-  document.querySelectorAll("a[href]").forEach((i) => {
-      if (i.href.indexOf('ton://') != -1) {
-          i.addEventListener('click', (event) => {
-              const url = event.target.href;
-              const resultURI = url.match(/ton:\/\/([^\/]*)\/([^\?]*)\?(.*)$/);
-              switch(resultURI[1]) {
-                case "transfer":
-                  let URIparams = {};
-                  resultURI[3].split("&").map((item) => {
-                    const res = item.split("=");
-                    URIparams[res[0]] = res[1];
-                  });
-                  if (resultURI[2] && URIparams["amount"]) {
-                    window.ton
-                      .request({
-                        method: "wallet_getPermissions",
-                        params: {},
-                      })
-                      .then((result) => {
-                        if (result.includes("ton_sendTransaction")) {
-                          runSendTransaction(resultURI[2], parseInt(URIparams["amount"]), typeof URIparams["message"] == "undefined" ? "" : URIparams["message"]);
-                        } else {
-                          window.ton
-                            .request({
-                              method: "wallet_requestPermissions",
-                              params: { permissions: ["ton_sendTransaction"] },
-                            })
-                            .then((result) => {
-                              if (result.contains("ton_sendTransaction")) {
-                                runSendTransaction(resultURI[2], parseInt(URIparams["amount"]), typeof URIparams["message"] == "undefined" ? "" : URIparams["message"]);
-                              }
-                            });
-                        }
-                      });
+const tonLinkListener = (event) => {
+  const url = event.target.href;
+  const resultURI = url.match(/ton:\/\/([^\/]*)\/([^\?]*)\?(.*)$/);
+  switch(resultURI[1]) {
+    case "transfer":
+      let URIparams = {};
+      resultURI[3].split("&").map((item) => {
+        const res = item.split("=");
+        URIparams[res[0]] = res[1];
+      });
+      if (resultURI[2]) {
+        window.ton
+          .request({
+            method: "wallet_getPermissions",
+            params: {},
+          })
+          .then((result) => {
+            if (result.includes("ton_sendTransaction")) {
+              runSendTransaction(resultURI[2], typeof URIparams["amount"] == "undefined" ? 0 : parseInt(URIparams["amount"]), typeof URIparams["text"] == "undefined" ? "" : URIparams["text"]);
+            } else {
+              window.ton
+                .request({
+                  method: "wallet_requestPermissions",
+                  params: { permissions: ["ton_sendTransaction"] },
+                })
+                .then((result) => {
+                  if (result.includes("ton_sendTransaction")) {
+                    runSendTransaction(resultURI[2], typeof URIparams["amount"] == "undefined" ? 0 : parseInt(URIparams["amount"]), typeof URIparams["text"] == "undefined" ? "" : URIparams["text"]);
                   }
-                break;
-                default:
-                  console.log('Specified ton:// URL format is not supported');
-                break;
-              }
+                });
+            }
           });
+        event.preventDefault();
       }
+    break;
+    default:
+      console.log('Specified ton:// URL format is not supported');
+    break;
+  }
+};
+
+window.addEventListener('load', (event) => {
+  const observer = new MutationObserver((mutationList, observer) => {
+    document.querySelectorAll("a[href]").forEach((i) => { 
+      if (i.href.indexOf('ton://') != -1) {
+        i.removeEventListener('click', tonLinkListener);
+        i.addEventListener('click', tonLinkListener);
+      }
+    });
   });
+  
+  const bodyElem = document.getElementsByTagName("body")[0];
+  //Add handler for links like ton://
+  observer.observe(bodyElem, { attributes: true, childList: true, subtree: true });  
 });
 
 /*--------------------THIRD PARTY API---------------------*/
+
+window.tonProtocolVersion = 1;
 
 //Emulate TON wallet API
 window.ton.isTonWallet = true;

@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Xton cüzdanından gönder",
   "Empty list": "Boş liste",
   "Waiting for the transaction confirmation on the blockchain": "Blockchain'de işlem onayını bekliyorum",
-  "Update transactions list": "İşlemler Listesini Güncelle"
+  "Update transactions list": "İşlemler Listesini Güncelle",
+  "Item index": "Öğe dizin",
+  "Description": "Tanım",
+  "External link": "Harici bağlantı",
+  "NFT content": "NFT içeriği",
+  "Owner": "Sahip"
 }

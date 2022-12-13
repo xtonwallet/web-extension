@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Lähetä Xton -lompakosta",
   "Empty list": "Tyhjä luettelo",
   "Waiting for the transaction confirmation on the blockchain": "Odottaa kaupan vahvistusta lohkoketjussa",
-  "Update transactions list": "Päivitä transaktioluettelo"
+  "Update transactions list": "Päivitä transaktioluettelo",
+  "Item index": "Kohteen hakemisto",
+  "Description": "Kuvaus",
+  "External link": "Ulkoinen linkki",
+  "NFT content": "NFT -sisältö",
+  "Owner": "Omistaja"
 }

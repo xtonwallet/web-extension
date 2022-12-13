@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Отправить из XTON кошелька",
   "Empty list": "Пустой список",
   "Waiting for the transaction confirmation on the blockchain": "Ожидание подтверждения транзакции на блокчейн",
-  "Update transactions list": "Обновить список транзакций"
+  "Update transactions list": "Обновить список транзакций",
+  "Item index": "Индекс",
+  "Description": "Описание",
+  "External link": "Внешняя ссылка",
+  "NFT content": "Содержание NFT",
+  "Owner": "Владелец"
 }

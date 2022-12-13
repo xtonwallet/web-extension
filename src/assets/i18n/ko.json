@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Xton 지갑에서 보내십시오",
   "Empty list": "빈 목록",
   "Waiting for the transaction confirmation on the blockchain": "블록 체인의 거래 확인을 기다리고 있습니다",
-  "Update transactions list": "거래 목록을 업데이트합니다"
+  "Update transactions list": "거래 목록을 업데이트합니다",
+  "Item index": "항목 색인",
+  "Description": "설명",
+  "External link": "외부 링크",
+  "NFT content": "NFT 컨텐츠",
+  "Owner": "소유자"
 }

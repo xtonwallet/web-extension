@@ -318,5 +318,10 @@
   "Send from XTON wallet": "שלח מארנק XTON",
   "Empty list": "רשימה ריקה",
   "Waiting for the transaction confirmation on the blockchain": "מחכה לאישור העסקה ב- blockchain",
-  "Update transactions list": "עדכן את רשימת העסקאות"
+  "Update transactions list": "עדכן את רשימת העסקאות",
+  "Item index": "מדד פריט",
+  "Description": "תיאור",
+  "External link": "קישור חיצוני",
+  "NFT content": "תוכן nft",
+  "Owner": "בעלים"
 }

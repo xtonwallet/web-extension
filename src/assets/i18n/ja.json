@@ -318,5 +318,10 @@
   "Send from XTON wallet": "XTONウォレットから送信します",
   "Empty list": "空のリスト",
   "Waiting for the transaction confirmation on the blockchain": "ブロックチェーンでのトランザクション確認を待っています",
-  "Update transactions list": "トランザクションリストを更新します"
+  "Update transactions list": "トランザクションリストを更新します",
+  "Item index": "アイテムインデックス",
+  "Description": "説明",
+  "External link": "外部リンク",
+  "NFT content": "NFTコンテンツ",
+  "Owner": "オーナー"
 }

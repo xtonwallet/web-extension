@@ -318,5 +318,10 @@
   "Send from XTON wallet": "ఎక్స్‌టన్ వాలెట్ నుండి పంపండి",
   "Empty list": "ఖాళీ జాబితా",
   "Waiting for the transaction confirmation on the blockchain": "బ్లాక్‌చెయిన్‌లో లావాదేవీ నిర్ధారణ కోసం వేచి ఉంది",
-  "Update transactions list": "లావాదేవీల జాబితాను నవీకరించండి"
+  "Update transactions list": "లావాదేవీల జాబితాను నవీకరించండి",
+  "Item index": "అంశం సూచిక",
+  "Description": "వివరణ",
+  "External link": "బాహ్య లింక్",
+  "NFT content": "NFT కంటెంట్",
+  "Owner": "యజమాని"
 }

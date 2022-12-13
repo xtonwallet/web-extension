@@ -1,5 +1,5 @@
 <script>
-  import { onMount, getContext } from "svelte";
+  import { onMount, onDestroy, getContext } from "svelte";
   import { fade } from "svelte/transition";
   import { Tabs, Tab, Icon, Button } from "svelte-chota";
   import { _ } from "svelte-i18n";
@@ -30,12 +30,14 @@
 
   import {
     accountStore,
+    networksStore,
     currentAccount,
     currentNetwork,
     currentRate,
     currentCurrency,
     waitingTransaction,
-    ASSET_TYPES
+    ASSET_TYPES,
+    APPROXIMATE_FEE
   } from "../../../common/stores.js";
 
   import {
@@ -57,15 +59,6 @@
   let assets = [];
   let transactionPage = 1;
 
-  onMount(() => {
-    balance = $currentAccount.balance[$currentNetwork.server]
-      ? fromNano($currentAccount.balance[$currentNetwork.server])
-      : 0;
-    checkBalance($currentAccount.address, $currentNetwork.server);
-    getTransactions($currentAccount.address, $currentNetwork.server, 10, transactionPage);
-    getTokenList($currentAccount.address, $currentNetwork.server);
-  });
-
   const walletUIUpdateListener = (message) => {
     if (message.type === "popup-updateWalletUI") {
       checkBalance($currentAccount.address, $currentNetwork.server);
@@ -74,7 +67,20 @@
     }
   };
 
-  browser.runtime.onMessage.addListener(walletUIUpdateListener);
+  onMount(() => {
+    browser.runtime.onMessage.addListener(walletUIUpdateListener);
+
+    balance = $currentAccount.balance[$currentNetwork.server]
+      ? fromNano($currentAccount.balance[$currentNetwork.server])
+      : 0;
+    checkBalance($currentAccount.address, $currentNetwork.server);
+    getTransactions($currentAccount.address, $currentNetwork.server, 10, transactionPage);
+    getTokenList($currentAccount.address, $currentNetwork.server);
+  });
+
+  onDestroy(() => {
+    browser.runtime.onMessage.removeListener(walletUIUpdateListener);
+  });
 
   $: showDeploy = $currentAccount.deployed
     ? !$currentAccount.deployed.includes($currentNetwork.server)
@@ -97,6 +103,11 @@
 
   const sendLink = (event) => {
     openModal("ModalSendLink", { data: "ton://transfer/" + $currentAccount.address });
+  };
+
+  const showNftContent = (event, asset) => {
+    event.stopPropagation();
+    openModal("ModalShowNftContent", { data: asset });
   };
 
   const checkBalance = (accountAddress, server) => {
@@ -252,6 +263,10 @@
   };
 
   const sendTransactionToken = (tokenObject) => {
+    if (tokenObject != "74") {
+      // we don't allow sending NFT now
+      return;
+    }
     if (tokenObject.icon == "") {
       tokenObject.icon = "/assets/img/icon-token-128.png";
     }
@@ -259,36 +274,42 @@
   };
 
   const deploy = () => {
-    deployLoading = true;
-    browser.runtime
-    .sendMessage({
-      type: "deployNewWallet",
-      data: {
-        accountAddress: $currentAccount.address,
-        server: $currentNetwork.server,
-      },
-    })
-    .then((result) => {
-      deployLoading = false;
-      if (!result.success) {
-        openModal("ModalError", { message: result.reason });
-        if (result.alreadyDeployed) {
-          const newCurrentAccount = $currentAccount;
-          newCurrentAccount.deployed.push($currentNetwork.server);
-          accountStore.changeAccount(newCurrentAccount);
-        }
-      } else {
-        openModal("ModalSuccess", {
-          message: "The wallet has been deployed",
+    if (new BigNumber(balance).lt(APPROXIMATE_FEE)) {
+      openModal("ModalError", {
+        message: "Account has insufficient balance for the requested operation. Send some value to account balance",
+      });
+    } else {
+      deployLoading = true;
+      browser.runtime
+        .sendMessage({
+          type: "deployNewWallet",
+          data: {
+            accountAddress: $currentAccount.address,
+            server: $currentNetwork.server,
+          },
+        })
+        .then((result) => {
+          deployLoading = false;
+          if (!result.success) {
+            openModal("ModalError", { message: result.reason });
+            if (result.alreadyDeployed) {
+              const newCurrentAccount = $currentAccount;
+              newCurrentAccount.deployed.push($currentNetwork.server);
+              accountStore.changeAccount(newCurrentAccount);
+            }
+          } else {
+            openModal("ModalSuccess", {
+              message: "The wallet has been deployed",
+            });
+            const newCurrentAccount = $currentAccount;
+            newCurrentAccount.deployed.push($currentNetwork.server);
+            accountStore.changeAccount(newCurrentAccount);
+          }
+        })
+        .catch((error) => {
+          console.error("Error on sendMessage:" + JSON.stringify(error));
         });
-        const newCurrentAccount = $currentAccount;
-        newCurrentAccount.deployed.push($currentNetwork.server);
-        accountStore.changeAccount(newCurrentAccount);
-      }
-    })
-    .catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
-    });
+    }
   };
 
   const importToken = () => {
@@ -325,9 +346,9 @@
   .address {
     font-size: 1.5rem;
     text-align: center;
+    max-width: 225px;
   }
   .nickname {
-    max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -503,6 +524,8 @@
     border-width: 1px;
     line-height: 0.5rem;
     white-space: nowrap;
+    width: 40px;
+    text-align: center;
   }
   .asset-balance {
     margin-right: 20px;
@@ -679,10 +702,24 @@
             title={asset.address}
             alt="logo" />
           <span class="asset-type">{ASSET_TYPES[asset.type]}</span>
-          <span class="asset-balance is-center" title="{fromNano(asset.balance, asset.decimals)} {asset.name}">
-            <span class="asset-balance-amount">{fromNano(asset.balance)}</span>
-            <span class="asset-balance-symbol">{asset.symbol}</span>
-          </span>
+          {#if asset.type == "74"} 
+            <span class="asset-balance is-center" title="{fromNano(asset.balance, asset.decimals)} {asset.name}">
+              <span class="asset-balance-amount">{fromNano(asset.balance)}</span>
+              <span class="asset-balance-symbol">{asset.symbol}</span>
+            </span>
+          {/if}
+          {#if asset.type == "64"} 
+            <span class="asset-balance is-center">
+              <Button
+                disable
+                title={$_('NFT content')}
+                class="action-button is-rounded"
+                on:click={(event) => {
+                  showNftContent(event, asset);
+                }}
+                icon={mdiEye} />
+            </span>
+          {/if}
         </div>
       {/each}
       <div class="flex-row is-horizontal-align import-asset">

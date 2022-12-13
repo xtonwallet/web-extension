@@ -2,6 +2,7 @@ import { Vault } from "../common/vault.js";
 import { toNano, generateRandomHex, encrypt, decrypt, broadcastMessage, sendNotificationToInPageScript, hexToStr, Unibabel, getRate } from "../common/utils.js";
 import TonLib from "../common/tonLib.js";
 import { CURRENT_KS_PASSWORD, currentRetrievingTransactionsPeriod, currentRetrievingTransactionsLastTime, settingsStore, currentEnabledPinPad, currentCurrency, messageSubscriptions } from "../common/stores.js";
+import BigNumber from "bignumber.js";
 
 const devMode = __DEV_MODE__;
 
@@ -376,7 +377,7 @@ export const accounts = () => {
       if (accountData.account_state === "active") {
         bounce = true;
       }
-      const result = await TonLibClient.sendTransaction(network.giver, bounce,
+      const result = await TonLibClient.sendTransaction("v4R2", network.giver, bounce,
         { toAddress: destination,
           amount: 5000000000,
           sendMode: 1 + 2, // transfer fees pay separately, ignore errors
@@ -605,7 +606,38 @@ export const accounts = () => {
         const accountData = await TonLibClient.requestAccountData(account);
         if (accountData.account_state === "active") {
           deployed.push(network.server);
-          version[network.server] = accountData.wallet_type;
+          switch(accountData.wallet_type) {
+            /* 
+            //for dinos?
+            case 'wallet simple r1':
+              version[network.server] = 'simpleR1';
+            break;
+            case 'wallet simple r2':
+              version[network.server] = 'simpleR2';
+            break;
+            case 'wallet simple r3':
+              version[network.server] = 'simpleR3';
+            break;
+            */
+            case 'wallet v2 r1':
+              version[network.server] = 'v2R1';
+            break;
+            case 'wallet v2 r2':
+              version[network.server] = 'v2R2';
+            break;
+            case 'wallet v3 r1':
+              version[network.server] = 'v3R1';
+            break;
+            case 'wallet v3 r2':
+              version[network.server] = 'v3R2';
+            break;
+            case 'wallet v4 r1':
+              version[network.server] = 'v4R1';
+            break;
+            case 'wallet v4 r2':
+              version[network.server] = 'v4R2';
+            break;
+          }
         }
       } catch(e) {
         //console.log(e);
@@ -829,10 +861,9 @@ export const accounts = () => {
       if (accountData.account_state === "active") {
         bounce = true;
       }
-
       let result;
       if (txData.params.allBalance) {
-        result = await TonLibClient.sendTransaction(accountAddress, bounce,
+        result = await TonLibClient.sendTransaction(account.version[server], accountAddress, bounce,
           {
             toAddress: txData.params.destination,
             amount: 0,
@@ -841,7 +872,7 @@ export const accounts = () => {
           },
           keyPair);
       } else {
-        result = await TonLibClient.sendTransaction(accountAddress, bounce,
+        result = await TonLibClient.sendTransaction(account.version[server], accountAddress, bounce,
           {
             toAddress: txData.params.destination,
             amount: txData.params.amount,
@@ -884,7 +915,7 @@ export const accounts = () => {
       if (txData.params.stateInit) {
         txDataPrepared.stateInit = TonLibClient.oneFromBoc(Unibabel.base64ToBuffer(txData.params.stateInit));
       }
-      result = await TonLibClient.sendTransaction(accountAddress, false, txDataPrepared, keyPair);
+      result = await TonLibClient.sendTransaction(account.version[server], accountAddress, false, txDataPrepared, keyPair);
       
       return {id: 0, reason: `SubmitRawTransaction for ${txData.params.to} with amount ${txData.params.amount}`};
     } catch (exp) {
@@ -1001,10 +1032,15 @@ export const accounts = () => {
   };
 
   const importToken = async (accountAddress, server, tokenObject) => {
-    tokenObject.wallet = await getTokenType74WalletAddress(server, tokenObject.address, accountAddress);
-    const result = await vault.addToken(accountAddress, server, tokenObject);
+    if (tokenObject.type == "74") {
+      tokenObject.wallet = await getTokenType74WalletAddress(server, tokenObject.address, accountAddress);
+      await vault.addToken(accountAddress, server, tokenObject);
+    }
+    if (tokenObject.type == "64") {
+      await vault.addToken(accountAddress, server, tokenObject);
+    }
     broadcastMessage("updateWalletUI");
-    return result;
+    return true;
   };
 
   /**
@@ -1045,7 +1081,6 @@ export const accounts = () => {
   }
 
   const getCurrentTokenBalance = async (destination, server, tokenRootAddress) => {
-    const TonLibClient = await TonLib.getClient(server);
     let amount = 0;
     try {
       const tokenObject = await vault.getToken(destination, server, tokenRootAddress);
@@ -1067,6 +1102,11 @@ export const accounts = () => {
     if (type74 != false) {
       type74.type = 74;
       return type74;
+    }
+    const type64 = await getTokenType64Info(server, tokenRootAddress);
+    if (type64 != false) {
+      type64.type = 64;
+      return type64;
     }
     return false;
   };
@@ -1138,11 +1178,11 @@ export const accounts = () => {
           try {
             const result = await FtWallet.getOnchainMetadata(resultData.jettonContentCell);
             return {
-              name: hexToStr(result.name),
-              symbol: hexToStr(result.symbol),
-              decimals: result.decimal ? Number(hexToStr(result.decimal)): 9,
+              name: hexToStr(result.name.substring(2)),
+              symbol: hexToStr(result.symbol.substring(2)),
+              decimals: result.decimal ? Number(hexToStr(result.decimal.substring(2))): 9,
               totalSupply: Number(resultData.totalSupply),
-              icon: hexToStr(result.image)
+              icon: hexToStr(result.image.substring(2))
             }
           } catch(e) {
             if (devMode) {
@@ -1187,6 +1227,75 @@ export const accounts = () => {
       return { result };
     } catch (exp) {
       return { error: exp.message };
+    }
+  };
+
+  const getTokenType64Info = async (server, tokenItemAddress) => {
+    const TonLibClient = await TonLib.getClient(server);
+    try {
+      const NftItem = TonLibClient.getNftItemToken(tokenItemAddress);
+      const resultData = await NftItem.getData();
+      if (resultData) {
+        const NftCollection = TonLibClient.getNftToken(resultData.collectionAddress);
+        const resultDataCollection = await NftCollection.getCollectionData();
+        if (resultDataCollection) {
+          if (resultDataCollection.collectionContentUri) {
+            const result = await fetch(resultDataCollection.collectionContentUri)
+                                  .then((response) => {
+                                    return response.json();
+                                  })
+                                  .then((data) => {
+                                    return data;
+                                  });
+            return {
+              name: result.name,
+              description: result.description,
+              image: result.image,
+              externalLink: result.external_link,
+              itemIndex: new BigNumber(resultData.itemIndex).toString(),
+              itemsCount: new BigNumber(resultDataCollection.itemsCount).toString(),
+              ownerAddress: resultDataCollection.ownerAddress != null? resultDataCollection.ownerAddress.toString(true, true, true): ""
+            }
+          }
+        }
+        //OnChanin content for NFT is not supported yet
+        //resultData.collectionContentCell 
+      } else {
+        return false;
+      }
+    } catch(e) {
+      if (devMode) {
+        console.log(e);
+      }
+      return false;
+    }
+  };
+
+  const getNftContent = async (server, tokenItemAddress) => {
+    const TonLibClient = await TonLib.getClient(server);
+    try {
+      const NftItem = TonLibClient.getNftItemToken(tokenItemAddress);
+      const resultData = await NftItem.getData();
+      if (resultData) {
+        const result = await fetch(Unibabel.bufferToUtf8(resultData.content).substr(1))
+                                  .then((response) => {
+                                    return response.json();
+                                  })
+                                  .then((data) => {
+                                    return data;
+                                  });
+        return {
+          "name": result.name,
+          "description": result.description,
+          "image": result.image,
+          "owner": resultData.ownerAddress.toString(true, true, true)
+        }
+      }
+    } catch(e) {
+      if (devMode) {
+        console.log(e);
+      }
+      return false;
     }
   };
 
@@ -1239,6 +1348,7 @@ export const accounts = () => {
     getFamousTokens,
     getTokenInfo,
     getTokenData,
+    getNftContent,
     importToken,
     getTokenListForUser,
     detectTokenTransaction,

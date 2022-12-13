@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Magpadala mula sa Xton Wallet",
   "Empty list": "Walang laman na listahan",
   "Waiting for the transaction confirmation on the blockchain": "Naghihintay para sa kumpirmasyon ng transaksyon sa blockchain",
-  "Update transactions list": "I-update ang listahan ng mga transaksyon"
+  "Update transactions list": "I-update ang listahan ng mga transaksyon",
+  "Item index": "Index ng item",
+  "Description": "Paglalarawan",
+  "External link": "Panlabas na link",
+  "NFT content": "Nilalaman ng NFT",
+  "Owner": "May -ari"
 }

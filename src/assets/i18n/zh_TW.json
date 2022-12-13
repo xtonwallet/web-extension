@@ -318,5 +318,10 @@
   "Send from XTON wallet": "從XTON錢包發送",
   "Empty list": "空列表",
   "Waiting for the transaction confirmation on the blockchain": "等待區塊鏈上的交易確認",
-  "Update transactions list": "更新交易列表"
+  "Update transactions list": "更新交易列表",
+  "Item index": "項目索引",
+  "Description": "描述",
+  "External link": "外部鏈接",
+  "NFT content": "NFT內容",
+  "Owner": "所有者"
 }

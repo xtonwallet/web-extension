@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Xton वॉलेट से भेजें",
   "Empty list": "खाली सूची",
   "Waiting for the transaction confirmation on the blockchain": "ब्लॉकचेन पर लेनदेन की पुष्टि की प्रतीक्षा में",
-  "Update transactions list": "अद्यतन लेनदेन सूची"
+  "Update transactions list": "अद्यतन लेनदेन सूची",
+  "Item index": "आइटम सूचकांक",
+  "Description": "विवरण",
+  "External link": "बाहरी लिंक",
+  "NFT content": "Nft सामग्री",
+  "Owner": "स्वामी"
 }

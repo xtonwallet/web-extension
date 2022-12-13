@@ -6,7 +6,6 @@
 
   //Stores
   import {
-    accountStore,
     currentAccount,
     currentNetwork,
   } from "../../../../common/stores.js";
@@ -29,6 +28,7 @@
   let title = $_("Native");
   let fee = 0;
   let total = 0;
+  let balance = 0;
   let allBalance = false;
   let disabled = true;
   let errorAmount = false;
@@ -64,6 +64,19 @@
   };
 
   onMount(() => {
+    browser.runtime
+      .sendMessage({
+        type: "getCurrentBalance",
+        data: { accountAddress: $currentAccount.address, server: $currentNetwork.server },
+      })
+      .then((result) => {
+        balance = result;
+      })
+      .catch((e) => {
+        balance = 0;
+        console.log(e); // here don't need to show any error for user, usually it is the network issue in the development environment
+      });
+
     destination = document.getElementById("sending-tx-destination");
     amount = document.getElementById("sending-tx-amount");
     message = document.getElementById("sending-tx-message");
@@ -96,11 +109,7 @@
 
   const setMax = () => {
     if (isNative) {
-      amount.value = fromNano(
-        $currentAccount.balance[$currentNetwork.server]
-          ? $currentAccount.balance[$currentNetwork.server]
-          : 0
-      );
+      amount.value = fromNano(balance);
     } else {
       amount.value = fromNano(modalData.token.balance, modalData.token.decimals);
     }
@@ -149,9 +158,7 @@
     }
     let txData, maxBalance;
     if (isNative) {
-      maxBalance = $currentAccount.balance[$currentNetwork.server]
-        ? $currentAccount.balance[$currentNetwork.server]
-        : 0;
+      maxBalance = balance;
       if (!allBalance && new BigNumber(toNano(amount.value)).gt(maxBalance)) {
         allBalance = true;
         amount.value = fromNano(maxBalance);
@@ -192,9 +199,7 @@
       })
       .then((result) => {
         fee = result.error ? 0 : fromNano(result.fee);
-        const maxBalance = $currentAccount.balance[$currentNetwork.server]
-          ? $currentAccount.balance[$currentNetwork.server]
-          : 0;
+        const maxBalance = balance;
         if (isNative) {
           if (allBalance) {
             amount.value = fromNano(maxBalance - toNano(fee));

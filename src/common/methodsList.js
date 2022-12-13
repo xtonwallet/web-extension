@@ -27,7 +27,7 @@ const methods = {
     Description: "Method to add asset for watching by user",
     UsePrivateKeys: false,
     MustBeAllowed: true,
-    RequiredParams: [{'name': 'string'}, {'symbol': 'string'}, {'decimals': 'number'}, {'address': 'string'}, {'icon': 'string'}, {'type': 'string'}],
+    RequiredParams: [{'name': 'string'}, {'address': 'string'}, {'icon': 'string'}, {'type': 'string'}],
   },
   "ton_account": {
     Description: "Web page will be able to know the selected account",

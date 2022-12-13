@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Send fra Xton lommebok",
   "Empty list": "Tom liste",
   "Waiting for the transaction confirmation on the blockchain": "Venter på transaksjonsbekreftelsen på blockchain",
-  "Update transactions list": "Zaktualizuj listę transakcji"
+  "Update transactions list": "Zaktualizuj listę transakcji",
+  "Item index": "Elementindeks",
+  "Description": "Beskrivelse",
+  "External link": "Ekstern lenke",
+  "NFT content": "NFT -innhold",
+  "Owner": "Eieren"
 }

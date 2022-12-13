@@ -3,7 +3,7 @@ import TonWeb from "./tonweb";
 import { Unibabel } from "./utils.js";
 
 class TonLib {
-  defaultWalletVersion = 'v3R2'; //private
+  defaultWalletVersion = 'v4R2'; //private //v3R2
   instance = null; //private
   version = '1.1'; //private
 
@@ -61,9 +61,9 @@ class TonLib {
     }
   }
 
-  async sendTransaction(address, bounce, data, keyPair) {
+  async sendTransaction(version, address, bounce, data, keyPair) {
     try {
-      const WalletClass = this.instance.wallet.all[this.defaultWalletVersion];
+      const WalletClass = this.instance.wallet.all[version];
       const toAddress = (new TonWeb.Address(address)).toString(true, true, false);
       const walletContract = new WalletClass(this.instance.provider, {address: toAddress});
 
@@ -344,6 +344,22 @@ class TonLib {
     }
   }
 
+  getNftToken(address) {
+    try {
+      return new TonWeb.token.nft.NftCollection(this.instance.provider, {"address": (new TonWeb.Address(address))});
+    } catch (exp) {
+      throw exp;
+    }
+  }
+
+  getNftItemToken(address) {
+    try {
+      return new TonWeb.token.nft.NftItem(this.instance.provider, {"address": (new TonWeb.Address(address))});
+    } catch (exp) {
+      throw exp;
+    }
+  }
+  
   oneFromBoc(data) {
     try {
       return TonWeb.boc.Cell.oneFromBoc(data);
@@ -382,6 +398,56 @@ class TonLib {
               }
               break;
             case "178d4519":
+              type = "tokenIncoming";
+              queryId = slice.loadUint(64);
+              amount = slice.loadCoins();
+              toAddress = slice.loadAddress();
+              responseAddress = slice.loadAddress();
+              //slice.loadBit(); // here no null custom_payload
+              forwardAmount = slice.loadCoins();
+              slice.loadBit(); // forward_payload in this slice, not separate cell
+              forwardPayload = slice.loadBits(slice.getFreeBits()-1);
+              try {
+                // if text
+                forwardPayload = Unibabel.bufferToUtf8(forwardPayload);
+              } catch(e) {
+                // if something else
+                forwardPayload = this.instance.utils.bytesToBase64(forwardPayload);
+              }
+              break;
+          }
+          return {
+            type: type,
+            amount: amount.toNumber(),
+            toAddress: toAddress.toString(true, true, true),
+            forwardPayload: forwardPayload
+          }
+        }
+
+      if (standard == "64" &&
+          (typeTx == "5fcc3d14" || // outgoing transfer
+            typeTx == "05138d91")  // incoming transfer
+          ) {
+          let type, queryId, newOwnerAddress, toAddress, responseAddress, forwardAmount, forwardPayload;
+          switch(typeTx) {
+            case "5fcc3d14":
+              type = "tokenTransfer";
+              queryId = slice.loadUint(64);
+              newOwnerAddress = slice.loadAddress();
+              responseAddress = slice.loadAddress();
+              slice.loadBit(); // null custom_payload
+              forwardAmount = slice.loadCoins();
+              slice.loadBit(); // forward_payload in this slice, not separate cell
+              forwardPayload = slice.loadBits(slice.getFreeBits());
+              try {
+                // if text
+                forwardPayload = Unibabel.bufferToUtf8(forwardPayload);
+              } catch(e) {
+                // if something else
+                forwardPayload = this.instance.utils.bytesToBase64(forwardPayload);
+              }
+              break;
+            case "05138d91":
               type = "tokenIncoming";
               queryId = slice.loadUint(64);
               amount = slice.loadCoins();

@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Xton ওয়ালেট থেকে প্রেরণ করুন",
   "Empty list": "খালি তালিকা",
   "Waiting for the transaction confirmation on the blockchain": "ব্লকচেইনে লেনদেনের নিশ্চয়তার জন্য অপেক্ষা করছি",
-  "Update transactions list": "লেনদেনের তালিকা আপডেট করুন"
+  "Update transactions list": "লেনদেনের তালিকা আপডেট করুন",
+  "Item index": "আইটেম সূচক",
+  "Description": "বর্ণনা",
+  "External link": "এক্সটার্নাল লিংক",
+  "NFT content": "এনএফটি সামগ্রী",
+  "Owner": "মালিক"
 }

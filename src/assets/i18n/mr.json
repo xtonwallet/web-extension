@@ -318,5 +318,10 @@
   "Send from XTON wallet": "एक्सटोन वॉलेट वरून पाठवा",
   "Empty list": "रिक्त यादी",
   "Waiting for the transaction confirmation on the blockchain": "ब्लॉकचेनवर व्यवहार पुष्टीकरणाची प्रतीक्षा करीत आहे",
-  "Update transactions list": "व्यवहार यादी अद्यतनित करा"
+  "Update transactions list": "व्यवहार यादी अद्यतनित करा",
+  "Item index": "आयटम इंडेक्स",
+  "Description": "वर्णन",
+  "External link": "बाह्य दुवा",
+  "NFT content": "एनएफटी सामग्री",
+  "Owner": "मालक"
 }

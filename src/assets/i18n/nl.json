@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Stuur vanuit Xton Wallet",
   "Empty list": "Lege lijst",
   "Waiting for the transaction confirmation on the blockchain": "Wachten op de transactiebevestiging op de blockchain",
-  "Update transactions list": "Update transactielijst"
+  "Update transactions list": "Update transactielijst",
+  "Item index": "Itemindex",
+  "Description": "Beschrijving",
+  "External link": "Externe link",
+  "NFT content": "NFT -inhoud",
+  "Owner": "Baasje"
 }

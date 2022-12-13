@@ -1,13 +1,17 @@
 <script>
   import "../common/i18n.js";
   import "./Styles.svelte";
-  import { onMount, onDestroy, setContext, beforeUpdate } from "svelte";
+  import { onMount, setContext, beforeUpdate } from "svelte";
   import { fade } from "svelte/transition";
   import { isLoading, _, locale } from "svelte-i18n";
 
   //Stores
   import {
     settingsStore,
+    accountStore,
+    networksStore,
+    currentAccount,
+    currentNetwork,
     currentPage,
     currentThemeName,
   } from "../common/stores.js";
@@ -76,6 +80,7 @@
   import ModalImportToken from "./Elements/Popup/Modals/ImportToken.svelte";
   import ModalQRCode from "./Elements/Popup/Modals/QRCode.svelte";
   import ModalSendLink from "./Elements/Popup/Modals/SendLink.svelte";
+  import ModalShowNftContent from "./Elements/Popup/Modals/ShowNftContent.svelte";
 
   export let loaded;
 
@@ -94,7 +99,38 @@
     }
   };
 
+  const changedThemeListener = (message, origin) => {
+    if (message.type === "page-themeChanged") {
+      if ($currentThemeName != message.data) {
+        settingsStore.setThemeName(message.data);
+        const body = document.getElementById("theme-toggle");
+        const theme = message.data;
+        if (theme == "light") {
+          body.classList.add("light");
+        } else {
+          body.classList.remove("light");
+        }
+      }
+    }
+  };
+
+  const changedEventsListener = (message) => {
+    if (message.type === "page-accountChanged") {
+      if (message.data.address != $currentAccount.address) {
+        accountStore.changeAccount(message.data);
+      }
+    }
+    if (message.type === "page-endpointChanged") {
+      if (message.data.server != $currentNetwork.server) {
+        networksStore.changeNetwork(message.data);
+      }
+    }
+  };
+
+  //we can't use onMount/onDestroy because it must be initialized at first
   browser.runtime.onMessage.addListener(walletIsLockedListener);
+  browser.runtime.onMessage.addListener(changedThemeListener);
+  browser.runtime.onMessage.addListener(changedEventsListener);
 
   onMount(() => {
     browser.runtime.sendMessage({ type: "walletIsLocked" }).then((data) => {
@@ -112,19 +148,17 @@
       const theme = $currentThemeName;
       if (theme == "light") {
         body.classList.add("light");
+      } else {
+        body.classList.remove("light");
       }
-      if (window.location.hash && window.location.hash.substr(1) != $currentPage.name) {
-        switchPage(window.location.hash.substr(1));
+      if (window.location.hash && window.location.hash.substring(1) != $currentPage.name) {
+        switchPage(window.location.hash.substring(1));
         window.location = window.location.href.split("#")[0];
       }
       if (typeof Pages[$currentPage.name] == "undefined") {
         settingsStore.changePage({ name: "AccountMain" });
       }
     }
-  });
-
-  onDestroy(() => {
-    browser.runtime.onMessage.removeListener(walletIsLockedListener);
   });
 
   setContext("app_functions", {
@@ -215,6 +249,7 @@
     ModalImportToken,
     ModalQRCode,
     ModalSendLink,
+    ModalShowNftContent,
   };
 </script>
 
@@ -253,7 +288,7 @@
       display: block;
     }
     .content-pane {
-      padding: 1rem 1rem 0 0;
+      padding: 1rem 2rem 0 0;
     }
   }
 

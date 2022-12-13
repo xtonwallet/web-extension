@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Надіслати з гаманця Xton",
   "Empty list": "Порожній список",
   "Waiting for the transaction confirmation on the blockchain": "Чекаючи підтвердження транзакції на блокчейні",
-  "Update transactions list": "Список оновлення транзакцій"
+  "Update transactions list": "Список оновлення транзакцій",
+  "Item index": "Індекс елемента",
+  "Description": "Опис",
+  "External link": "Зовнішнє посилання",
+  "NFT content": "Вміст NFT",
+  "Owner": "Власник"
 }

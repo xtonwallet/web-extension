@@ -2,13 +2,11 @@
   import "../common/i18n.js";
   import "./Styles.svelte";
   import { onMount, onDestroy, setContext, beforeUpdate } from "svelte";
-  import { get } from "svelte/store";
   import { fade } from "svelte/transition";
   import { isLoading, _, locale } from "svelte-i18n";
 
   //Stores
   import {
-    accountStore,
     settingsStore,
     currentPage,
     currentThemeName,
@@ -51,6 +49,7 @@
   import ModalImportToken from "./Elements/Popup/Modals/ImportToken.svelte";
   import ModalQRCode from "./Elements/Popup/Modals/QRCode.svelte";
   import ModalSendLink from "./Elements/Popup/Modals/SendLink.svelte";
+  import ModalShowNftContent from "./Elements/Popup/Modals/ShowNftContent.svelte";
 
   export let loaded;
 
@@ -92,6 +91,7 @@
     }
   };
 
+  //we can't use onMount/onDestroy because it must be initialized at first
   browser.runtime.onMessage.addListener(walletIsLockedListener);
   browser.runtime.onMessage.addListener(popupMessageListener);
   browser.runtime.onMessage.addListener(popupViewListener);
@@ -134,14 +134,10 @@
       const theme = $currentThemeName;
       if (theme == "light") {
         body.classList.add("light");
+      } else {
+        body.classList.remove("light");
       }
     }
-  });
-
-  onDestroy(() => {
-    browser.runtime.onMessage.removeListener(walletIsLockedListener);
-    browser.runtime.onMessage.removeListener(popupMessageListener);
-    browser.runtime.onMessage.removeListener(popupViewListener);
   });
 
   setContext("app_functions", {
@@ -257,6 +253,7 @@
     ModalImportToken,
     ModalQRCode,
     ModalSendLink,
+    ModalShowNftContent,
   };
 
 </script>

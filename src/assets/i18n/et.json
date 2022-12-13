@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Saada XTON -i rahakotist",
   "Empty list": "Tühjade nimekiri",
   "Waiting for the transaction confirmation on the blockchain": "Ootab tehingu kinnitust blockchainis",
-  "Update transactions list": "Uuendage tehingute loendit"
+  "Update transactions list": "Uuendage tehingute loendit",
+  "Item index": "Üksuse indeks",
+  "Description": "Kirjeldus",
+  "External link": "Väline link",
+  "NFT content": "Nft sisu",
+  "Owner": "Omanik"
 }

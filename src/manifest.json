@@ -37,8 +37,8 @@
     "default_title": "XTON wallet",
     "default_popup": "popup.html"
   },
-  "permissions": ["alarms", "nativeMessaging", "notifications", "proxy", "scripting", "storage", "tabs", "unlimitedStorage"],
-  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: http: https:; connect-src https://toncenter.com/api/v2/jsonRPC https://mainnet.xtonwallet.com/jsonRPC https://testnet.toncenter.com/api/v2/jsonRPC https://testnet.xtonwallet.com/jsonRPC https://min-api.cryptocompare.com/data/price http://localhost:7777" },
+  "permissions": ["alarms", "nativeMessaging", "notifications", "proxy", "storage", "tabs", "unlimitedStorage"],
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: http: https:; connect-src https: http://localhost:7777" },
   "web_accessible_resources": [{
     "resources": ["assets/*", "inpage.js"],
     "matches": ["file://*/*", "http://*/*", "https://*/*"]

@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Odoslať z peňaženky XTON",
   "Empty list": "Prázdny zoznam",
   "Waiting for the transaction confirmation on the blockchain": "Čaká sa na potvrdenie transakcie na blockchaine",
-  "Update transactions list": "Aktualizujte zoznam transakcií"
+  "Update transactions list": "Aktualizujte zoznam transakcií",
+  "Item index": "Index položiek",
+  "Description": "Opis",
+  "External link": "Externý odkaz",
+  "NFT content": "Obsah NFT",
+  "Owner": "Majiteľ"
 }

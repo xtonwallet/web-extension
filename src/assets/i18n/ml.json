@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Xton വാലറ്റിൽ നിന്ന് അയയ്ക്കുക",
   "Empty list": "ശൂന്യമായ പട്ടിക",
   "Waiting for the transaction confirmation on the blockchain": "ബ്ലോക്ക്ചെയിനെക്കുറിച്ചുള്ള ഇടപാട് സ്ഥിരീകരണത്തിനായി കാത്തിരിക്കുന്നു",
-  "Update transactions list": "ഇടപാടുകളുടെ പട്ടിക അപ്ഡേറ്റുചെയ്യുക"
+  "Update transactions list": "ഇടപാടുകളുടെ പട്ടിക അപ്ഡേറ്റുചെയ്യുക",
+  "Item index": "ഇന സൂചിക",
+  "Description": "വിവരണം",
+  "External link": "ബാഹ്യ ലിങ്ക്",
+  "NFT content": "NFT ഉള്ളടക്കം",
+  "Owner": "ഉടമ"
 }

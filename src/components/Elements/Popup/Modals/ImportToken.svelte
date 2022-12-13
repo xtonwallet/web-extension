@@ -1,15 +1,12 @@
 <script>
-  import { onMount, getContext, afterUpdate } from "svelte";
+  import { onMount, getContext } from "svelte";
   import { _ } from "svelte-i18n";
   import Select from "../../Select";
 
   //Components
-  import { Button, Field, Input, Icon, Row, Col } from "svelte-chota";
+  import { Button, Field, Input } from "svelte-chota";
 
   export let modalData = {};
-
-  /* Icons https://materialdesignicons.com/ */
-  import { mdiAlert } from "@mdi/js";
 
   //Stores
   import { currentNetwork, ASSET_TYPES } from "../../../../common/stores.js";
@@ -22,14 +19,11 @@
   let disabled,
     loading = false;
 
-  let tokenAddress, tokenSymbol, tokenDecimals, tokenType, tokenName, tokenIcon;
+  let currentTokenType = 74;
+  let tokenAddress, tokenSymbol, tokenDecimals, tokenType, tokenItemIndex, tokenName, tokenIcon, tokenDescription, tokenExternalLink;
 
   //Context
-  const { closeModal, openModal } = getContext("app_functions");
-
-  const cancelModal = () => {
-    closeModal();
-  };
+  const { closeModal } = getContext("app_functions");
 
   let complexItems = [];
   let famousTokens = [];
@@ -62,8 +56,11 @@
     tokenSymbol = document.getElementById("token-symbol");
     tokenDecimals = document.getElementById("token-decimals");
     tokenName = document.getElementById("token-name");
+    tokenDescription = document.getElementById("token-description");
+    tokenExternalLink = document.getElementById("token-external-link");
     tokenIcon = document.getElementById("token-icon");
     tokenType = document.getElementById("token-type");
+    tokenItemIndex = document.getElementById("token-item-index");
     if (modalData.id) {
       const params = modalData.params;
       if (params.address) {
@@ -78,12 +75,22 @@
       }
       if (params.name) {
         tokenName.value = params.name;
+      } 
+      if (params.description) {
+        tokenDescription.value = params.description;
+      }
+      if (params.externalLink) {
+        tokenExternalLink.value = params.externalLink;
       }
       if (params.icon) {
         tokenIcon.value = params.icon;
       }
       if (params.type) {
+        currentTokenType = params.type; 
         tokenType.value = params.type;
+      }
+      if (params.itemIndex) {
+        tokenItemIndex.value = params.itemIndex;
       }
     }
     loadFamousTokenList();
@@ -106,6 +113,9 @@
         data: {
           server: $currentNetwork.server,
           name: tokenName.value,
+          itemIndex: tokenItemIndex.value,
+          description: tokenDescription.value,
+          externalLink: tokenExternalLink.value,
           address: tokenAddress.dataset.value,
           symbol: tokenSymbol.value,
           decimals: tokenDecimals.value,
@@ -159,6 +169,7 @@
           tokenName.value = item.name;
           tokenIcon.value = item.icon;
           tokenType.value = item.type;
+          currentTokenType = 74;
         }
       });
     } else {
@@ -184,7 +195,8 @@
           },
         })
         .then((result) => {
-          if (typeof result.symbol != "undefined") {
+          if (result.type == 74 && typeof result.symbol != "undefined") {
+            currentTokenType = result.type;
             tokenSymbol.value = result.symbol;
             tokenDecimals.value = result.decimals;
             tokenName.value = result.name;
@@ -192,6 +204,16 @@
             tokenType.value = result.type;
             //result.totalSupply
           }
+          if (result.type == 64 && typeof result.name != "undefined") {
+            currentTokenType = result.type;
+            tokenName.value = result.name;
+            tokenDescription.value = result.description;
+            tokenExternalLink.value = result.externalLink;
+            tokenIcon.value = result.image;
+            tokenType.value = result.type;
+            tokenItemIndex.value = result.itemIndex;
+            //result.itemsCount
+          }          
         })
         .catch((error) => {
           console.error("Error on sendMessage:" + JSON.stringify(error));
@@ -228,7 +250,6 @@
       }
     }
   }
-
 </style>
 
 <div class="flex-column">
@@ -249,22 +270,45 @@
               on:keyup={validateTokenAddress} />
           </div>
         </Field>
-        <Field label={$_('Symbol')}>
-          <Input required id="token-symbol" />
-        </Field>
+        <span class:hidden="{currentTokenType == 74}">
+          <Field label={$_('Item index')}>
+            <Input required id="token-item-index" />
+          </Field>
+        </span>
+        <span class:hidden="{currentTokenType == 64}">
+          <Field label={$_('Symbol')}>
+            <Input required id="token-symbol" />
+          </Field>
+        </span>
         <Field label={$_('Name')}>
           <Input required id="token-name" />
         </Field>
+        <span class:hidden="{currentTokenType == 74}">
+          <Field label={$_('Description')}>
+            <Input required id="token-description" />
+          </Field>
+        </span>
+        <span class:hidden="{currentTokenType == 74}">
+          <Field label={$_('External link')}>
+            <Input required id="token-external-link" />
+          </Field>
+        </span>
         <Field label={$_('Type')}>
-          <select id="token-type">
+          <select id="token-type" on:change={(event) => {currentTokenType = Number(event.target.value).valueOf();}}>
             {#each Object.keys(ASSET_TYPES) as index}
-              <option value={index}>{ASSET_TYPES[index]}</option>
+              {#if currentTokenType == index}
+                  <option selected value={index}>{ASSET_TYPES[index]}</option>
+                {:else}
+                  <option value={index}>{ASSET_TYPES[index]}</option>
+              {/if}
             {/each}
           </select>
         </Field>
-        <Field label={$_('Decimals of precision')}>
-          <Input required number min="0" step="1" id="token-decimals" />
-        </Field>
+        <span class:hidden="{currentTokenType == 64}">
+          <Field label={$_('Decimals of precision')}>
+            <Input required number min="0" step="1" id="token-decimals" />
+          </Field>
+        </span>
         <Field label={$_('Icon')}>
           <Input required id="token-icon" />
         </Field>

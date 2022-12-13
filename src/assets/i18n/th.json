@@ -318,5 +318,10 @@
   "Send from XTON wallet": "ส่งจาก wallet xton",
   "Empty list": "รายการเปล่า",
   "Waiting for the transaction confirmation on the blockchain": "กำลังรอการยืนยันการทำธุรกรรมบน blockchain",
-  "Update transactions list": "อัปเดตรายการธุรกรรม"
+  "Update transactions list": "อัปเดตรายการธุรกรรม",
+  "Item index": "ดัชนีรายการ",
+  "Description": "คำอธิบาย",
+  "External link": "การเชื่อมโยงภายนอก",
+  "NFT content": "เนื้อหา NFT",
+  "Owner": "เจ้าของ"
 }

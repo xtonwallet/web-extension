@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Trimite din portofelul Xton",
   "Empty list": "Lista goală",
   "Waiting for the transaction confirmation on the blockchain": "În așteptarea confirmării tranzacției pe blockchain",
-  "Update transactions list": "Actualizați lista tranzacțiilor"
+  "Update transactions list": "Actualizați lista tranzacțiilor",
+  "Item index": "Indicele articolului",
+  "Description": "Descriere",
+  "External link": "Link extern",
+  "NFT content": "Conținut NFT",
+  "Owner": "Proprietar"
 }

@@ -73,13 +73,13 @@ const broadcastMessage = (type, data) => {
   browser.runtime.sendMessage({type: `page-${type}`, data})
   .catch((error) => {
     if (devMode)  {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error(`Error on sendMessage ${type}: ${JSON.stringify(error)}`);
     }
   });
   browser.runtime.sendMessage({type: `popup-${type}`, data})
   .catch((error) => {
     if (devMode)  {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error(`Error on sendMessage ${type}: ${JSON.stringify(error)}`);
     }
   });
 };
@@ -120,18 +120,7 @@ const openPageWithPath = (path) => {
 };
 
 const openRequestPopup = (modalName, data) => {
-  browser.runtime.sendMessage({ type: 'popupView'})
-  .then((popupView) => {
-    if (popupView) {
-      browser.runtime.sendMessage({ type: 'popupMessage', data: {'modalName': modalName, 'data': data} })
-      .catch((error) => {
-        if (devMode)  {
-          console.error("Error on sendMessage:" + JSON.stringify(error));
-        }
-      });
-    }
-  })
-  .catch(() => {
+  const openPopup = (modalName, data) => {
     browser.windows.getAll().then(async (windows) => {
       if (windows.length != 0) {
         const popup = windows.filter((win) => {
@@ -183,6 +172,23 @@ const openRequestPopup = (modalName, data) => {
         }, 1000); // let's wait for 1 seconds, because maybe will be some delay on the window opening
       }
     });
+  };
+
+  browser.runtime.sendMessage({ type: 'popupView'})
+  .then((popupView) => {
+    if (popupView) {
+      browser.runtime.sendMessage({ type: 'popupMessage', data: {'modalName': modalName, 'data': data} })
+      .catch((error) => {
+        if (devMode)  {
+          console.error("Error on sendMessage:" + JSON.stringify(error));
+        }
+      });
+    } else {
+      openPopup(modalName, data);
+    }
+  })
+  .catch(() => {
+    openPopup(modalName, data);
   });
 };
 

@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Xton વ let લેટથી મોકલો",
   "Empty list": "ખાલી યાદી",
   "Waiting for the transaction confirmation on the blockchain": "બ્લોકચેન પર ટ્રાન્ઝેક્શનની પુષ્ટિની રાહ જોવી",
-  "Update transactions list": "ટ્રાન્ઝેક્શન સૂચિ અપડેટ કરો"
+  "Update transactions list": "ટ્રાન્ઝેક્શન સૂચિ અપડેટ કરો",
+  "Item index": "બાબત",
+  "Description": "વર્ણન",
+  "External link": "બહારની કડી",
+  "NFT content": "એન.એફ.ટી.",
+  "Owner": "માલિક"
 }

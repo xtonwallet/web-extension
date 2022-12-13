@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Skicka från Xton Wallet",
   "Empty list": "Tomt",
   "Waiting for the transaction confirmation on the blockchain": "Väntar på transaktionsbekräftelsen på blockchain",
-  "Update transactions list": "Uppdatera transaktionslistan"
+  "Update transactions list": "Uppdatera transaktionslistan",
+  "Item index": "Objektindex",
+  "Description": "Beskrivning",
+  "External link": "Extern länk",
+  "NFT content": "NFT -innehåll",
+  "Owner": "Ägare"
 }

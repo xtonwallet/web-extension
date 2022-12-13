@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Αποστολή από το πορτοφόλι XTON",
   "Empty list": "Κενή λίστα",
   "Waiting for the transaction confirmation on the blockchain": "Περιμένοντας την επιβεβαίωση συναλλαγής στο blockchain",
-  "Update transactions list": "Ενημέρωση της λίστας συναλλαγών"
+  "Update transactions list": "Ενημέρωση της λίστας συναλλαγών",
+  "Item index": "Ευρετήριο αντικειμένου",
+  "Description": "Περιγραφή",
+  "External link": "Εξωτερικός σύνδεσμος",
+  "NFT content": "Περιεχόμενο NFT",
+  "Owner": "Ιδιοκτήτης"
 }

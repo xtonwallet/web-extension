@@ -318,5 +318,10 @@
   "Send from XTON wallet": "Kirim dari dompet xton",
   "Empty list": "Daftar kosong",
   "Waiting for the transaction confirmation on the blockchain": "Menunggu konfirmasi transaksi di blockchain",
-  "Update transactions list": "Perbarui daftar transaksi"
+  "Update transactions list": "Perbarui daftar transaksi",
+  "Item index": "Indeks item",
+  "Description": "Keterangan",
+  "External link": "Tautan eksternal",
+  "NFT content": "Konten NFT",
+  "Owner": "Pemilik"
 }

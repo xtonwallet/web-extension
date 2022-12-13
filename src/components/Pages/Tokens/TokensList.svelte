@@ -113,6 +113,8 @@
     line-height: 0.5rem;
     white-space: nowrap;
     left: 0px;
+    width: 40px;
+    text-align: center;
   }
   .asset-balance-amount {
     max-width: 165px;
@@ -149,10 +151,18 @@
               alt="logo" />
             <span class="asset-type">{ASSET_TYPES[asset.type]}</span>
           </div>
-          <span class="asset-balance is-center" title="{fromNano(asset.balance, asset.decimals)} {asset.name}">
-            <span class="asset-balance-amount">{fromNano(asset.balance)}</span>
-            <span class="asset-balance-symbol">{asset.symbol}</span>
-          </span>
+          {#if asset.type == "74"}
+            <span class="asset-balance is-center" title="{fromNano(asset.balance, asset.decimals)} {asset.name}">
+              <span class="asset-balance-amount">{fromNano(asset.balance)}</span>
+              <span class="asset-balance-symbol">{asset.symbol}</span>
+            </span>
+          {/if}
+          {#if asset.type == "64"}
+            <span class="asset-balance is-center" title="{asset.name}">
+              <span class="asset-balance-amount"></span>
+              <span class="asset-balance-symbol">{asset.name}</span>
+            </span>
+          {/if}
         </div>
       {/each}
     </div>
