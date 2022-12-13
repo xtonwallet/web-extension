@@ -1,6 +1,6 @@
 {
   "homepage_url": "https://xtonwallet.com/",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "name": "__MSG_extName__",
   "short_name": "__MSG_extShortName__",
   "description": "__MSG_extDescription__",
@@ -38,9 +38,11 @@
     "default_popup": "popup.html"
   },
   "permissions": ["alarms", "nativeMessaging", "notifications", "proxy", "storage", "tabs", "unlimitedStorage"],
-  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: http: https:; connect-src https: http://localhost:7777" },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: http: https:; connect-src https: http://localhost:7777"
+  },
   "web_accessible_resources": [{
     "resources": ["assets/*", "inpage.js"],
     "matches": ["file://*/*", "http://*/*", "https://*/*"]
-  }]  
+  }]
 }
