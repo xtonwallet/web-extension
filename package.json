@@ -12,7 +12,7 @@
     "test": "mocha --recursive --timeout 30000 tests/e2e/",
     "test-firstrun": "mocha --recursive --timeout 30000 tests/e2e/firstrun/*.js",
     "test-dapps": "mocha --recursive --timeout 30000 tests/e2e/dapp/*.js",
-    "version": "gulp patchVersion && auto-changelog -p -b 20 -l 20 -t keepachangelog --starting-version v2.0.0"
+    "version": "gulp patchVersion && auto-changelog -p -b 20 -l 20 -t keepachangelog --starting-version 2.0.0"
   },
   "repository": {
     "type": "git",
