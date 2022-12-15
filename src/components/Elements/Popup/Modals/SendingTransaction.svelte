@@ -64,6 +64,9 @@
   };
 
   onMount(() => {
+    destination = document.getElementById("sending-tx-destination");
+    amount = document.getElementById("sending-tx-amount");
+    message = document.getElementById("sending-tx-message");
     browser.runtime
       .sendMessage({
         type: "getCurrentBalance",
@@ -71,36 +74,32 @@
       })
       .then((result) => {
         balance = result;
+        if (modalData.id) {
+          const params = modalData.params;
+          if (params.amount) {
+            amount.value = params.amount;
+          }
+          if (params.message) {
+            message.value = params.message;
+          }
+          if (params.destination) {
+            destination.dataset.value = params.destination;
+            destination.value = params.destination;
+            validateAddress({});
+          }
+          loadSelectAddressesList();
+        }
+        if (modalData.token) {
+          isNative = false;
+          icon = modalData.token.icon;
+          symbol = modalData.token.symbol;
+          title = modalData.token.name;
+        }
       })
       .catch((e) => {
         balance = 0;
         console.log(e); // here don't need to show any error for user, usually it is the network issue in the development environment
       });
-
-    destination = document.getElementById("sending-tx-destination");
-    amount = document.getElementById("sending-tx-amount");
-    message = document.getElementById("sending-tx-message");
-    if (modalData.id) {
-      const params = modalData.params;
-      if (params.amount) {
-        amount.value = params.amount;
-      }
-      if (params.message) {
-        message.value = params.message;
-      }
-      if (params.destination) {
-        destination.dataset.value = params.destination;
-        destination.value = params.destination;
-        validateAddress({});
-      }
-      loadSelectAddressesList();
-    }
-    if (modalData.token) {
-      isNative = false;
-      icon = modalData.token.icon;
-      symbol = modalData.token.symbol;
-      title = modalData.token.name;
-    }
   });
 
   currentAccount.subscribe((value) => {

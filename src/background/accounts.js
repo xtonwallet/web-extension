@@ -894,7 +894,7 @@ export const accounts = () => {
       const TonLibClient = await TonLib.getClient(server);
       const keyPair      = await decrypt(currentPassword, account.encrypted);
 
-      let txDataPrepared, result;
+      let txDataPrepared;
       switch(txData.params.dataType) {
         case "boc":
           txData.params.data = TonLibClient.oneFromBoc(Unibabel.base64ToBuffer(txData.params.data));

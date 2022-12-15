@@ -214,7 +214,7 @@
   };
 
   const buy = () => {
-    browser.tabs.create({ url: "https://coinmarketcap.com/currencies/toncoin/markets/" });
+    browser.tabs.create({ url: "https://exchange.mercuryo.io/?currency=TONCOIN&utm_source=xtonwallet" });
   };
 
   const giver = () => {

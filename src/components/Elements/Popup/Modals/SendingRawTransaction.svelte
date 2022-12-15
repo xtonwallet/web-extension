@@ -62,6 +62,11 @@
   };
 
   onMount(() => {
+    to = document.getElementById("sending-tx-to");
+    amount = document.getElementById("sending-tx-amount");
+    data = document.getElementById("sending-tx-data");
+    dataType = document.getElementById("sending-tx-dataType");
+    stateInit = document.getElementById("sending-tx-stateInit");
     browser.runtime
       .sendMessage({
         type: "getCurrentBalance",
@@ -69,38 +74,32 @@
       })
       .then((result) => {
         balance = result;
+        if (modalData.id) {
+          const params = modalData.params;
+          if (params.amount) {
+            amount.value = params.amount;
+          }
+          if (params.data) {
+            data.value = params.data;
+          }
+          if (params.dataType) {
+            dataType.value = params.dataType;
+          }
+          if (params.stateInit) {
+            stateInit.value = params.stateInit;
+          }
+          if (params.to) {
+            to.dataset.value = params.to;
+            to.value = params.to;
+            validateAddress({});
+          }
+          loadSelectAddressesList();
+        }
       })
       .catch((e) => {
         balance = 0;
         console.log(e); // here don't need to show any error for user, usually it is the network issue in the development environment
       });
-
-    to = document.getElementById("sending-tx-to");
-    amount = document.getElementById("sending-tx-amount");
-    data = document.getElementById("sending-tx-data");
-    dataType = document.getElementById("sending-tx-dataType");
-    stateInit = document.getElementById("sending-tx-stateInit");
-    if (modalData.id) {
-      const params = modalData.params;
-      if (params.amount) {
-        amount.value = params.amount;
-      }
-      if (params.data) {
-        data.value = params.data;
-      }
-      if (params.dataType) {
-        dataType.value = params.dataType;
-      }
-      if (params.stateInit) {
-        stateInit.value = params.stateInit;
-      }
-      if (params.to) {
-        to.dataset.value = params.to;
-        to.value = params.to;
-        validateAddress({});
-      }
-      loadSelectAddressesList();
-    }
   });
 
   currentAccount.subscribe((value) => {

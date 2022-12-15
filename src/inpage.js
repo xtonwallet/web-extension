@@ -5,11 +5,7 @@ window.addEventListener("xtonwallet", (event) => {
   const { type, payload } = event.detail;
   if (type == "notification") {
     const { method, params } = payload;
-    if (method === 'connect') {
-      provider.emit('connect', params);
-    } else if (method === 'disconnect') {
-      provider.emit('disconnect', params);
-    } else if (method === 'accountChanged') {
+    if (method === 'accountChanged') {
       provider.emit('accountChanged', params);
     } else if (method === 'unlockStateChanged') {
       provider.emit('unlockStateChanged', params);
@@ -104,8 +100,8 @@ window.tonProtocolVersion = 1;
 
 //Emulate TON wallet API
 window.ton.isTonWallet = true;
-window.ton.send = async function(methodRaw, params = []) {
-  let method;
+window.ton.send = async function(methodRaw, initialParams = []) {
+  let method, params;
   //translate method name
   switch(methodRaw) {
     case 'ton_requestAccounts':
@@ -119,8 +115,8 @@ window.ton.send = async function(methodRaw, params = []) {
       break;
     case 'ton_sendTransaction':
       method = "ton_sendRawTransaction";
-      params = params.shift();
-      if (params.value) {
+      params = initialParams.shift();
+      if (typeof params.value != "undefined") {
         params.amount = Number(params.value).valueOf()/10**9; // simple conversion to TON coin
       }
       if (typeof params.stateInit == "undefined") {
@@ -129,7 +125,7 @@ window.ton.send = async function(methodRaw, params = []) {
       break;
     case 'ton_rawSign':
       method = "ton_signMessage";
-      params = params.shift();
+      params = initialParams.shift();
       break;
     case 'flushMemoryCache':
       // nothing to do

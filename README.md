@@ -181,6 +181,7 @@ Usually after common commit needs to use `patch`
 - [x] Adding tokens and interactions with them
 - [x] Supporting of easy conversion between currencies
 - [x] TON proxy supporting
+- [x] NFT supporting
 - [ ] TON DNS supporting
 - [ ] Mobile version for IOS/Android platforms with the same functionality as in browsers
 - [ ] Full SDK supporting
