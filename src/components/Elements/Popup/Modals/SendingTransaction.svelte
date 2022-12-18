@@ -198,6 +198,14 @@
       })
       .then((result) => {
         fee = result.error ? 0 : fromNano(result.fee);
+        if (fee == 0) {
+          disabled = true;
+          errorAmount = "Amount can't be less than 0,001";
+          return;
+        } else {
+          disabled = false;
+          errorAmount = false;
+        }
         const maxBalance = balance;
         if (isNative) {
           if (allBalance) {
@@ -213,13 +221,10 @@
           }
         } else {
           total = fromNano(result.fee);
-        }
-        if (fee == 0) {
-          disabled = true;
-          errorAmount = "Amount can't be less than 0,001";
-        } else {
-          disabled = false;
-          errorAmount = false;
+          if (new BigNumber(result.fee).gt(maxBalance)) {
+            disabled = true;
+            errorAmount = "Account has insufficient balance for the requested operation. Send some value to account balance";
+          }
         }
       }).catch((error) => {
         console.error("Error on sendMessage:" + JSON.stringify(error));

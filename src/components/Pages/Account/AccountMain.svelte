@@ -250,7 +250,7 @@
   };
 
   const sendTransactionToken = (tokenObject) => {
-    if (tokenObject != "74") {
+    if (tokenObject.type != "74") {
       // we don't allow sending NFT now
       return;
     }
@@ -411,6 +411,7 @@
     justify-content: space-between;
     padding: 1rem;
     border-bottom: 1px dashed var(--color-black);
+    cursor: pointer;
   }
   .asset-logo {
     width: 32px;

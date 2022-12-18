@@ -263,7 +263,7 @@
   };
 
   const sendTransactionToken = (tokenObject) => {
-    if (tokenObject != "74") {
+    if (tokenObject.type != "74") {
       // we don't allow sending NFT now
       return;
     }
