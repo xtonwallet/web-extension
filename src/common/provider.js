@@ -65,14 +65,12 @@ export default class Provider extends EventEmitter {
       this._handleEndpointChanged(params);
     });
 
-/*
     this.on('ton_subscription', (params) => {
       this.emit('message', {
         type: 'ton_subscription',
         data: params,
       });
     });
-*/
 
     this._initializeState();
   }
