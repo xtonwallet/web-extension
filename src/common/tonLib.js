@@ -168,25 +168,6 @@ class TonLib {
   }
 
 /*
-  async getSubscriptionId(params, callback) {
-    try {
-      const result = await this.instance.net.subscribe_collection(params, callback);
-      return result.handle;
-    } catch (exp) {
-      throw exp;
-    }
-  }
-
-  async removeSubscriptionId(params) {
-    try {
-      await this.instance.net.unsubscribe(params);
-      return true;
-    } catch (exp) {
-      throw exp;
-    }
-  }
-*/
-/*
   async requestManyAccountBalances(accountsList) {
     try {
       let filter = "";
@@ -222,9 +203,9 @@ class TonLib {
     }
   }
 
-  async calcRunFees(address, data, keyPair = null) {
+  async calcRunFees(version, address, data, keyPair = null) {
     try {
-      const WalletClass = this.instance.wallet.all[this.defaultWalletVersion];
+      const WalletClass = this.instance.wallet.all[version];
       const toAddress = (new TonWeb.Address(address)).toString(true, true, false);
       const walletContract = new WalletClass(this.instance.provider, {address: toAddress});
 
@@ -294,13 +275,13 @@ class TonLib {
     }
   }
 
-  async estimateTransferFtTokenWallet(JtWallet, accountAddress, walletAddressOwner, params, keyPair) {
+  async estimateTransferFtTokenWallet(version, JtWallet, accountAddress, walletAddressOwner, params, keyPair) {
     try {
       params.toAddress = new TonWeb.Address(params.toAddress);
       params.responseAddress = new TonWeb.Address(params.responseAddress);
       params.forwardPayload = Unibabel.utf8ToBuffer(params.forwardPayload);
 
-      const WalletClass = this.instance.wallet.all[this.defaultWalletVersion];
+      const WalletClass = this.instance.wallet.all[version];
       const toAddress = (new TonWeb.Address(accountAddress)).toString(true, true, false);
       const walletContract = new WalletClass(this.instance.provider, {address: toAddress});
       const JtWalletTransferBody = (await JtWallet.createTransferBody(params));
@@ -319,13 +300,13 @@ class TonLib {
     }
   }
 
-  async sendTransferFtTokenWallet(JtWallet, accountAddress, walletAddressOwner, params, keyPair) {
+  async sendTransferFtTokenWallet(version, JtWallet, accountAddress, walletAddressOwner, params, keyPair) {
     try {
       params.toAddress = (new TonWeb.Address(params.toAddress));
       params.responseAddress = (new TonWeb.Address(params.responseAddress));
       params.forwardPayload = Unibabel.utf8ToBuffer(params.forwardPayload);
 
-      const WalletClass = this.instance.wallet.all[this.defaultWalletVersion];
+      const WalletClass = this.instance.wallet.all[version];
       const toAddress = (new TonWeb.Address(accountAddress)).toString(true, true, false);
       const walletContract = new WalletClass(this.instance.provider, {address: toAddress});
       const JtWalletTransferBody = (await JtWallet.createTransferBody(params));

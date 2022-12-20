@@ -161,6 +161,31 @@
       });
   };
 
+  let waitingTransactionChecking = false;
+  waitingTransaction.subscribe((value) => {
+    if (value.includes($currentNetwork.server + "-" + $currentAccount.address) && !waitingTransactionChecking) {
+      waitingTransactionChecking = true;
+      setTimeout(() => {
+          browser.runtime
+            .sendMessage({
+              type: "checkNewTransactions",
+              data: {
+                accountAddress: $currentAccount.address,
+                server: $currentNetwork.server
+              }
+            }).then(() => {
+              console.log("remove then " + $currentNetwork.server + "-" + $currentAccount.address);
+              accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
+              waitingTransactionChecking = false;
+            }).catch((e) => {
+              console.log("remove catch " + $currentNetwork.server + "-" + $currentAccount.address);
+              accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
+              waitingTransactionChecking = false;
+            });
+        }, 10000);
+    }
+  });
+
   currentAccount.subscribe((value) => {
     balance = value.balance[$currentNetwork.server]
       ? fromNano(value.balance[$currentNetwork.server])

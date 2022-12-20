@@ -201,7 +201,7 @@ export const controller = () => {
 
   const checkNewTransactions = async (accountAddress, server) => {
     await accountsController.updateTransactionsList(accountAddress, server);
-    accountStore.removeWaitingTransaction(server + "-" + accountAddress);
+    return true;
   }
 
   const sendTransaction = async (data, origin) => {

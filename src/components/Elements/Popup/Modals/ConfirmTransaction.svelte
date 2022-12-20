@@ -66,21 +66,6 @@
       })
       .then((result) => {
         accountStore.addWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
-        setTimeout(() => {
-          browser.runtime
-            .sendMessage({
-              type: "checkNewTransactions",
-              data: {
-                accountAddress: $currentAccount.address,
-                server: $currentNetwork.server
-              }
-            }).then(() => {
-              accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
-            }).catch((e) => {
-              accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
-              console.log(e);
-            });
-        }, 10000);
         //here need to set by default for the next same window
         loading = false;
         disabled = false;

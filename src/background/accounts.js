@@ -1,7 +1,7 @@
 import { Vault } from "../common/vault.js";
 import { toNano, generateRandomHex, encrypt, decrypt, broadcastMessage, sendNotificationToInPageScript, hexToStr, Unibabel, getRate } from "../common/utils.js";
 import TonLib from "../common/tonLib.js";
-import { CURRENT_KS_PASSWORD, currentRetrievingTransactionsPeriod, currentRetrievingTransactionsLastTime, settingsStore, currentEnabledPinPad, currentCurrency, messageSubscriptions } from "../common/stores.js";
+import { CURRENT_KS_PASSWORD, accountStore, currentRetrievingTransactionsPeriod, currentRetrievingTransactionsLastTime, settingsStore, currentEnabledPinPad, currentCurrency, messageSubscriptions } from "../common/stores.js";
 import BigNumber from "bignumber.js";
 
 const devMode = __DEV_MODE__;
@@ -52,6 +52,9 @@ export const accounts = () => {
         let walletsTokenInfo = {};
         try {
           for (let index in allAddresses) {
+
+            accountStore.removeWaitingTransaction(server + "-" + allAddresses[index]);
+
             const tokenList = await vault.tokenList(allAddresses[index], server);
             if (tokenList && tokenList.length != 0) {
               tokenList.forEach((item) => {
@@ -74,7 +77,7 @@ export const accounts = () => {
           }
         } catch(e) {
           if (devMode) {
-            console.log(e);
+            console.log(server, e);
           }
           continue;
         }
@@ -133,8 +136,8 @@ export const accounts = () => {
                 const walletDeployed = await checkWalletDeployed(transactions[i].in_msg.destination);
                 if (walletDeployed.deployed.includes(server) !== true) {
                   await vault.markAsDeployed(transactions[i].in_msg.destination, server);
-                  await vault.setWalletVersion(transactions[i].in_msg.destination, walletDeployed.version);
                 }
+                await vault.setWalletVersion(transactions[i].in_msg.destination, walletDeployed.version);
               }
               else if (txData.in_msg.source == "" && txData.out_msgs.length) {
                 txData.type = "transfer";
@@ -176,6 +179,7 @@ export const accounts = () => {
   });
 
   const updateTransactionsList = async (address, server, fromStart = false) => {
+    accountStore.removeWaitingTransaction(server + "-" + address);
     const TonLibClient     = await TonLib.getClient(server);
     const network          = await vault.getNetwork(server);
     const lastTransactions = await vault.getTransactions(address, server, 50, 1);
@@ -253,7 +257,12 @@ export const accounts = () => {
         if (txData.in_msg.source == "" && txData.out_msgs.length == 0) {
           txData.type = "deploy";
           txData.amount  = txData.fee * -1;
-          await vault.markAsDeployed(transactions[i].in_msg.destination, server);
+
+          const walletDeployed = await checkWalletDeployed(transactions[i].in_msg.destination);
+          if (walletDeployed.deployed.includes(server) !== true) {
+            await vault.markAsDeployed(transactions[i].in_msg.destination, server);
+          }
+          await vault.setWalletVersion(transactions[i].in_msg.destination, walletDeployed.version);
         }
         else if (txData.in_msg.source == "" && txData.out_msgs.length) {
           txData.type = "transfer";
@@ -444,6 +453,7 @@ export const accounts = () => {
         if (walletDeployed.deployed.includes(server)) {
           await vault.markAsDeployed(destination, server);
           response.alreadyDeployed = true;
+          await vault.setWalletVersion(destination, walletDeployed.version);
         }
       }
       return response;
@@ -783,7 +793,7 @@ export const accounts = () => {
 
       let result;
       if (txData.params.allBalance) { //@TODO need to be sure, that one-custodial wallet
-        result = await TonLibClient.calcRunFees(accountAddress,
+        result = await TonLibClient.calcRunFees(account.version[server], accountAddress,
           {
             toAddress: txData.params.destination,
             amount: 0,
@@ -792,7 +802,7 @@ export const accounts = () => {
           },
           keyPair);
       } else {
-        result = await TonLibClient.calcRunFees(accountAddress,
+        result = await TonLibClient.calcRunFees(account.version[server], accountAddress,
           {
             toAddress: txData.params.destination,
             amount: txData.params.amount,
@@ -838,7 +848,7 @@ export const accounts = () => {
         txDataPrepared.stateInit = TonLibClient.oneFromBoc(Unibabel.base64ToBuffer(txData.params.stateInit));
       }
 
-      result = await TonLibClient.calcRunFees(accountAddress,
+      result = await TonLibClient.calcRunFees(account.version[server], accountAddress,
         txDataPrepared,
         keyPair);
 
@@ -1126,10 +1136,11 @@ export const accounts = () => {
 
   const calculateFeeForTokenType74 = async (accountAddress, server, txData, keyPair) => {
     try {
+      const account      = await vault.getAccount(accountAddress);
       const TonLibClient = await TonLib.getClient(server);
       const walletAddressOwner = await getTokenType74WalletAddress(server, txData.params.token.address, accountAddress);
       const JtWallet = TonLibClient.getFtTokenWallet(walletAddressOwner);
-      const result = await TonLibClient.estimateTransferFtTokenWallet(JtWallet, accountAddress, walletAddressOwner, {
+      const result = await TonLibClient.estimateTransferFtTokenWallet(account.version[server], JtWallet, accountAddress, walletAddressOwner, {
         "jettonAmount": txData.params.amount,
         "toAddress": txData.params.destination,
         "responseAddress": accountAddress,
@@ -1211,11 +1222,12 @@ export const accounts = () => {
 
   const transferTokenType74 = async (accountAddress, server, txData, keyPair) => {
     try {
+      const account      = await vault.getAccount(accountAddress);
       const TonLibClient = await TonLib.getClient(server);
       const walletAddressOwner = await getTokenType74WalletAddress(server, txData.params.token.address, accountAddress);
 
       const JtWallet = TonLibClient.getFtTokenWallet(walletAddressOwner);
-      const result = await TonLibClient.sendTransferFtTokenWallet(JtWallet, accountAddress, walletAddressOwner, {
+      const result = await TonLibClient.sendTransferFtTokenWallet(account.version[server], JtWallet, accountAddress, walletAddressOwner, {
         "jettonAmount": txData.params.amount,
         "toAddress": txData.params.destination,
         "responseAddress": accountAddress,
