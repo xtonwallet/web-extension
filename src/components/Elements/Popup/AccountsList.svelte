@@ -216,6 +216,7 @@
         {#each allAccounts as account}
           <div
             on:click={(event) => changeAccount(account.address)}
+            on:keyup={(event) => changeAccount(account.address)}
             class:selected={account.address == $currentAccount.address}
             class="account-item is-vertical-align">
             <span class="identicon">{@html indenticon(account.address)}</span>
