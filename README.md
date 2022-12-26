@@ -39,7 +39,7 @@ Testing system is based on [selenium](https://www.selenium.dev/) and [mochajs](h
 To test need to run:
 
 ```bash
-npm run test
+yarn run test
 ```
 
 # Technical stack
@@ -66,19 +66,19 @@ This repository provides by [Apache License 2.0](LICENSE)
 To prepare environment need to run:
 
 ```
-npm i
+yarn install
 ```
 
 To run developer mode:
 
 ```
-npm start
+yarn start
 ```
 
 To prepare build need to run:
 
 ```
-npm run build
+yarn run build
 ```
 
 This command will generate a zip file for each browser.
@@ -151,7 +151,7 @@ If you are native speaker on any other language and can help with translation, p
 * Run tests
 
 ```
-  npm run test
+  yarn run test
 ```
 
 * Create a commit with a description
@@ -159,19 +159,19 @@ If you are native speaker on any other language and can help with translation, p
 * Increase a version in package.json and manifest.json and update [CHANGELOG](CHANGELOG.md) file
 
 ```
-  npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease [--preid=<prerelease-id>] | from-git]
+  yarn version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease [--preid=<prerelease-id>] | from-git]
 ```
 
 Usually after common commit needs to use `patch`
 
 ```
-  npm version patch
+  yarn version patch
 ```
 
 * Create builds for browsers
 
 ```
-  npm run build
+  yarn run build
 ```
 
 # Requested features

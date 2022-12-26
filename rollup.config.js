@@ -5,7 +5,7 @@ import postcss from 'rollup-plugin-postcss';
 import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import json from '@rollup/plugin-json';
 import livereload from 'rollup-plugin-livereload';
 import preprocess from 'svelte-preprocess';
