@@ -79,13 +79,13 @@
     <Card>
       {$_("About text")}
       <div slot="footer" class="is-right">
-        <a href="https://xtonwallet.com" target="_blank" title="{$_("Visit website")}">{$_("Visit website")}</a>
+        <a href="https://xtonwallet.com" target="_blank" rel="noopener noreferrer" title="{$_("Visit website")}">{$_("Visit website")}</a>
       </div>
     </Card>
   </div>
   <div class="social-box">
     {#each shareList as item}
-      <div on:click={() => openLink(item.url)}>
+      <div on:click={() => openLink(item.url)} on:keyup={() => openLink(item.url)}>
         <Icon src="{icons[item.name]}" size="2"/>
       </div>
     {/each}

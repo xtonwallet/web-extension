@@ -163,7 +163,9 @@
                   class="copy-text"
                   size="1.5"
                   color="grey"
-                  on:click={() => copyText(account.address)} />
+                  on:click={() => copyText(account.address)}
+                  on:keyup={() => copyText(account.address)}
+                  />
                 {account.address}
               </div>
             </div>
@@ -176,7 +178,9 @@
                   class="copy-text"
                   size="1.5"
                   color="grey"
-                  on:click={() => copyText(account.keyPair.public)} />
+                  on:click={() => copyText(account.keyPair.public)}
+                  on:keyup={() => copyText(account.keyPair.public)}
+                  />
                 {account.keyPair.public}
               </div>
             </div>
@@ -189,7 +193,9 @@
                   class="copy-text"
                   size="1.5"
                   color="grey"
-                  on:click={() => copyText(account.keyPair.secret)} />
+                  on:click={() => copyText(account.keyPair.secret)}
+                  on:keyup={() => copyText(account.keyPair.secret)}
+                  />
                 {account.keyPair.secret}
               </div>
             </div>

@@ -120,7 +120,9 @@
   class="item"
   class:selected={isSelected}
   class:notselected={!isSelected}
-  on:click={() => menuAction()}>
+  on:click={() => menuAction()}
+  on:keyup={() => menuAction()}
+  >
   <div class="logo">
     <Icon
       src={menuItem.logo}

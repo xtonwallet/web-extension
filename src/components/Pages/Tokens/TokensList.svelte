@@ -16,7 +16,7 @@
   } from "../../../common/utils.js";
 
   //Stores
-  import { Checkbox, Field, Button } from "svelte-chota";
+  import { Checkbox, Button } from "svelte-chota";
 
   //Context
   const { switchPage } = getContext("app_functions");
@@ -38,8 +38,10 @@
       },
     })
     .then((result) => {
-      assets = result;
-      assetsLoaded = true;
+      if (server == $currentNetwork.server) {
+        assets = result;
+        assetsLoaded = true;
+      }
     })
     .catch((e) => {
       console.log(e); // here don't need to show any error for user, usually it is the network issue in the development environment
@@ -137,7 +139,8 @@
   id="manage-tokens-form"
   on:submit|preventDefault={() => handleSubmit()}
   target="_self"
-  bind:this={formObj}>
+  bind:this={formObj}
+  autocomplete="off">
   <div class="tokens-wrapper">
     <div class="tokens-wrapper-scroll">
       {#each assets as asset}

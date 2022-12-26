@@ -204,7 +204,7 @@
     <div class="lock-wallet">
       <div class="flex-row">
         <div>{$_('Accounts')}</div>
-        <div class="lock-wallet-button" on:click={() => lock()}>
+        <div class="lock-wallet-button" on:click={() => lock()} on:keyup={() => lock()}>
           <Icon src={mdiLock} size="1" color="var(--color-black)" />
           {$_('Sign out')}
         </div>
@@ -230,25 +230,25 @@
       </div>
     </div>
     <div class="spacer" />
-    <div class="menu-item" on:click={() => addNewAccount()}>
+    <div class="menu-item" on:click={() => addNewAccount()} on:keyup={() => addNewAccount()}>
       <Icon src={mdiPlus} size="1.5" color="var(--color-black)" />
       {$_('Add')}
     </div>
     <div class="spacer" />
-    <div class="menu-item" on:click={() => restoreWallet()}>
+    <div class="menu-item" on:click={() => restoreWallet()} on:keyup={() => restoreWallet()}>
       <Icon src={mdiArchiveArrowUp} size="1.5" color="var(--color-black)" />
       {$_('Restore wallet')}
     </div>
-    <div class="menu-item" on:click={() => backupWallet()}>
+    <div class="menu-item" on:click={() => backupWallet()} on:keyup={() => backupWallet()}>
       <Icon src={mdiArchiveArrowDown} size="1.5" color="var(--color-black)" />
       {$_('Backup wallet')}
     </div>
     <div class="spacer" />
-    <div class="menu-item" on:click={() => settings()}>
+    <div class="menu-item" on:click={() => settings()} on:keyup={() => settings()}>
       <Icon src={mdiCog} size="1.5" color="var(--color-black)" />
       {$_('Settings')}
     </div>
-    <div class="menu-item" on:click={() => information()}>
+    <div class="menu-item" on:click={() => information()} on:keyup={() => information()}>
       <Icon src={mdiCardBulleted} size="1.5" color="var(--color-black)" />
       {$_('Information')}
     </div>

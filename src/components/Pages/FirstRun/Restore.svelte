@@ -14,7 +14,6 @@
   import Complete  from '../Restore/Complete.svelte';
 
   import Steps from '../../Elements/Steps.svelte';
-  import Step from '../../Elements/Step.svelte';
 
   import Logo from '../../Elements/Logo.svelte';
 

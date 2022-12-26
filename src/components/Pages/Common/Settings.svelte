@@ -121,7 +121,8 @@
   id="settings-form"
   on:submit|preventDefault={() => handleSubmit()}
   target="_self"
-  bind:this={formObj}>
+  bind:this={formObj}
+  autocomplete="off">
   <Field grouped class="not-overflowed">
     <div class="input-box-50">
       <Field label={$_('Language')}>

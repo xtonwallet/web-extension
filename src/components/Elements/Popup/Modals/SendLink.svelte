@@ -125,7 +125,7 @@
 
   <div class="social-box">
     {#each shareList as item}
-      <div on:click={() => openLink(item.url)}>
+      <div on:click={() => openLink(item.url)} on:keyup={() => openLink(item.url)}>
         <Icon src="{icons[item.name]}" size="2"/>
       </div>
     {/each}

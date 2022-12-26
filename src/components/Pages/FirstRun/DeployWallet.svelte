@@ -57,6 +57,13 @@
     networksStore.changeNetwork(network);
     giver = (network.giver != "");
     checkBalance();
+    browser.runtime
+      .sendMessage({
+        type: "changeNetwork",
+        data: network,
+      }).catch((error) => {
+        console.error("Error on sendMessage:" + JSON.stringify(error));
+      });
   };
 
   const deployWallet = () => {

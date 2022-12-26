@@ -290,6 +290,7 @@
                 on:mouseover={() => handleHover(i)}
                 on:focus={() => handleHover(i)}
                 on:click={(event) => handleClick({ item, i, event })}
+                on:keyup={(event) => handleClick({ item, i, event })}
                 class="listItem">
                 <svelte:component
                     this={Item}
@@ -310,6 +311,7 @@
                     on:mouseover={() => handleHover(i)}
                     on:focus={() => handleHover(i)}
                     on:click={(event) => handleClick({ item, i, event })}
+                    on:keyup={(event) => handleClick({ item, i, event })}
                     class="listItem"
                     tabindex="-1">
                     <svelte:component

@@ -89,7 +89,9 @@
       class="icons"
       class:back={$currentThemeName === 'dark'}
       class:front={$currentThemeName === 'light'}
-      on:click={themeToggle}>
+      on:click={themeToggle}
+      on:keyup={themeToggle}
+      >
       <Icon src={mdiWeatherSunny} color="grey" size={size} />
     </div>
 
@@ -97,7 +99,8 @@
       class="icons"
       class:back={$currentThemeName === 'light'}
       class:front={$currentThemeName === 'dark'}
-      on:click={themeToggle}>
+      on:click={themeToggle}
+      on:keyup={themeToggle}>
       <Icon src={mdiWeatherNight} color="grey" size={size} />
     </div>
   </div>

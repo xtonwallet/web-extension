@@ -97,7 +97,8 @@
       class="inputs"
       on:submit|preventDefault={() => {}}
       bind:this={formField}
-      target="_self">
+      target="_self"
+      autocomplete="off">
       <Field label={$_('Password')}>
         <Input
           password

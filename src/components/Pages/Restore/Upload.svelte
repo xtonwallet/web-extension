@@ -115,7 +115,7 @@
     </div>
 
     <div class="caption-box text-caption">
-      <span class="text-accent" on:click={() => openPicker()}>{$_("Click here to choose a file")}</span>
+      <span class="text-accent" on:click={() => openPicker()} on:keyup={() => openPicker()}>{$_("Click here to choose a file")}</span>
       {$_("or drag and drop your file below.")}
     </div>
 

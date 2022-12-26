@@ -1,6 +1,6 @@
 <script>
   import BigNumber from "bignumber.js";
-  import { onMount, getContext, afterUpdate } from "svelte";
+  import { onMount, getContext } from "svelte";
   import { _ } from "svelte-i18n";
   import Select from "../../Select";
 

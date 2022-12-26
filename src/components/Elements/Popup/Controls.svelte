@@ -78,12 +78,13 @@
   <Button dropdown={$currentNetwork.name} autoclose outline icon={mdiNetwork}>
     {#each allNetworks as network}
       <div on:click={(event) => changeNetwork(event.target.dataset.value)}
+           on:keyup={(event) => changeNetwork(event.target.dataset.value)}
             class:selected={network.server == $currentNetwork.server}
             data-value={network.server}>
             {network.name}
       </div>
     {/each}
-    <div on:click={() => addNewNetwork()}>
+    <div on:click={() => addNewNetwork()} on:keyup={() => addNewNetwork()}>
       <Icon src={mdiPlus} size="1.5" color="var(--color-black)" /> {$_("Add")}
     </div>
   </Button>

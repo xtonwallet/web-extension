@@ -65,7 +65,8 @@
     <div
       class="flex-row back-box"
       class:hide={$steps.currentStep >= $steps.stepList.length}
-      on:click={() => goBack()}>
+      on:click={() => goBack()}
+      on:keyup={() => goBack()}>
       <div class="back-box-wrapper">
         <Icon src={mdiArrowLeft} size="1.5" />
         <div class="back-button text-button">{$_("Back")}</div>

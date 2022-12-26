@@ -100,7 +100,7 @@
 <div class="row">
   <div class="col-9"> <h6 class="margin-bottom-0">{$_('Manage networks')}</h6> </div>
   <div class="col-3">
-    <div class="pointer" on:click={() => addNewNetwork()}>
+    <div class="pointer" on:click={() => addNewNetwork()} on:keyup={() => addNewNetwork()}>
       <Icon src={mdiPlus} size="1.5" color="var(--color-black)" />
       {$_('Add')}
     </div>
@@ -111,7 +111,8 @@
   id="manage-networks-form"
   on:submit|preventDefault={() => handleSubmit()}
   target="_self"
-  bind:this={formObj}>
+  bind:this={formObj}
+  autocomplete="off">
   <div class="networks-wrapper">
     <div class="networks-wrapper-scroll">
       {#each allNetworks as networkItem}

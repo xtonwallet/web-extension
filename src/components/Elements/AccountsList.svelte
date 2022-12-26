@@ -189,7 +189,7 @@
     <div class="lock-wallet">
       <div class="flex-row">
         <div>{$_('Accounts')}</div>
-        <div class="lock-wallet-button" on:click={() => lock()}>
+        <div class="lock-wallet-button" on:click={() => lock()} on:keyup={() => lock()}>
           <Icon src={mdiLock} size="1" color="var(--color-black)" />
           {$_('Sign out')}
         </div>
@@ -200,7 +200,8 @@
       <div class="account-list-wrapper-scroll">
         {#each allAccounts as account}
           <div
-            on:click={(event) => changeAccount(account.address)}
+            on:click={() => changeAccount(account.address)}
+            on:keyup={() => changeAccount(account.address)}
             class:selected={account.address == $currentAccount.address}
             class="account-item is-vertical-align">
             <span class="identicon">{@html indenticon(account.address)}</span>
@@ -215,7 +216,7 @@
       </div>
     </div>
     <div class="spacer" />
-    <div class="menu-item" on:click={() => addNewAccount()}>
+    <div class="menu-item" on:click={() => addNewAccount()} on:keyup={() => addNewAccount()}>
       <Icon src={mdiPlus} size="1.5" color="var(--color-black)" />
       {$_('Add')}
     </div>

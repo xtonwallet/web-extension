@@ -55,7 +55,7 @@
 </style>
 
 <div class="box flex-column">
-  <div class="brand" class:clickable on:click={() => goHome()}>
+  <div class="brand" class:clickable on:click={() => goHome()} on:keyup={() => goHome()}>
     <div class="logo">
       <img src="/assets/img/icon-128.png" alt="logo" />
       <span class="rate">{$currentRate} {$currentCurrency}</span>

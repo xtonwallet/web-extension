@@ -852,6 +852,7 @@
   class:focused={isFocused}
   style={containerStyles}
   on:click={handleClick}
+  on:keyup={handleClick}
   bind:this={container}>
   <span
     aria-live="polite"

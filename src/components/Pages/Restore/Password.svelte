@@ -100,7 +100,8 @@
       id="password-form"
       on:submit|preventDefault={() => handleSubmit()}
       target="_self"
-      bind:this={formObj}>
+      bind:this={formObj}
+      autocomplete="off">
       <div class="input-box">
         <Field label="{$_("Keystore password")}">
           <Input

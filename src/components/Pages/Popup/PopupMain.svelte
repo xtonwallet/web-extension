@@ -154,7 +154,9 @@
         },
       })
       .then((result) => {
-        assets = result;
+        if (server == $currentNetwork.server) {
+          assets = result;
+        }
       })
       .catch((e) => {
         console.log(e); // here don't need to show any error for user, usually it is the network issue in the development environment
@@ -580,11 +582,11 @@
   <div class="flex-column flow-content-left flow-content-left-0">
     <div class="account-receipt">
       <Button dropdown="" autoclose outline icon={mdiPaperRoll}>
-        <div class="account-receipt-item" on:click={() => showQRCode()}>
+        <div class="account-receipt-item" on:click={() => showQRCode()} on:keyup={() => showQRCode()}>
           <Icon src={mdiQrcode} size="1" color="var(--color-black)" />
           {$_('QR code')}
         </div>
-        <div class="account-receipt-item" on:click={() => sendLink()}>
+        <div class="account-receipt-item" on:click={() => sendLink()} on:keyup={() => sendLink()}>
           <Icon src={mdiSend} size="1" color="var(--color-black)" />
           {$_('Send the link')}
         </div>
@@ -593,7 +595,9 @@
   </div>
   <div
     class="flex-column flow-content-left copy-text"
-    on:click={(e) => copyAddress(e)}>
+    on:click={(e) => copyAddress(e)}
+    on:keyup={(e) => copyAddress(e)}
+    >
     <div class="nickname" title={$currentAccount.nickname}>
       {$currentAccount.nickname}
     </div>
@@ -606,21 +610,23 @@
   <div class="flex-column flow-content-right">
     <div class="account-settings">
       <Button dropdown="" autoclose outline icon={mdiCog}>
-        <div class="account-settings-item" on:click={() => editNickname()}>
+        <div class="account-settings-item" on:click={() => editNickname()} on:keyup={() => editNickname()}>
           <Icon src={mdiPencil} size="1" color="var(--color-black)" />
           {$_('Edit nickname')}
         </div>
         <div
           class="account-settings-item"
-          on:click={() => viewAddressOnExplorer()}>
+          on:click={() => viewAddressOnExplorer()}
+          on:keyup={() => viewAddressOnExplorer()}
+          >
           <Icon src={mdiEye} size="1" color="var(--color-black)" />
           {$_('View on explorer')}
         </div>
-        <div class="account-settings-item" on:click={() => deleteAccount()}>
+        <div class="account-settings-item" on:click={() => deleteAccount()} on:keyup={() => deleteAccount()}>
           <Icon src={mdiDelete} size="1" color="var(--color-black)" />
           {$_('Delete account')}
         </div>
-        <div class="account-settings-item" on:click={() => updateTransactions()}>
+        <div class="account-settings-item" on:click={() => updateTransactions()} on:keyup={() => updateTransactions()}>
           <Icon src={mdiUpdate} size="1" color="var(--color-black)" />
           {$_('Update transactions list')}
         </div>
@@ -705,7 +711,11 @@
         class="flex-row is-horizontal-align account-assets"
         on:click={() => {
           sendTransactionTon();
-        }}>
+        }}
+        on:keyup={() => {
+          sendTransactionTon();
+        }}
+        >
         <img
           src="/assets/img/icon-crystal-128.png"
           class="asset-logo"
@@ -720,7 +730,11 @@
           class="flex-row is-horizontal-align account-assets"
           on:click={() => {
             sendTransactionToken(asset);
-          }}>
+          }}
+          on:keyup={() => {
+            sendTransactionToken(asset);
+          }}
+          >
           <img
             src={asset.icon != '' ? asset.icon : '/assets/img/icon-token-128.png'}
             class="asset-logo"
@@ -748,7 +762,7 @@
         </div>
       {/each}
       <div class="flex-row is-horizontal-align import-asset">
-        <a href={'#'} on:click={() => importToken()}>{$_('Import token')}</a>
+        <a href={'#'} on:click={() => importToken()} on:keyup={() => importToken()}>{$_('Import token')}</a>
       </div>
     </div>
   </div>
@@ -776,6 +790,7 @@
           class="flex-row is-horizontal-align account-tx"
           data-hash={tx.new_hash}
           on:click={() => viewTransactionOnExplorer(tx.id)}
+          on:keyup={() => viewTransactionOnExplorer(tx.id)}
           >
           <span class="tx-type">
             {#if tx.type == 'deploy'}

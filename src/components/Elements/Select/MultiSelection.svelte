@@ -79,15 +79,18 @@
         class="multiSelectItem {activeValue === i ? 'active' : ''} {isDisabled
             ? 'disabled'
             : ''}"
-        on:click={(event) =>
-            multiFullItemClearable ? handleClear(i, event) : {}}>
+        on:click={(event) => multiFullItemClearable ? handleClear(i, event) : {}}
+        on:keyup={(event) => multiFullItemClearable ? handleClear(i, event) : {}}
+        >
         <div class="multiSelectItem_label">
             {@html getSelectionLabel(item)}
         </div>
         {#if !isDisabled && !multiFullItemClearable}
             <div
                 class="multiSelectItem_clear"
-                on:click={(event) => handleClear(i, event)}>
+                on:click={(event) => handleClear(i, event)}
+                on:keyup={(event) => handleClear(i, event)}
+                >
                 <svg
                     width="100%"
                     height="100%"

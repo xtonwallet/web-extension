@@ -121,7 +121,7 @@
         <h6 class="heading">{$_('Unlock')}</h6>
         <div class="flow-text-box text-body1">{$_('Access your wallet')}</div>
 
-        <form bind:this={formObj}>
+        <form bind:this={formObj} autocomplete="off">
           <Field label={$_('Password')}>
             <Input
               id="pwd-input"
