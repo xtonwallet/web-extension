@@ -25,8 +25,8 @@ export default class Provider extends EventEmitter {
     super();
 
     // set property that it is XTON wallet
-    this.isXTonWallet = true;
-    this.isTEP100 = true;
+    this.isXTONWallet = true;
+    this.isTEPs105 = true;
 
     // private state
     this._log = logger;
