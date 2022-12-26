@@ -9,7 +9,10 @@ let lastCurrentAccount = null;
 //This is called everytime when accountStore is updated
 accountStore.subscribe(async (current) => {
   if (current.currentAccount && current.currentAccount.address != lastCurrentAccount) {
-    sendNotificationToInPageScript('xtonwallet-notification', {"method": "accountChanged", "params": current.currentAccount.address});
+    // need to send event only from background
+    if (typeof window == "undefined") {
+      sendNotificationToInPageScript('xtonwallet-notification', {"method": "accountChanged", "params": current.currentAccount.address});
+    }
     broadcastMessage("accountChanged", current.currentAccount);
     lastCurrentAccount = current.currentAccount.address;
   }
@@ -20,7 +23,10 @@ let lastCurrentEndpoint = null;
 //This is called everytime when networksStore is updated
 networksStore.subscribe(async (current) => {
   if (current.currentNetwork && current.currentNetwork.server != lastCurrentEndpoint) {
-    sendNotificationToInPageScript('xtonwallet-notification', {"method": "endpointChanged", "params": current.currentNetwork.server});
+    // need to send event only from background
+    if (typeof window == "undefined") {
+      sendNotificationToInPageScript('xtonwallet-notification', {"method": "endpointChanged", "params": current.currentNetwork.server});
+    }
     broadcastMessage("endpointChanged", current.currentNetwork);
     lastCurrentEndpoint = current.currentNetwork.server;
   }
