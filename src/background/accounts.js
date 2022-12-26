@@ -696,9 +696,9 @@ export const accounts = () => {
     return await resultAccounts;
   };
 
-  const addAccountByKeys = async (nickname, keyPair) => {
+  const addAccountByKeys = async (nickname, keyPair, version) => {
     const TonLibClient = await TonLib.getClient();
-    const address = await TonLibClient.predictAddress(keyPair.public);
+    const address = await TonLibClient.predictAddress(keyPair.public, version);
     const walletDeployed = await checkWalletDeployed(address);
     const account = {
       address: address,
@@ -727,7 +727,7 @@ export const accounts = () => {
     }
   };
 
-  const addAccountBySeed  = async (nickname, seed) => {
+  const addAccountBySeed  = async (nickname, seed, version) => {
     const TonLibClient = await TonLib.getClient();
     const keys = await TonLibClient.convertSeedToKeys(seed.split(' '));
     //prepare for saving
@@ -735,7 +735,7 @@ export const accounts = () => {
       public: Unibabel.bufferToHex(Object.values(keys.publicKey)),
       secret: Unibabel.bufferToHex(Object.values(keys.secretKey))
     };
-    const address = await TonLibClient.predictAddress(keyPair.public);
+    const address = await TonLibClient.predictAddress(keyPair.public, version);
     const walletDeployed = await checkWalletDeployed(address);
     const account = {
       address: address,

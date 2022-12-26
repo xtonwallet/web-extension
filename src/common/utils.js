@@ -87,10 +87,8 @@ const broadcastMessage = (type, data) => {
 const sendNotificationToInPageScript = (type, data) => {
   browser.tabs.query({active: true}).then((tabs) => {
     if (tabs.length > 0 && tabs[0].url.indexOf("chrome-extension://") == -1) {
-      browser.windows.get(tabs[0].windowId).then((window) => {
-        // we must to check that channel is opened
-        if (typeof window.ton != "undefined") {
-          browser.tabs.sendMessage(tabs[0].id, {"type": type, "data": data})
+      browser.windows.get(tabs[0].windowId).then(() => {
+        browser.tabs.sendMessage(tabs[0].id, {"type": type, "data": data})
           .catch((error) => {
             if (devMode)  {
               console.error("Error on sendMessage:" + JSON.stringify(error) + 
@@ -101,7 +99,6 @@ const sendNotificationToInPageScript = (type, data) => {
                 );
             }
           });
-        }
       });
     }
   });

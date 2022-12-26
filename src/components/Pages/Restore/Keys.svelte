@@ -12,12 +12,13 @@
 
   //Components
   import ErrorBox from "../../Elements/ErrorBox.svelte";
+  import Select from "../../Elements/Select";
 
   //Components
   import Loading from "../../Elements/Loading.svelte";
 
   //DOM nodes
-  let error, formObj, publicKey, secretKey, nickname;
+  let error, formObj, publicKey, secretKey, nickname, version;
   let loading;
 
   onMount(() => {
@@ -28,13 +29,20 @@
     publicKey = document.getElementById("publicKey-input");
     secretKey = document.getElementById("secretKey-input");
     nickname  = document.getElementById("nickname-input");
+    version   = document.getElementById("version-input");
   });
 
   const handleSubmit = async () => {
     try {
       if (formObj.checkValidity()) {
         loading = true;
-        browser.runtime.sendMessage({type: "addAccountByKeys", data: {"nickname": nickname.value, "keyPair": {"public": publicKey.value, "secret": secretKey.value}}})
+        browser.runtime.sendMessage({type: "addAccountByKeys",
+                                     data: {"nickname": nickname.value, 
+                                            "keyPair": {"public": publicKey.value, 
+                                                        "secret": secretKey.value},
+                                            "version": version.dataset.value
+                                            }
+                                    })
         .then((result) => {
           loading = false;
           if (!result.error) {
@@ -62,6 +70,18 @@
     setKeyStore(undefined);
     changeStep(0);
   };
+
+  const complexItems = [{value: 'v2R1', label: 'Version 2r1'},
+                        {value: 'v2R2', label: 'Version 2r2'},
+                        {value: 'v3R1', label: 'Version 3r1'},
+                        {value: 'v3R2', label: 'Version 3r2'},
+                        {value: 'v4R1', label: 'Version 4r1'},
+                        {value: 'v4R2', label: 'Version 4r2'},
+                        ];
+
+  const setVersion = (event) => {
+    version.dataset.value = event.detail.value;
+  }
 </script>
 
 <style>
@@ -79,7 +99,22 @@
       id="keys-form"
       on:submit|preventDefault={() => handleSubmit()}
       target="_self"
-      bind:this={formObj}>
+      bind:this={formObj}
+      autocomplete="off">
+      <div class="input-box">
+        <Field label="{$_("Version")}">
+         <Select
+          id="version-input"
+          items={complexItems}
+          required
+          value="v4R2"
+          placeholder={$_('Version')}
+          noOptionsMessage={$_('No matches')}
+          on:select={setVersion}
+          on:clear={() => {version.dataset.value = "v4R2"}}
+          on:keyup={setVersion} />
+        </Field>
+      </div>
       <div class="input-box">
         <Field label="{$_("Public key")}">
           <Input

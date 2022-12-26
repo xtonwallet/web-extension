@@ -1,7 +1,7 @@
 import nacl from "tweetnacl";
 import Contract from "../index";
 import {Cell} from "../../boc";
-import {stringToBytes, Address} from "../../utils";
+import {Address} from "../../utils";
 import BigNumber from "bignumber.js";
 
 /**

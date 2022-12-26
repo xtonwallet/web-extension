@@ -206,9 +206,9 @@ export const eventsHandler = (controller) => {
 
           if (message.type === 'addAccounts') return Promise.resolve(controller.accounts.addAccounts(message.data.full, message.data.encrypted));
 
-          if (message.type === 'addAccountByKeys') return Promise.resolve(controller.accounts.addAccountByKeys(message.data.nickname, message.data.keyPair));
+          if (message.type === 'addAccountByKeys') return Promise.resolve(controller.accounts.addAccountByKeys(message.data.nickname, message.data.keyPair, message.data.version));
 
-          if (message.type === 'addAccountBySeed') return Promise.resolve(controller.accounts.addAccountBySeed(message.data.nickname, message.data.seed));
+          if (message.type === 'addAccountBySeed') return Promise.resolve(controller.accounts.addAccountBySeed(message.data.nickname, message.data.seed, message.data.version));
 
           if (message.type === 'getAllAccounts') return Promise.resolve(controller.accounts.getSanatizedAccounts(message.data));
 

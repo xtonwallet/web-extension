@@ -48,9 +48,13 @@ class TonLib {
     }
   }
 
-  async predictAddress(publicKey) {
+  async predictAddress(publicKey, _version = "") {
     try {
-      const WalletClass = this.instance.wallet.all[this.defaultWalletVersion];
+      let version = this.defaultWalletVersion;
+      if (_version != "" && this.instance.wallet.all[_version]) {
+        version = _version;
+      }
+      const WalletClass = this.instance.wallet.all[version];
       const walletContract = new WalletClass(this.instance.provider, {
             publicKey: Unibabel.hexToBuffer(publicKey),
             wc: 0

@@ -1,8 +1,8 @@
-const {BN} = require("../../utils");
+import BigNumber from "bignumber.js";
 
 /**
  * @param slice {Slice}
- * @return {{seqno: number, bounce: boolean, payload: string, expireAt: number, toAddress: Address, value: BN}}
+ * @return {{seqno: number, bounce: boolean, payload: string, expireAt: number, toAddress: Address, value: BigNumber}}
  */
 function parseWalletV3TransferBody(slice) {
     const signature = slice.loadBits(512);
@@ -33,13 +33,13 @@ function parseWalletV3TransferBody(slice) {
 
     if (order.loadBit()) throw Error('invalid currencyCollection');
     const ihrFees = order.loadCoins();
-    if (!ihrFees.eq(new BN(0))) throw new Error('invalid ihrFees');
+    if (!ihrFees.eq(new BigNumber(0))) throw new Error('invalid ihrFees');
     const fwdFees = order.loadCoins();
-    if (!fwdFees.eq(new BN(0))) throw new Error('invalid fwdFees');
+    if (!fwdFees.eq(new BigNumber(0))) throw new Error('invalid fwdFees');
     const createdLt = order.loadUint(64);
-    if (!createdLt.eq(new BN(0))) throw new Error('invalid createdLt');
+    if (!createdLt.eq(new BigNumber(0))) throw new Error('invalid createdLt');
     const createdAt = order.loadUint(32);
-    if (!createdAt.eq(new BN(0))) throw new Error('invalid createdAt');
+    if (!createdAt.eq(new BigNumber(0))) throw new Error('invalid createdAt');
 
     // order stateInit
     if (order.loadBit()) {
@@ -57,7 +57,7 @@ function parseWalletV3TransferBody(slice) {
         if (order.getFreeBits() > 32) {
             const op = order.loadUint(32);
             const payloadBytes = order.loadBits(order.getFreeBits());
-            payload = op.eq(new BN(0)) ? new TextDecoder().decode(payloadBytes) : '';
+            payload = op.eq(new BigNumber(0)) ? new TextDecoder().decode(payloadBytes) : '';
         }
     }
 
@@ -88,7 +88,7 @@ function parseWalletV3TransferBody(slice) {
 
 /**
  * @param cell {Cell}
- * @return {{seqno: number, bounce: boolean, payload: string, fromAddress: Address|null, expireAt: number, toAddress: Address, value: BN}}
+ * @return {{seqno: number, bounce: boolean, payload: string, fromAddress: Address|null, expireAt: number, toAddress: Address, value: BigNumber}}
  */
 function parseWalletV3TransferQuery(cell) {
     const slice = cell.beginParse();
@@ -103,7 +103,7 @@ function parseWalletV3TransferQuery(cell) {
     const externalDestAddress = slice.loadAddress();
 
     const externalImportFee = slice.loadCoins();
-    if (!externalImportFee.eq(new BN(0))) throw new Error('invalid externalImportFee');
+    if (!externalImportFee.eq(new BigNumber(0))) throw new Error('invalid externalImportFee');
 
     // stateInit
 
@@ -127,4 +127,4 @@ function parseWalletV3TransferQuery(cell) {
     };
 }
 
-module.exports = {parseWalletV3TransferQuery, parseWalletV3TransferBody};
+export {parseWalletV3TransferQuery, parseWalletV3TransferBody};
