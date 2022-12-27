@@ -1,7 +1,7 @@
 <script>
   import "../common/i18n.js";
   import "./Styles.svelte";
-  import { onMount, onDestroy, setContext, beforeUpdate } from "svelte";
+  import { onMount, setContext, beforeUpdate } from "svelte";
   import { fade } from "svelte/transition";
   import { isLoading, _, locale } from "svelte-i18n";
 

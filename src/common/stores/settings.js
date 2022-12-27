@@ -1,7 +1,9 @@
-import { writable, derived, get } from 'svelte/store';
-import { setStorageItem, getStorageItem, removeStorageItem, enableProxy } from '../utils.js';
+import { writable, derived } from 'svelte/store';
+import { setStorageItem, getStorageItem, enableProxy } from '../utils.js';
 import { init, getLocaleFromNavigator } from 'svelte-i18n';
 
+const localeFromNavigator = getLocaleFromNavigator();
+const locale = localeFromNavigator != null ? localeFromNavigator.split('-')[0]: "en";
 const defaultSettingsStore = {
   "currentPage" : {
     "name": "AccountMain",
@@ -9,7 +11,7 @@ const defaultSettingsStore = {
   },
   "dismissWarning": false,
   "themeName": "dark",
-  "lang": getLocaleFromNavigator(),
+  "lang": locale,
   "autologout": 5,
   "enabledPinPad": false,
   "retrievingTransactionsPeriod": 1,

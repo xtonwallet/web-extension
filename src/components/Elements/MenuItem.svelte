@@ -69,13 +69,13 @@
   }
 
   .item.selected:hover > .floating-label {
-    background-color: var(--primary-color-lighter);
+    background-color: var(--color-grey-2);
     color: var(--font-primary-inverted);
     border: 1px solid transparent;
   }
 
   .item:hover {
-    background-color: var(--primary-color-lighter);
+    background-color: var(--color-grey-2);
   }
 
   .notselected:hover {

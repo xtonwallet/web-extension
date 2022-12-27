@@ -660,19 +660,18 @@ export const accounts = () => {
     const resultAccounts = Promise.all(
       accounts.map(async (account) => {
         let result;
+        const walletDeployed = await checkWalletDeployed(account.address);
         if (full) {
           account.encrypted = await encrypt(currentPassword, account.keyPair);
           //stores only in encrypted form
           delete account.keyPair;
           //removes technical detail
           delete account.checked;
-          const walletDeployed = await checkWalletDeployed(account.address);
+
           account.deployed = walletDeployed.deployed;
           account.version = walletDeployed.version;
           result = await vault.addNewAccount(account);
         } else {
-          const walletDeployed = await checkWalletDeployed(account.address);
-
           const fullAccount = {
             address: account.address,
             nickname: account.nickname,
@@ -693,7 +692,9 @@ export const accounts = () => {
         return {"address": account.address, "nickname": account.nickname, "deployed": [], "balance": {},  "result": result};
       })
     );
-    return await resultAccounts;
+    const output = await resultAccounts;
+    accountStore.changeAccount(output[0]);
+    return output;
   };
 
   const addAccountByKeys = async (nickname, keyPair, version) => {
@@ -718,6 +719,7 @@ export const accounts = () => {
     try {
       if (await vault.addNewAccount(account)) {
         updateTransactionsListAllNetworks(account.address);
+        accountStore.changeAccount(account);
         return {"address": account.address, "nickname": account.nickname, "deployed": [], "balance": {}, "result": true};
       } else {
         return {"address": account.address, "nickname": account.nickname, "deployed": [], "balance": {}, "result": false};
@@ -754,6 +756,7 @@ export const accounts = () => {
     try {
       if (await vault.addNewAccount(account)) {
         updateTransactionsListAllNetworks(account.address);
+        accountStore.changeAccount(account);
         return {"address": account.address, "nickname": account.nickname, "deployed": [], "balance": {}, "result": true};
       } else {
         return {"address": account.address, "nickname": account.nickname, "deployed": [], "balance": {}, "result": false};
