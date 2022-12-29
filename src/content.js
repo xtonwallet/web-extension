@@ -71,7 +71,7 @@ if (checkDoctype() && checkSuffix() && checkDocumentElement() && checkExcludedDo
     // Listen notifications from the background
     browser.runtime.onMessage.addListener((message, sender) => {
       if (sender.id == browser.runtime.id && sender.origin == 'null' && message.type === 'xtonwallet-notification') {
-        window.dispatchEvent(new CustomEvent(`xtonwallet`, {
+        window.dispatchEvent(new CustomEvent("xtonwallet", {
           detail: {type: "notification", payload: {"method": message.data.method, "params": message.data.params}},
         }));
       }

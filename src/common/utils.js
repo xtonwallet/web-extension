@@ -86,20 +86,24 @@ const broadcastMessage = (type, data) => {
 
 const sendNotificationToInPageScript = (type, data) => {
   browser.tabs.query({active: true}).then((tabs) => {
-    if (tabs.length > 0 && tabs[0].url.indexOf("chrome-extension://") == -1) {
-      browser.windows.get(tabs[0].windowId).then(() => {
-        browser.tabs.sendMessage(tabs[0].id, {"type": type, "data": data})
-          .catch((error) => {
-            if (devMode)  {
-              console.error("Error on sendMessage:" + JSON.stringify(error) + 
-                " " + 
-                JSON.stringify({"type": type, "data": data}) +
-                " " + 
-                JSON.stringify(tabs[0])
-                );
-            }
+    if (tabs.length > 0) {
+      for (let i in tabs) {
+        if (tabs[i].url.indexOf("chrome-extension://") == -1) {
+          browser.windows.get(tabs[i].windowId).then(() => {
+            browser.tabs.sendMessage(tabs[i].id, {"type": type, "data": data})
+              .catch((error) => {
+                if (devMode)  {
+                  console.error("Error on sendMessage:" + JSON.stringify(error) + 
+                    " " + 
+                    JSON.stringify({"type": type, "data": data}) +
+                    " " + 
+                    JSON.stringify(tabs[i])
+                    );
+                }
+              });
           });
-      });
+        }
+      }
     }
   });
 };
