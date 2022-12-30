@@ -10,8 +10,15 @@
   const { changeStep } = getContext("functions");
   const { switchPage } = getContext("app_functions");
 
+  const localeFromNavigator = getLocaleFromNavigator();
+
   onMount(() => {
     steps.set({ current: 0, stepList: [] });
+    // need to change storage on background
+    browser.runtime
+      .sendMessage({ type: "setSettings", 
+                     data: {"setLang": localeFromNavigator != null ? localeFromNavigator.split('-')[0]: "en"}
+                    });
   });
 </script>
 

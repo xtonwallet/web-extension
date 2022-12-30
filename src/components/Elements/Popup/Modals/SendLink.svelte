@@ -49,7 +49,8 @@
     mdiWhatsapp,
     mdiSkype,
     mdiTelegram,
-    mdiFacebookMessenger
+    mdiFacebookMessenger,
+    mdiClipboard
   } from "@mdi/js";
 
   const icons = {
@@ -106,12 +107,14 @@
 
 <div class="flex-column">
   <p class="header">
-    {$_('Send link')}
+    {$_('Send the link')}
   </p>
   <div class="flex-row flex-center-center">
     <Field gapless>
       <Input id="link" readonly value={link}/>
-      <Button on:click={(e) => copyLink(e)} outline>{$_('Copy')}</Button>
+      <Button on:click={(e) => copyLink(e)} outline title="{$_('Copy')}">
+        <Icon src="{mdiClipboard}" size="1"/>
+      </Button>
     </Field>
   </div>
   <div class="flex-row flex-center-center">

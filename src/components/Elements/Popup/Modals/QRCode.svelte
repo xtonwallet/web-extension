@@ -17,7 +17,7 @@
   let qrCode;
   onMount(() => {
     qrCode = generateQRcode(document.getElementById("qrcode"), modalData.data);
-    qrCode.resize(250, 250);
+    qrCode.resize(200, 200);
   });
 
   //Context
@@ -37,7 +37,7 @@
     const amount = document.getElementById("amount").value;
     const message = document.getElementById("message").value;
     await qrCode.makeCode(modalData.data + "?amount=" + toNano(amount) + "&text=" + message);
-    await qrCode.resize(250, 250);
+    await qrCode.resize(200, 200);
   };
 </script>
 

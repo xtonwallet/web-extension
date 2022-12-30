@@ -307,7 +307,7 @@
   "Networks": "Сети",
   "No tokens that you can remove": "Нет токенов которые вы можете удалить",
   "No networks that you can remove": "Нет сетей которые вы можете удалить",
-  "Enable TON Proxy": "Включить TON прокси",
+  "Enable TON proxy": "Включить TON прокси",
   "Send raw transaction": "Отправить сырую транзакцию",
   "State init": "Инициализация состояния",
   "Currency to display asset cost": "Валюта для отображения стоимости активов",
