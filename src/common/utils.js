@@ -88,7 +88,7 @@ const sendNotificationToInPageScript = (type, data) => {
   browser.tabs.query({active: true}).then((tabs) => {
     if (tabs.length > 0) {
       for (let i in tabs) {
-        if (tabs[i].url.indexOf("chrome-extension://") == -1) {
+        if (tabs[i].url.indexOf("chrome-extension://") == -1 && tabs[i].url.indexOf("chrome://") == -1) {
           browser.windows.get(tabs[i].windowId).then(() => {
             browser.tabs.sendMessage(tabs[i].id, {"type": type, "data": data})
               .catch((error) => {

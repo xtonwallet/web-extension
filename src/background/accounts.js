@@ -337,7 +337,7 @@ export const accounts = () => {
       public: Unibabel.bufferToHex(Object.values(keys.publicKey)),
       secret: Unibabel.bufferToHex(Object.values(keys.secretKey))
     };
-    const address      = await TonLibClient.predictAddress(keyPair.public);
+    const address = await TonLibClient.predictAddress(keyPair.public);
     const account = {
       address: address,
       nickname: nickname,
@@ -353,6 +353,7 @@ export const accounts = () => {
     };
     try {
       if (await vault.addNewAccount(account)) {
+        accountStore.changeAccount(account);
         return { added: true,
           seed: seed.join(' '),
           account: {
