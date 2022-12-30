@@ -14,12 +14,6 @@
     width: 35rem;
     margin-top: 4rem;
   }
-
-  .subtext {
-    max-width: 601px;
-    line-height: 1.4;
-  }
-
 </style>
  
 <div class="flex-row flow-page" in:fade={{ delay: 0, duration: 200 }}>

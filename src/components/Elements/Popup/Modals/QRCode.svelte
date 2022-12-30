@@ -41,10 +41,6 @@
   };
 </script>
 
-<style lang="scss">
-
-</style>
-
 <div class="flex-column">
   <p class="header">
     {$_('QR code')}
