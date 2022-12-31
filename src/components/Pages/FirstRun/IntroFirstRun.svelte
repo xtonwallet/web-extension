@@ -2,7 +2,8 @@
   import { onMount, getContext } from "svelte";
   import { fade } from "svelte/transition";
   import { Button } from "svelte-chota";
-  import { _ } from "svelte-i18n";
+  import { _, getLocaleFromNavigator } from "svelte-i18n";
+
   //Stores
   import { steps } from "../../../common/stores.js";
 
