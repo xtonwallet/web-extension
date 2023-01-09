@@ -7,7 +7,7 @@ const devMode = __DEV_MODE__;
 const NOTIFICATION_HEIGHT = 620;
 const NOTIFICATION_WIDTH = 365;
 const PROXY_HOSTS = "in1.ton.org:8080 in2.ton.org:8080 in3.ton.org:8080";
-const API_RATE_URL = "https://min-api.cryptocompare.com/data/price?fsym=TONCOIN&tsyms=";
+const API_RATE_URL = "https://mainnet.xtonwallet.com/currencyrate?currencyName=";
 
 let _popupId;
 
@@ -545,10 +545,10 @@ const getRate = async (сurrency) => {
   //Receive the rate by this time
   const result = await fetch(API_RATE_URL + сurrency)
                         .then((response) => {
-                          return response.json();
+                          return response.text();
                         })
                         .then((data) => {
-                          return data[сurrency];
+                          return data;
                         });
   return result;
 };

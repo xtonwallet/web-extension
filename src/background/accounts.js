@@ -1291,20 +1291,59 @@ export const accounts = () => {
     const TonLibClient = await TonLib.getClient(server);
     try {
       const NftItem = TonLibClient.getNftItemToken(tokenItemAddress);
-      const resultData = await NftItem.getData();
-      if (resultData) {
-        const result = await fetch(Unibabel.bufferToUtf8(resultData.content).substr(1))
-                                  .then((response) => {
-                                    return response.json();
-                                  })
-                                  .then((data) => {
-                                    return data;
-                                  });
-        return {
-          "name": result.name,
-          "description": result.description,
-          "image": result.image,
-          "owner": resultData.ownerAddress.toString(true, true, true)
+      const resultNftItemData = await NftItem.getData();
+      const NftCollection = TonLibClient.getNftToken(resultNftItemData.collectionAddress);
+      const resultData = await NftCollection.getNftItemContent(NftItem);
+      if (typeof (resultData.contentUri) != "undefined" && resultData.contentUri != "") {
+        try {
+          const result = await fetch(resultData.contentUri)
+                                    .then((response) => {
+                                      return response.json();
+                                    })
+                                    .then((data) => {
+                                      return data;
+                                    });
+          return {
+            "name": result.name,
+            "description": result.description,
+            "image": result.image,
+            "attributes": typeof(result.attributes) != "undefined" ? result.attributes: [],
+            "owner": resultData.ownerAddress.toString(true, true, true)
+          }
+        } catch(e) {
+          return {
+            "name": "No metadata",
+            "description": "Ask about issue the collection creator",
+            "image": "",
+            "attributes": [],
+            "owner": ""
+          }
+        }
+      }
+      if (typeof (resultData.content) != "undefined" && resultData.content != "") {
+        try {
+          const result = await fetch(Unibabel.bufferToUtf8(resultData.content).substr(1))
+                                    .then((response) => {
+                                      return response.json();
+                                    })
+                                    .then((data) => {
+                                      return data;
+                                    });
+          return {
+            "name": result.name,
+            "description": result.description,
+            "image": result.image,
+            "attributes": typeof(result.attributes) != "undefined" ? result.attributes: [],
+            "owner": resultData.ownerAddress.toString(true, true, true)
+          }
+        } catch(e) {
+          return {
+            "name": "No metadata",
+            "description": "Ask about issue the collection creator",
+            "image": "",
+            "attributes": [],
+            "owner": ""
+          }
         }
       }
     } catch(e) {

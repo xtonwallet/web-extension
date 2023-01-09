@@ -119,6 +119,12 @@ window.ton.send = async function(methodRaw, initialParams = []) {
       if (typeof params.value != "undefined") {
         params.amount = Number(params.value).valueOf()/10**9; // simple conversion to TON coin
       }
+      if (typeof params.data == "undefined") {
+        params.data = "";
+      }
+      if (typeof params.dataType == "undefined") {
+        params.dataType = "";
+      }
       if (typeof params.stateInit == "undefined") {
         params.stateInit = "";
       }
