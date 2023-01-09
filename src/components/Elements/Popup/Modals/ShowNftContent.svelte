@@ -22,6 +22,7 @@
   let description = `${$_("Loading")}...`;
   let image = "";
   let owner = "";
+  let attributes = [];
   onMount(() => {
     browser.runtime
       .sendMessage({
@@ -34,6 +35,7 @@
           description = result.description;
           image = result.image;
           owner = result.owner;
+          attributes = result.attributes;
         }
       })
       .catch((e) => {
@@ -96,6 +98,28 @@
     position: relative;
   }
 
+  .attributes {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .attributes-trait {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--color-primary);
+    width: 45%;
+    box-sizing: border-box;
+    margin: 2%;
+    font-size: 1.2rem;
+  }
+
+  .attributes-trait-type {
+    font-weight: 700;
+  }
+  
+  .attributes-trait-value {
+    font-style: normal;
+  }
 </style>
 
 <div class="flex-column">
@@ -125,6 +149,14 @@
             </span>
           </a>
         </p>
+        <div class="flex-row attributes">
+          {#each attributes as item}
+            <div class="attributes-trait">
+              <div class="attributes-trait-type">{item.trait_type}</div>
+              <div class="attributes-trait-value">{item.value}</div>
+            </div>
+          {/each}
+        </div>
         <div class="flex-row flow-buttons">
           <Button
             id="cancel-btn"

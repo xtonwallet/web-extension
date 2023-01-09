@@ -97,6 +97,8 @@
     align-items: center;
     justify-content: center;
     z-index: 100;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   .dragover {

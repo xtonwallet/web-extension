@@ -43,8 +43,9 @@ settingsStore.subscribe(async (current) => {
 
 export { settingsStore, currentPage, currentThemeName, currentLang,
          currentAutologout, currentRetrievingTransactionsPeriod,
-         currentRetrievingTransactionsLastTime, needsBackup, currentEnabledPinPad,
-         currentEnabledProxy, currentCurrency, currentRate
+         currentRetrievingTransactionsLastTime, needsBackup,
+         currentEnabledPinPad, currentEnabledProxy, currentCurrency,
+         currentRate, currentResolution
        } from './stores/settings.js';
 export { networksStore, currentNetwork } from './stores/networks.js';
 export { accountStore, currentAccount, waitingTransaction, messageSubscriptions } from './stores/account.js';

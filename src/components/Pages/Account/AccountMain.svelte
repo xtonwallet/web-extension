@@ -32,6 +32,7 @@
     accountStore,
     currentAccount,
     currentNetwork,
+    currentResolution,
     currentRate,
     currentCurrency,
     waitingTransaction,
@@ -42,6 +43,7 @@
   import {
     copyToClipboard,
     fromNano,
+    shortAddress,
   } from "../../../common/utils.js";
 
   //Context
@@ -420,9 +422,6 @@
     background-color: var(--color-primary);
     color: var(--color-white);
   }
-  :global(.account-tabs) {
-    margin-top: 1rem;
-  }
   :global(.account-tabs span) {
     width: 50%;
   }
@@ -430,6 +429,7 @@
     font-weight: bold;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    text-align: center;
   }
   .account-assets,
   .account-tx {
@@ -458,14 +458,15 @@
       align-items: center;
       display: flex;
       width: 40px;
+      padding-right: 10px;
       cursor: pointer;
     }
   }
   .account-tx-wrapper {
-    max-height: 20rem;
+    max-height: 24rem;
     overflow: hidden;
     .account-tx-wrapper-scroll {
-      max-height: 20rem;
+      max-height: 24rem;
       overflow-y: auto;
       width: calc(100% + 20px);
     }
@@ -500,20 +501,30 @@
     width: auto;
   }
   .token-list-wrapper {
-    max-height: 17rem;
+    max-height: 24rem;
     overflow: hidden;
     width: 100%;
     .token-list-wrapper-scroll {
-      max-height: 17rem;
+      max-height: 24rem;
       overflow-y: auto;
       padding: 0px;
       width: calc(100% + 20px);
+    }
+  }
+  :global {
+    summary, button {
+      white-space: normal !important;
     }
   }
   @media (min-width: 480px) {
     .token-list-wrapper,
     .account-tx-wrapper {
       padding: 0px;
+    }
+    :global {
+      summary, button {
+        white-space: nowrap !important;
+      }
     }
   }
   .import-asset {
@@ -595,7 +606,11 @@
       {$currentAccount.nickname}
     </div>
     <div class="address">
-      <span title={$currentAccount.address}> {$currentAccount.address} </span>
+      {#if ($currentResolution.innerWidth < 768)}
+        <span title={$currentAccount.address}> {shortAddress($currentAccount.address)} </span>
+      {:else}
+        <span title={$currentAccount.address}> {$currentAccount.address} </span>
+      {/if}
     </div>
   </div>
   <div class="flex-column flow-content-right-account">

@@ -17,7 +17,10 @@ const defaultSettingsStore = {
   "retrievingTransactionsLastTime": 0,
   "enabledProxy": false,
   "currency": "USD",
-  "rate": "*"
+  "rate": "*",
+  "innerHeight": 0,
+  "innerWidth": 0,
+  "condition": false
 };
 
 const createSettingsStore = () => {
@@ -142,6 +145,14 @@ const createSettingsStore = () => {
         return store;
       });
     },
+    setResolution: (innerHeight, innerWidth, condition) => {
+      settingsStore.update((store) => {
+        store.innerHeight = innerHeight;
+        store.innerWidth = innerWidth;
+        store.condition = condition;
+        return store;
+      });
+    },
     dismissWarning: () => {
       settingsStore.update((store) => {
         store.dismissWarning = true;
@@ -212,6 +223,16 @@ export const currentCurrency = derived(
 export const currentRate = derived(
   settingsStore,
   ($settingsStore) => { return $settingsStore.rate; }
+);
+
+//Derived Store to return resolution
+export const currentResolution = derived(
+  settingsStore,
+  ($settingsStore) => { return {"innerHeight": $settingsStore.innerHeight,
+                                "innerWidth": $settingsStore.innerWidth,
+                                "condition": $settingsStore.condition
+                                };
+                      }
 );
 
 //Derived Store to return if the user needs to make another backup

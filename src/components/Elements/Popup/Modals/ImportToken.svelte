@@ -250,6 +250,36 @@
       }
     }
   }
+
+  :global(.page .import-token-wrapper) {
+    max-height: 35rem;
+    overflow: hidden;
+    .import-token-wrapper-scroll {
+      max-height: 35rem;
+      overflow-y: auto;
+      width: calc(100% + 20px);
+      .import-token-wrapper-internal {
+        width: fit-content;
+        margin-left: 0rem;
+      }
+    }
+  }
+
+  @media (min-width: 480px) {
+    :global(.page .import-token-wrapper) {
+      max-height: 35rem;
+      overflow: hidden;
+      .import-token-wrapper-scroll {
+        max-height: 35rem;
+        overflow-y: auto;
+        width: calc(100% + 20px);
+        .import-token-wrapper-internal {
+          width: fit-content;
+          margin-left: 2rem;
+        }
+      }
+    }
+  }
 </style>
 
 <div class="flex-column">

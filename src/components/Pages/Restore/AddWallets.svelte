@@ -5,13 +5,14 @@
   import { _ } from 'svelte-i18n';
 
   //Stores
-  import { steps } from "../../../common/stores.js";
+  import { steps, currentResolution, } from "../../../common/stores.js";
+
+  import {
+    shortAddress,
+  } from "../../../common/utils.js";
 
   //Context
-  const { setKeys, changeStep, nextPage, cancel } = getContext("functions");
-
-  //DOM nodes
-  let formObj;
+  const { setKeys, nextPage, cancel } = getContext("functions");
 
   //Props
   export let keys;
@@ -127,7 +128,7 @@
   p {
     margin: 0;
   }
-  .address > p {
+  .address > div {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -137,7 +138,6 @@
 <div class="flex-row flow-page" in:fade={{ delay: 0, duration: 200 }}>
   <div class="flex-column flow-content-left">
     <h6>{$_("Password confirmed")}</h6>
-
     <div class="flow-text-box text-body1">
       {$_("Almost there! Now let's select which accounts you'd like to restore")}
     </div>
@@ -150,7 +150,6 @@
         on:click={() => nextStep()}>
         {$_("Restore accounts")}
       </Button>
-
       <Button
         id="cancel-btn"
         class="button__solid"
@@ -191,7 +190,11 @@
           <p class="nickname text-secondary">{`${key.nickname}`}</p>
         </div>
         <div id={`div-address-${i}`} class="address">
-          <p>{key.address}</p>
+          {#if ($currentResolution.innerWidth > 768)}
+            <div title="{key.address}">{key.address}</div>
+          {:else}
+            <div title="{key.address}">{shortAddress(key.address)}</div>
+          {/if}
         </div>
       </div>
     {/each}

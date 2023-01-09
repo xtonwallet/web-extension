@@ -13,6 +13,7 @@
   export let menuItem;
 
   let feedbackURL = "https://docs.google.com/forms/d/e/1FAIpQLSeDZwc8cvMKhjQc2PzTiqNCJ31oAqvhzbO6IEWBv1CBu2b3LA/viewform";
+  let helpURL = "https://docs.xtonwallet.com";
 
   $: isSelected = $currentPage.name === menuItem.page.name;
   $: backupPage = menuItem.name === "Backup wallet";
@@ -27,6 +28,10 @@
     }
     if (menuItem.page.name === "Feedback") {
       window.open(feedbackURL, "_blank");
+      return;
+    }
+    if (menuItem.page.name === "Help") {
+      window.open(helpURL, "_blank");
       return;
     }
     switchPage(menuItem.page.name);

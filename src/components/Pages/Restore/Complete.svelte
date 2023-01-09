@@ -8,11 +8,15 @@
   import { mdiThumbUp, mdiAlert } from "@mdi/js";
 
   //Stores
-  import { steps } from "../../../common/stores.js";
+  import { steps, currentResolution, } from "../../../common/stores.js";
+
+  import {
+    shortAddress,
+  } from "../../../common/utils.js";
 
   //Context
   const { switchPage } = getContext("app_functions");
-  const { setKeys, changeStep } = getContext("functions");
+  const { changeStep } = getContext("functions");
 
   //Props
   export let keys;
@@ -84,7 +88,7 @@
     margin: 0;
   }
 
-  .address > p {
+  .address > div {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -132,7 +136,11 @@
             <p class="nickname text-secondary">{`${key.nickname}`}</p>
           </div>
           <div id={`div-address-${i}`} class="address">
-            <p>{key.address}</p>
+            {#if ($currentResolution.innerWidth > 768)}
+              <div title="{key.address}">{key.address}</div>
+            {:else}
+              <div title="{key.address}">{shortAddress(key.address)}</div>
+            {/if}
           </div>
         </div>
       {/each}

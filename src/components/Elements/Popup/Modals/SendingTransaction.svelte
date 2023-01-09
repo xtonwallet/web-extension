@@ -296,7 +296,7 @@
   }
   #sending-tx-fee {
     margin-right: 1rem;
-    font-weight: 300px;
+    font-weight: 700;
   }
   #sending-tx-total {
     margin-left: 1rem;

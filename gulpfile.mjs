@@ -1,5 +1,7 @@
 import gulp from 'gulp';
 import imagemin from 'gulp-imagemin';
+import rename from 'gulp-rename';
+import replace from 'gulp-replace';
 import jsoneditor from 'gulp-json-editor';
 import zip from 'gulp-zip';
 import del from 'del';
@@ -106,7 +108,8 @@ gulp.task('delete:development', function () {
 gulp.task('copy',
   gulp.series(
     gulp.parallel(...copyTaskNames),
-    'manifest:firefox'
+    'manifest:firefox',
+    'manifest:chrome',
   )
 );
 
@@ -126,6 +129,73 @@ gulp.task('build',
     'optimize:images',
     'delete:development',
     'zip'
+  )
+);
+
+// clean mobile dist
+gulp.task('clean:mobile', function clean_mobile () {
+  return del(['./builds/mobile*']);
+});
+
+// create mobile version
+gulp.task('mobile:polyfill', 
+  gulp.series(
+    function mobile_polyfill () {
+      return gulp.src('./tools/mobile-polyfill.js')
+        .pipe(rename('browser-polyfill.js'))
+        .pipe(gulp.dest('./builds/mobile/', { overwrite: true }));
+    },
+    function mobile_background () {
+      return gulp.src('./tools/background.html')
+        .pipe(gulp.dest('./builds/mobile/', { overwrite: true }));
+    }
+  )
+);
+
+// replace pathes for mobile version
+gulp.task('mobile:assets', 
+  gulp.series(
+    function replace_js() {
+      return gulp.src('./builds/mobile/*.js')
+        .pipe(replace('/assets/', '/assets/wallet-js/assets/'))
+        .pipe(gulp.dest('./builds/mobile/', { overwrite: true }));
+    },
+    function replace_css() {
+      return gulp.src('./builds/mobile/*.css')
+        .pipe(replace('./', '/assets/wallet-js/'))
+        .pipe(replace('(assets/', '(/assets/wallet-js/'))
+        .pipe(gulp.dest('./builds/mobile/', { overwrite: true }));
+    }
+  )
+);
+
+copyTask('copy:mobile', {
+  source: './dist/',
+  destination: './builds/mobile',
+});
+
+gulp.task('optimize:images:mobile', function () {
+  return gulp.src('./builds/mobile/images/**', { base: './builds/' })
+    .pipe(imagemin())
+    .pipe(gulp.dest('./builds/', { overwrite: true }));
+});
+
+gulp.task('delete:development:mobile', function () {
+  return del(['./builds/mobile/livereload.js',
+              './builds/mobile/chromereload.js',
+              './builds/mobile/*.css.map'
+              ]);
+});
+
+// high level tasks
+gulp.task('mobile',
+  gulp.series(
+    'clean:mobile',
+    'copy:mobile',
+    'mobile:polyfill',
+    'mobile:assets',
+    'optimize:images:mobile',
+    'delete:development:mobile',
   )
 );
 

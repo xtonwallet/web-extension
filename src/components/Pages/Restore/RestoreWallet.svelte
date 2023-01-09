@@ -1,9 +1,11 @@
 <script>
   import { setContext, getContext } from 'svelte';
 
+  //Stores
+  import { currentResolution, } from "../../../common/stores.js";
+
   //Components
   import Steps from "../../Elements/Steps.svelte";
-  import Step from "../../Elements/Step.svelte";
   import Logo from '../../Elements/Logo.svelte';
 
   import IntroRestore from './IntroRestore.svelte';
@@ -61,12 +63,19 @@
   .hide-steps {
     display: none;
   }
+  @media (max-width: 480px) {
+    .flow-content {
+      margin-top: -6rem;
+    }
+  }
 </style>
 
 <div class="flow-layout">
-    <div class="flow-header">
-        <Logo />
-    </div>
+    {#if ($currentResolution.innerWidth > 768)}
+      <div class="flow-header">
+          <Logo />
+      </div>
+    {/if}
     <div class="flow-content">
         <svelte:component this={currentPage} {file} {keystoreFile} {keys}/>
     </div>

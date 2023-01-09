@@ -52,7 +52,6 @@
     flex-grow: 1;
     justify-content: center;
   }
-
 </style>
 
 <div class="backup-create">

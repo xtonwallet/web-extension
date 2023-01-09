@@ -10,7 +10,7 @@
   import Step from "./Step.svelte";
 
   //Stores
-  import { steps } from "../../common/stores.js";
+  import { steps, currentResolution, } from "../../common/stores.js";
 
   //Context
   const { changeStep } = getContext("functions");
@@ -28,7 +28,7 @@
 
 <style>
   .steps {
-    margin: 2rem 60px 0;
+    margin: 1rem 60px 1rem;
   }
 
   .back-box {
@@ -73,10 +73,12 @@
       </div>
     </div>
   {/if}
-  {#each $steps.stepList as stepInfo, index}
-    <Step
-      {stepInfo}
-      first={index === 0}
-      last={index + 1 === $steps.stepList.length} />
-  {/each}
+  {#if $currentResolution.innerWidth > 768}
+    {#each $steps.stepList as stepInfo, index}
+      <Step
+        {stepInfo}
+        first={index === 0}
+        last={index + 1 === $steps.stepList.length} />
+    {/each}
+  {/if}
 </div>

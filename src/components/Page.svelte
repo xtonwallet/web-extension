@@ -92,6 +92,11 @@
   $: enabledPinPad = false;
   $: firstRun = undefined;
 
+  let innerWidth = 0
+  let innerHeight = 0
+  
+  $: condition = innerWidth*1.33 <= innerHeight
+
   const walletIsLockedListener = (message, origin) => {
     if (message.type === "page-walletIsLocked") {
       walletIsLocked = message.data.locked;
@@ -158,6 +163,7 @@
       if (typeof Pages[$currentPage.name] == "undefined") {
         settingsStore.changePage({ name: "AccountMain" });
       }
+      settingsStore.setResolution(innerHeight, innerWidth, condition);
     }
   });
 
@@ -299,6 +305,8 @@
     }
   }
 </style>
+
+<svelte:window bind:innerWidth bind:innerHeight />
 
 <div class="container page">
   {#if !$isLoading && $locale && $loaded && typeof firstRun !== 'undefined'}

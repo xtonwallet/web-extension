@@ -53,7 +53,7 @@
 <div class="loading" style={mainStyle}>
   <div class="lds-dual-ring" />
   {#if message !== ''}
-    <h3 class="message">{$isLoading || !$locale ? '...' : $_(message)}</h3>
+    <h3 class="message is-center">{$isLoading || !$locale ? '...' : $_(message)}</h3>
   {/if}
   {#if subMessage !== ''}
     <p>{$isLoading || !$locale ? '...' : $_(subMessage)}</p>

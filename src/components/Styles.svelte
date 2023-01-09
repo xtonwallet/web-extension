@@ -1,5 +1,5 @@
 <style global lang="scss">
-  @import "../chota.min.css";
+  @import "./chota.min.css";
 
   /* cyrillic-ext from https://fonts.gstatic.com/s/mulish/v12/1Ptyg83HX_SGhgqO0yLcmjzUAuWexZNR8aqvG4w-.woff2*/
   @font-face {
@@ -851,9 +851,39 @@
     background: inherit;
   }
 
+  .grouped {
+    flex-direction: column;
+  }
+
   .input-box-50 {
     background: inherit;
-    width: 50%;
+    width: 100%;
+  }
+
+  .grouped>:not(:last-child) {
+    margin-right: 0px;
+  }
+
+  .flow-buttons {
+    margin-bottom: 4rem;
+  }
+
+  @media (min-width: 480px) {
+    .grouped {
+      flex-direction: inherit;
+    }
+
+    .input-box-50 {
+      width: 50%;
+    }
+
+    .grouped>:not(:last-child) {
+      margin-right: 16px;
+    }
+
+    .flow-buttons {
+      margin-bottom: 0rem;
+    }
   }
 
   .inputbox {
@@ -989,6 +1019,7 @@
     width: 316px;
     justify-content: flex-start;
   }
+
   .flow-content-right {
     flex-direction: column;
     justify-content: flex-start;
@@ -996,6 +1027,15 @@
     padding: 1rem;
     max-width: 800px;
   }
+
+  @media (max-width: 480px) {
+    .flow-content-left,
+    .flow-content-right {
+      padding: 0px;
+      width: 100%;
+    }
+  }
+
   .flow-content-left > .text-box {
     margin: 1rem 0;
   }
@@ -1003,6 +1043,11 @@
     flex-grow: 1;
     max-height: 250px;
     justify-content: flex-end;
+  }
+
+  .buttons {
+    width: 35rem;
+    margin-top: 4rem;
   }
 
   .flow-text-box {
@@ -1196,5 +1241,9 @@
 
   .hidden {
     display: none;
+  }
+
+  .button, [type=button], [type=reset], [type=submit], button {
+    padding: 1rem 1rem;
   }
 </style>

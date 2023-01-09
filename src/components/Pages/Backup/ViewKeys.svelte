@@ -109,6 +109,10 @@
     margin: 0;
   }
 
+  .key-text {
+    line-break: anywhere;
+    display: inline;
+  }
 </style>
 
 <div class="flex-row flow-page" in:fade={{ delay: 0, duration: 200 }}>
@@ -133,13 +137,6 @@
         on:click={() => appHome()}>
         {$_('Back to home')}
       </Button>
-      <a
-        class="text-link text-caption text-secondary"
-        href="https://xtonwallet.com"
-        target="_blank"
-        rel="noopener noreferrer">
-        {$_('Help')}
-      </a>
     </div>
   </div>
   <div class="flow-content-right key-box" in:fade={{ delay: 0, duration: 200 }}>
@@ -156,7 +153,6 @@
           <div class="flex-column result-box text-body3 text-secondary">
             <div>
               {$_('Wallet address')}:
-
               <div>
                 <Icon
                   src={mdiContentCopy}
@@ -166,12 +162,11 @@
                   on:click={() => copyText(account.address)}
                   on:keyup={() => copyText(account.address)}
                   />
-                {account.address}
+                <div class="key-text">{account.address}</div>
               </div>
             </div>
             <div>
               {$_('Public key')}:
-
               <div>
                 <Icon
                   src={mdiContentCopy}
@@ -181,12 +176,11 @@
                   on:click={() => copyText(account.keyPair.public)}
                   on:keyup={() => copyText(account.keyPair.public)}
                   />
-                {account.keyPair.public}
+                <div class="key-text">{account.keyPair.public}</div>
               </div>
             </div>
             <div>
               {$_('Secret key')}:
-
               <div>
                 <Icon
                   src={mdiContentCopy}
@@ -196,7 +190,7 @@
                   on:click={() => copyText(account.keyPair.secret)}
                   on:keyup={() => copyText(account.keyPair.secret)}
                   />
-                {account.keyPair.secret}
+                <div class="key-text">{account.keyPair.secret}</div>
               </div>
             </div>
           </div>
