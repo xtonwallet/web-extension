@@ -151,7 +151,7 @@
   };
 
   const calculateFee = () => {
-    if (amount.value == "") {
+    if (amount.value == "" || typeof(destination.dataset.value) == "undefined") {
       disabled = true;
       return;
     }

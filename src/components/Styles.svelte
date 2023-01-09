@@ -851,34 +851,34 @@
     background: inherit;
   }
 
-  .grouped {
-    flex-direction: column;
-  }
-
   .input-box-50 {
     background: inherit;
     width: 100%;
-  }
-
-  .grouped>:not(:last-child) {
-    margin-right: 0px;
   }
 
   .flow-buttons {
     margin-bottom: 4rem;
   }
 
+  .page .grouped {
+    flex-direction: column;
+  }
+
+  .page .grouped>:not(:last-child) {
+    margin-right: 0px;
+  }
+
   @media (min-width: 480px) {
-    .grouped {
+    .page .grouped {
       flex-direction: inherit;
+    }
+
+    .page .grouped>:not(:last-child) {
+      margin-right: 16px;
     }
 
     .input-box-50 {
       width: 50%;
-    }
-
-    .grouped>:not(:last-child) {
-      margin-right: 16px;
     }
 
     .flow-buttons {
