@@ -58,8 +58,10 @@ export const accounts = () => {
             const tokenList = await vault.tokenList(allAddresses[index], server);
             if (tokenList && tokenList.length != 0) {
               tokenList.forEach((item) => {
-                tokenWallets[item.wallet] = allAddresses[index];
-                walletsTokenInfo[item.wallet] = item;
+                if (typeof item.wallet != "undefined") { // wallet only for jetton
+                  tokenWallets[item.wallet] = allAddresses[index];
+                  walletsTokenInfo[item.wallet] = item;
+                }
               });
             }
 
@@ -196,8 +198,10 @@ export const accounts = () => {
     const tokenList = await vault.tokenList(address, server);
     if (tokenList && tokenList.length != 0) {
       tokenList.forEach((item) => {
-        tokenWallets[item.wallet] = address;
-        walletsTokenInfo[item.wallet] = item;
+        if (typeof item.wallet != "undefined") { // wallet only for jetton
+          tokenWallets[item.wallet] = address;
+          walletsTokenInfo[item.wallet] = item;
+        }
       });
     }
 
