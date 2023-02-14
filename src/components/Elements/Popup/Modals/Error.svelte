@@ -1,5 +1,4 @@
 <script>
-  import { getContext } from 'svelte';
   import { _ } from 'svelte-i18n';
 
   export let modalData = {};

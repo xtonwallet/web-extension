@@ -1,7 +1,3 @@
-import nacl from "tweetnacl";
-import {Cell} from "../../boc";
-import {Address, toNano, bytesToHex, hexToBytes, stringToBytes, bytesToBase64} from "../../utils";
-import Contract from "../index.js";
 import {SimpleWalletContractR1, SimpleWalletContractR2, SimpleWalletContractR3} from "./WalletContractSimple";
 import {WalletV2ContractR1, WalletV2ContractR2} from "./WalletContractV2";
 import {WalletV3ContractR1, WalletV3ContractR2} from "./WalletContractV3";

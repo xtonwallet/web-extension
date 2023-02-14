@@ -30,7 +30,7 @@
     });
 
     let currDateTime = new Date().toLocaleString();
-    let filename = "XTon_Wallet_" + currDateTime + ".keystore";
+    let filename = "XTon_Wallet_" + currDateTime + ".txt";
     let element = document.createElement("a");
 
     element.setAttribute(

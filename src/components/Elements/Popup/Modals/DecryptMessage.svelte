@@ -13,9 +13,7 @@
   let decrypted = "";
 
   export let modalData = {};
-
-  //Context
-  const { closeModal, openModal } = getContext("app_functions");
+  export let closeModal;
 
   const cancelModal = () => {
     // send a message that the request is rejected for InPage script

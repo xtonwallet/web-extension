@@ -243,7 +243,7 @@ export const controller = () => {
           return new Promise((resolve, reject) => {
                 resolve({"id": data.id, "data": {
                   code: 4300,
-                  message: "User doesn't have enough asset balance",
+                  message: "Not enough asset balance",
                 }});
           });
         }
@@ -251,7 +251,7 @@ export const controller = () => {
         return new Promise((resolve, reject) => {
               resolve({"id": data.id, "data": {
                 code: 4300,
-                message: "User doesn't have this asset",
+                message: "No such asset",
               }});
         });
       }

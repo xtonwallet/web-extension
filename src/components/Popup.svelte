@@ -146,7 +146,7 @@
     getModalData: () => {
       return modalData;
     },
-    closeModal: () => (showModal = false),
+    closeModal: () => closeModal(),
     firstRun: () => (firstRun ? true : false),
     appHome: () => switchPage("AccountMain"),
     checkFirstRun: () => checkFirstRun(),

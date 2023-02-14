@@ -1,5 +1,5 @@
-import { writable, derived, get } from 'svelte/store';
-import { setStorageItem, getStorageItem, removeStorageItem } from '../utils.js';
+import { writable, derived } from 'svelte/store';
+import { setStorageItem, getStorageItem } from '../utils.js';
 
 const defaultNetworksStore = {
   "currentNetwork" : {

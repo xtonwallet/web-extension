@@ -1,7 +1,6 @@
 <script>
-  import { onMount, getContext, afterUpdate } from "svelte";
+  import { onMount, getContext } from "svelte";
   import { _ } from "svelte-i18n";
-  import Select from "../../Select";
 
   import {
     shortAddress,
@@ -15,6 +14,7 @@
   let title = $_("Native");
 
   export let modalData = {};
+  export let closeModal;
   let loading = false;
   let disabled = false;
 
@@ -43,10 +43,10 @@
   import { fromNano } from "../../../../common/utils.js";
 
   //Components
-  import { Field, Button, Input } from "svelte-chota";
+  import { Button } from "svelte-chota";
 
   //Context
-  const { closeModal, openModal } = getContext("app_functions");
+  const { openModal } = getContext("app_functions");
 
   const cancelTransaction = () => {
     closeModal();

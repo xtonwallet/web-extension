@@ -11,14 +11,12 @@
   } from "../../../../common/utils.js";
 
   export let modalData = {};
+  export let closeModal;
 
   let link;
   onMount(() => {
     link = modalData.data;
   });
-
-  //Context
-  const { closeModal } = getContext("app_functions");
 
   const cancelModal = () => {
     closeModal();

@@ -1,7 +1,8 @@
 <script>
   import { _ } from "svelte-i18n";
   import { Icon, Card } from "svelte-chota";
-  let version = browser.runtime.getManifest().version;
+  import { onMount } from "svelte";
+  let version;
 
   import {
     mdiFacebook,
@@ -15,6 +16,10 @@
     mdiTelegram,
     mdiFacebookMessenger
   } from "@mdi/js";
+
+  onMount(async () => {
+    version = (await browser.runtime.getManifest()).version;
+  });
 
   const icons = {
     "facebook": mdiFacebook,
@@ -41,8 +46,8 @@
       {name: "twitter", url: 'https://twitter.com/share?url={{TEMPLATE_URL}}&text={{TEMPLATE_TEXT}}'},
       {name: "linkedin", url: 'https://www.linkedin.com/cws/share?url={{TEMPLATE_URL}}'},
       {name: "xing", url: 'https://www.xing.com/social_plugins/share?url={{TEMPLATE_URL}}'},
-      {name: "vk", url: 'http://vk.com/share.php?url={{TEMPLATE_URL}}&description={{TEMPLATE_TEXT}}&image={{TEMPLATE_IMAGE}}'},
-      {name: "reddit", url: 'http://www.reddit.com/submit?url={{TEMPLATE_URL}}&title={{TEMPLATE_TEXT}}'},
+      {name: "vk", url: 'https://vk.com/share.php?url={{TEMPLATE_URL}}&description={{TEMPLATE_TEXT}}&image={{TEMPLATE_IMAGE}}'},
+      {name: "reddit", url: 'https://www.reddit.com/submit?url={{TEMPLATE_URL}}&title={{TEMPLATE_TEXT}}'},
       {name: "whatsapp", url: 'whatsapp://send?text={{TEMPLATE_URL}} {{TEMPLATE_TEXT}}'},
       {name: "skype", url: 'skype:?chat&topic={{TEMPLATE_URL}} {{TEMPLATE_TEXT}}'},
       {name: "telegram", url: 'tg://msg?text={{TEMPLATE_URL}} {{TEMPLATE_TEXT}}'},
@@ -64,11 +69,12 @@
   .social-box {
     display: flex;
     justify-content: space-evenly;
-    width: 534px;
     margin: 70px auto;
     align-items: center;
+    flex-wrap: wrap;
     div {
       cursor: pointer;
+      padding: 1rem;
     }
   }
 </style>

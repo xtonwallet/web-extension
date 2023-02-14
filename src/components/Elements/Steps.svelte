@@ -73,7 +73,7 @@
       </div>
     </div>
   {/if}
-  {#if $currentResolution.innerWidth > 768}
+  {#if $currentResolution.innerWidth > 768 && !$currentResolution.condition }
     {#each $steps.stepList as stepInfo, index}
       <Step
         {stepInfo}

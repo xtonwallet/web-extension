@@ -15,6 +15,7 @@
   let title = $_("Native");
 
   export let modalData = {};
+  export let closeModal;
   let loading = false;
   let disabled = false;
 
@@ -41,7 +42,7 @@
   import { Field, Button, Input } from "svelte-chota";
 
   //Context
-  const { closeModal, openModal } = getContext("app_functions");
+  const { openModal } = getContext("app_functions");
 
   const cancelTransaction = () => {
     closeModal();

@@ -71,7 +71,7 @@
 </style>
 
 <div class="flow-layout">
-    {#if ($currentResolution.innerWidth > 768)}
+    {#if $currentResolution.innerWidth > 768 && !$currentResolution.condition}
       <div class="flow-header">
           <Logo />
       </div>

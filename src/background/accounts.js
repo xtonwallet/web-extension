@@ -1178,6 +1178,10 @@ export const accounts = () => {
       const resultData = await FtWallet.getJettonData();
       if (resultData) {
         if (resultData.jettonContentUri) {
+          const protocolContentUri = new URL(resultData.jettonContentUri).protocol;
+          if (protocolContentUri == 'ipfs:') {
+            resultData.jettonContentUri = `https://cloudflare-ipfs.com/ipfs/${resultData.jettonContentUri.substr(7)}#x-ipfs-companion-no-redirect`
+          }
           const result = await fetch(resultData.jettonContentUri)
                                 .then((response) => {
                                   return response.json();
@@ -1185,6 +1189,10 @@ export const accounts = () => {
                                 .then((data) => {
                                   return data;
                                 });
+          const protocol = new URL(result.image).protocol;
+          if (protocol == 'ipfs:') {
+            result.image = `https://cloudflare-ipfs.com/ipfs/${result.image.substr(7)}#x-ipfs-companion-no-redirect`
+          }
           return {
             name: result.name,
             symbol: result.symbol,

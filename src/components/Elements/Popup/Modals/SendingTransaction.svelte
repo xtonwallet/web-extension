@@ -20,6 +20,7 @@
   import { Field, Button, Input } from "svelte-chota";
 
   export let modalData = {};
+  export let closeModal;
 
   let destination, amount, message;
   let icon = "/assets/img/icon-crystal-128.png";
@@ -34,7 +35,7 @@
   let errorAmount = false;
 
   //Context
-  const { closeModal, openModal } = getContext("app_functions");
+  const { openModal } = getContext("app_functions");
 
   let complexItems = [];
 

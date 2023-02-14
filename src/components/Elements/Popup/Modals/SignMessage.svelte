@@ -12,9 +12,7 @@
   let disabled, loading = false;
 
   export let modalData = {};
-
-  //Context
-  const { closeModal, openModal } = getContext("app_functions");
+  export let closeModal;
 
   const cancelModal = () => {
     closeModal();

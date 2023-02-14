@@ -17,6 +17,7 @@
   import "../../../../common/fileSaver.js";
 
   export let modalData = {};
+  export let closeModal;
 
   let name = `${$_("Loading")}...`;
   let description = `${$_("Loading")}...`;
@@ -48,9 +49,6 @@
       url: `${explorer}/address/${address}`,
     });
   };
-
-  //Context
-  const { closeModal } = getContext("app_functions");
 
   const cancelModal = () => {
     closeModal();

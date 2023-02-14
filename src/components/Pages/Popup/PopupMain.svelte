@@ -176,11 +176,9 @@
                 server: $currentNetwork.server
               }
             }).then(() => {
-              console.log("remove then " + $currentNetwork.server + "-" + $currentAccount.address);
               accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
               waitingTransactionChecking = false;
             }).catch((e) => {
-              console.log("remove catch " + $currentNetwork.server + "-" + $currentAccount.address);
               accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
               waitingTransactionChecking = false;
             });

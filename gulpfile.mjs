@@ -71,7 +71,7 @@ gulp.task('clean', function clean () {
 gulp.task('manifest:chrome', function () {
   return gulp.src('./builds/chrome/manifest.json')
     .pipe(jsoneditor(function (json) {
-      json.minimum_chrome_version = '58';
+      json.minimum_chrome_version = '88';
       return json;
     }))
     .pipe(gulp.dest('./builds/chrome', { overwrite: true }));

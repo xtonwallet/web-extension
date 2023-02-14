@@ -3,13 +3,12 @@
   import { _ } from 'svelte-i18n';
 
 //Stores
-  import { accountStore, currentAccount, currentNetwork } from "../../../../common/stores.js";
+  import { accountStore, currentAccount } from "../../../../common/stores.js";
 
   //Components
   import { Field, Button, Input } from "svelte-chota";
 
-  //Context
-  const { closeModal } = getContext('app_functions');
+  export let closeModal;
 
   let allAccounts = [];
 

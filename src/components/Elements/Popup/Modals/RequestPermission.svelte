@@ -17,7 +17,8 @@
   let error = "";
 
   export let modalData = {};
-
+  export let closeModal;
+  
   onMount(() => {
     if (modalData.params) {
       if (Array.isArray(modalData.params.permissions)) {
@@ -43,9 +44,6 @@
       error = "Web page requests invalid permissions";
     }
   });
-
-  //Context
-  const { closeModal, openModal } = getContext("app_functions");
 
   const cancelModal = () => {
     //here need to set by default for the next same window
@@ -97,7 +95,7 @@
   .permissions-list {
     overflow-y: auto;
     max-height: 200px;
-    padding-left: 10px;
+    padding-left: 0px;
     padding-right: 0px;
     width: 100%;
     li {
@@ -113,9 +111,10 @@
   .method-description {
     font-size: 0.7em;
     color: var( --color-darkGrey);
+    padding-left: 5px;
   }
   .origin {
-    font-weigth: bold;
+    font-weight: bold;
   }
   .origin-text {
     margin-bottom: 0px;

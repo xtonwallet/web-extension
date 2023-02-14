@@ -13,7 +13,9 @@ accountStore.subscribe(async (current) => {
     if (typeof window == "undefined") {
       sendNotificationToInPageScript('xtonwallet-notification', {"method": "accountChanged", "params": current.currentAccount.address});
     }
-    broadcastMessage("accountChanged", current.currentAccount);
+    const cleanAccount = current.currentAccount;
+    delete cleanAccount.encrypted;
+    broadcastMessage("accountChanged", cleanAccount);
     lastCurrentAccount = current.currentAccount.address;
   }
 });

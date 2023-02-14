@@ -7,6 +7,7 @@
   import { Button, Field, Input } from "svelte-chota";
 
   export let modalData = {};
+  export let closeModal;
 
   //Stores
   import { currentNetwork, ASSET_TYPES } from "../../../../common/stores.js";
@@ -21,9 +22,6 @@
 
   let currentTokenType = 74;
   let tokenAddress, tokenSymbol, tokenDecimals, tokenType, tokenItemIndex, tokenName, tokenIcon, tokenDescription, tokenExternalLink;
-
-  //Context
-  const { closeModal } = getContext("app_functions");
 
   let complexItems = [];
   let famousTokens = [];

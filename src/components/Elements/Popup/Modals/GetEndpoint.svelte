@@ -1,19 +1,13 @@
 <script>
-  import { onMount, getContext, afterUpdate } from "svelte";
   import { _ } from "svelte-i18n";
   import { sendRequestReject, sendRequestResolve } from '../../../../common/utils.js';
 
   //Components
-  import { Button, Input, Icon } from "svelte-chota";
-
-  /* Icons https://materialdesignicons.com/ */
-  import { mdiAlert } from "@mdi/js";
+  import { Button } from "svelte-chota";
 
   export let modalData = {};
-
-  //Context
-  const { closeModal, openModal } = getContext("app_functions");
-
+  export let closeModal;
+  
   const cancelModal = () => {
     closeModal();
     // send a message that the request is rejected for InPage script

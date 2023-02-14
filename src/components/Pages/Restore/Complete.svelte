@@ -136,7 +136,7 @@
             <p class="nickname text-secondary">{`${key.nickname}`}</p>
           </div>
           <div id={`div-address-${i}`} class="address">
-            {#if ($currentResolution.innerWidth > 768)}
+            {#if $currentResolution.innerWidth > 768 && !$currentResolution.condition}
               <div title="{key.address}">{key.address}</div>
             {:else}
               <div title="{key.address}">{shortAddress(key.address)}</div>

@@ -1,6 +1,6 @@
 <script>
   import BigNumber from "bignumber.js";
-  import { onMount, getContext, afterUpdate } from "svelte";
+  import { onMount, getContext } from "svelte";
   import { _ } from "svelte-i18n";
   import Select from "../../Select";
 
@@ -20,6 +20,7 @@
   import { Field, Button, Input } from "svelte-chota";
 
   export let modalData = {};
+  export let closeModal;
 
   let to, amount, data, dataType, stateInit;
   let icon = "/assets/img/icon-crystal-128.png";
@@ -32,7 +33,7 @@
   let errorAmount = false;
 
   //Context
-  const { closeModal, openModal } = getContext("app_functions");
+  const { openModal } = getContext("app_functions");
 
   let complexItems = [];
 
