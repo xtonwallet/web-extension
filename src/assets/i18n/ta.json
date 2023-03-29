@@ -323,5 +323,21 @@
   "Description": "விளக்கம்",
   "External link": "வெளிப்புற இணைப்பு",
   "NFT content": "NFT உள்ளடக்கம்",
-  "Owner": "உரிமையாளர்"
+  "Owner": "உரிமையாளர்",
+  "Privacy policy": "தனியுரிமைக் கொள்கை",
+  "Terms of use": "பயன்பாட்டு விதிமுறைகளை",
+  "Data": "தகவல்கள்",
+  "Data type": "தரவு வகை",
+  "Don't ask me when reconnecting": "மீண்டும் இணைக்கும்போது என்னிடம் கேட்க வேண்டாம்",
+  "Dapp permissions": "DAPP அனுமதிகள்",
+  "Manage Dapp permissions": "DAPP அனுமதிகளை நிர்வகிக்கவும்",
+  "Delete selected permissions": "தேர்ந்தெடுக்கப்பட்ட அனுமதிகளை நீக்கு",
+  "No permissions that you can remove": "நீங்கள் அகற்றக்கூடிய அனுமதிகள் எதுவும் இல்லை",
+  "Web page will be able to initialize the raw transaction dialog": "ரா பரிவர்த்தனை உரையாடலைத் தொடங்க வலைப்பக்கத்தால் முடியும்",
+  "Web page will be able to connect by TON connect protocol": "டன் இணைப்பு நெறிமுறை மூலம் வலைப்பக்கத்தை இணைக்க முடியும்",
+  "Web page will be able to reconnect by TON connect protocol": "டன் இணைப்பு நெறிமுறை மூலம் வலைப்பக்கத்தை மீண்டும் இணைக்க முடியும்",
+  "Search by domain": "டொமைன் மூலம் தேடுங்கள்",
+  "This transaction is expired": "இந்த பரிவர்த்தனை காலாவதியானது",
+  "This transaction is for another account": "இந்த பரிவர்த்தனை மற்றொரு கணக்கிற்கு",
+  "This transaction is for another network": "இந்த பரிவர்த்தனை மற்றொரு நெட்வொர்க்கிற்கு"
 }

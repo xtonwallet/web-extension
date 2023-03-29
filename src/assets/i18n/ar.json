@@ -323,5 +323,21 @@
   "Description": "وصف",
   "External link": "رابط خارجي",
   "NFT content": "محتوى NFT",
-  "Owner": "صاحب"
+  "Owner": "صاحب",
+  "Privacy policy": "سياسة الخصوصية",
+  "Terms of use": "شروط الاستخدام",
+  "Data": "بيانات",
+  "Data type": "نوع البيانات",
+  "Don't ask me when reconnecting": "لا تسألني عند إعادة الاتصال",
+  "Dapp permissions": "أذونات DAPP",
+  "Manage Dapp permissions": "إدارة أذونات DAPP",
+  "Delete selected permissions": "حذف أذونات محددة",
+  "No permissions that you can remove": "لا أذونات يمكنك إزالتها",
+  "Web page will be able to initialize the raw transaction dialog": "ستتمكن صفحة الويب من تهيئة مربع حوار المعاملة الخام",
+  "Web page will be able to connect by TON connect protocol": "ستتمكن صفحة الويب من الاتصال بواسطة بروتوكول TON CONNECT",
+  "Web page will be able to reconnect by TON connect protocol": "ستتمكن صفحة الويب من إعادة الاتصال عن طريق بروتوكول TON CONNECT",
+  "Search by domain": "البحث عن طريق المجال",
+  "This transaction is expired": "انتهت صلاحية هذه الصفقة",
+  "This transaction is for another account": "هذه الصفقة هي حساب آخر",
+  "This transaction is for another network": "هذه الصفقة لشبكة أخرى"
 }

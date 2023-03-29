@@ -60,7 +60,7 @@
         //'Favorite address'
         //'Favorite smart contract'
       }).catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
   };
 
@@ -228,7 +228,7 @@
           }
         }
       }).catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
   };
 
@@ -311,7 +311,7 @@
 </style>
 
 <div class="flex-column container">
-  <h6 class="title">{$_('Send transaction')}</h6>
+  <h6 class="title text-center">{$_('Send transaction')}</h6>
   <div class="is-center">
     <img alt="logo" class="token-logo" src="{icon}"/><br/>
     <span title="{title}">{symbol}</span>

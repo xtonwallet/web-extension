@@ -323,5 +323,21 @@
   "Description": "描述",
   "External link": "外部鏈接",
   "NFT content": "NFT內容",
-  "Owner": "所有者"
+  "Owner": "所有者",
+  "Privacy policy": "隱私政策",
+  "Terms of use": "使用條款",
+  "Data": "數據",
+  "Data type": "數據類型",
+  "Don't ask me when reconnecting": "不要問我重新連接",
+  "Dapp permissions": "DAPP許可",
+  "Manage Dapp permissions": "管理DAPP權限",
+  "Delete selected permissions": "刪除選定的權限",
+  "No permissions that you can remove": "沒有權限您可以刪除",
+  "Web page will be able to initialize the raw transaction dialog": "網頁將能夠初始化“原始事務”對話框",
+  "Web page will be able to connect by TON connect protocol": "網頁將能夠通過TON CONNECT協議連接",
+  "Web page will be able to reconnect by TON connect protocol": "網頁將能夠通過TON CONNECT協議重新連接",
+  "Search by domain": "通過域進行搜索",
+  "This transaction is expired": "此交易過期",
+  "This transaction is for another account": "此交易是另一個帳戶",
+  "This transaction is for another network": "此交易是針對另一個網絡的"
 }

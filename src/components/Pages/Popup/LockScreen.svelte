@@ -26,7 +26,7 @@
         }
       })
       .catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
     }
     event.preventDefault();
@@ -57,7 +57,7 @@
       }
     })
     .catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     });
   };
 </script>

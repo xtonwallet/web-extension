@@ -323,5 +323,21 @@
   "Description": "Tanım",
   "External link": "Harici bağlantı",
   "NFT content": "NFT içeriği",
-  "Owner": "Sahip"
+  "Owner": "Sahip",
+  "Privacy policy": "Gizlilik Politikası",
+  "Terms of use": "Kullanım Şartları",
+  "Data": "Veri",
+  "Data type": "Veri tipi",
+  "Don't ask me when reconnecting": "Bana ne zaman yeniden bağlanma sorma",
+  "Dapp permissions": "DAPP izinleri",
+  "Manage Dapp permissions": "DAPP izinlerini yönetin",
+  "Delete selected permissions": "Seçilen İzinleri Sil",
+  "No permissions that you can remove": "Kaldırabileceğiniz izin yok",
+  "Web page will be able to initialize the raw transaction dialog": "Web sayfası ham işlem iletişim kutusunu başlatabilir",
+  "Web page will be able to connect by TON connect protocol": "Web sayfası, Ton Connect Protokolü ile Bağlanabilecek",
+  "Web page will be able to reconnect by TON connect protocol": "Web sayfası Ton Connect Protokolü ile yeniden bağlantı kurabilir",
+  "Search by domain": "Etki alanına göre arama",
+  "This transaction is expired": "Bu işlem süresi doldu",
+  "This transaction is for another account": "Bu işlem başka bir hesap içindir",
+  "This transaction is for another network": "Bu işlem başka bir ağ içindir"
 }

@@ -65,6 +65,24 @@ class TonLib {
     }
   }
 
+  async walletStateInit(publicKey, _version = "") {
+    try {
+      let version = this.defaultWalletVersion;
+      if (_version != "" && this.instance.wallet.all[_version]) {
+        version = _version;
+      }
+      const WalletClass = this.instance.wallet.all[version];
+      const walletContract = new WalletClass(this.instance.provider, {
+            publicKey: Unibabel.hexToBuffer(publicKey),
+            wc: 0
+      });
+      const { stateInit } = await walletContract.createStateInit();
+      return Unibabel.bufferToBase64(await stateInit.toBoc());
+    } catch (exp) {
+      throw exp;
+    }
+  }
+
   async sendTransaction(version, address, bounce, data, keyPair) {
     try {
       const WalletClass = this.instance.wallet.all[version];
@@ -202,6 +220,76 @@ class TonLib {
   async requestAccountData(address) {
     try {
       return await this.instance.provider.getWalletInfo(address);
+    } catch (exp) {
+      throw exp;
+    }
+  }
+
+  parseAddress(address) {
+    try {
+      return new TonWeb.utils.Address(address);
+    } catch (exp) {
+      throw exp;
+    }
+  }
+
+  /*
+  message = utf8_encode("ton-proof-item-v2/") ++ 
+          Address ++
+          AppDomain ++
+          Timestamp ++  
+          Payload 
+  signature = Ed25519Sign(privkey, sha256(0xffff ++ utf8_encode("ton-connect") ++ sha256(message)))
+  
+  Where
+  Address is the wallet address encoded as a sequence:
+      workchain: 32-bit signed integer big endian;
+      hash: 256-bit unsigned integer big endian;
+  AppDomain is Length ++ EncodedDomainName
+      Length is 32-bit value of utf-8 encoded app domain name length in bytes
+      EncodedDomainName id Length-byte utf-8 encoded app domain name
+  Timestamp 64-bit unix epoch time of the signing operation
+  Payload is a variable-length binary string.
+  */
+  tonProof(walletAddress, domain, timestamp, payload) {
+    try {
+      let proof = new TonWeb.boc.BitString(5000);
+      proof.writeString('ton-proof-item-v2/');
+      proof.writeUint(walletAddress.wc, 32);
+      proof.writeBytes(walletAddress.hashPart);
+
+      let len;
+      const domainLengthHEX = domain.length.toString(16).padStart(2, '0');
+      const domainLengthLE = [];
+      len = domainLengthHEX.length - 2;
+      while (len >= 0) {
+        domainLengthLE.push(domainLengthHEX.substr(len, 2));
+        len -= 2;
+      }
+
+      proof.writeUint(domainLengthLE.join('').padEnd(8, '0'), 32, 16); //LE
+      proof.writeString(domain);
+
+      const timestampHEX = timestamp.toString(16);
+      const timestampLE = [];
+      len = timestampHEX.length - 2;
+      while (len >= 0) {
+        timestampLE.push(timestampHEX.substr(len, 2));
+        len -= 2;
+      }
+
+      proof.writeUint(timestampLE.join('').padEnd(16, '0'), 64, 16); //LE
+
+      proof.writeString(payload);
+      return proof.toHex();
+    } catch (exp) {
+      throw exp;
+    }
+  }
+
+  sha256(data) {
+    try {
+      return TonWeb.utils.sha256(data);
     } catch (exp) {
       throw exp;
     }

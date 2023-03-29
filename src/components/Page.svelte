@@ -26,6 +26,7 @@
   import AddNewNetwork from "./Pages/Network/AddNewNetwork.svelte";
   import NetworksList from "./Pages/Network/NetworksList.svelte";
   import TokensList from "./Pages/Tokens/TokensList.svelte";
+  import PermissionsList from "./Pages/Permissions/PermissionsList.svelte";
   import LockScreen from "./Pages/Common/LockScreen.svelte";
   import Settings from "./Pages/Common/Settings.svelte";
   import About from "./Pages/Common/About.svelte";
@@ -44,6 +45,7 @@
     AddNewNetwork,
     NetworksList,
     TokensList,
+    PermissionsList,
     Settings,
 
     //full pages
@@ -81,6 +83,8 @@
   import ModalQRCode from "./Elements/Popup/Modals/QRCode.svelte";
   import ModalSendLink from "./Elements/Popup/Modals/SendLink.svelte";
   import ModalShowNftContent from "./Elements/Popup/Modals/ShowNftContent.svelte";
+  import ModalTonConnectAccount from "./Elements/Popup/Modals/TonConnectAccount.svelte";
+  import ModalTonReconnectAccount from "./Elements/Popup/Modals/TonReconnectAccount.svelte";
 
   export let loaded;
 
@@ -142,7 +146,7 @@
       walletIsLocked = data.locked;
       enabledPinPad = data.enabledPinPad;
     }).catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     });
     checkFirstRun();
   });
@@ -188,7 +192,7 @@
       }
       firstRun ? settingsStore.changePage({ name: "Onboarding" }) : null;
     }).catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     });
   };
 
@@ -219,7 +223,7 @@
         "setThemeName": "light",
       }})
       .catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
     } else {
       body.classList.remove("light");
@@ -230,7 +234,7 @@
         "setThemeName": "dark",
       }})
       .catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
     }
   }
@@ -256,6 +260,8 @@
     ModalQRCode,
     ModalSendLink,
     ModalShowNftContent,
+    ModalTonConnectAccount,
+    ModalTonReconnectAccount,
   };
 </script>
 

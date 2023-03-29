@@ -323,5 +323,21 @@
   "Description": "คำอธิบาย",
   "External link": "การเชื่อมโยงภายนอก",
   "NFT content": "เนื้อหา NFT",
-  "Owner": "เจ้าของ"
+  "Owner": "เจ้าของ",
+  "Privacy policy": "นโยบายความเป็นส่วนตัว",
+  "Terms of use": "ข้อกำหนดการใช้งาน",
+  "Data": "ข้อมูล",
+  "Data type": "ประเภทข้อมูล",
+  "Don't ask me when reconnecting": "อย่าถามฉันเมื่อทำการเชื่อมต่ออีกครั้ง",
+  "Dapp permissions": "การอนุญาต dapp",
+  "Manage Dapp permissions": "จัดการสิทธิ์ dapp",
+  "Delete selected permissions": "ลบสิทธิ์ที่เลือก",
+  "No permissions that you can remove": "ไม่มีสิทธิ์ที่คุณสามารถลบได้",
+  "Web page will be able to initialize the raw transaction dialog": "หน้าเว็บจะสามารถเริ่มต้นกล่องโต้ตอบการทำธุรกรรมดิบ",
+  "Web page will be able to connect by TON connect protocol": "หน้าเว็บจะสามารถเชื่อมต่อด้วยโปรโตคอล TON Connect",
+  "Web page will be able to reconnect by TON connect protocol": "หน้าเว็บจะสามารถเชื่อมต่อใหม่โดย TON Connect Protocol",
+  "Search by domain": "ค้นหาโดยโดเมน",
+  "This transaction is expired": "ธุรกรรมนี้หมดอายุแล้ว",
+  "This transaction is for another account": "ธุรกรรมนี้มีไว้สำหรับบัญชีอื่น",
+  "This transaction is for another network": "ธุรกรรมนี้ใช้สำหรับเครือข่ายอื่น"
 }

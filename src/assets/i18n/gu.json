@@ -323,5 +323,21 @@
   "Description": "વર્ણન",
   "External link": "બહારની કડી",
   "NFT content": "એન.એફ.ટી.",
-  "Owner": "માલિક"
+  "Owner": "માલિક",
+  "Privacy policy": "ગોપનીયતા નીતિ",
+  "Terms of use": "વાપરવાના નિયમો",
+  "Data": "માહિતી",
+  "Data type": "આધાર -પ્રકાર",
+  "Don't ask me when reconnecting": "જ્યારે ફરીથી કનેક્ટિંગ કરો ત્યારે મને પૂછશો નહીં",
+  "Dapp permissions": "Dapp પરવાનગીઓ",
+  "Manage Dapp permissions": "DAPP પરવાનગીનું સંચાલન કરો",
+  "Delete selected permissions": "પસંદ કરેલી પરવાનગી કા Delete ી નાખો",
+  "No permissions that you can remove": "કોઈ પરવાનગી નથી જે તમે દૂર કરી શકો છો",
+  "Web page will be able to initialize the raw transaction dialog": "વેબ પૃષ્ઠ કાચા ટ્રાન્ઝેક્શન સંવાદ પ્રારંભ કરવામાં સમર્થ હશે",
+  "Web page will be able to connect by TON connect protocol": "વેબ પૃષ્ઠ ટન કનેક્ટ પ્રોટોકોલ દ્વારા કનેક્ટ કરવામાં સમર્થ હશે",
+  "Web page will be able to reconnect by TON connect protocol": "વેબ પૃષ્ઠ ટન કનેક્ટ પ્રોટોકોલ દ્વારા ફરીથી કનેક્ટ કરવામાં સમર્થ હશે",
+  "Search by domain": "ડોમેન દ્વારા શોધ",
+  "This transaction is expired": "આ વ્યવહાર સમાપ્ત થઈ ગયો છે",
+  "This transaction is for another account": "આ વ્યવહાર બીજા ખાતા માટે છે",
+  "This transaction is for another network": "આ વ્યવહાર બીજા નેટવર્ક માટે છે"
 }

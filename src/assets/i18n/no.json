@@ -323,5 +323,21 @@
   "Description": "Beskrivelse",
   "External link": "Ekstern lenke",
   "NFT content": "NFT -innhold",
-  "Owner": "Eieren"
+  "Owner": "Eieren",
+  "Privacy policy": "Personvernregler",
+  "Terms of use": "Vilkår for bruk",
+  "Data": "Data",
+  "Data type": "Data-type",
+  "Don't ask me when reconnecting": "Ikke spør meg når du kobler til igjen",
+  "Dapp permissions ": "DAPP -tillatelser",
+  "Manage Dapp permissions": "Administrer DAPP -tillatelser",
+  "Delete selected permissions ": "Slett valgte tillatelser",
+  "No permissions that you can remove": "Ingen tillatelser som du kan fjerne",
+  "Web page will be able to initialize the raw transaction dialog": "Nettside vil kunne initialisere dialogboksen Raw Transaction",
+  "Web page will be able to connect by TON connect protocol": "Nettside vil kunne koble til med ton Connect Protocol",
+  "Web page will be able to reconnect by TON connect protocol": "Nettside vil kunne koble seg på nytt etter Ton Connect Protocol",
+  "Search by domain": "Søk etter domene",
+  "This transaction is expired": "Denne transaksjonen er utløpt",
+  "This transaction is for another account": "Denne transaksjonen er for en annen konto",
+  "This transaction is for another network": "Denne transaksjonen er for et annet nettverk"
 }

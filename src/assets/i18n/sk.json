@@ -323,5 +323,21 @@
   "Description": "Opis",
   "External link": "Externý odkaz",
   "NFT content": "Obsah NFT",
-  "Owner": "Majiteľ"
+  "Owner": "Majiteľ",
+  "Privacy policy": "Zásady ochrany osobných údajov",
+  "Terms of use": "Podmienky používania",
+  "Data": "Údaje",
+  "Data type": "Dátový typ",
+  "Don't ask me when reconnecting": "Nepýtaj sa ma, keď sa znovu pripojte",
+  "Dapp permissions": "Povolenia DAPP",
+  "Manage Dapp permissions": "Spravujte povolenia DAPP",
+  "Delete selected permissions": "Odstrániť vybrané povolenia",
+  "No permissions that you can remove": "Žiadne povolenia, ktoré môžete odstrániť",
+  "Web page will be able to initialize the raw transaction dialog": "Webová stránka bude schopná inicializovať dialógové okno RAW Transaktion",
+  "Web page will be able to connect by TON connect protocol": "Webová stránka sa bude môcť pripojiť pomocou protokolu Ton Connect Protocol",
+  "Web page will be able to reconnect by TON connect protocol": "Webová stránka sa bude môcť znovu pripojiť pomocou Ton Connect Protocol",
+  "Search by domain": "Vyhľadajte podľa domény",
+  "This transaction is expired": "Platnosť tejto transakcie vyprší",
+  "This transaction is for another account": "Táto transakcia je určená pre iný účet",
+  "This transaction is for another network": "Táto transakcia je určená pre inú sieť"
 }

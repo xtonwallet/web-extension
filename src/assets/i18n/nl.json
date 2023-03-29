@@ -323,5 +323,21 @@
   "Description": "Beschrijving",
   "External link": "Externe link",
   "NFT content": "NFT -inhoud",
-  "Owner": "Baasje"
+  "Owner": "Baasje",
+  "Privacy policy": "Privacybeleid",
+  "Terms of use": "Gebruiksvoorwaarden",
+  "Data": "Gegevens",
+  "Data type": "Data type",
+  "Don't ask me when reconnecting": "Vraag me niet bij het opnieuw verbinden",
+  "Dapp permissions": "DAPP -machtigingen",
+  "Manage Dapp permissions": "Beheer Dapp -machtigingen",
+  "Delete selected permissions": "Verwijder geselecteerde machtigingen",
+  "No permissions that you can remove": "Geen machtigingen die u kunt verwijderen",
+  "Web page will be able to initialize the raw transaction dialog": "Webpagina kan het ruwe transactiedialoogvenster initialiseren",
+  "Web page will be able to connect by TON connect protocol": "Webpagina kan verbinding maken met het ton Connect -protocol",
+  "Web page will be able to reconnect by TON connect protocol": "Webpagina kan opnieuw verbinding maken met ton Connect -protocol",
+  "Search by domain": "Zoek per domein",
+  "This transaction is expired": "Deze transactie is verlopen",
+  "This transaction is for another account": "Deze transactie is voor een andere account",
+  "This transaction is for another network": "Deze transactie is voor een ander netwerk"
 }

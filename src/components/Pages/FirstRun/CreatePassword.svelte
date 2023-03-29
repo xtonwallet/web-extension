@@ -86,7 +86,7 @@
         throw new Error("Could not create password in browser storage");
       }
     }).catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     });
   };
 </script>

@@ -1,7 +1,6 @@
 <script>
   import { onMount, getContext, afterUpdate } from "svelte";
   import { _ } from "svelte-i18n";
-  import Select from "../../Select";
 
   import {
     shortAddress,
@@ -25,7 +24,7 @@
       .then((result) => {
         allNetworks = result;
       }).catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
   });
 
@@ -39,7 +38,7 @@
   import { fromNano } from "../../../../common/utils.js";
 
   //Components
-  import { Field, Button, Input } from "svelte-chota";
+  import { Button } from "svelte-chota";
 
   //Context
   const { openModal } = getContext("app_functions");
@@ -55,13 +54,34 @@
   const confirmTransaction = () => {
     loading = true;
     disabled = true;
+  
+    if (modalData.txData.params.valid_until && new Date().getTime() > parseInt(modalData.txData.params.valid_until)) {
+      openModal("ModalError", { message: "This transaction is expired" });
+      if (modalData.id) {
+        // let's show 5 seconds popup with the error, then close it and send it
+        setTimeout(() => {
+          sendRequestResolve(modalData.id, {
+            code: 4300,
+            message: "This transaction is expired",
+          });
+        }, 5000);
+      }
+      return;
+    }
+
     browser.runtime
       .sendMessage({
         type: "runTransaction",
         data: modalData,
       })
       .then((result) => {
-        accountStore.addWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
+        browser.runtime
+        .sendMessage({
+          type: "addWaitingTransaction",
+          data: $currentNetwork.server + "-" + $currentAccount.address,
+        }).then(() => {
+          accountStore.addWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
+        })
         //here need to set by default for the next same window
         loading = false;
         disabled = false;
@@ -93,11 +113,11 @@
               accountStore.changeAccount(newCurrentAccount);
             })
             .catch((error) => {
-              console.error("Error on sendMessage:" + JSON.stringify(error));
+              console.error("Error on sendMessage:" + JSON.stringify(error.message));
             });
         }
       }).catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
   };
 
@@ -117,6 +137,7 @@
   .send-raw-transaction-wrapper {
     max-height: 35rem;
     overflow: hidden;
+    padding-right: 2rem;
     .send-raw-transaction-wrapper-scroll {
       max-height: 35rem;
       overflow-y: auto;
@@ -134,10 +155,14 @@
     overflow-y: auto;
     max-height: 75px;
   }
+  .input-box-50 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 </style>
 
 <div class="sending-tx flex-column">
-  <h6 class="title">{$_('Send transaction')}</h6>
+  <h6 class="title text-center">{$_('Send transaction')}</h6>
   <div class="send-raw-transaction-wrapper">
     <div class="send-raw-transaction-wrapper-scroll">
       <div class="send-raw-transaction-wrapper-internal">
@@ -174,7 +199,11 @@
         <div class="flex-row flex-center-center">
           <div class="flex-column flex-center-center">
             <span class="weight-500">{$_('Message')}</span>
-            <span class="text-container message">{modalData.txData.params.data} ({modalData.txData.params.dataType})</span>
+            {#if modalData.txData.params.data}
+              <span class="text-container message">{modalData.txData.params.data} ({modalData.txData.params.dataType})</span>
+            {:else}
+              <span class="message">&nbsp;</span>
+            {/if}
           </div>
         </div>
         {#if modalData.txData.params.stateInit != ""}

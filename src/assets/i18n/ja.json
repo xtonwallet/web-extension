@@ -323,5 +323,21 @@
   "Description": "説明",
   "External link": "外部リンク",
   "NFT content": "NFTコンテンツ",
-  "Owner": "オーナー"
+  "Owner": "オーナー",
+  "Privacy policy": "プライバシーポリシー",
+  "Terms of use": "利用規約",
+  "Data": "データ",
+  "Data type": "データ・タイプ",
+  "Don't ask me when reconnecting": "再接続するときは私に聞かないでください",
+  "Dapp permissions": "DAPP許可",
+  "Manage Dapp permissions": "DAPP許可を管理します",
+  "Delete selected permissions": "選択した権限を削除します",
+  "No permissions that you can remove": "削除できる権限はありません",
+  "Web page will be able to initialize the raw transaction dialog": "Webページは、生のトランザクションダイアログを初期化できます",
+  "Web page will be able to connect by TON connect protocol": "WebページはTon Connectプロトコルで接続できます",
+  "Web page will be able to reconnect by TON connect protocol": "WebページはTon Connectプロトコルで再接続できます",
+  "Search by domain": "ドメインごとに検索します",
+  "This transaction is expired": "このトランザクションは期限切れです",
+  "This transaction is for another account": "このトランザクションは別のアカウント用です",
+  "This transaction is for another network": "このトランザクションは別のネットワーク向けです"
 }

@@ -1,8 +1,9 @@
 import { accounts } from './accounts.js';
 import { networks } from './networks.js';
 import { sdk } from './sdk.js';
-import { broadcastMessage, sendNotificationToInPageScript, openRequestPopup, closeRequestPopup, fromNano, gte, lt } from '../common/utils.js';
-import { APPROXIMATE_FEE, settingsStore, accountStore, currentAccount, networksStore, currentNetwork, currentEnabledPinPad } from "../common/stores.js";
+import { broadcastMessage, sendNotificationToInPageScript, openRequestPopup, closeRequestPopup, sendRequestReject, fromNano, lt, Unibabel, strToHex } from '../common/utils.js';
+import { APPROXIMATE_FEE, settingsStore, accountStore, currentAccount, networksStore, currentNetwork, currentEnabledPinPad, waitingTransaction } from "../common/stores.js";
+import methodsList from "../common/methodsList.js";
 
 export const controller = () => {
   const accountsController = Object.freeze(accounts());
@@ -88,6 +89,10 @@ export const controller = () => {
     networksStore.changeNetwork(data);
   };
 
+  const addWaitingTransaction = async (data) => {
+    accountStore.addWaitingTransaction(data);
+  };
+
   const lock = async () => {
     accountsController.lock();
 
@@ -132,7 +137,7 @@ export const controller = () => {
     });
     const permissions = await accountsController.getPermissions(account, origin);
     return {"id": data.id, "data": { code: 4000, data: permissions}};
-  }
+  };
 
   const checkPermission = async (data, origin) => {
     const account = await new Promise((resolve) => {
@@ -141,7 +146,7 @@ export const controller = () => {
       });
     });
     return await accountsController.checkPermission(account, origin, data.method);
-  }
+  };
 
   const requestPermissions = async (data, origin) => {
     data.origin = origin;
@@ -202,7 +207,7 @@ export const controller = () => {
   const checkNewTransactions = async (accountAddress, server) => {
     await accountsController.updateTransactionsList(accountAddress, server);
     return true;
-  }
+  };
 
   const sendTransaction = async (data, origin) => {
     const endpoint = await new Promise((resolve) => {
@@ -505,7 +510,30 @@ export const controller = () => {
       });
     });
     return await accountsController.saveGrantedPermissions(account, origin, grantedPermissions) ? grantedPermissions: [];
-  }
+  };
+
+  const savePermissionsList = async (data) => {
+    const origins = Object.keys(data);
+    const account = await new Promise((resolve) => {
+      currentAccount.subscribe((value) => {
+        resolve(value.address);
+      });
+    });
+    for (let i in origins) {
+      await accountsController.removePermissions(account, origins[i], data[origins[i]]);
+    }
+    return true;
+  };
+
+  const getPermissionsList = async (data) => {
+    const account = await new Promise((resolve) => {
+      currentAccount.subscribe((value) => {
+        resolve(value.address);
+      });
+    });
+    let permissionsList = await accountsController.getPermissionsList(account);
+    return { permissionsList, methodsList };
+  };
 
   const getSignForData = async (data) => {
     const account = await new Promise((resolve) => {
@@ -588,6 +616,440 @@ export const controller = () => {
     return {"id": data.id, "data": { code: 4000, data: true}};
   };
 
+  const tonConnectConnect = async (data, origin) => {
+    const getPayloads = async (data) => {
+      const walletAddress = await new Promise((resolve) => {
+        currentAccount.subscribe(async (value) => {
+          resolve(value.address);
+        });
+      });
+      
+      const payloads = [];
+      try {
+        for (let i in data.params.items) {
+          const item = data.params.items[i];
+          switch(item.name) {
+            case 'ton_addr':
+              const tonAddrItem = await tonConnectTonAddrItem(walletAddress);
+              payloads.push(tonAddrItem);
+            break;
+            case 'ton_proof':
+              const tonProofItem = await tonConnectTonProofItem(walletAddress, new URL(origin).hostname, item.payload)
+              payloads.push(tonProofItem);
+            break;
+            default:
+              payloads.push({
+                name: item.name,
+                error: {
+                  code: 400,
+                  message: "Method is not supported"
+                }
+              });
+            break;
+          }
+        }
+      } catch(e) {
+        if (__DEV_MODE__) {
+          console.log(e);
+        }
+      }
+
+      return payloads;
+    };
+
+    let manifest;
+    try {
+      manifest = await fetch(data.params.manifestUrl);
+    } catch(e) {
+      return {"id": data.id, "data": { code: 4000, data: {event: "connect_error", payload: {
+                  code: 2, //2 App manifest not found
+                  message: "App manifest not found"
+                }}}};
+    }
+    data.manifest = await manifest.json();
+    if (typeof data.manifest.url == "undefined" || typeof data.manifest.name == "undefined" || typeof data.manifest.iconUrl == "undefined") {
+      return {"id": data.id, "data": { code: 4000, data: {event: "connect_error", payload: {
+        code: 3, //3 App manifest content error
+        message: "App manifest content error"
+      }}}};
+    }
+
+    data.origin = origin;
+    openRequestPopup('ModalTonConnectAccount', data);
+    return new Promise((resolve, reject) => {
+      const listener = (message) => {
+        if (message.type === "popupMessageResponse" && message.id == data.id) {
+          browser.runtime.onMessage.removeListener(listener);
+          closeRequestPopup();
+          if (message.data.code != 4000) {
+            resolve({"id": data.id, "data": { "code": 4000, 
+                "data": {"event": "connect_error",
+                  "payload": {
+                    "code": message.data.code == 4001 ? 300: 1,//1 Bad request, 300 User rejected
+                    "message": message.data.message
+                  }
+                }
+              }
+            });
+            return;
+          }
+          getPayloads(data).then((payloads) => {
+            if (payloads.length == 0) {
+              resolve({"id": data.id, "data": { "code": 4000, 
+                                                "data": { "event": "connect_error",
+                                                          "payload": {
+                                                            "code": 1,
+                                                            "message": "Empty response due to wrong incoming items"
+                                                          }
+                                                        }
+                                              }
+                      });
+            } else {
+              resolve({"id": data.id, "data": { "code": 4000, 
+                                                "data": { "event": "connect", 
+                                                          "payload": { "items": payloads }
+                                                        }
+                                              }
+                      });
+            }
+          });
+        }
+      };
+      browser.runtime.onMessage.addListener(listener);
+    });
+  };
+
+  const tonConnectReconnect = async (data, origin) => {
+    const getPayloads = async () => {
+      const walletAddress = await new Promise((resolve) => {
+        currentAccount.subscribe(async (value) => {
+          resolve(value.address);
+        });
+      });
+      // need to check auto-reconnect for the user and pass without confirmation
+      const payloads = [];
+
+      const tonAddrItem = await tonConnectTonAddrItem(walletAddress);
+      payloads.push(tonAddrItem);
+
+      return payloads;
+    };
+
+    data.origin = origin;
+
+    const walletIsLockedObject = await accountsController.walletIsLocked();
+    if (await checkPermission({method: "tonConnect_reconnect"}, origin) && !walletIsLockedObject.locked) {
+      return new Promise((resolve, reject) => {
+        getPayloads().then((payloads) => {
+          if (payloads.length == 0) {
+            resolve({"id": data.id, "data": { code: 4000, 
+                                              data: {event: "connect_error",
+                                                      payload: {
+                                                        code: 1,
+                                                        message: "Empty response due to wrong incoming items"
+                                                      }
+                                                    }
+                                            }
+                    });
+          } else {
+            resolve({"id": data.id, "data": { code: 4000, 
+                                            data: { event: 'connect', 
+                                                    payload: {items: payloads}
+                                                  }
+                                          }
+                  });
+          }
+        });
+      });
+    } else {
+      // we must to check that the current account has tonConnect_connect permission, because we can't reconnect from another account
+      if (await checkPermission({method: "tonConnect_connect"}, origin)) {
+        openRequestPopup('ModalTonReconnectAccount', data);
+        return new Promise((resolve, reject) => {
+          const listener = (message) => {
+            if (message.type === "popupMessageResponse" && message.id == data.id) {
+              browser.runtime.onMessage.removeListener(listener);
+              closeRequestPopup();
+              if (message.data.code != 4000) {
+                resolve({"id": data.id, "data": { "code": 4000, 
+                    "data": {"event": "connect_error",
+                      "payload": {
+                        "code": message.data.code == 4001 ? 300: 1,//1	Bad request, 300 User rejected
+                        "message": message.data.message
+                      }
+                    }
+                  }
+                });
+                return;
+              }
+              getPayloads().then((payloads) => {
+                if (payloads.length == 0) {
+                  resolve({"id": data.id, "data": { code: 4000, 
+                                                    data: {event: "connect_error",
+                                                            payload: {
+                                                              code: 1,
+                                                              message: "Empty response due to wrong incoming items"
+                                                            }
+                                                          }
+                                                  }
+                          });
+                } else {
+                  resolve({"id": data.id, "data": { code: 4000, 
+                                                  data: { event: 'connect', 
+                                                          payload: {items: payloads}
+                                                        }
+                                                }
+                        });
+                }
+              });
+            }
+          };
+          browser.runtime.onMessage.addListener(listener);
+        });
+      } else {
+        return {"id": data.id, "data": { code: 4000, 
+                                          data: {event: "connect_error",
+                                                  payload: {
+                                                    code: 1,
+                                                    message: "No permission for reconnect, maybe it is another account"
+                                                  }
+                                                }
+                                        }
+                };
+      }
+    }
+  };
+
+  const tonConnectDisconnect = async (data, origin) => {
+    const account = await new Promise((resolve) => {
+      currentAccount.subscribe((value) => {
+        resolve(value.address);
+      });
+    });
+
+    await accountsController.removePermissions(account, origin, ['tonConnect_connect', 'tonConnect_disconnect', 'tonConnect_reconnect']);
+    return {"id": data.id, "data": { code: 4000, data: {  event: 'disconnect',
+                                                          payload: {},
+                                                        }
+                                    }
+            };
+  };
+
+  const tonConnectSendTransaction = async (data, origin) => {
+    let result;
+    switch(data.params.method) {
+      case "sendTransaction":
+        const parsedParams = JSON.parse(data.params.params);
+        if (parsedParams.network) {
+          const endpoint = await new Promise((resolve) => {
+            currentNetwork.subscribe((value) => {
+              resolve(value.server);
+            });
+          });
+          //network (NETWORK, optional): The network (mainnet or testnet) where DApp intends to send the transaction. If not set, the transaction 
+          //is sent to the network currently set in the wallet, but this is not safe and DApp should always strive to set the network. If the network 
+          //parameter is set, but the wallet has a different network set, the wallet should show an alert and DO NOT ALLOW TO SEND this transaction.
+          if (parsedParams.network != (endpoint === 'mainnet' ? '-239' : '-3')) {
+            openRequestPopup("ModalError", { message: "This transaction is for another network" });
+            return new Promise((resolve, reject) => {
+              // let's show 5 seconds popup with the error, then close it and send it
+              setTimeout(() => {
+                sendRequestReject(data.id);
+                closeRequestPopup();
+                resolve({"id": data.id, "data": { code: 4000, data: {  error: { code: 1, message: "Another network" },
+                                                                      id: data.params.id
+                                                                    }}});
+              }, 5000);
+            });
+          }
+        }
+        if (parsedParams.from) {
+          let parsedAddress = "";
+          try {
+            parsedAddress = await sdkController.parseAddress(parsedParams.from);
+          } catch(e) {
+            openRequestPopup("ModalError", { message: "This transaction is for another account" });
+            return new Promise((resolve, reject) => {
+              // let's show 5 seconds popup with the error, then close it and send it
+              setTimeout(() => {
+                sendRequestReject(data.id);
+                closeRequestPopup();
+                resolve({"id": data.id, "data": { code: 4000, data: {  error: { code: 1, message: "Not valid address in `from` parameter" },
+                                                                      id: data.params.id
+                                                                    }}});
+              }, 5000)
+            });
+          }
+
+          const walletAddress = await new Promise((resolve) => {
+            currentAccount.subscribe(async (value) => {
+              resolve(value.address);
+            });
+          });
+          //from (string in : format, optional) - The sender address from which DApp intends to send the transaction. If not set, wallet allows user 
+          //to select the sender's address at the moment of transaction approval. If from parameter is set, the wallet should DO NOT ALLOW user to select 
+          //the sender's address; If sending from the specified address is impossible, the wallet should show an alert and DO NOT ALLOW TO SEND this transaction.
+          if (parsedAddress.toString(true, true, true, false) != walletAddress) {
+            openRequestPopup("ModalError", { message: "This transaction is for another account" });
+            return new Promise((resolve, reject) => {
+              // let's show 5 seconds popup with the error, then close it and send it
+              setTimeout(() => {
+                sendRequestReject(data.id);
+                closeRequestPopup();
+                resolve({"id": data.id, "data": { code: 4000, data: {  error: { code: 1, message: "Another account" },
+                                                                      id: data.params.id
+                                                                    }}});
+              }, 5000)
+            });
+          }
+        }
+        let remainMessages = parsedParams.messages.length;
+        if (remainMessages > 4) {
+          return {"id": data.id, "data": { code: 4000, data: {  error: { code: 1, message: "Bad request" },
+                                                                id: data.params.id
+                                                              }}};
+        }
+        const modalDataQueue = [];
+        const modalDataQueueResult = [];
+        let error = false;
+        for (let i in parsedParams.messages) {
+          const modalData = { ...data };
+          modalData.params = {};
+          modalData.params.to = parsedParams.messages[i].address;
+          modalData.params.amount = parsedParams.messages[i].amount;
+          //(integer, optional): unix timestamp. after this moment transaction will be invalid.
+          if (parsedParams.valid_until) {
+            modalData.params.valid_until = parsedParams.valid_until;
+          }
+          if (parsedParams.messages[i].payload) {
+            modalData.params.data = parsedParams.messages[i].payload;
+            modalData.params.dataType = "boc";
+          }
+          if (parsedParams.messages[i].stateInit) {
+            modalData.params.stateInit = parsedParams.messages[i].stateInit;
+          }
+          modalData.id = modalData.id + i;
+          modalDataQueue.push(modalData);
+        }
+        openRequestPopup('ModalSendingRawTransaction', modalDataQueue.shift());
+        result = new Promise((resolve, reject) => {
+          const listener = (message) => {
+            if (message.type === "popupMessageResponse" && message.id.substr(0, message.id.length-1) == data.id) {
+              remainMessages--;
+              closeRequestPopup();
+
+              if (message.data.code == 4001) { // User reject
+                modalDataQueueResult.push({"error": {"code": 300, "message": "User declined the transaction"}, "id": parseInt(message.id.substr(-1))});
+                error = true;
+              } else if (message.data.code == 4300) { // Another error
+                modalDataQueueResult.push({"error": {"code": 300, "message": message.data.message}, "id": parseInt(message.id.substr(-1))});
+                error = true;
+              } else {
+                modalDataQueueResult.push({"result": "", "id": parseInt(message.id.substr(-1))});
+              }
+
+              if (remainMessages == 0) {
+                browser.runtime.onMessage.removeListener(listener);
+                // @TODO by specification we should return common result, but what else the user will decline one message?
+                // need to return  status by all messages in array - modalDataQueueResult
+                //console.log(modalDataQueueResult);
+                if (error) {
+                  resolve({"id": data.id, "data": { code: 4000, data: {error: {code: 300, message: "User declined the transaction"}, "id": message.id.substr(-1)}}}); 
+                } else {
+                  resolve({"id": data.id, "data": { code: 4000, data: {result: "", "id": message.id.substr(-1)}}});
+                }
+                return;
+              }
+
+              if (modalDataQueue != 0) {
+                // we need to wait some time before show the next in the queue, because the wallet must to change internal id to accept this new tx
+                let checkWaiting = async () => {
+                  const endpoint = await new Promise((resolve) => {
+                    currentNetwork.subscribe((value) => {
+                      resolve(value.server);
+                    });
+                  });
+                  const walletAddress = await new Promise((resolve) => {
+                    currentAccount.subscribe((value) => {
+                      resolve(value.address);
+                    });
+                  });
+                  const waiting = await new Promise((resolve) => {
+                    waitingTransaction.subscribe((value) => {
+                      resolve(value);
+                    });
+                  });
+                  if (waiting.includes(endpoint + "-" + walletAddress)) {
+                    setTimeout(() => {
+                      checkWaiting();
+                    }, 5000);
+                  } else {
+                    openRequestPopup('ModalSendingRawTransaction', modalDataQueue.shift());
+                  }
+                };
+                checkWaiting();
+              }
+            }
+          };
+          browser.runtime.onMessage.addListener(listener);
+        });
+        break;
+      case "signData":
+        result = {"id": data.id, "data": { code: 4000, data: {  error: { code: 400, message: "Method is not supported" },
+                                                                id: data.params.id
+                                                              }}};
+        break;
+      case "disconnect":
+        // we don't need to receive any confirmations from the user side
+        result = {"id": data.id, "data": { code: 4000, data: {  result: { }, id: data.params.id }}};
+        break;
+      default:
+        result = {"id": data.id, "data": { code: 4000, data: {  error: { code: 400, message: "Method is not supported" },
+                                                                id: data.params.id
+                                                              }}};
+      }
+    return result;
+  };
+
+  const tonConnectTonAddrItem = async (accountAddress) => {
+    const endpoint = await new Promise((resolve) => {
+      currentNetwork.subscribe((value) => {
+        resolve(value.server);
+      });
+    });
+    const stateInit = await accountsController.getWalletStateInit(accountAddress, endpoint);
+    const parsedAddress = await sdkController.parseAddress(accountAddress);
+    return {
+      name: 'ton_addr',
+      address: parsedAddress.toString(false),
+      network: endpoint === 'mainnet' ? '-239' : '-3',
+      walletStateInit: stateInit,
+    };
+  };
+
+  const tonConnectTonProofItem = async (walletAddress, domain, payload) => {
+    const timestamp = Math.round(Date.now() / 1000);
+    const parsedAddress = await sdkController.parseAddress(walletAddress);
+    const _proof = await sdkController.makeTonProof(parsedAddress, domain, timestamp, payload);
+    const sha256Buffer = await sdkController.sha256(Unibabel.hexToBuffer(_proof));
+    const sha256Hash = Unibabel.bufferToHex(Object.values(new Uint8Array(sha256Buffer)));
+    const bufferToSign = 'ffff' + strToHex('ton-connect') + sha256Hash;
+    const bufferToSignSha256 = await sdkController.sha256(Unibabel.hexToBuffer(bufferToSign));
+    const signature = await accountsController.getSignForData(walletAddress, Unibabel.bufferToHex(Object.values(new Uint8Array(bufferToSignSha256))));
+    return {
+      name: 'ton_proof',
+      proof: {
+        timestamp,
+        domain: {
+          lengthBytes: domain.length,
+          value: domain,
+        },
+        signature: Unibabel.bufferToBase64(Unibabel.hexToBuffer(signature)),
+        payload,
+      },
+    };
+  };
+
   const getFamousTokens = (server) => {
     return accountsController.getFamousTokens()[server];
   };
@@ -641,6 +1103,8 @@ export const controller = () => {
     getProviderState,
     getSdkVersion,
     saveGrantedPermissions,
+    savePermissionsList,
+    getPermissionsList,
     checkPermission,
     getPermissions,
     requestPermissions,
@@ -674,8 +1138,13 @@ export const controller = () => {
     removeNetworks,
     updateTransactions,
     removeTokens,
+    addWaitingTransaction,
     getSubscriptionId,
     removeSubscriptionId,
+    tonConnectConnect,
+    tonConnectReconnect,
+    tonConnectDisconnect,
+    tonConnectSendTransaction,
     getFamousTokens,
     importToken,
     getNftContent,

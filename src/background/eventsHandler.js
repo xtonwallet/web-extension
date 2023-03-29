@@ -46,7 +46,6 @@ export const eventsHandler = (controller) => {
   });
 
   browser.runtime.onMessage.addListener( async (message, sender) => {
-
     // mark that the user is working
     lastActionTimestamp.set(~~(new Date().getTime()/1000));
 
@@ -165,9 +164,26 @@ export const eventsHandler = (controller) => {
             return Promise.resolve(controller.removeSubscriptionId(data, sender.origin));
           }
 
+          if (data.method === 'tonConnect_connect') {
+            return Promise.resolve(controller.tonConnectConnect(data, sender.origin));
+          }
+
+          if (data.method === 'tonConnect_reconnect') {
+            return Promise.resolve(controller.tonConnectReconnect(data, sender.origin));
+          }
+
+          if (data.method === 'tonConnect_disconnect') {
+            return Promise.resolve(controller.tonConnectDisconnect(data, sender.origin));
+          }
+
+          if (data.method === 'tonConnect_sendTransaction') {
+            return Promise.resolve(controller.tonConnectSendTransaction(data, sender.origin));
+          }
+
           return Promise.resolve({"id": message.data.id, "data": {code: 4200, message: 'Unsupported Method'}});
         }
       }
+
       if (isFromPage || isFromPopup) {
 
         if (message.type === 'createPassword') return Promise.resolve(controller.createPassword(message.data));
@@ -249,6 +265,10 @@ export const eventsHandler = (controller) => {
           // Permissions
           if (message.type === 'saveGrantedPermissions') return Promise.resolve(controller.saveGrantedPermissions(message.data));
 
+          if (message.type === 'getPermissionsList') return Promise.resolve(controller.getPermissionsList(message.data));
+
+          if (message.type === 'savePermissionsList') return Promise.resolve(controller.savePermissionsList(message.data));
+
           // SDK
           if (message.type === 'signMessage') return Promise.resolve(controller.getSignForData(message.data));
 
@@ -257,6 +277,8 @@ export const eventsHandler = (controller) => {
           if (message.type === 'decryptMessage') return Promise.resolve(controller.doDecryptionForMessage(message.data));
 
           if (message.type === 'getSignature') return Promise.resolve(controller.getSignature(message.data));
+
+          if (message.type === 'addWaitingTransaction') return Promise.resolve(controller.addWaitingTransaction(message.data));
 
           //Tokens
           if (message.type === 'getFamousTokens') return Promise.resolve(controller.getFamousTokens(message.data));

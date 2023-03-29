@@ -323,5 +323,21 @@
   "Description": "Keterangan",
   "External link": "Tautan eksternal",
   "NFT content": "Konten NFT",
-  "Owner": "Pemilik"
+  "Owner": "Pemilik",
+  "Privacy policy": "Kebijakan pribadi",
+  "Terms of use": "Syarat Penggunaan",
+  "Data": "Data",
+  "Data type": "Tipe data",
+  "Don't ask me when reconnecting": "Jangan tanya saya saat menghubungkan kembali",
+  "Dapp permissions": "Izin DAPP",
+  "Manage Dapp permissions": "Kelola izin DAPP",
+  "Delete selected permissions": "Hapus izin yang dipilih",
+  "No permissions that you can remove": "Tidak ada izin yang dapat Anda hapus",
+  "Web page will be able to initialize the raw transaction dialog": "Halaman web akan dapat menginisialisasi dialog transaksi mentah",
+  "Web page will be able to connect by TON connect protocol": "Halaman web akan dapat terhubung dengan protokol ton connect",
+  "Web page will be able to reconnect by TON connect protocol": "Halaman web akan dapat terhubung kembali dengan Ton Connect Protocol",
+  "Search by domain": "Cari dengan domain",
+  "This transaction is expired": "Transaksi ini kedaluwarsa",
+  "This transaction is for another account": "Transaksi ini adalah untuk akun lain",
+  "This transaction is for another network": "Transaksi ini untuk jaringan lain"
 }

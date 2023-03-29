@@ -36,7 +36,7 @@
       .then((result) => {
         allAccounts = result;
       }).catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
   };
 
@@ -52,7 +52,7 @@
         data: newCurrentAccount[0],
       })
       .catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
     }
   };
@@ -77,7 +77,7 @@
   const lock = () => {
     browser.runtime.sendMessage({ type: "lockWallet" })
     .catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     });
     return;
   };
@@ -150,7 +150,7 @@
     max-width: 85px;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 85px;
+    width: 79px;
   }
   :global(.account-dropdown .card .account-item .balance) {
     font-weight: bold;

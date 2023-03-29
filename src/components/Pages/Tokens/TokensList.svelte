@@ -68,7 +68,7 @@
           }
         })
         .catch((error) => {
-          console.error("Error on sendMessage:" + JSON.stringify(error));
+          console.error("Error on sendMessage:" + JSON.stringify(error.message));
         });
       }
     } catch (e) {
@@ -83,10 +83,10 @@
 
 <style lang="scss">
   .tokens-wrapper {
-    max-height: 30rem;
+    max-height: 40rem;
     overflow: hidden;
     .tokens-wrapper-scroll {
-      max-height: 30rem;
+      max-height: 40rem;
       overflow-y: auto;
       width: calc(100% + 20px);
     }

@@ -5,7 +5,7 @@
   import MenuBox from "./MenuBox.svelte";
 
   /* Icons https://materialdesignicons.com/ */
-  import { mdiArchiveArrowDown, mdiArchiveArrowUp, mdiLock, mdiCog, mdiAlphaTCircleOutline, mdiLan, mdiBullhorn, mdiHelp, mdiCardBulleted } from "@mdi/js";
+  import { mdiArchiveArrowDown, mdiArchiveArrowUp, mdiLock, mdiCog, mdiAlphaTCircleOutline, mdiLan, mdiApplicationCog, mdiBullhorn, mdiHelp, mdiCardBulleted, mdiAccessPoint } from "@mdi/js";
 
   let menus = [
     {
@@ -70,6 +70,15 @@
           name: "Networks",
           page: {
             name: "NetworksList",
+          },
+        },
+        {
+          id: "permissions",
+          show: true,
+          logo: mdiApplicationCog,
+          name: "Dapp permissions",
+          page: {
+            name: "PermissionsList",
           },
         },
       ]

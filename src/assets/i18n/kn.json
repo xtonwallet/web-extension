@@ -323,5 +323,21 @@
   "Description": "ವಿವರಣೆ",
   "External link": "ಬಾಹ್ಯ ಸಂಪರ್ಕ",
   "NFT content": "Nft ವಿಷಯ",
-  "Owner": "ಮಾಲಿಕ"
+  "Owner": "ಮಾಲಿಕ",
+  "Privacy policy": "ಗೌಪ್ಯತಾ ನೀತಿ",
+  "Terms of use": "ಬಳಕೆಯ ನಿಯಮಗಳು",
+  "Data": "ದತ್ತ",
+  "Data type": "ದತ್ತಾಂಶಗಳ ಪ್ರಕಾರ",
+  "Don't ask me when reconnecting": "ಮರುಸಂಪರ್ಕಿಸುವಾಗ ನನ್ನನ್ನು ಕೇಳಬೇಡಿ",
+  "Dapp permissions": "ಡಿಎಪಿಪಿ ಅನುಮತಿಗಳು",
+  "Manage Dapp permissions": "ಡಿಎಪಿಪಿ ಅನುಮತಿಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
+  "Delete selected permissions": "ಆಯ್ದ ಅನುಮತಿಗಳನ್ನು ಅಳಿಸಿ",
+  "No permissions that you can remove": "ನೀವು ತೆಗೆದುಹಾಕಬಹುದಾದ ಯಾವುದೇ ಅನುಮತಿಗಳಿಲ್ಲ",
+  "Web page will be able to initialize the raw transaction dialog": "ವೆಬ್ ಪುಟವು ಕಚ್ಚಾ ವಹಿವಾಟು ಸಂವಾದವನ್ನು ಪ್ರಾರಂಭಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ",
+  "Web page will be able to connect by TON connect protocol": "ವೆಬ್ ಪುಟವು ಟನ್ ಕನೆಕ್ಟ್ ಪ್ರೊಟೊಕಾಲ್ ಮೂಲಕ ಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ",
+  "Web page will be able to reconnect by TON connect protocol": "ವೆಬ್ ಪುಟವು ಟನ್ ಕನೆಕ್ಟ್ ಪ್ರೊಟೊಕಾಲ್ ಮೂಲಕ ಮರುಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ",
+  "Search by domain": "ಡೊಮೇನ್ ಮೂಲಕ ಹುಡುಕಿ",
+  "This transaction is expired": "ಈ ವಹಿವಾಟು ಅವಧಿ ಮುಗಿದಿದೆ",
+  "This transaction is for another account": "ಈ ವಹಿವಾಟು ಮತ್ತೊಂದು ಖಾತೆಗೆ",
+  "This transaction is for another network": "ಈ ವಹಿವಾಟು ಮತ್ತೊಂದು ನೆಟ್‌ವರ್ಕ್‌ಗಾಗಿ"
 }

@@ -19,7 +19,7 @@
     browser.runtime.sendMessage({ type: "getAllNetworks", data: {} }).then((result) => {
       allNetworks = result;
     }).catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     });
   });
 
@@ -32,7 +32,7 @@
         type: "changeNetwork",
         data: newCurrentNetwork[0],
       }).catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
     }
   };

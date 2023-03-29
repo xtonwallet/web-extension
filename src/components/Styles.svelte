@@ -886,6 +886,12 @@
     }
   }
 
+  .modal {
+    .flow-buttons {
+      margin-bottom: 0rem;
+    }
+  }
+
   .inputbox {
     position: relative;
   }
@@ -963,6 +969,7 @@
   /* Firefox */
   .mainbox[type="number"] {
     -moz-appearance: textfield;
+    appearance: textfield;
   }
 
   .mainbox:-webkit-autofill,

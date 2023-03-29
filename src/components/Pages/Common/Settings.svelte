@@ -93,7 +93,7 @@
           .then(() => {
             switchPage("AccountMain");
           }).catch((error) => {
-            console.error("Error on sendMessage:" + JSON.stringify(error));
+            console.error("Error on sendMessage:" + JSON.stringify(error.message));
           });
       }
     } catch (e) {

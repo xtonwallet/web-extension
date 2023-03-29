@@ -50,6 +50,8 @@
   import ModalQRCode from "./Elements/Popup/Modals/QRCode.svelte";
   import ModalSendLink from "./Elements/Popup/Modals/SendLink.svelte";
   import ModalShowNftContent from "./Elements/Popup/Modals/ShowNftContent.svelte";
+  import ModalTonConnectAccount from "./Elements/Popup/Modals/TonConnectAccount.svelte";
+  import ModalTonReconnectAccount from "./Elements/Popup/Modals/TonReconnectAccount.svelte";
 
   export let loaded;
 
@@ -101,7 +103,7 @@
       walletIsLocked = data.locked;
       enabledPinPad = data.enabledPinPad;
     }).catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     });
 
     checkFirstRun();
@@ -182,7 +184,7 @@
         settingsStore.changePage({ name: "PopupMain" });
       }
     }).catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     });
   };
 
@@ -215,7 +217,7 @@
         },
       })
       .catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
     } else {
       body.classList.remove("light");
@@ -228,7 +230,7 @@
         },
       })
       .catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
     }
   }
@@ -254,6 +256,8 @@
     ModalQRCode,
     ModalSendLink,
     ModalShowNftContent,
+    ModalTonConnectAccount,
+    ModalTonReconnectAccount,
   };
 
 </script>

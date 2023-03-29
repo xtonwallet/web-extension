@@ -48,7 +48,7 @@
       giver = (network.giver != "");
       checkBalance();
     }).catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     });
   });
 
@@ -62,7 +62,7 @@
         type: "changeNetwork",
         data: network,
       }).catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
   };
 
@@ -79,7 +79,7 @@
         changeStep(newAccount ? 2: 5);
       }
     }).catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     });
   };
 
@@ -93,7 +93,7 @@
       balance = result;
     })
     .catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     });
   };
 
@@ -111,7 +111,7 @@
       }
     })
     .catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     });
   };
 

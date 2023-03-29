@@ -22,7 +22,7 @@
     if (menuItem.page.name === "LockScreen") {
       browser.runtime.sendMessage({ type: "lockWallet" })
       .catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
       return;
     }

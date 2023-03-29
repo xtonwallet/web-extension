@@ -58,7 +58,7 @@
         //'Favorite address'
         //'Favorite smart contract'
       }).catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
   };
 
@@ -78,7 +78,7 @@
         if (modalData.id) {
           const params = modalData.params;
           if (params.amount) {
-            amount.value = params.amount;
+            amount.value = fromNano(params.amount);
           }
           if (params.data) {
             data.value = params.data;
@@ -187,7 +187,7 @@
           errorAmount = false;
         }
       }).catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
   };
 
@@ -211,6 +211,9 @@
         stateInit: stateInit.value,
       },
     };
+    if (modalData.id && modalData.params.valid_until) {
+      txData.params.valid_until = modalData.params.valid_until;
+    }
     openModal("ModalConfirmRawTransaction", {
       id: modalData.id,
       accountAddress: $currentAccount.address,
@@ -275,7 +278,7 @@
 </style>
 
 <div class="flex-column container">
-  <h6 class="title">{$_('Send raw transaction')}</h6>
+  <h6 class="title text-center">{$_('Send raw transaction')}</h6>
   <div class="send-raw-transaction-wrapper">
     <div class="send-raw-transaction-wrapper-scroll">
       <div class="send-raw-transaction-wrapper-internal">

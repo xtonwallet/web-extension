@@ -32,7 +32,7 @@ export class Vault {
           { address: "0:123", 
             nickname: "main",
             balance: {"mainnet": 5000000000},
-            varsion: {"mainnet": "v3r2"},
+            version: {"mainnet": "v3r2"},
             transactions: {"mainnet": [{...}]},
             permissions: {"domain.com": ['ton_address', 'ton_endpoint']},
             updatedDate: 123123,
@@ -500,6 +500,14 @@ export class Vault {
     return await store.get(server);
   }
 
+  async getPermissionsList (accountAddress) {
+    await this.init();
+    const transaction = this.db.transaction('accounts', 'readwrite');
+    const store = transaction.objectStore('accounts');
+    const existingAccount = await store.get(accountAddress);
+    return existingAccount && existingAccount.permissions ? existingAccount.permissions: [];
+  }
+
   async getPermissions (accountAddress, origin) {
     await this.init();
     const transaction = this.db.transaction('accounts', 'readwrite');
@@ -522,6 +530,32 @@ export class Vault {
           existingAccount.permissions[origin] = [...new Set([...existingAccount.permissions[origin],...permissions])]
         } else {
           existingAccount.permissions[origin] = permissions;
+        }
+      }
+      await store.put(existingAccount);
+      return true;
+    }
+    return false;
+  }
+
+  async removePermissions (accountAddress, origin, permissions) {
+    await this.init();
+    const transaction = this.db.transaction('accounts', 'readwrite');
+    const store = transaction.objectStore('accounts');
+    const existingAccount = await store.get(accountAddress);
+    if (existingAccount) {
+      if (typeof existingAccount.permissions == "undefined") {
+        return false;
+      } else {
+        if (existingAccount.permissions[origin]) {
+          existingAccount.permissions[origin] = existingAccount.permissions[origin].filter((item) => {
+            return !permissions.includes(item);
+          });
+          if (existingAccount.permissions[origin].length == 0) {
+            delete existingAccount.permissions[origin];
+          }
+        } else {
+          return false;
         }
       }
       await store.put(existingAccount);

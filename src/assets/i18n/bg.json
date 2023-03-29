@@ -323,5 +323,21 @@
   "Description": "Описание",
   "External link": "Външен линк",
   "NFT content": "NFT съдържание",
-  "Owner": "Собственик"
+  "Owner": "Собственик",
+  "Privacy policy": "Политика за поверителност",
+  "Terms of use": "Условия за ползване",
+  "Data": "Данни",
+  "Data type": "Тип данни",
+  "Don't ask me when reconnecting": "Не ме питайте, когато се свържете отново",
+  "Dapp permissions": "DAPP разрешения",
+  "Manage Dapp permissions": "Управление на разрешенията на Dapp",
+  "Delete selected permissions": "Изтриване на избрани разрешения",
+  "No permissions that you can remove": "Няма разрешения, които можете да премахнете",
+  "Web page will be able to initialize the raw transaction dialog": "Уеб страницата ще може да инициализира диалоговия прозорец за транзакция на RAW",
+  "Web page will be able to connect by TON connect protocol": "Уеб страницата ще може да се свърже с тон Connect протокол",
+  "Web page will be able to reconnect by TON connect protocol": "Уеб страницата ще може да се свърже отново с TON Connect Protocol",
+  "Search by domain": "Търсене по домейн",
+  "This transaction is expired": "Тази транзакция е изтекла",
+  "This transaction is for another account": "Тази транзакция е за друг акаунт",
+  "This transaction is for another network": "Тази транзакция е за друга мрежа"
 }

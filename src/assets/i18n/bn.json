@@ -323,5 +323,21 @@
   "Description": "বর্ণনা",
   "External link": "এক্সটার্নাল লিংক",
   "NFT content": "এনএফটি সামগ্রী",
-  "Owner": "মালিক"
+  "Owner": "মালিক",
+  "Privacy policy": "গোপনীয়তা নীতি",
+  "Terms of use": "ব্যবহারের শর্তাবলী",
+  "Data": "ডেটা",
+  "Data type": "ডেটা টাইপ",
+  "Don't ask me when reconnecting": "পুনরায় সংযোগ করার সময় আমাকে জিজ্ঞাসা করবেন না",
+  "Dapp permissions": "ড্যাপ অনুমতি",
+  "Manage Dapp permissions": "ডিএপিপি অনুমতি পরিচালনা করুন",
+  "Delete selected permissions": "নির্বাচিত অনুমতিগুলি মুছুন",
+  "No permissions that you can remove": "আপনি অপসারণ করতে পারেন এমন কোনও অনুমতি নেই",
+  "Web page will be able to initialize the raw transaction dialog": "ওয়েব পৃষ্ঠা কাঁচা লেনদেন ডায়ালগটি আরম্ভ করতে সক্ষম হবে",
+  "Web page will be able to connect by TON connect protocol": "ওয়েব পৃষ্ঠা টন কানেক্ট প্রোটোকল দ্বারা সংযোগ করতে সক্ষম হবে",
+  "Web page will be able to reconnect by TON connect protocol": "ওয়েব পৃষ্ঠা টন কানেক্ট প্রোটোকল দ্বারা পুনরায় সংযোগ করতে সক্ষম হবে",
+  "Search by domain": "ডোমেন দ্বারা অনুসন্ধান",
+  "This transaction is expired": "এই লেনদেনের মেয়াদ শেষ হয়ে গেছে",
+  "This transaction is for another account": "এই লেনদেন অন্য অ্যাকাউন্টের জন্য",
+  "This transaction is for another network": "এই লেনদেনটি অন্য নেটওয়ার্কের জন্য"
 }

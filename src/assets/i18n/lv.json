@@ -323,5 +323,21 @@
   "Description": "Apraksts",
   "External link": "Ārējā saite",
   "NFT content": "NFT saturs",
-  "Owner": "Īpašnieks"
+  "Owner": "Īpašnieks",
+  "Privacy policy": "Privātuma politika",
+  "Terms of use": "Lietošanas noteikumi",
+  "Data": "Dati",
+  "Data type": "Datu tips",
+  "Don't ask me when reconnecting": "Neprasi man, kad atkal savieno",
+  "Dapp permissions": "DAPP atļaujas",
+  "Manage Dapp permissions": "Pārvaldiet DAPP atļaujas",
+  "Delete selected permissions": "Dzēst izvēlētās atļaujas",
+  "No permissions that you can remove": "Nav atļauju, kuras varat noņemt",
+  "Web page will be able to initialize the raw transaction dialog": "Tīmekļa lapa varēs inicializēt neapstrādātu darījumu dialoglodziņu",
+  "Web page will be able to connect by TON connect protocol": "Tīmekļa lapa varēs izveidot savienojumu ar ton connect protokolu",
+  "Web page will be able to reconnect by TON connect protocol": "Tīmekļa lapa varēs atjaunot savienojumu ar ton connect protokolu",
+  "Search by domain": "Meklēšana pēc domēna",
+  "This transaction is expired": "Šī darījuma derīguma termiņš ir beidzies",
+  "This transaction is for another account": "Šis darījums ir paredzēts citam kontam",
+  "This transaction is for another network": "Šis darījums ir paredzēts citam tīklam"
 }

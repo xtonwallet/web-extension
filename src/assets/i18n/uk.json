@@ -323,5 +323,21 @@
   "Description": "Опис",
   "External link": "Зовнішнє посилання",
   "NFT content": "Вміст NFT",
-  "Owner": "Власник"
+  "Owner": "Власник",
+  "Privacy policy": "Політика конфіденційності",
+  "Terms of use": "Умови використання",
+  "Data": "Дані",
+  "Data type": "Тип даних",
+  "Don't ask me when reconnecting": "Не питайте мене, коли знову з'єднується",
+  "Dapp permissions": "Дозволи DAPP",
+  "Manage Dapp permissions": "Керуйте дозволами DAPP",
+  "Delete selected permissions": "Видалити вибрані дозволи",
+  "No permissions that you can remove": "Ніяких дозволів, які ви можете видалити",
+  "Web page will be able to initialize the raw transaction dialog": "Веб -сторінка зможе ініціалізувати діалогове вікно RAW Transaction",
+  "Web page will be able to connect by TON connect protocol": "Веб -сторінка зможе підключитися за допомогою протоколу Ton Connect",
+  "Web page will be able to reconnect by TON connect protocol": "Веб -сторінка зможе знову підключитися до протоколу Ton Connect",
+  "Search by domain": "Пошук за доменом",
+  "This transaction is expired": "Ця транзакція закінчилася",
+  "This transaction is for another account": "Ця транзакція призначена для іншого рахунку",
+  "This transaction is for another network": "Ця транзакція призначена для іншої мережі"
 }

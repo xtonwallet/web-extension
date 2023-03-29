@@ -323,5 +323,21 @@
   "Description": "Sự mô tả",
   "External link": "Liên kết bên ngoài",
   "NFT content": "NFT nội dung",
-  "Owner": "Người sở hữu"
+  "Owner": "Người sở hữu",
+  "Privacy policy": "Chính sách bảo mật",
+  "Terms of use": "Điều khoản sử dụng",
+  "Data": "Dữ liệu",
+  "Data type": "Loại dữ liệu",
+  "Don't ask me when reconnecting": "Đừng hỏi tôi khi kết nối lại",
+  "Dapp permissions": "Quyền DAPP",
+  "Manage Dapp permissions": "Quản lý quyền DAPP",
+  "Delete selected permissions": "Xóa các quyền đã chọn",
+  "No permissions that you can remove": "Không có quyền mà bạn có thể xóa",
+  "Web page will be able to initialize the raw transaction dialog": "Trang web sẽ có thể khởi tạo hộp thoại giao dịch thô",
+  "Web page will be able to connect by TON connect protocol": "Trang web sẽ có thể kết nối bằng giao thức Ton Connect",
+  "Web page will be able to reconnect by TON connect protocol": "Trang web sẽ có thể kết nối lại bằng giao thức Ton Connect",
+  "Search by domain": "Tìm kiếm theo tên miền",
+  "This transaction is expired": "Giao dịch này đã hết hạn",
+  "This transaction is for another account": "Giao dịch này dành cho một tài khoản khác",
+  "This transaction is for another network": "Giao dịch này dành cho một mạng khác"
 }

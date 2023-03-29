@@ -323,5 +323,21 @@
   "Description": "Kirjeldus",
   "External link": "Väline link",
   "NFT content": "Nft sisu",
-  "Owner": "Omanik"
+  "Owner": "Omanik",
+  "Privacy policy": "Privaatsuspoliitika",
+  "Terms of use": "Kasutustingimused",
+  "Data": "Andmed",
+  "Data type": "Andmetüüp",
+  "Don't ask me when reconnecting": "Ärge küsige minult uuesti ühendades",
+  "Dapp permissions": "DAPP lubad",
+  "Manage Dapp permissions": "Hallake DAPP -i lubasid",
+  "Delete selected permissions": "Kustutage valitud õigused",
+  "No permissions that you can remove": "Pole õigusi, mille saate eemaldada",
+  "Web page will be able to initialize the raw transaction dialog": "Veebileht saab lähtestada töötlemata tehingu dialoogi",
+  "Web page will be able to connect by TON connect protocol": "Veebileht saab ühendada Ton Connecti protokolli abil",
+  "Web page will be able to reconnect by TON connect protocol": "Veebileht saab uuesti ühendada Ton Connecti protokolli järgi",
+  "Search by domain": "Otsige domeeni järgi",
+  "This transaction is expired": "See tehing on aegunud",
+  "This transaction is for another account": "See tehing on mõeldud teise konto jaoks",
+  "This transaction is for another network": "See tehing on mõeldud teise võrgu jaoks"
 }

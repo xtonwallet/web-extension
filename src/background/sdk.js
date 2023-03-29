@@ -27,11 +27,29 @@ export const sdk = () => {
     const TonLibClient = await TonLib.getClient(network);
     return await TonLibClient.runSdkMethodDirectly(module, method, params);
   };
+  
+  const sha256 = async (data) => {
+    const TonLibClient = await TonLib.getClient();
+    return await TonLibClient.sha256(data);
+  };
+
+  const parseAddress = async (data) => {
+    const TonLibClient = await TonLib.getClient();
+    return TonLibClient.parseAddress(data);
+  };
+
+  const makeTonProof = async (walletAddress, domain, timestamp, payload) => {
+    const TonLibClient = await TonLib.getClient();
+    return TonLibClient.tonProof(walletAddress, domain, timestamp, payload);
+  };
 
   return {
     cryptoGenerateRandomBytes,
     getSdkVersion,
     checkThatSdkMethodExists,
-    runSdkMethod
+    runSdkMethod,
+    sha256,
+    parseAddress,
+    makeTonProof
   };
 };

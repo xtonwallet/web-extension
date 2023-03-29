@@ -323,5 +323,21 @@
   "Description": "Beskrivelse",
   "External link": "Eksternt link",
   "NFT content": "NFT -indhold",
-  "Owner": "Ejer"
+  "Owner": "Ejer",
+  "Privacy policy": "Fortrolighedspolitik",
+  "Terms of use": "Brugsbetingelser",
+  "Data": "Data",
+  "Data type": "Datatype",
+  "Don't ask me when reconnecting": "Spørg mig ikke, hvornår du genopretter igen",
+  "Dapp permissions": "Dapp -tilladelser",
+  "Manage Dapp permissions": "Administrer DAPP -tilladelser",
+  "Delete selected permissions": "Slet valgte tilladelser",
+  "No permissions that you can remove": "Ingen tilladelser, som du kan fjerne",
+  "Web page will be able to initialize the raw transaction dialog": "Webside vil være i stand til at initialisere dialogboksen Raw Transaction",
+  "Web page will be able to connect by TON connect protocol": "Webside vil være i stand til at oprette forbindelse til Ton Connect Protocol",
+  "Web page will be able to reconnect by TON connect protocol": "Webside vil være i stand til at oprette forbindelse igen med TON Connect Protocol",
+  "Search by domain": "Søg efter domæne",
+  "This transaction is expired": "Denne transaktion er udløbet",
+  "This transaction is for another account": "Denne transaktion er til en anden konto",
+  "This transaction is for another network": "Denne transaktion er til et andet netværk"
 }

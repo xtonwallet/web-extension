@@ -9,7 +9,7 @@ const NOTIFICATION_WIDTH = 365;
 const PROXY_HOSTS = "in1.ton.org:8080 in2.ton.org:8080 in3.ton.org:8080";
 const API_RATE_URL = "https://mainnet.xtonwallet.com/currencyrate?currencyName=";
 
-let _popupId;
+let _popupId = 0;
 
 const setStorageItem = async (name, value) => {
   const obj = {};
@@ -93,7 +93,7 @@ const sendNotificationToInPageScript = (type, data) => {
             browser.tabs.sendMessage(tabs[i].id, {"type": type, "data": data})
               .catch((error) => {
                 if (devMode)  {
-                  console.error("Error on sendMessage:" + JSON.stringify(error) + 
+                  console.error("Error on sendMessage:" + JSON.stringify(error.message) + 
                     " " + 
                     JSON.stringify({"type": type, "data": data}) +
                     " " + 
@@ -121,75 +121,71 @@ const openPageWithPath = (path) => {
 };
 
 const openRequestPopup = (modalName, data) => {
-  const openPopup = (modalName, data) => {
-    browser.windows.getAll().then(async (windows) => {
-      if (windows.length != 0) {
-        const popup = windows.filter((win) => {
-          return win && win.type === 'popup' && win.id === _popupId;
-        });
-        if (popup.length > 0 ) {
-          await browser.windows.update(popup[0].id, { focused: true });
-        } else {
-          let left = 0;
-          let top = 0;
-          try {
-            const lastFocused = await browser.windows.getLastFocused();
-            // Position window in top right corner of lastFocused window.
-            top = lastFocused.top;
-            left = lastFocused.left + (lastFocused.width - NOTIFICATION_WIDTH);
-          } catch (_) {
-            // The following properties are more than likely 0, due to being
-            // opened from the background chrome process for the extension that
-            // has no physical dimensions
-            const { screenX, screenY, outerWidth } = window;
-            top = Math.max(screenY, 0);
-            left = Math.max(screenX + (outerWidth - NOTIFICATION_WIDTH), 0);
-          }
-          const popupWindow = await browser.windows.create({
-            url: '/popup.html',
-            type: 'popup',
-            width: NOTIFICATION_WIDTH,
-            height: NOTIFICATION_HEIGHT,
-            left,
-            top,
-          });
-
-          // Firefox currently ignores left/top for create, but it works for update
-          if (popupWindow.left !== left && popupWindow.state !== 'fullscreen') {
-            await browser.windows.update(popupWindow.id, { left, top });
-          }
-
-          _popupId = popupWindow.id;
-        }
-
-        //send information to the opened Popup
-        setTimeout(() => {
-          browser.runtime.sendMessage({ type: 'popupMessage', data: {'modalName': modalName, 'data': data} })
-          .catch((error) => {
-            if (devMode)  {
-              console.error("Error on sendMessage:" + JSON.stringify(error));
-            }
-          });
-        }, 1000); // let's wait for 1 seconds, because maybe will be some delay on the window opening
+  const openPopup = async (modalName, data) => {
+    if (_popupId !== 0) {
+      await browser.windows.update(_popupId, { focused: true });
+    } else {
+      let left = 0;
+      let top = 0;
+      try {
+        const lastFocused = await browser.windows.getLastFocused();
+        // Position window in top right corner of lastFocused window.
+        top = lastFocused.top;
+        left = lastFocused.left + (lastFocused.width - NOTIFICATION_WIDTH);
+      } catch (_) {
+        // The following properties are more than likely 0, due to being
+        // opened from the background chrome process for the extension that
+        // has no physical dimensions
+        const { screenX, screenY, outerWidth } = window;
+        top = Math.max(screenY, 0);
+        left = Math.max(screenX + (outerWidth - NOTIFICATION_WIDTH), 0);
       }
-    });
+      const popupWindow = await browser.windows.create({
+        url: '/popup.html',
+        type: 'popup',
+        width: NOTIFICATION_WIDTH,
+        height: NOTIFICATION_HEIGHT,
+        left,
+        top,
+      });
+
+      // Firefox currently ignores left/top for create, but it works for update
+      if (popupWindow.left !== left && popupWindow.state !== 'fullscreen') {
+        await browser.windows.update(popupWindow.id, { left, top });
+      }
+
+      _popupId = popupWindow.id;
+    }
+
+    //send information to the opened Popup
+    setTimeout(() => {
+      browser.runtime.sendMessage({ type: 'popupMessage', data: {'modalName': modalName, 'data': data} })
+      .catch((error) => {
+        if (devMode) {
+          console.error("Error on sendMessage:" + JSON.stringify(error.message));
+        }
+      });
+    }, 1000); // let's wait for 1 seconds, because maybe will be some delay on the window opening
   };
 
   browser.runtime.sendMessage({ type: 'popupView'})
-  .then((popupView) => {
+  .then(async (popupView) => {
     if (popupView) {
       browser.runtime.sendMessage({ type: 'popupMessage', data: {'modalName': modalName, 'data': data} })
       .catch((error) => {
         if (devMode)  {
-          console.error("Error on sendMessage:" + JSON.stringify(error));
+          console.error("Error on sendMessage:" + JSON.stringify(error.message));
         }
       });
     } else {
-      openPopup(modalName, data);
+      await openPopup(modalName, data);
     }
   })
-  .catch(() => {
-    openPopup(modalName, data);
+  .catch(async (e) => {
+    if (devMode) {
+      console.log(e);
+    }
+    await openPopup(modalName, data);
   });
 };
 
@@ -203,9 +199,9 @@ const generateQRcode = (element, data, width = 200, height = 200) => {
 }
 
 const closeRequestPopup = () => {
-  if (_popupId) {
+  if (_popupId !== 0) {
     browser.windows.remove(_popupId);
-    _popupId = false;
+    _popupId = 0;
   }
 };
 
@@ -218,7 +214,7 @@ const sendRequestReject = (id) => {
   browser.runtime.sendMessage({ type: 'popupMessageResponse', id: id, data: {code: 4001, message: 'User rejected request'} })
   .catch((error) => {
     if (devMode)  {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     }
   });
 };
@@ -232,7 +228,7 @@ const sendRequestResolve = (id, data) => {
   browser.runtime.sendMessage({ type: 'popupMessageResponse', id: id, data: data })
   .catch((error) => {
     if (devMode)  {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     }
   });
 };

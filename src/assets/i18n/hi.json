@@ -323,5 +323,21 @@
   "Description": "विवरण",
   "External link": "बाहरी लिंक",
   "NFT content": "Nft सामग्री",
-  "Owner": "स्वामी"
+  "Owner": "स्वामी",
+  "Privacy policy": "गोपनीयता नीति",
+  "Terms of use": "उपयोग की शर्तें",
+  "Data": "आंकड़े",
+  "Data type": "डेटा प्रकार",
+  "Don't ask me when reconnecting": "फिर से जुड़ने पर मुझसे मत पूछो",
+  "Dapp permissions": "डैप अनुमतियाँ",
+  "Manage Dapp permissions": "चयनित अनुमतियाँ हटाएं",
+  "Delete selected permissions": "DAPP अनुमतियाँ प्रबंधित करें",
+  "No permissions that you can remove": "कोई अनुमतियाँ जिसे आप हटा सकते हैं",
+  "Web page will be able to initialize the raw transaction dialog": "वेब पेज कच्चे लेनदेन संवाद को इनिशियलाइज़ करने में सक्षम होगा",
+  "Web page will be able to connect by TON connect protocol": "वेब पेज टन कनेक्ट प्रोटोकॉल द्वारा कनेक्ट करने में सक्षम होगा",
+  "Web page will be able to reconnect by TON connect protocol": "वेब पेज टन कनेक्ट प्रोटोकॉल द्वारा फिर से जुड़ने में सक्षम होगा",
+  "Search by domain": "डोमेन द्वारा खोजें",
+  "This transaction is expired": "यह लेनदेन समाप्त हो गया है",
+  "This transaction is for another account": "यह लेनदेन दूसरे खाते के लिए है",
+  "This transaction is for another network": "यह लेनदेन दूसरे नेटवर्क के लिए है"
 }

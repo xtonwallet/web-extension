@@ -323,5 +323,21 @@
   "Description": "Paglalarawan",
   "External link": "Panlabas na link",
   "NFT content": "Nilalaman ng NFT",
-  "Owner": "May -ari"
+  "Owner": "May -ari",
+  "Privacy policy": "Patakaran sa Pagkapribado",
+  "Terms of use": "Mga Tuntunin ng Paggamit",
+  "Data": "Data",
+  "Data type": "Uri ng datos",
+  "Don't ask me when reconnecting": "Huwag mo akong tanungin kung kailan muling kumonekta",
+  "Dapp permissions": "Mga pahintulot ng DAPP",
+  "Manage Dapp permissions": "Pamahalaan ang mga pahintulot sa DAPP",
+  "Delete selected permissions": "Tanggalin ang mga napiling pahintulot",
+  "No permissions that you can remove": "Walang mga pahintulot na maaari mong alisin",
+  "Web page will be able to initialize the raw transaction dialog": "Ang web page ay magagawang simulan ang dialog ng Raw Transaksyon",
+  "Web page will be able to connect by TON connect protocol": "Ang web page ay maaaring kumonekta sa pamamagitan ng ton connect protocol",
+  "Web page will be able to reconnect by TON connect protocol": "Ang web page ay magagawang muling kumonekta sa pamamagitan ng ton connect protocol",
+  "Search by domain": "Maghanap sa pamamagitan ng domain",
+  "This transaction is expired": "Ang transaksyon na ito ay nag -expire",
+  "This transaction is for another account": "Ang transaksyon na ito ay para sa isa pang account",
+  "This transaction is for another network": "Ang transaksyon na ito ay para sa isa pang network"
 }

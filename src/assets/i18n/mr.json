@@ -323,5 +323,21 @@
   "Description": "वर्णन",
   "External link": "बाह्य दुवा",
   "NFT content": "एनएफटी सामग्री",
-  "Owner": "मालक"
+  "Owner": "मालक",
+  "Privacy policy": "गोपनीयता धोरण",
+  "Terms of use": "वापरण्याच्या अटी",
+  "Data": "डेटा",
+  "Data type": "डेटा प्रकार",
+  "Don't ask me when reconnecting": "पुन्हा कनेक्टिंग करताना मला विचारू नका",
+  "Dapp permissions": "डीएपीपी परवानग्या",
+  "Manage Dapp permissions": "डीएपीपी परवानग्या व्यवस्थापित करा",
+  "Delete selected permissions": "निवडलेल्या परवानग्या हटवा",
+  "No permissions that you can remove": "आपण काढू शकता अशा कोणत्याही परवानग्या",
+  "Web page will be able to initialize the raw transaction dialog": "वेब पृष्ठ कच्चे व्यवहार संवाद प्रारंभ करण्यास सक्षम असेल",
+  "Web page will be able to connect by TON connect protocol": "वेब पृष्ठ टोन कनेक्ट प्रोटोकॉलद्वारे कनेक्ट करण्यात सक्षम असेल",
+  "Web page will be able to reconnect by TON connect protocol": "टन कनेक्ट प्रोटोकॉलद्वारे वेब पृष्ठ पुन्हा कनेक्ट करण्यात सक्षम असेल",
+  "Search by domain": "डोमेनद्वारे शोध",
+  "This transaction is expired": "हा व्यवहार कालबाह्य झाला आहे",
+  "This transaction is for another account": "हा व्यवहार दुसर्‍या खात्यासाठी आहे",
+  "This transaction is for another network": "हा व्यवहार दुसर्‍या नेटवर्कसाठी आहे"
 }

@@ -201,3 +201,144 @@ window.ton._transformResult = (method, result) => {
   }
   return output;
 }
+
+// TON Connect
+
+const CONNECT_EVENT_ERROR_CODES = {
+  UNKNOWN_ERROR: 0,
+  BAD_REQUEST_ERROR: 1,
+  MANIFEST_NOT_FOUND_ERROR: 2,
+  MANIFEST_CONTENT_ERROR: 3,
+  UNKNOWN_APP_ERROR: 100,
+  USER_REJECTS_ERROR: 300,
+  METHOD_NOT_SUPPORTED: 400
+};
+
+const TONCONNECT_VERSION = 2;
+
+function getPlatform() {
+  const { userAgent, platform } = window.navigator;
+
+  const macosPlatforms = ['macOS', 'Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'];
+  const windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'];
+  const iphonePlatforms = ['iPhone'];
+  const ipadPlatforms = ['iPad', 'iPod'];
+
+  let os;
+
+  if (macosPlatforms.indexOf(platform) !== -1) {
+    os = 'mac';
+  } else if (iphonePlatforms.indexOf(platform) !== -1) {
+    os = 'iphone';
+  } else if (ipadPlatforms.indexOf(platform) !== -1) {
+    os = 'ipad';
+  } else if (windowsPlatforms.indexOf(platform) !== -1) {
+    os = 'windows';
+  } else if (/Android/.test(userAgent)) {
+    os = 'linux';
+  } else if (/Linux/.test(platform)) {
+    os = 'linux';
+  }
+
+  return os;
+}
+
+function getDeviceInfo() {
+  return {
+    platform: getPlatform(),
+    appName: 'XTONWallet',
+    appVersion: '1.0',
+    maxProtocolVersion: TONCONNECT_VERSION,
+    features: ['SendTransaction'],
+  };
+}
+
+export class TonConnect {
+  deviceInfo = getDeviceInfo();
+
+  protocolVersion = TONCONNECT_VERSION;
+
+  isWalletBrowser = false;
+
+  provider;
+
+  callbacks;
+
+  constructor(provider) {
+    this.provider = provider;
+    this.callbacks = [];
+  }
+
+  async connect(protocolVersion = 0, message) {
+    if (protocolVersion > this.protocolVersion) {
+      return TonConnect.buildError(
+        'Unsupported protocol version',
+        CONNECT_EVENT_ERROR_CODES.BAD_REQUEST_ERROR,
+      );
+    }
+    const response = await this.request('connect', message);
+    if (response.event === 'connect') {
+      response.payload.device = getDeviceInfo();
+    }
+    return this.emit(response);
+  }
+
+  async restoreConnection() {
+    const response = await this.request('reconnect');
+    if (response.event === 'connect') {
+      response.payload.device = getDeviceInfo();
+    }
+
+    return this.emit(response);
+  }
+
+  async disconnect() {
+    await this.request('disconnect');
+
+    return this.emit({
+      event: 'disconnect',
+      payload: {},
+    });
+  }
+
+  async send(message) {
+    const response = await this.request(message.method, message);
+    return response;
+  }
+
+  listen(callback) {
+    this.callbacks.push(callback);
+    return () => {
+      this.callbacks = this.callbacks.filter((cb) => cb !== callback);
+    };
+  }
+
+  async request(name, params = {}) {
+    let _provider = this.provider;
+    return _provider.request({'method': `tonConnect_${name}`, params});
+  }
+
+  buildError(msg = 'Unknown error', code) {
+    return {
+      event: 'connect_error',
+      payload: {
+        code: code || CONNECT_EVENT_ERROR_CODES.UNKNOWN_ERROR,
+        message: msg,
+      },
+    };
+  }
+
+  emit(event) {
+    this.callbacks.forEach((cb) => cb(event));
+    return event;
+  }
+
+  destroy() {
+    this.callbacks = [];
+    this.provider.destroy();
+  }
+}
+
+window.xtonwallet = {
+  tonconnect: new TonConnect(provider)
+};

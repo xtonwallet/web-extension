@@ -114,9 +114,10 @@ class BitString {
      * Write unsigned int
      * @param number  {number | BigNumber}
      * @param bitLength  {number}  size of uint in bits
+     * @param base  {number}  base for BigNumber
      */
-    writeUint(number, bitLength) {
-        number = new BigNumber(number);
+    writeUint(number, bitLength, base = 10) {
+        number = new BigNumber(number, base);
         if (
             bitLength == 0 ||
             (number.toString(2).length > bitLength)

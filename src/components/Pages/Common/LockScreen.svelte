@@ -24,7 +24,7 @@
           setValidity(document.getElementById("pwd-input"), $_("Incorrect password"));
         }
       }).catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
     }
     event.preventDefault();
@@ -52,7 +52,7 @@
         pinCode = "";
       }
     }).catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     });
   };
 </script>

@@ -323,5 +323,21 @@
   "Description": "Leírás",
   "External link": "Külső hivatkozás",
   "NFT content": "NFT tartalom",
-  "Owner": "Tulajdonos"
+  "Owner": "Tulajdonos",
+  "Privacy policy": "Adatvédelmi irányelvek",
+  "Terms of use": "Használati feltételek",
+  "Data": "Adat",
+  "Data type": "Adattípus",
+  "Don't ask me when reconnecting": "Ne kérdezzen tőlem, amikor újracsatlakoztat",
+  "Dapp permissions": "DAPP engedélyek",
+  "Manage Dapp permissions": "Kezelje a DAPP engedélyeket",
+  "Delete selected permissions": "A kiválasztott engedélyek törlése",
+  "No permissions that you can remove": "Nincs olyan engedély, amelyet eltávolíthat",
+  "Web page will be able to initialize the raw transaction dialog": "A weboldal képes lesz inicializálni a nyers tranzakció párbeszédpanelt",
+  "Web page will be able to connect by TON connect protocol": "A weboldal képes lesz csatlakozni a TON Connect Protocol -ba",
+  "Web page will be able to reconnect by TON connect protocol": "A weboldal képes lesz újracsatlakozni a Ton Connect Protocol segítségével",
+  "Search by domain": "Keresés domain szerint",
+  "This transaction is expired": "Ez a tranzakció lejárt",
+  "This transaction is for another account": "Ez a tranzakció egy másik számlára vonatkozik",
+  "This transaction is for another network": "Ez a tranzakció egy másik hálózatra vonatkozik"
 }

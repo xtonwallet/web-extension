@@ -323,5 +323,21 @@
   "Description": "apibūdinimas",
   "External link": "Išorinė nuoroda",
   "NFT content": "NFT turinys",
-  "Owner": "Savininkas"
+  "Owner": "Savininkas",
+  "Privacy policy": "Privatumo politika",
+  "Terms of use": "Naudojimo sąlygos",
+  "Data": "Duomenys",
+  "Data type": "Duomenų tipas",
+  "Don't ask me when reconnecting": "Neklauskite manęs, kai vėl prisijungsite",
+  "Dapp permissions": "DAPP leidimai",
+  "Manage Dapp permissions": "Tvarkykite DAPP leidimus",
+  "Delete selected permissions": "Ištrinkite pasirinktus leidimus",
+  "No permissions that you can remove": "Jokių leidimų, kuriuos galite pašalinti",
+  "Web page will be able to initialize the raw transaction dialog": "Tinklalapis galės inicijuoti RAW operacijų dialogo langą",
+  "Web page will be able to connect by TON connect protocol": "Tinklalapis galės prisijungti pagal „ton Connect“ protokolą",
+  "Web page will be able to reconnect by TON connect protocol": "Tinklalapis galės vėl prisijungti prie „ton Connect“ protokolo",
+  "Search by domain": "Paieška pagal domeną",
+  "This transaction is expired": "Ši operacija pasibaigė",
+  "This transaction is for another account": "Ši operacija skirta kitai paskyrai",
+  "This transaction is for another network": "Ši operacija skirta kitam tinklui"
 }

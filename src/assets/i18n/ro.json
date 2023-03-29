@@ -323,5 +323,21 @@
   "Description": "Descriere",
   "External link": "Link extern",
   "NFT content": "Conținut NFT",
-  "Owner": "Proprietar"
+  "Owner": "Proprietar",
+  "Privacy policy": "Politica de confidențialitate",
+  "Terms of use": "Termeni de utilizare",
+  "Data": "Date",
+  "Data type": "Tip de date",
+  "Don't ask me when reconnecting": "Nu mă întreba când mă reconectez",
+  "Dapp permissions": "Permisiuni DAPP",
+  "Manage Dapp permissions": "Gestionați permisiunile DAPP",
+  "Delete selected permissions": "Ștergeți permisiunile selectate",
+  "No permissions that you can remove": "Fără permisiuni pe care le puteți elimina",
+  "Web page will be able to initialize the raw transaction dialog": "Pagina web va putea inițializa dialogul de tranzacții brute",
+  "Web page will be able to connect by TON connect protocol": "Pagina web va putea conecta prin protocolul de conectare ton",
+  "Web page will be able to reconnect by TON connect protocol": "Pagina web se va putea reconecta prin protocolul TON Connect",
+  "Search by domain": "Căutare după domeniu",
+  "This transaction is expired": "Această tranzacție este expirată",
+  "This transaction is for another account": "Această tranzacție este pentru un alt cont",
+  "This transaction is for another network": "Această tranzacție este pentru o altă rețea"
 }

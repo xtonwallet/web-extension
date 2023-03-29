@@ -323,5 +323,21 @@
   "Description": "వివరణ",
   "External link": "బాహ్య లింక్",
   "NFT content": "NFT కంటెంట్",
-  "Owner": "యజమాని"
+  "Owner": "యజమాని",
+  "Privacy policy": "గోప్యతా విధానం",
+  "Terms of use": "ఉపయోగ నిబంధనలు",
+  "Data": "సమాచారం",
+  "Data type": "సమాచార తరహా",
+  "Don't ask me when reconnecting": "తిరిగి కనెక్ట్ అయినప్పుడు నన్ను అడగవద్దు",
+  "Dapp permissions": "DAPP అనుమతులు",
+  "Manage Dapp permissions": "DAPP అనుమతులను నిర్వహించండి",
+  "Delete selected permissions": "ఎంచుకున్న అనుమతులను తొలగించండి",
+  "No permissions that you can remove": "మీరు తొలగించగల అనుమతులు లేవు",
+  "Web page will be able to initialize the raw transaction dialog": "వెబ్ పేజీ ముడి లావాదేవీ డైలాగ్‌ను ప్రారంభించగలదు",
+  "Web page will be able to connect by TON connect protocol": "వెబ్ పేజీ టన్ కనెక్ట్ ప్రోటోకాల్ ద్వారా కనెక్ట్ అవ్వగలదు",
+  "Web page will be able to reconnect by TON connect protocol": "వెబ్ పేజీ టన్ కనెక్ట్ ప్రోటోకాల్ ద్వారా తిరిగి కనెక్ట్ అవ్వగలదు",
+  "Search by domain": "డొమైన్ ద్వారా శోధించండి",
+  "This transaction is expired": "ఈ లావాదేవీ గడువు ముగిసింది",
+  "This transaction is for another account": "ఈ లావాదేవీ మరొక ఖాతా కోసం",
+  "This transaction is for another network": "ఈ లావాదేవీ మరొక నెట్‌వర్క్ కోసం"
 }

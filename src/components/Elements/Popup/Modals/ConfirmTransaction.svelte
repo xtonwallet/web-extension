@@ -24,7 +24,7 @@
       .then((result) => {
         allNetworks = result;
       }).catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
     if (modalData.txData.type == "sendToken") {
       icon = modalData.txData.params.token.icon;
@@ -65,7 +65,13 @@
         data: modalData,
       })
       .then((result) => {
-        accountStore.addWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
+        browser.runtime
+        .sendMessage({
+          type: "addWaitingTransaction",
+          data: $currentNetwork.server + "-" + $currentAccount.address,
+        }).then(() => {
+          accountStore.addWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
+        })
         //here need to set by default for the next same window
         loading = false;
         disabled = false;
@@ -97,11 +103,11 @@
               accountStore.changeAccount(newCurrentAccount);
             })
             .catch((error) => {
-              console.error("Error on sendMessage:" + JSON.stringify(error));
+              console.error("Error on sendMessage:" + JSON.stringify(error.message));
             })
         }
       }).catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error));
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
   };
 
@@ -125,10 +131,14 @@
     text-overflow: ellipsis;
     padding-right: 1rem;
   }
+  .input-box-50 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 </style>
 
 <div class="sending-tx flex-column">
-  <h6 class="title">{$_('Send transaction')}</h6>
+  <h6 class="title text-center">{$_('Send transaction')}</h6>
   <div class="is-center">
     <img alt="logo" class="token-logo" src={icon} /><br />
     <span {title}>{symbol}</span>
@@ -171,7 +181,11 @@
   <div class="flex-row flex-center-center">
     <div class="flex-column flex-center-center">
       <span class="weight-500">{$_('Message')}</span>
-      <span class="message">{modalData.txData.params.message}</span>
+      {#if modalData.txData.params.message}
+        <span class="message">{modalData.txData.params.message}</span>
+        {:else}
+        <span class="message">&nbsp;</span>
+      {/if}
     </div>
   </div>
   <div class="flex-row flow-buttons">

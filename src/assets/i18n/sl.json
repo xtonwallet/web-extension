@@ -323,5 +323,21 @@
   "Description": "Opis",
   "External link": "Zunanja povezava",
   "NFT content": "NFT vsebina",
-  "Owner": "Lastnik"
+  "Owner": "Lastnik",
+  "Privacy policy": "Politika zasebnosti",
+  "Terms of use": "Pogoji uporabe",
+  "Data": "Podatki",
+  "Data type": "Vrsta podatkov",
+  "Don't ask me when reconnecting": "Ne sprašuj me, ko ponovno povežem",
+  "Dapp permissions": "DAPP dovoljenja",
+  "Manage Dapp permissions": "Upravljanje dovoljenj DAPP",
+  "Delete selected permissions": "Izbrišite izbrana dovoljenja",
+  "No permissions that you can remove": "Brez dovoljenj, ki jih lahko odstranite",
+  "Web page will be able to initialize the raw transaction dialog": "Spletna stran bo lahko inicializirala pogovorno okno Raw Transaction",
+  "Web page will be able to connect by TON connect protocol": "Spletna stran se bo lahko povezala s protokolom Ton Connect",
+  "Web page will be able to reconnect by TON connect protocol": "Spletna stran se bo lahko ponovno povezala s protokolom Ton Connect",
+  "Search by domain": "Iskanje po domeni",
+  "This transaction is expired": "Ta transakcija je potekla",
+  "This transaction is for another account": "Ta transakcija je za drug račun",
+  "This transaction is for another network": "Ta transakcija je za drugo omrežje"
 }

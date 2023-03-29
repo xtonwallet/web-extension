@@ -100,7 +100,32 @@ const methods = {
     UsePrivateKeys: false,
     MustBeAllowed: true,
     RequiredParams: [{'address': 'string'}]
-  }
+  },
+  //tonconnect - we avoid to use the common permissions system here
+  "tonConnect_connect": {
+    Description: "Web page will be able to connect by TON connect protocol",
+    UsePrivateKeys: false,
+    MustBeAllowed: false,
+    RequiredParams: []
+  },
+  "tonConnect_reconnect": {
+    Description: "Web page will be able to reconnect by TON connect protocol",
+    UsePrivateKeys: false,
+    MustBeAllowed: false,
+    RequiredParams: []
+  },
+  "tonConnect_disconnect": {
+    Description: "Web page will be able to disconnect by TON connect protocol",
+    UsePrivateKeys: false,
+    MustBeAllowed: false,
+    RequiredParams: []
+  },
+  "tonConnect_sendTransaction": {
+    Description: "Web page will be able to send transaction by TON connect protocol",
+    UsePrivateKeys: false,
+    MustBeAllowed: false,
+    RequiredParams: []
+  },
 };
 
 export default methods;

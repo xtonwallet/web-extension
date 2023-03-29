@@ -323,5 +323,21 @@
   "Description": "Kuvaus",
   "External link": "Ulkoinen linkki",
   "NFT content": "NFT -sisältö",
-  "Owner": "Omistaja"
+  "Owner": "Omistaja",
+  "Privacy policy": "Tietosuojakäytäntö",
+  "Terms of use": "Käyttöehdot",
+  "Data": "Tiedot",
+  "Data type": "Tietotyyppi",
+  "Don't ask me when reconnecting": "Älä kysy minulta yhteydenpitoa uudelleen",
+  "Dapp permissions": "DAPP -käyttöoikeudet",
+  "Manage Dapp permissions": "Hallitse DAPP -käyttöoikeuksia",
+  "Delete selected permissions": "Poista valitut käyttöoikeudet",
+  "No permissions that you can remove": "Ei käyttöoikeuksia, jotka voit poistaa",
+  "Web page will be able to initialize the raw transaction dialog": "Verkkosivu pystyy alustamaan RAW Transaction -valintaikkunan",
+  "Web page will be able to connect by TON connect protocol": "Verkkosivu voi muodostaa yhteyden TON Connect -protokollalla",
+  "Web page will be able to reconnect by TON connect protocol": "Verkkosivu voi muodostaa yhteyden TON Connect -protokollan avulla",
+  "Search by domain": "Etsi verkkotunnus",
+  "This transaction is expired": "Tämä tapahtuma on vanhentunut",
+  "This transaction is for another account": "Tämä tapahtuma on toiselle tilille",
+  "This transaction is for another network": "Tämä tapahtuma on toiselle verkolle"
 }

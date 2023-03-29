@@ -323,5 +323,21 @@
   "Description": "Penerangan",
   "External link": "Pautan luaran",
   "NFT content": "Kandungan NFT",
-  "Owner": "Pemilik"
+  "Owner": "Pemilik",
+  "Privacy policy": "Dasar Privasi",
+  "Terms of use": "Syarat Penggunaan",
+  "Data": "Data",
+  "Data type": "Jenis data",
+  "Don't ask me when reconnecting": "Jangan tanya saya apabila menyambung semula",
+  "Dapp permissions": "Kebenaran Dapp",
+  "Manage Dapp permissions": "Menguruskan kebenaran DAPP",
+  "Delete selected permissions": "Padam keizinan yang dipilih",
+  "No permissions that you can remove": "Tiada kebenaran yang boleh anda keluarkan",
+  "Web page will be able to initialize the raw transaction dialog": "Laman web akan dapat memulakan dialog transaksi mentah",
+  "Web page will be able to connect by TON connect protocol": "Halaman Web akan dapat menyambung dengan protokol TON Connect",
+  "Web page will be able to reconnect by TON connect protocol": "Halaman Web akan dapat menyambung semula oleh TON Connect Protocol",
+  "Search by domain": "Cari oleh Domain",
+  "This transaction is expired": "Transaksi ini tamat tempoh",
+  "This transaction is for another account": "Transaksi ini adalah untuk akaun lain",
+  "This transaction is for another network": "Transaksi ini adalah untuk rangkaian lain"
 }

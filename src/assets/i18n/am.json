@@ -323,5 +323,21 @@
   "Description": "መግለጫ",
   "External link": "ውጫዊ አገናኝ",
   "NFT content": "Nft ይዘት",
-  "Owner": "ባለቤት"
+  "Owner": "ባለቤት",
+  "Privacy policy": "የ ግል የሆነ",
+  "Terms of use": "የአጠቃቀም መመሪያ",
+  "Data": "ውሂብ",
+  "Data type": "የውሂብ አይነት",
+  "Don't ask me when reconnecting": "እንደገና መገናኘት አትጠይቀኝ",
+  "Dapp permissions": "DAPP ፈቃዶች",
+  "Manage Dapp permissions": "የ DAPP ፈቃዶችን ያቀናብሩ",
+  "Delete selected permissions": "የተመረጡ ፈቃዶችን ሰርዝ",
+  "No permissions that you can remove": "ሊያስወግዱት የሚችሏቸው ፈቃዶች የሉም",
+  "Web page will be able to initialize the raw transaction dialog": "ድረ-ገጽ ጥሬ የግብይት ንግግርን ማስጀመር ይችላል",
+  "Web page will be able to connect by TON connect protocol": "ድረ-ገጽ በቶን አገናኝ ፕሮቶኮል መገናኘት ይችላል",
+  "Web page will be able to reconnect by TON connect protocol": "ድረ ገጽ በቶኒ አገናኝ ፕሮቶኮል እንደገና መገናኘት ይችላል",
+  "Search by domain": "በ ጎራ ይፈልጉ",
+  "This transaction is expired": "ይህ ግብይት ለሌላ መለያ ነው",
+  "This transaction is for another account": "ይህ ግብይት ጊዜው አልፎበታል",
+  "This transaction is for another network": "ይህ ግብይት ለሌላ አውታረ መረብ ነው"
 }

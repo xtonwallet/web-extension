@@ -261,7 +261,7 @@
         }
       }
     ).catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error));
+      console.error("Error on sendMessage:" + JSON.stringify(error.message));
     });
   };
 
@@ -320,7 +320,7 @@
             accountStore.changeAccount(newCurrentAccount);
           }
         }).catch((error) => {
-          console.error("Error on sendMessage:" + JSON.stringify(error));
+          console.error("Error on sendMessage:" + JSON.stringify(error.message));
         });
     }
   };

@@ -323,5 +323,21 @@
   "Description": "Περιγραφή",
   "External link": "Εξωτερικός σύνδεσμος",
   "NFT content": "Περιεχόμενο NFT",
-  "Owner": "Ιδιοκτήτης"
+  "Owner": "Ιδιοκτήτης",
+  "Privacy policy": "Πολιτική απορρήτου",
+  "Terms of use": "Οροι χρήσης",
+  "Data": "Δεδομένα",
+  "Data type": "Τύπος δεδομένων",
+  "Don't ask me when reconnecting": "Μην με ρωτάς όταν επανασυνδέσεις",
+  "Dapp permissions": "Δικαιώματα DAPP",
+  "Manage Dapp permissions": "Διαχείριση δικαιωμάτων DAPP",
+  "Delete selected permissions": "Διαγραφή επιλεγμένων δικαιωμάτων",
+  "No permissions that you can remove": "Χωρίς δικαιώματα που μπορείτε να καταργήσετε",
+  "Web page will be able to initialize the raw transaction dialog": "Η ιστοσελίδα θα είναι σε θέση να αρχικοποιήσει το παράθυρο διαλόγου Raw Transaction",
+  "Web page will be able to connect by TON connect protocol": "Η ιστοσελίδα θα είναι σε θέση να συνδεθεί με το Ton Connect Protocol",
+  "Web page will be able to reconnect by TON connect protocol": "Η ιστοσελίδα θα είναι σε θέση να επανασυνδεθεί με πρωτόκολλο Ton Connect",
+  "Search by domain": "Αναζήτηση ανά τομέα",
+  "This transaction is expired": "Αυτή η συναλλαγή έχει λήξει",
+  "This transaction is for another account": "Αυτή η συναλλαγή είναι για έναν άλλο λογαριασμό",
+  "This transaction is for another network": "Αυτή η συναλλαγή είναι για ένα άλλο δίκτυο"
 }

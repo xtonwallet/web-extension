@@ -323,5 +323,21 @@
   "Description": "Descripción",
   "External link": "Enlace externo",
   "NFT content": "Contenido NFT",
-  "Owner": "Dueño"
+  "Owner": "Dueño",
+  "Privacy policy": "Política de privacidad",
+  "Terms of use": "Condiciones de uso",
+  "Data": "Datos",
+  "Data type": "Tipo de datos",
+  "Don't ask me when reconnecting": "No me preguntes cuando se vuelva a conectar",
+  "Dapp permissions": "Permisos DAPP",
+  "Manage Dapp permissions": "Administrar permisos DAPP",
+  "Delete selected permissions": "Eliminar permisos seleccionados",
+  "No permissions that you can remove": "No hay permisos que puedas eliminar",
+  "Web page will be able to initialize the raw transaction dialog": "La página web podrá inicializar el cuadro de diálogo de transacción sin procesar",
+  "Web page will be able to connect by TON connect protocol": "La página web podrá conectarse por un protocolo de Ton Connect",
+  "Web page will be able to reconnect by TON connect protocol": "La página web podrá volver a conectarse por Ton Connect Protocol",
+  "Search by domain": "Buscar por dominio",
+  "This transaction is expired": "Esta transacción ha caducado",
+  "This transaction is for another account": "Esta transacción es para otra cuenta",
+  "This transaction is for another network": "Esta transacción es para otra red"
 }

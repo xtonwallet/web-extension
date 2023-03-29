@@ -323,5 +323,21 @@
   "Description": "വിവരണം",
   "External link": "ബാഹ്യ ലിങ്ക്",
   "NFT content": "NFT ഉള്ളടക്കം",
-  "Owner": "ഉടമ"
+  "Owner": "ഉടമ",
+  "Privacy policy": "സ്വകാര്യതാ നയം",
+  "Terms of use": "ഉപയോഗ നിബന്ധനകൾ",
+  "Data": "ഡാറ്റ",
+  "Data type": "ഡാറ്റ തരം",
+  "Don't ask me when reconnecting": "വീണ്ടും ബന്ധിപ്പിക്കുമ്പോൾ എന്നോട് ചോദിക്കരുത്",
+  "Dapp permissions": "ഡാപ്പ് അനുമതികൾ",
+  "Manage Dapp permissions": "ഡാപ്പ് അനുമതികൾ കൈകാര്യം ചെയ്യുക",
+  "Delete selected permissions": "തിരഞ്ഞെടുത്ത അനുമതികൾ ഇല്ലാതാക്കുക",
+  "No permissions that you can remove": "നിങ്ങൾക്ക് നീക്കംചെയ്യാൻ കഴിയുന്ന അനുമതികളില്ല",
+  "Web page will be able to initialize the raw transaction dialog": "അസംസ്കൃത ഇടപാട് ഡയലോഗ് സമാരംഭിക്കാൻ വെബ് പേജിന് കഴിയും",
+  "Web page will be able to connect by TON connect protocol": "വെബ് പേജിന് ടൺ കണക്റ്റ് പ്രോട്ടോക്കോൾ വഴി ബന്ധിപ്പിക്കാൻ കഴിയും",
+  "Web page will be able to reconnect by TON connect protocol": "വെബ് പേജിന് ടൺ കണക്റ്റ് പ്രോട്ടോക്കോൾ വഴി വീണ്ടും കണക്റ്റുചെയ്യാനാകും",
+  "Search by domain": "ഡൊമെയ്ൻ ഉപയോഗിച്ച് തിരയുക",
+  "This transaction is expired": "ഈ ഇടപാട് കാലഹരണപ്പെട്ടു",
+  "This transaction is for another account": "ഈ ഇടപാട് മറ്റൊരു അക്കൗണ്ടിനാണ്",
+  "This transaction is for another network": "ഈ ഇടപാട് മറ്റൊരു നെറ്റ്വർക്കിനുള്ളതാണ്"
 }

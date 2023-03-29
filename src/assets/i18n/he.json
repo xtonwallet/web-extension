@@ -323,5 +323,21 @@
   "Description": "תיאור",
   "External link": "קישור חיצוני",
   "NFT content": "תוכן nft",
-  "Owner": "בעלים"
+  "Owner": "בעלים",
+  "Privacy policy": "מדיניות הפרטיות",
+  "Terms of use": "תנאי שימוש",
+  "Data": "נתונים",
+  "Data type": "סוג מידע",
+  "Don't ask me when reconnecting": "אל תשאל אותי מתי חיבור מחדש",
+  "Dapp permissions": "הרשאות DAPP",
+  "Manage Dapp permissions": "נהל הרשאות DAPP",
+  "Delete selected permissions": "מחק הרשאות שנבחרו",
+  "No permissions that you can remove": "אין הרשאות שתוכל להסיר",
+  "Web page will be able to initialize the raw transaction dialog": "דף אינטרנט יוכל לאתחל את דו -שיח העסקה הגולמית",
+  "Web page will be able to connect by TON connect protocol": "דף אינטרנט יוכל להתחבר על ידי פרוטוקול טון Connect",
+  "Web page will be able to reconnect by TON connect protocol": "דף אינטרנט יוכל להתחבר מחדש על ידי פרוטוקול טון Connect",
+  "Search by domain": "חיפוש לפי דומיין",
+  "This transaction is expired": "עסקה זו פגה",
+  "This transaction is for another account": "עסקה זו מיועדת לחשבון אחר",
+  "This transaction is for another network": "עסקה זו מיועדת לרשת אחרת"
 }

@@ -323,5 +323,21 @@
   "Description": "설명",
   "External link": "외부 링크",
   "NFT content": "NFT 컨텐츠",
-  "Owner": "소유자"
+  "Owner": "소유자",
+  "Privacy policy": "개인 정보 정책",
+  "Terms of use": "이용 약관",
+  "Data": "데이터",
+  "Data type": "데이터 형식",
+  "Don't ask me when reconnecting": "다시 연결할 때 묻지 마십시오",
+  "Dapp permissions": "DAPP 권한",
+  "Manage Dapp permissions": "DAPP 권한을 관리합니다",
+  "Delete selected permissions": "선택한 권한을 삭제하십시오",
+  "No permissions that you can remove": "제거 할 수있는 권한이 없습니다",
+  "Web page will be able to initialize the raw transaction dialog": "웹 페이지는 원시 거래 대화 상자를 초기화 할 수 있습니다.",
+  "Web page will be able to connect by TON connect protocol": "웹 페이지는 Ton Connect 프로토콜로 연결할 수 있습니다.",
+  "Web page will be able to reconnect by TON connect protocol": "웹 페이지는 Ton Connect 프로토콜로 다시 연결할 수 있습니다.",
+  "Search by domain": "도메인 별 검색",
+  "This transaction is expired": "이 거래는 만료됩니다",
+  "This transaction is for another account": "이 거래는 다른 계정을위한 것입니다",
+  "This transaction is for another network": "이 거래는 다른 네트워크를위한 것입니다"
 }

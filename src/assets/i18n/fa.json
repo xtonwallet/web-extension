@@ -323,5 +323,21 @@
   "Description": "شرح",
   "External link": "لینک خارجی",
   "NFT content": "محتوای NFT",
-  "Owner": "صاحب"
+  "Owner": "صاحب",
+  "Privacy policy": "سیاست حفظ حریم خصوصی",
+  "Terms of use": "شرایط استفاده",
+  "Data": "داده ها",
+  "Data type": "نوع داده",
+  "Don't ask me when reconnecting": "هنگام اتصال مجدد از من نپرس",
+  "Dapp permissions": "مجوزهای DAPP",
+  "Manage Dapp permissions": "مجوزهای DAPP را مدیریت کنید",
+  "Delete selected permissions": "مجوزهای انتخاب شده را حذف کنید",
+  "No permissions that you can remove": "بدون مجوز که می توانید حذف کنید",
+  "Web page will be able to initialize the raw transaction dialog": "صفحه وب می تواند گفتگوی معاملات خام را آغاز کند",
+  "Web page will be able to connect by TON connect protocol": "صفحه وب قادر به اتصال توسط Ton Connect Protocol خواهد بود",
+  "Web page will be able to reconnect by TON connect protocol": "صفحه وب قادر به اتصال مجدد توسط Ton Connect Protocol خواهد بود",
+  "Search by domain": "جستجو توسط دامنه",
+  "This transaction is expired": "این معامله منقضی شده است",
+  "This transaction is for another account": "این معامله برای یک حساب دیگر است",
+  "This transaction is for another network": "این معامله برای شبکه دیگری است"
 }

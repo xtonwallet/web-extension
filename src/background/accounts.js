@@ -52,9 +52,6 @@ export const accounts = () => {
         let walletsTokenInfo = {};
         try {
           for (let index in allAddresses) {
-
-            accountStore.removeWaitingTransaction(server + "-" + allAddresses[index]);
-
             const tokenList = await vault.tokenList(allAddresses[index], server);
             if (tokenList && tokenList.length != 0) {
               tokenList.forEach((item) => {
@@ -67,6 +64,9 @@ export const accounts = () => {
 
             // regular txs
             const result = await TonLibClient.requestAccountTransactions(allAddresses[index], retrievingTransactionsLastTime);
+            if (result.length > 0) {
+              accountStore.removeWaitingTransaction(server + "-" + allAddresses[index]);
+            }
             transactions = transactions.concat(result);
           }
           // token wallets
@@ -181,7 +181,6 @@ export const accounts = () => {
   });
 
   const updateTransactionsList = async (address, server, fromStart = false) => {
-    accountStore.removeWaitingTransaction(server + "-" + address);
     const TonLibClient     = await TonLib.getClient(server);
     const network          = await vault.getNetwork(server);
     const lastTransactions = await vault.getTransactions(address, server, 50, 1);
@@ -230,6 +229,7 @@ export const accounts = () => {
       if (txIds.includes(transactions[i].id) === true) {
         continue;
       }
+      accountStore.removeWaitingTransaction(server + "-" + address);
       const txData = transactions[i];
 
       let detectedToken;
@@ -609,7 +609,7 @@ export const accounts = () => {
     return await vault.updateNickname(address, nickname);
   };
 
-  const checkWalletDeployed = async (account) => {
+  const checkWalletDeployed = async (account, defaultVersion = "") => {
     let deployed = [];
     let version = {};
     const networks = await vault.getNetworks();
@@ -653,6 +653,9 @@ export const accounts = () => {
               version[network.server] = 'v4R2';
             break;
           }
+        } else if (defaultVersion != "") {
+          version[network.server] = defaultVersion;
+          return {deployed, version};
         }
       } catch(e) {
         //console.log(e);
@@ -702,10 +705,17 @@ export const accounts = () => {
     return output;
   };
 
+  const getWalletStateInit = async (accountAddress, server) => {
+    const TonLibClient = await TonLib.getClient(server);
+    const account = await vault.getAccount(accountAddress);
+    const keyPair = await decrypt(currentPassword, account.encrypted);
+    return await TonLibClient.walletStateInit(keyPair.public, account.version[server] ? account.version[server] : "");
+  };
+
   const addAccountByKeys = async (nickname, keyPair, version) => {
     const TonLibClient = await TonLib.getClient();
     const address = await TonLibClient.predictAddress(keyPair.public, version);
-    const walletDeployed = await checkWalletDeployed(address);
+    const walletDeployed = await checkWalletDeployed(address, version);
     const account = {
       address: address,
       nickname: nickname,
@@ -734,7 +744,7 @@ export const accounts = () => {
     }
   };
 
-  const addAccountBySeed  = async (nickname, seed, version) => {
+  const addAccountBySeed = async (nickname, seed, version) => {
     const TonLibClient = await TonLib.getClient();
     const keys = await TonLibClient.convertSeedToKeys(seed.split(' '));
     //prepare for saving
@@ -743,7 +753,7 @@ export const accounts = () => {
       secret: Unibabel.bufferToHex(Object.values(keys.secretKey))
     };
     const address = await TonLibClient.predictAddress(keyPair.public, version);
-    const walletDeployed = await checkWalletDeployed(address);
+    const walletDeployed = await checkWalletDeployed(address, version);
     const account = {
       address: address,
       nickname: nickname,
@@ -949,6 +959,14 @@ export const accounts = () => {
 
   const saveGrantedPermissions = async (account, origin, permissions) => {
     return await vault.savePermissions(account, origin, permissions);
+  };
+
+  const removePermissions = async (account, origin, permissions) => {
+    return await vault.removePermissions(account, origin, permissions);
+  };
+
+  const getPermissionsList = async (account) => {
+    return await vault.getPermissionsList(account);
   };
 
   const getPermissions = async (account, origin) => {
@@ -1380,6 +1398,7 @@ export const accounts = () => {
     getPublicKeyForAccount,
     getWalletVersionForAccount,
     getKeyPairForAccount,
+    getWalletStateInit,
     deployNewWallet,
     createKeystore,
     addNewAccount,
@@ -1402,6 +1421,8 @@ export const accounts = () => {
     sendTransaction,
     sendRawTransaction,
     saveGrantedPermissions,
+    removePermissions,
+    getPermissionsList,
     getPermissions,
     checkPermission,
     getSignForData,
