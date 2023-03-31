@@ -91,6 +91,15 @@ gulp.task('manifest:firefox', function () {
     .pipe(gulp.dest('./builds/firefox', { overwrite: true }));
 });
 
+gulp.task('manifest:opera', function () {
+  return gulp.src('./builds/opera/manifest.json')
+    .pipe(jsoneditor(function (json) {
+      delete json.short_name;
+      return json;
+    }))
+    .pipe(gulp.dest('./builds/opera', { overwrite: true }));
+});
+
 gulp.task('optimize:images', function () {
   return gulp.src('./builds/**/images/**', { base: './builds/' })
     .pipe(imagemin())
@@ -110,6 +119,7 @@ gulp.task('copy',
     gulp.parallel(...copyTaskNames),
     'manifest:firefox',
     'manifest:chrome',
+    'manifest:opera',
   )
 );
 
