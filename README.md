@@ -195,3 +195,7 @@ Usually after common commit needs to use `patch`
 - [ ] Creating multisign wallet (many owners, requirement count more than 0)
 - [ ] Hard wallet supporting
 - [ ] Fishing blacklist with the voting process on TON blockchain
+
+# Official address
+
+EQC6JdMGKESs00LDyfmlU-ryyr-buA-i9M8Ja39KE1NxzmNt
