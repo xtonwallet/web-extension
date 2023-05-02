@@ -337,6 +337,18 @@ export class TonConnect {
     this.callbacks = [];
     this.provider.destroy();
   }
+
+  walletInfo = {
+    "name": "XTONWallet",
+    "image": "https://xtonwallet.com/assets/img/icon-256-back.png",
+    "about_url": "https://xtonwallet.com",
+    "bridge": [
+      {
+        "type": "js",
+        "key": "xtonwallet"
+      }
+    ]
+  }
 }
 
 window.xtonwallet = {
