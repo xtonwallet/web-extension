@@ -5,7 +5,19 @@
   import MenuBox from "./MenuBox.svelte";
 
   /* Icons https://materialdesignicons.com/ */
-  import { mdiArchiveArrowDown, mdiArchiveArrowUp, mdiLock, mdiCog, mdiAlphaTCircleOutline, mdiLan, mdiApplicationCog, mdiBullhorn, mdiHelp, mdiCardBulleted, mdiAccessPoint } from "@mdi/js";
+  import {
+    mdiArchiveArrowDown,
+    mdiArchiveArrowUp,
+    mdiLock,
+    mdiCog,
+    mdiAlphaTCircleOutline,
+    mdiLan,
+    mdiBullhorn,
+    mdiHelp,
+    mdiCardBulleted,
+    mdiQrcode,
+    mdiApplicationCog
+  } from "@mdi/js";
 
   let menus = [
     {
