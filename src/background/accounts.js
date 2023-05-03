@@ -709,7 +709,7 @@ export const accounts = () => {
     const TonLibClient = await TonLib.getClient(server);
     const account = await vault.getAccount(accountAddress);
     const keyPair = await decrypt(currentPassword, account.encrypted);
-    return await TonLibClient.walletStateInit(keyPair.public, account.version[server] ? account.version[server] : "");
+    return await TonLibClient.walletStateInit(keyPair.public, account.version && account.version[server] ? account.version[server] : "");
   };
 
   const addAccountByKeys = async (nickname, keyPair, version) => {
@@ -811,7 +811,7 @@ export const accounts = () => {
 
       let result;
       if (txData.params.allBalance) { //@TODO need to be sure, that one-custodial wallet
-        result = await TonLibClient.calcRunFees(account.version[server], accountAddress,
+        result = await TonLibClient.calcRunFees(account.version && account.version[server] ? account.version[server]: "", accountAddress,
           {
             toAddress: txData.params.destination,
             amount: 0,
@@ -820,7 +820,7 @@ export const accounts = () => {
           },
           keyPair);
       } else {
-        result = await TonLibClient.calcRunFees(account.version[server], accountAddress,
+        result = await TonLibClient.calcRunFees(account.version && account.version[server] ? account.version[server]: "", accountAddress,
           {
             toAddress: txData.params.destination,
             amount: txData.params.amount,
@@ -866,7 +866,7 @@ export const accounts = () => {
         txDataPrepared.stateInit = TonLibClient.oneFromBoc(Unibabel.base64ToBuffer(txData.params.stateInit));
       }
 
-      result = await TonLibClient.calcRunFees(account.version[server], accountAddress,
+      result = await TonLibClient.calcRunFees(account.version && account.version[server] ? account.version[server]: "", accountAddress,
         txDataPrepared,
         keyPair);
 
@@ -891,7 +891,7 @@ export const accounts = () => {
       }
       let result;
       if (txData.params.allBalance) {
-        result = await TonLibClient.sendTransaction(account.version[server], accountAddress, bounce,
+        result = await TonLibClient.sendTransaction(account.version && account.version[server] ? account.version[server]: "", accountAddress, bounce,
           {
             toAddress: txData.params.destination,
             amount: 0,
@@ -900,7 +900,7 @@ export const accounts = () => {
           },
           keyPair);
       } else {
-        result = await TonLibClient.sendTransaction(account.version[server], accountAddress, bounce,
+        result = await TonLibClient.sendTransaction(account.version && account.version[server] ? account.version[server]: "", accountAddress, bounce,
           {
             toAddress: txData.params.destination,
             amount: txData.params.amount,
@@ -943,7 +943,7 @@ export const accounts = () => {
       if (txData.params.stateInit) {
         txDataPrepared.stateInit = TonLibClient.oneFromBoc(Unibabel.base64ToBuffer(txData.params.stateInit));
       }
-      result = await TonLibClient.sendTransaction(account.version[server], accountAddress, false, txDataPrepared, keyPair);
+      result = await TonLibClient.sendTransaction(account.version && account.version[server] ? account.version[server]: "", accountAddress, false, txDataPrepared, keyPair);
       
       return {id: 0, reason: `SubmitRawTransaction for ${txData.params.to} with amount ${txData.params.amount}`};
     } catch (exp) {
@@ -1166,7 +1166,7 @@ export const accounts = () => {
       const TonLibClient = await TonLib.getClient(server);
       const walletAddressOwner = await getTokenType74WalletAddress(server, txData.params.token.address, accountAddress);
       const JtWallet = TonLibClient.getFtTokenWallet(walletAddressOwner);
-      const result = await TonLibClient.estimateTransferFtTokenWallet(account.version[server], JtWallet, accountAddress, walletAddressOwner, {
+      const result = await TonLibClient.estimateTransferFtTokenWallet(account.version && account.version[server] ? account.version[server]: "", JtWallet, accountAddress, walletAddressOwner, {
         "jettonAmount": txData.params.amount,
         "toAddress": txData.params.destination,
         "responseAddress": accountAddress,
@@ -1261,7 +1261,7 @@ export const accounts = () => {
       const walletAddressOwner = await getTokenType74WalletAddress(server, txData.params.token.address, accountAddress);
 
       const JtWallet = TonLibClient.getFtTokenWallet(walletAddressOwner);
-      const result = await TonLibClient.sendTransferFtTokenWallet(account.version[server], JtWallet, accountAddress, walletAddressOwner, {
+      const result = await TonLibClient.sendTransferFtTokenWallet(account.version && account.version[server] ? account.version[server]: "", JtWallet, accountAddress, walletAddressOwner, {
         "jettonAmount": txData.params.amount,
         "toAddress": txData.params.destination,
         "responseAddress": accountAddress,
