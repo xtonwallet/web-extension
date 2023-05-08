@@ -108,7 +108,7 @@
   "Loading": "荷重",
   "Network": "通信網",
   "Deploy": "展開する",
-  "Deploy wallet instructions": "Walletを使用するにはスマート契約を展開する必要があります。それはあなたがこの財布のアドレスに持っている必要がある量のいくらかの金額です。 TestNetにWalletを展開しようとしている場合は、 `Giver`を使用してこの初期額を取ることができます。",
+  "Deploy wallet instructions": "Walletを使用するにはスマート契約を展開する必要があります。それはあなたがこの財布のアドレスに持っている必要がある量のいくらかの金額です。",
   "Take from giver": "贈り物から取る",
   "Balance": "残高",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "期限切れのメッセージ。契約はチェーンでは実行されませんでした。考えられる理由：アカウントは要求された操作のためのバランスが不十分です。アカウントのバランスにいくらかの値を送信します",
@@ -236,7 +236,7 @@
   "Skip this step": "このステップを飛ばす",
   "Dismiss backup warning": "バックアップ警告を解除します",
   "Max": "max",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "要求された操作のバランスが不十分です。アカウント残高にいくらかの値を送信してください。",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "要求された操作のバランスが不十分です。アカウント残高にいくらかの値を送信してください (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "契約の実行はエラーで終了しました：Computeフェーズは成功しません。",
   "Warning": "警告",
   "Warning text about restoring": "シード フレーズの回復は時代遅れの方法です。 最初の起動時のキーストアの復元のみがサポートされています。 最初のウォレットを作成した後、シード フレーズから古いウォレットをエクスポートできるようになります。",
@@ -339,5 +339,6 @@
   "Search by domain": "ドメインごとに検索します",
   "This transaction is expired": "このトランザクションは期限切れです",
   "This transaction is for another account": "このトランザクションは別のアカウント用です",
-  "This transaction is for another network": "このトランザクションは別のネットワーク向けです"
+  "This transaction is for another network": "このトランザクションは別のネットワーク向けです",
+  "Extended mode": "拡張モード"
 }

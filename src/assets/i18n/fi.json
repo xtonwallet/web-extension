@@ -108,7 +108,7 @@
   "Loading": "Ladataan",
   "Network": "Verkosto",
   "Deploy": "Ottaa käyttöön",
-  "Deploy wallet instructions": "Lompakon käyttämiseksi on käytettävä älykkäämpiä sopimuksia. Se maksaa jonkin verran määrää, että sinun täytyy olla tämän lompakon osoitteessa. Jos yrität käyttää lompakkoa TestNetissä, voit käyttää 'Giver' ottaa tämän alkumäärän.",
+  "Deploy wallet instructions": "Lompakon käyttämiseksi on käytettävä älykkäämpiä sopimuksia. Se maksaa jonkin verran määrää, että sinun täytyy olla tämän lompakon osoitteessa.",
   "Take from giver": "Ottaa vastaan",
   "Balance": "Saldo",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Viesti päättyi. Sopimusta ei toteutettu ketjussa. Mahdollinen syy: Tilillä ei ole riittävästi saldon pyydetystä toiminnasta. Lähetä arvoa tilin saldoon",
@@ -236,7 +236,7 @@
   "Skip this step": "Ohita tämä vaihe",
   "Dismiss backup warning": "Hylkää varmuuskopiointi varoitus",
   "Max": "Max",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Tilillä ei ole riittävästi saldon pyydetystä toiminnasta. Lähetä arvo tili saldo.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Tilillä ei ole riittävästi saldon pyydetystä toiminnasta. Lähetä arvo tili saldo (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Sopimuksen toteutus lopetettiin virheellä: Laskuvaihe ei ole onnistunut, poistumiskoodi: 107. Lisätietoja poistokoodista Tarkista sopimuksen lähdekoodi tai pyydä sopimuskehitystä",
   "Warning": "Varoitus",
   "Warning text about restoring": "Siementensuodatus on vanhentunut menetelmä. Tuemme vain Keystore Reales ensimmäisessä käynnistämisessä. Ensimmäisen lompakon luomisen jälkeen on mahdollista viedä vanha lompakko siementen lauseesta.",
@@ -339,5 +339,6 @@
   "Search by domain": "Etsi verkkotunnus",
   "This transaction is expired": "Tämä tapahtuma on vanhentunut",
   "This transaction is for another account": "Tämä tapahtuma on toiselle tilille",
-  "This transaction is for another network": "Tämä tapahtuma on toiselle verkolle"
+  "This transaction is for another network": "Tämä tapahtuma on toiselle verkolle",
+  "Extended mode": "Pidennetty tila"
 }

@@ -108,7 +108,7 @@
   "Loading": "Laadimine",
   "Network": "Võrk",
   "Deploy": "Kasutusele võtma",
-  "Deploy wallet instructions": "Rahakoti kasutamiseks vajab aruka lepingu kasutamist. See maksab mõned summad, mida peate selle rahakoti aadressil olema. Kui te üritate kasutada rahakoti TESTNET-is, saate selle esialgse summa võtta 'andja'.",
+  "Deploy wallet instructions": "Rahakoti kasutamiseks vajab aruka lepingu kasutamist. See maksab mõned summad, mida peate selle rahakoti aadressil olema.",
   "Take from giver": "Andjalt võtma",
   "Balance": "Tasakaal",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Sõnum aegunud. Lepingut ei toimunud ahelas. Võimalik põhjus: kontol on taotletud toimingu jaoks ebapiisav tasakaal. Saada mõned väärtused konto saldoks",
@@ -236,7 +236,7 @@
   "Skip this step": "Jätke see samm vahele",
   "Dismiss backup warning": "Vabastage varukoopia hoiatus",
   "Max": "Max",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Kontol ei ole nõutud toimingu jaoks piisavalt tasakaalu. Saada mõned väärtused konto saldoks.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Kontol ei ole nõutud toimingu jaoks piisavalt tasakaalu. Saada mõned väärtused konto saldoks (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Lepingu täitmine lõpetati vigadega: arvutusfaas ei õnnestunud, väljumise kood: 107. Lisateavet väljumise koodi kohta Kontrollige lepingu lähtekoodi või küsige lepingu arendajalt",
   "Warning": "Hoiatus",
   "Warning text about restoring": "Seemne lause taastamine on aegunud meetod. Me toetame ainult võtmetore taastamist esimesel käivitamisel. Pärast esimese rahakoti loomist on võimalik vana rahakotti seemnepildi eksportida.",
@@ -339,5 +339,6 @@
   "Search by domain": "Otsige domeeni järgi",
   "This transaction is expired": "See tehing on aegunud",
   "This transaction is for another account": "See tehing on mõeldud teise konto jaoks",
-  "This transaction is for another network": "See tehing on mõeldud teise võrgu jaoks"
+  "This transaction is for another network": "See tehing on mõeldud teise võrgu jaoks",
+  "Extended mode": "Pikendatud režiim"
 }

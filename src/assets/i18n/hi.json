@@ -108,7 +108,7 @@
   "Loading": "लोड हो रहा है",
   "Network": "नेटवर्क",
   "Deploy": "तैनाती",
-  "Deploy wallet instructions": "वॉलेट का उपयोग करने के लिए स्मार्ट अनुबंध को तैनात करने की जरूरत है। इस वॉलेट के पते पर आपको कुछ राशि की आवश्यकता है। यदि आप टेस्टनेट पर वॉलेट को तैनात करने की कोशिश कर रहे हैं, तो आप इस प्रारंभिक राशि को लेने के लिए `दिवर 'का उपयोग कर सकते हैं।",
+  "Deploy wallet instructions": "बटुए का उपयोग करने के लिए स्मार्ट अनुबंध को परिनियोजित करने की आवश्यकता है। इसमें कुछ राशि खर्च होती है जो आपके पास इस वॉलेट के पते पर होनी चाहिए।",
   "Take from giver": "गिवर से ले लो",
   "Balance": "संतुलन",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "संदेश समाप्त हो गया। अनुबंध श्रृंखला पर निष्पादित नहीं किया गया था। संभावित कारण: अनुरोधित ऑपरेशन के लिए खाते में अपर्याप्त शेष राशि है। खाता शेष राशि के लिए कुछ मूल्य भेजें",
@@ -236,7 +236,7 @@
   "Skip this step": "इस स्टेप को छोड़ दें",
   "Dismiss backup warning": "बैकअप चेतावनी को खारिज करें",
   "Max": "मैक्स",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "अनुरोधित ऑपरेशन के लिए खाते में अपर्याप्त शेष राशि है। खाता शेष राशि के लिए कुछ मूल्य भेजें।",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "अनुरोधित ऑपरेशन के लिए खाते में अपर्याप्त शेष राशि है। खाता शेष राशि के लिए कुछ मूल्य भेजें। (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "अनुबंध निष्पादन को त्रुटि के साथ समाप्त कर दिया गया था: गणना चरण सफल नहीं हुआ है, बाहर निकलें कोड: 107. निकास कोड के बारे में अधिक जानकारी के लिए अनुबंध स्रोत कोड की जांच करें या अनुबंध डेवलपर से पूछें",
   "Warning": "चेतावनी",
   "Warning text about restoring": "बीज वाक्यांश पुनर्प्राप्ति एक पुरानी पद्धति है। हम केवल पहले लॉन्च पर कीस्टोर रीस्टोर का समर्थन करते हैं। पहला बटुआ बनाने के बाद, पुराने बटुए को बीज वाक्यांश से निर्यात करना संभव होगा।",
@@ -339,5 +339,6 @@
   "Search by domain": "डोमेन द्वारा खोजें",
   "This transaction is expired": "यह लेनदेन समाप्त हो गया है",
   "This transaction is for another account": "यह लेनदेन दूसरे खाते के लिए है",
-  "This transaction is for another network": "यह लेनदेन दूसरे नेटवर्क के लिए है"
+  "This transaction is for another network": "यह लेनदेन दूसरे नेटवर्क के लिए है",
+  "Extended mode": "विस्तारित विधा"
 }

@@ -108,7 +108,7 @@
   "Loading": "લોડ કરી રહ્યું છે",
   "Network": "નેટવર્ક",
   "Deploy": "જમાવવું",
-  "Deploy wallet instructions": "વોલેટનો ઉપયોગ કરવા માટે સ્માર્ટ કોન્ટ્રેક્ટને જમાવવાની જરૂર છે. તે આ વૉલેટના સરનામા પર તમારી પાસે કેટલીક રકમ છે જે તમારે હોવી આવશ્યક છે. જો તમે ટેસ્ટનેટ પર વૉલેટને જમાવવાનો પ્રયાસ કરી રહ્યાં છો, તો તમે આ પ્રારંભિક રકમ લેવા માટે 'giver` નો ઉપયોગ કરી શકો છો.",
+  "Deploy wallet instructions": "વોલેટનો ઉપયોગ કરવા માટે સ્માર્ટ કોન્ટ્રેક્ટને જમાવવાની જરૂર છે. તે આ વૉલેટના સરનામા પર તમારી પાસે કેટલીક રકમ છે જે તમારે હોવી આવશ્યક છે.",
   "Take from giver": "આપનાર પાસેથી લો",
   "Balance": "સંતુલન",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "સંદેશ સમાપ્ત થયો. કોન્ટ્રાક્ટ સાંકળ પર ચલાવવામાં આવ્યો ન હતો. સંભવિત કારણ: એકાઉન્ટમાં વિનંતી કરેલ ઑપરેશન માટે અપર્યાપ્ત સંતુલન છે. એકાઉન્ટ સંતુલન માટે કેટલાક મૂલ્ય મોકલો",
@@ -236,7 +236,7 @@
   "Skip this step": "આ પગલું છોડી દો",
   "Dismiss backup warning": "બેકઅપ ચેતવણીને કાઢી નાખો",
   "Max": "મહત્તમ",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "વિનંતી કરેલ ઑપરેશન માટે એકાઉન્ટમાં અપર્યાપ્ત સંતુલન છે. એકાઉન્ટ સંતુલન માટે કેટલાક મૂલ્ય મોકલો.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "વિનંતી કરેલ ઑપરેશન માટે એકાઉન્ટમાં અપર્યાપ્ત સંતુલન છે. એકાઉન્ટ સંતુલન માટે કેટલાક મૂલ્ય મોકલો (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "કોન્ટ્રેક્ટ એક્ઝેક્યુશનને ભૂલથી સમાપ્ત કરવામાં આવ્યું હતું: કોમ્પ્યુટ તબક્કો સફળ થઈ ગયું નથી, એક્ઝિટ કોડ: 107. એક્ઝિટ કોડ વિશે વધુ માહિતી માટે કોન્ટ્રેક્ટ સ્રોત કોડ તપાસો અથવા કોન્ટ્રેક્ટ ડેવલપરને પૂછો",
   "Warning": "ચેતવણી",
   "Warning text about restoring": "બીજ શબ્દસમૂહ પુનઃપ્રાપ્તિ જૂની પદ્ધતિ છે. અમે ફક્ત પ્રથમ લોન્ચ પર કીસ્ટોર રીસ્ટોર્સને સપોર્ટ કરીએ છીએ. પ્રથમ વૉલેટ બનાવ્યાં પછી, બીજ શબ્દસમૂહમાંથી જૂના વૉલેટ નિકાસ કરવું શક્ય છે. મહેરબાની કરીને નોંધ કરો કે અમે ફક્ત વૉલેટના સેફેમ્ટિઝિગવાલ્ટ સંસ્કરણને સમર્થન આપીએ છીએ, તેથી જો બીજ શબ્દસમૂહ અન્ય સંસ્કરણોથી સંબંધિત હોય. બધા ભંડોળ નવા બનાવેલ અને જમાવટવાળા વૉલેટમાં સ્થાનાંતરિત થવું આવશ્યક છે.",
@@ -339,5 +339,6 @@
   "Search by domain": "ડોમેન દ્વારા શોધ",
   "This transaction is expired": "આ વ્યવહાર સમાપ્ત થઈ ગયો છે",
   "This transaction is for another account": "આ વ્યવહાર બીજા ખાતા માટે છે",
-  "This transaction is for another network": "આ વ્યવહાર બીજા નેટવર્ક માટે છે"
+  "This transaction is for another network": "આ વ્યવહાર બીજા નેટવર્ક માટે છે",
+  "Extended mode": "વિસ્તૃત સ્થિતિ"
 }

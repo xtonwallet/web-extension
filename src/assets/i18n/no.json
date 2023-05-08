@@ -108,7 +108,7 @@
   "Loading": "Lasting",
   "Network": "Nettverk",
   "Deploy": "Utplassere",
-  "Deploy wallet instructions": "For bruk av lommeboken må du distribuere Smart Contract. Det koster litt beløp som du må ha på adressen til denne lommeboken. Hvis du prøver å distribuere lommeboken på Testnet, kan du bruke `Giver` for å ta dette innledende beløpet.",
+  "Deploy wallet instructions": "For bruk av lommeboken må du distribuere Smart Contract. Det koster litt beløp som du må ha på adressen til denne lommeboken.",
   "Take from giver": "Ta fra giver",
   "Balance": "Balansere",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Meldingen utløpt. Kontrakten ble ikke utført på kjede. Mulig årsak: Kontoen har utilstrekkelig balanse for den forespurte operasjonen. Send litt verdi til kontosaldoen",
@@ -236,7 +236,7 @@
   "Skip this step": "Hoppe over dette trinnet",
   "Dismiss backup warning": "Avvis Backup Warning.",
   "Max": "Max.",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Kontoen har utilstrekkelig balanse for den forespurte operasjonen. Send litt verdi til kontosaldoen.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Kontoen har utilstrekkelig balanse for den forespurte operasjonen. Send litt verdi til kontosaldoen (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Kontraktsutførelsen ble avsluttet med feil: Beregnet fase lykkes, avsluttes, avslutter kode: 107. For mer informasjon om utgangskode, kontroller kontraktskildekoden eller spør kontraktsutvikleren",
   "Warning": "Advarsel",
   "Warning text about restoring": "Frøfrasgjenoppretting er en utdatert metode. Vi støtter bare KeyStore Restores på første lansering. Etter å ha skapt den første lommeboken, vil det være mulig å eksportere den gamle lommeboken fra frøfrasen.",
@@ -339,5 +339,6 @@
   "Search by domain": "Søk etter domene",
   "This transaction is expired": "Denne transaksjonen er utløpt",
   "This transaction is for another account": "Denne transaksjonen er for en annen konto",
-  "This transaction is for another network": "Denne transaksjonen er for et annet nettverk"
+  "This transaction is for another network": "Denne transaksjonen er for et annet nettverk",
+  "Extended mode": "Utvidet modus"
 }

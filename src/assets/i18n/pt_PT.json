@@ -108,7 +108,7 @@
   "Loading": "Carregando",
   "Network": "Rede",
   "Deploy": "Implantar",
-  "Deploy wallet instructions": "Para usar a carteira precisa implantar contrato inteligente. Custa algum valor que você deve ter no endereço desta carteira. Se você está tentando implantar a carteira no TestNet, você pode usar o `doador` para tomar este valor inicial.",
+  "Deploy wallet instructions": "Para usar a carteira precisa implantar contrato inteligente. Custa algum valor que você deve ter no endereço desta carteira.",
   "Take from giver": "Tirar do doador",
   "Balance": "Equilíbrio",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Mensagem expirada. Contrato não foi executado na cadeia. Possível razão: a conta tem equilíbrio insuficiente para a operação solicitada. Envie algum valor para o saldo da conta",
@@ -236,7 +236,7 @@
   "Skip this step": "Pular esta etapa",
   "Dismiss backup warning": "Dispense o aviso de backup",
   "Max": "Max.",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Conta tem saldo insuficiente para a operação solicitada. Envie algum valor para o saldo da conta.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Conta tem saldo insuficiente para a operação solicitada. Envie algum valor para o saldo da conta (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "A execução do contrato foi encerrada com erro: a fase de computação não é bem-sucedida, saída do código: 107. Para obter mais informações sobre o código de saída Verifique o código-fonte do contrato ou pergunte ao desenvolvedor do contrato",
   "Warning": "Aviso",
   "Warning text about restoring": "A recuperação da frase de semente é um método desatualizado. Só suportamos a Keystore restaurações no primeiro lançamento. Depois de criar a primeira carteira, será possível exportar a carteira antiga da frase de semente.",
@@ -339,5 +339,6 @@
   "Search by domain": "Pesquise por domínio",
   "This transaction is expired": "Esta transação expirou",
   "This transaction is for another account": "Esta transação é para outra conta",
-  "This transaction is for another network": "Esta transação é para outra rede"
+  "This transaction is for another network": "Esta transação é para outra rede",
+  "Extended mode": "Modo estendido"
 }

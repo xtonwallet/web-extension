@@ -108,7 +108,7 @@
   "Loading": "Bezig met laden",
   "Network": "Netwerk",
   "Deploy": "Inzetten",
-  "Deploy wallet instructions": "Voor het gebruik van de portemonnee moet Smart Contract implementeren. Het kost een bedrag dat u moet hebben op het adres van deze portemonnee. Als u probeert de portemonnee op Testnet te implementeren, kunt u `gever` gebruiken om dit initiële bedrag te nemen.",
+  "Deploy wallet instructions": "Voor het gebruik van de portemonnee moet Smart Contract implementeren. Het kost een bedrag dat u moet hebben op het adres van deze portemonnee.",
   "Take from giver": "Neem af van gever",
   "Balance": "Balans",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Bericht verlopen. Contract werd niet op keten uitgevoerd. Mogelijke reden: account heeft onvoldoende saldo voor de gevraagde operatie. Stuur een waarde naar accountsaldo",
@@ -236,7 +236,7 @@
   "Skip this step": "Sla deze stap over",
   "Dismiss backup warning": "WAARSCHUWING VAN DE BACKOP",
   "Max": "Max",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Account heeft onvoldoende saldo voor de gevraagde operatie. Stuur een waarde naar een accountsaldo.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Account heeft onvoldoende saldo voor de gevraagde operatie. Stuur een waarde naar een accountsaldo (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "De uitvoering van het contract werd beëindigd met fout: de berekeningsfase is niet opgevolgd, Exit Code: 107. Voor meer informatie over Exit Code Controleer de contractbroncode of vraag de ontwikkelingsontwikkelaar",
   "Warning": "Waarschuwing",
   "Warning text about restoring": "Seed Phrase Recovery is een verouderde methode. Wij ondersteunen alleen de keystore-restauraties bij de eerste lancering. Na het maken van de eerste portemonnee is het mogelijk om de oude portemonnee uit de zaaduitdrukking te exporteren.",
@@ -339,5 +339,6 @@
   "Search by domain": "Zoek per domein",
   "This transaction is expired": "Deze transactie is verlopen",
   "This transaction is for another account": "Deze transactie is voor een andere account",
-  "This transaction is for another network": "Deze transactie is voor een ander netwerk"
+  "This transaction is for another network": "Deze transactie is voor een ander netwerk",
+  "Extended mode": "Uitgebreide modus"
 }

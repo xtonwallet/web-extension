@@ -205,8 +205,7 @@ export const controller = () => {
   };
 
   const checkNewTransactions = async (accountAddress, server) => {
-    await accountsController.updateTransactionsList(accountAddress, server);
-    return true;
+    return await accountsController.updateTransactionsList(accountAddress, server);
   };
 
   const sendTransaction = async (data, origin) => {
@@ -974,12 +973,25 @@ export const controller = () => {
                       resolve(value.address);
                     });
                   });
-                  const waiting = await new Promise((resolve) => {
-                    waitingTransaction.subscribe((value) => {
-                      resolve(value);
-                    });
-                  });
-                  if (waiting.includes(endpoint + "-" + walletAddress)) {
+
+                  let needCheckAgain = false;
+                  try {
+                    let checkNewTransactionsResult = await checkNewTransactions(walletAddress, endpoint);
+                    if (checkNewTransactionsResult) {
+                      accountStore.removeWaitingTransaction(endpoint + "-" + walletAddress);
+                    } else {
+                      const waiting = await new Promise((resolve) => {
+                        waitingTransaction.subscribe((value) => {
+                          resolve(value);
+                        });
+                      });
+                      needCheckAgain = waiting.includes(endpoint + "-" + walletAddress);
+                    }
+                  } catch(e) {
+                    needCheckAgain = true;
+                  }
+
+                  if (needCheckAgain) {
                     setTimeout(() => {
                       checkWaiting();
                     }, 5000);

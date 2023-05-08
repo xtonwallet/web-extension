@@ -34,7 +34,7 @@ class HttpProvider {
             body: JSON.stringify(request)
         })
         .then((response) => response.json())
-        .then(({ result, error }) => result || Promise.reject(error))
+        .then(({ ok, result, error }) => ok && result ? result : Promise.reject(error))
         .catch((error) => {
             return Promise.reject(error)
         });

@@ -108,7 +108,7 @@
   "Loading": "nalaganje",
   "Network": "Network.",
   "Deploy": "Uvajanje",
-  "Deploy wallet instructions": "Za uporabo denarnice je treba uporabiti pametno pogodbo. Stane nekaj zneska, ki ga morate imeti na naslovu te denarnice. Če poskušate uporabiti denarnico na TESTERNET, lahko uporabite 'daver', da vzamete ta začetni znesek.",
+  "Deploy wallet instructions": "Za uporabo denarnice je treba uporabiti pametno pogodbo. Stane nekaj zneska, ki ga morate imeti na naslovu te denarnice.",
   "Take from giver": "Vzemite iz giverja",
   "Balance": "Ravnovesje",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Sporočilo je potekel. Pogodba ni bila izvedena na verigi. Možen razlog: račun nima zadostnega ravnovesja za zahtevano operacijo. Pošljite nekaj vrednosti na stanje na računu",
@@ -236,7 +236,7 @@
   "Skip this step": "Preskočite ta korak",
   "Dismiss backup warning": "Zavrne varnostno kopijo",
   "Max": "Max.",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Račun za zahtevano operacijo ne zadostuje. Pošljite nekaj vrednosti na stanje na računu.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Račun za zahtevano operacijo ne zadostuje. Pošljite nekaj vrednosti na stanje na računu (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Izvedba pogodbe je bila prekinjena z napako: Faza izračuna ni uspela, izhodna koda: 107. Za več informacij o izhodni kodi preverite kodo naročnika ali vprašajte razvijalca pogodbe",
   "Warning": "Opozorilo",
   "Warning text about restoring": "Izterjava semenskega stavka je zastarela metoda. Podpiramo samo ključno mesto ob obnavljanju prvega zagona. Po ustvarjanju prve denarnice, bo mogoče izvoziti staro denarnico iz semenske fraze. Prosimo, upoštevajte, da podpiramo samo varno različico denarnice, tako da, če semenska fraza pripada drugim različicam. Vsa sredstva je treba prenesti na novo ustvarjeno in razporejeno denarnico.",
@@ -339,5 +339,6 @@
   "Search by domain": "Iskanje po domeni",
   "This transaction is expired": "Ta transakcija je potekla",
   "This transaction is for another account": "Ta transakcija je za drug račun",
-  "This transaction is for another network": "Ta transakcija je za drugo omrežje"
+  "This transaction is for another network": "Ta transakcija je za drugo omrežje",
+  "Extended mode": "Podaljšani način"
 }

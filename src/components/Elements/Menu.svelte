@@ -1,6 +1,7 @@
 <script>
   import { fly } from "svelte/transition";
   import { quintOut } from "svelte/easing";
+  import { currentExtendedMode } from "../../common/stores.js";
 
   import MenuBox from "./MenuBox.svelte";
 
@@ -19,116 +20,121 @@
     mdiApplicationCog
   } from "@mdi/js";
 
-  let menus = [
-    {
-      heading: "Security",
-      show: true,
-      items: [
-        {
-          id: "backup",
-          show: true,
-          logo: mdiArchiveArrowDown,
-          name: "Backup wallet",
-          page: {
-            name: "Backup",
-          },
-        },
-        {
-          id: "restore",
-          show: true,
-          logo: mdiArchiveArrowUp,
-          name: "Restore wallet",
-          page: {
-            name: "RestoreWallet",
-          },
-        },
-        {
-          id: "lock",
-          show: true,
-          logo: mdiLock,
-          name: "Sign out & lock",
-          page: {
-            name: "LockScreen",
-          },
-        },
-      ],
-    },
-    {
-      heading: "Wallet",
-      show: true,
-      items: [
-        {
-          id: "settings",
-          show: true,
-          logo: mdiCog,
-          name: "Settings",
-          page: {
-            name: "Settings",
-          },
-        },
-        {
-          id: "tokens",
-          show: true,
-          logo: mdiAlphaTCircleOutline,
-          name: "Tokens",
-          page: {
-            name: "TokensList",
-          },
-        },
-        {
-          id: "networks",
-          show: true,
-          logo: mdiLan,
-          name: "Networks",
-          page: {
-            name: "NetworksList",
-          },
-        },
-        {
-          id: "permissions",
-          show: true,
-          logo: mdiApplicationCog,
-          name: "Dapp permissions",
-          page: {
-            name: "PermissionsList",
-          },
-        },
-      ]
-    },
-    {
-      heading: "Information",
-      show: true,
-      items: [
-        {
-          id: "about",
-          show: true,
-          logo: mdiCardBulleted,
-          name: "About app",
-          page: {
-            name: "About",
-          },
-        },
-        {
-          id: "feedback",
-          show: true,
-          logo: mdiBullhorn,
-          name: "Give feedback",
-          page: {
-            name: "Feedback",
-          },
-        },
-        {
-          id: "help",
-          show: true,
-          logo: mdiHelp,
-          name: "Help",
-          page: {
-            name: "Help",
-          },
-        },
-      ],
-    },
-  ];
+  let menus = [{
+                heading: "Security",
+                show: true,
+                items: [
+                  {
+                    id: "backup",
+                    show: true,
+                    logo: mdiArchiveArrowDown,
+                    name: "Backup wallet",
+                    page: {
+                      name: "Backup",
+                    },
+                  },
+                  {
+                    id: "restore",
+                    show: true,
+                    logo: mdiArchiveArrowUp,
+                    name: "Restore wallet",
+                    page: {
+                      name: "RestoreWallet",
+                    },
+                  },
+                  {
+                    id: "lock",
+                    show: true,
+                    logo: mdiLock,
+                    name: "Sign out & lock",
+                    page: {
+                      name: "LockScreen",
+                    },
+                  },
+                ],
+              }];
+
+  const items = [
+                {
+                  id: "settings",
+                  show: true,
+                  logo: mdiCog,
+                  name: "Settings",
+                  page: {
+                    name: "Settings",
+                  },
+                },
+                {
+                  id: "tokens",
+                  show: true,
+                  logo: mdiAlphaTCircleOutline,
+                  name: "Tokens",
+                  page: {
+                    name: "TokensList",
+                  },
+                }];
+
+  if ($currentExtendedMode) {
+    items.push({
+                id: "networks",
+                show: true,
+                logo: mdiLan,
+                name: "Networks",
+                page: {
+                  name: "NetworksList",
+                },
+              });
+  }
+
+  items.push({
+              id: "permissions",
+              show: true,
+              logo: mdiApplicationCog,
+              name: "Dapp permissions",
+              page: {
+                name: "PermissionsList",
+              },
+            });
+
+  menus.push({
+              heading: "Wallet",
+              show: true,
+              items: items
+            });
+
+  menus.push({
+              heading: "Information",
+              show: true,
+              items: [
+                {
+                  id: "about",
+                  show: true,
+                  logo: mdiCardBulleted,
+                  name: "About app",
+                  page: {
+                    name: "About",
+                  },
+                },
+                {
+                  id: "feedback",
+                  show: true,
+                  logo: mdiBullhorn,
+                  name: "Give feedback",
+                  page: {
+                    name: "Feedback",
+                  },
+                },
+                {
+                  id: "help",
+                  show: true,
+                  logo: mdiHelp,
+                  name: "Help",
+                  page: {
+                    name: "Help",
+                  },
+                },
+              ],
+            });
 </script>
 
 <style>

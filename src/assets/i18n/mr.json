@@ -108,7 +108,7 @@
   "Loading": "लोडिंग",
   "Network": "नेटवर्क",
   "Deploy": "तैनात करणे",
-  "Deploy wallet instructions": "वॉलेट वापरण्यासाठी स्मार्ट कॉन्ट्रॅक्ट तैनात करणे आवश्यक आहे. या वॉलेटच्या पत्त्यावर आपल्याला आवश्यक असलेली काही रक्कम खर्च करते. आपण टेस्टनेटवर वॉलेट टाकण्याचा प्रयत्न करीत असल्यास, आपण प्रारंभिक रक्कम घेण्यासाठी 'जिव्हर' वापरू शकता.",
+  "Deploy wallet instructions": "वॉलेट वापरण्यासाठी स्मार्ट कॉन्ट्रॅक्ट तैनात करणे आवश्यक आहे. या वॉलेटच्या पत्त्यावर आपल्याला आवश्यक असलेली काही रक्कम खर्च करते.",
   "Take from giver": "देणार पासून घ्या",
   "Balance": "शिल्लक",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "संदेश कालबाह्य झाला. साखळीवर करार केला गेला नाही. संभाव्य कारण: विनंती केलेल्या ऑपरेशनसाठी खात्यात अपुरे शिल्लक आहे. खाते शिल्लक काही मूल्य पाठवा",
@@ -236,7 +236,7 @@
   "Skip this step": "हे चरण वगळा",
   "Dismiss backup warning": "बॅकअप चेतावणी डिसमिस करा",
   "Max": "कमाल",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "विनंती केलेल्या ऑपरेशनसाठी खात्यात अपुरे शिल्लक आहे. खाते शिल्लक काही मूल्य पाठवा.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "विनंती केलेल्या ऑपरेशनसाठी खात्यात अपुरे शिल्लक आहे. खाते शिल्लक काही मूल्य पाठवा (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "कॉन्ट्रॅक्ट अंमलबजावणी त्रुटीसह समाप्त केली गेली: गणना चरण यशस्वी झाला नाही, कोड कोड: 107. एक्झीट कोडबद्दल अधिक माहितीसाठी कॉन्ट्रॅक्ट स्त्रोत कोड तपासा किंवा करार विकासक विचारा",
   "Warning": "चेतावणी",
   "Warning text about restoring": "बियाणे वाक्यांश पुनर्प्राप्ती एक कालबाह्य पद्धत आहे. आम्ही प्रथम प्रक्षेपणावर फक्त कीस्टोर पुनर्संचयित करतो. प्रथम वॉलेट तयार केल्यानंतर, जुन्या वॉलेटला बियाणे वाक्यांशातून निर्यात करणे शक्य होईल. कृपया लक्षात घ्या की आम्ही फक्त वॉलेटच्या सुरक्षिततेसगुली आवृत्तीचे समर्थन करतो, म्हणून जर बियाणे वाक्यांश इतर आवृत्त्या संबंधित असेल तर. सर्व फंड नव्याने तयार आणि तैनात वॉलेटमध्ये हस्तांतरित करणे आवश्यक आहे.",
@@ -339,5 +339,6 @@
   "Search by domain": "डोमेनद्वारे शोध",
   "This transaction is expired": "हा व्यवहार कालबाह्य झाला आहे",
   "This transaction is for another account": "हा व्यवहार दुसर्‍या खात्यासाठी आहे",
-  "This transaction is for another network": "हा व्यवहार दुसर्‍या नेटवर्कसाठी आहे"
+  "This transaction is for another network": "हा व्यवहार दुसर्‍या नेटवर्कसाठी आहे",
+  "Extended mode": "विस्तारित मोड"
 }

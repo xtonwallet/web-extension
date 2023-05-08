@@ -44,11 +44,11 @@ class TonWeb {
      * @param to_lt?    {number}
      * @return array of transaction objects
      */
-    async getTransactions(address, limit = 20, lt = undefined, txhash = undefined, to_lt = undefined) {
+    async getTransactions(address, limit = 20, lt = undefined, txhash = undefined, to_lt = undefined, archival = undefined) {
         if (lt == 0) {
             return this.provider.getTransactions(address.toString(), limit, lt, txhash, to_lt, true);
         } else {
-            return this.provider.getTransactions(address.toString(), limit, lt, txhash, to_lt);
+            return this.provider.getTransactions(address.toString(), limit, lt, txhash, to_lt, archival);
         }
     };
 

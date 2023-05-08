@@ -108,7 +108,7 @@
   "Loading": "লোড হচ্ছে",
   "Network": "অন্তর্জাল",
   "Deploy": "স্থাপন করা",
-  "Deploy wallet instructions": "Wallet ব্যবহার করার জন্য স্মার্ট চুক্তি স্থাপনের প্রয়োজন। এটি এমন কিছু পরিমাণ খরচ করে যা আপনাকে এই মানিবারের ঠিকানায় থাকতে হবে। আপনি যদি TestNet এ ওয়ালেটটি স্থাপন করার চেষ্টা করছেন, আপনি এই প্রাথমিক পরিমাণটি নিতে 'দাতা' ব্যবহার করতে পারেন।",
+  "Deploy wallet instructions": "ওয়ালেট ব্যবহারের জন্য স্মার্ট চুক্তি স্থাপন করা প্রয়োজন। এই মানিব্যাগের ঠিকানায় আপনাকে অবশ্যই কিছু পরিমাণ খরচ করতে হবে।",
   "Take from giver": "প্রদানকারী থেকে নিন",
   "Balance": "ভারসাম্য",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "বার্তা মেয়াদ শেষ। চুক্তি চেইন উপর মৃত্যুদন্ড কার্যকর করা হয় নি। সম্ভাব্য কারণ: অ্যাকাউন্ট অনুরোধ অপারেশন জন্য অপর্যাপ্ত ভারসাম্য আছে। অ্যাকাউন্ট ব্যালেন্স কিছু মান পাঠান",
@@ -236,7 +236,7 @@
   "Skip this step": "এই পদক্ষেপটি এড়িয়ে যান",
   "Dismiss backup warning": "ব্যাকআপ সতর্কতা বরখাস্ত করুন",
   "Max": "সর্বোচ্চ",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "অ্যাকাউন্ট অনুরোধ অপারেশন জন্য অপর্যাপ্ত ভারসাম্য আছে। অ্যাকাউন্ট ব্যালেন্স কিছু মান পাঠান।",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "অ্যাকাউন্ট অনুরোধ অপারেশন জন্য অপর্যাপ্ত ভারসাম্য আছে। অ্যাকাউন্ট ব্যালেন্স কিছু মান পাঠান। (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "চুক্তি এক্সিকিউশনটি ত্রুটির সাথে সমাপ্ত হয়েছিল: কম্পিউট ফেজ সফল নয়, প্রস্থান কোড: 107. প্রস্থান কোড সম্পর্কে আরও তথ্যের জন্য চুক্তি সোর্স কোডটি চেক করুন অথবা চুক্তি বিকাশকারীকে জিজ্ঞাসা করুন",
   "Warning": "সতর্কতা",
   "Warning text about restoring": "বীজ বাক্যাংশ পুনরুদ্ধার একটি পুরানো পদ্ধতি। আমরা শুধুমাত্র প্রথম লঞ্চে কীস্টোর পুনরুদ্ধার সমর্থন করি। প্রথম ওয়ালেট তৈরি করার পর, বীজ বাক্যাংশ থেকে পুরানো ওয়ালেট রপ্তানি করা সম্ভব হবে।",
@@ -339,5 +339,6 @@
   "Search by domain": "ডোমেন দ্বারা অনুসন্ধান",
   "This transaction is expired": "এই লেনদেনের মেয়াদ শেষ হয়ে গেছে",
   "This transaction is for another account": "এই লেনদেন অন্য অ্যাকাউন্টের জন্য",
-  "This transaction is for another network": "এই লেনদেনটি অন্য নেটওয়ার্কের জন্য"
+  "This transaction is for another network": "এই লেনদেনটি অন্য নেটওয়ার্কের জন্য",
+  "Extended mode": "বর্ধিত মোড"
 }

@@ -1,5 +1,5 @@
 <script>
-  import { getContext, onMount, onDestroy, afterUpdate } from "svelte";
+  import { getContext, onMount, onDestroy } from "svelte";
   import { Icon, Button } from "svelte-chota";
   import { _ } from "svelte-i18n";
 

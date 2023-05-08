@@ -108,7 +108,7 @@
   "Loading": "Зареждане",
   "Network": "Мрежа",
   "Deploy": "Разгръщане",
-  "Deploy wallet instructions": "За използване на портфейла трябва да се разгърне интелигентен договор. Това струва някаква сума, която трябва да имате на адреса на този портфейл. Ако се опитвате да разгърнете портфейла в Testnet, можете да използвате 'Дарител', за да вземете тази първоначална сума.",
+  "Deploy wallet instructions": "За използване на портфейла трябва да се разгърне интелигентен договор. Това струва някаква сума, която трябва да имате на адреса на този портфейл.",
   "Take from giver": "Вземете от Дарител.",
   "Balance": "Баланс",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Изтекла съобщение. Договорът не е изпълнен на верига. Възможна причина: сметка няма достатъчно баланс за исканата операция. Изпратете някаква стойност на баланса на сметката",
@@ -236,7 +236,7 @@
   "Skip this step": "Пропуснете тази стъпка",
   "Dismiss backup warning": "Освободете предупреждението за архивиране",
   "Max": "Макс",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Сметката има недостатъчен баланс за исканата операция. Изпратете баланса на сметката.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Сметката има недостатъчен баланс за исканата операция. Изпратете баланса на сметката (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Изпълнението на договора е прекратено с грешка: Фазата на изчисление не е успешна, изход код: 107. За повече информация относно кода за изход проверете кода на източника на договор или попитайте разработчика на договора",
   "Warning": "Внимание",
   "Warning text about restoring": "Възстановяването на семената е остарял метод. Подкрепяме само Keystore възстановява първото стартиране. След създаването на първия портфейл, ще бъде възможно да се изнася стария портфейл от семената.",
@@ -339,5 +339,6 @@
   "Search by domain": "Търсене по домейн",
   "This transaction is expired": "Тази транзакция е изтекла",
   "This transaction is for another account": "Тази транзакция е за друг акаунт",
-  "This transaction is for another network": "Тази транзакция е за друга мрежа"
+  "This transaction is for another network": "Тази транзакция е за друга мрежа",
+  "Extended mode": "Удължен режим"
 }

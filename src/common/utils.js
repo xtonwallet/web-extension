@@ -549,6 +549,10 @@ const getRate = async (сurrency) => {
   return result;
 };
 
+const sleep = async (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+};
+
 export {
   Unibabel,
   // Simple methods to store in localStorage:
@@ -587,4 +591,5 @@ export {
   enableProxy,
   generateQRcode,
   getRate,
+  sleep,
 };

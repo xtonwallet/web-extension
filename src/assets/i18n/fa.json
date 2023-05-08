@@ -108,7 +108,7 @@
   "Loading": "بارگذاری",
   "Network": "شبکه",
   "Deploy": "راه اندازی کردن",
-  "Deploy wallet instructions": "برای استفاده از کیف پول نیاز به استقرار قرارداد هوشمند دارد. این هزینه ها را هزینه می کند که باید در آدرس این کیف پول داشته باشید. اگر شما در حال تلاش برای استفاده از کیف پول در TestNet هستید، می توانید از 'Giver' برای استفاده از این مقدار اولیه استفاده کنید.",
+  "Deploy wallet instructions": "برای استفاده از کیف پول نیاز به استقرار قرارداد هوشمند است. مقداری هزینه دارد که باید در آدرس این کیف پول داشته باشید.",
   "Take from giver": "از دست دادن",
   "Balance": "تعادل",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "پیام منقضی شده است قرارداد بر روی زنجیره اجرا نشد. دلیل احتمالی: حساب دارای تعادل کافی برای عملیات درخواست شده است. ارسال ارزش برای تعادل حساب",
@@ -236,7 +236,7 @@
   "Skip this step": "از این مرحله بگذر",
   "Dismiss backup warning": "اخراج پشتیبان گیری اخطار",
   "Max": "مکس",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "حساب دارای تعادل کافی برای عملیات درخواست شده است. ارسال برخی از ارزش به حساب مانده حساب.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "حساب دارای تعادل کافی برای عملیات درخواست شده است. ارسال برخی از ارزش به حساب مانده حساب (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "اعدام قرارداد با خطا خاتمه یافت: فاز محاسبه شده موفق نشد، خروج از کد: 107. برای کسب اطلاعات بیشتر در مورد کد خروج، کد منبع قرارداد را بررسی کنید یا از توسعه دهنده قرارداد بپرسید",
   "Warning": "هشدار",
   "Warning text about restoring": "بازیابی عبارت بذر یک روش منسوخ شده است. ما فقط از بازیابی فروشگاه کلید در اولین راه اندازی پشتیبانی می کنیم. پس از ایجاد اولین کیف پول، امکان صادرات کیف پول قدیمی از عبارت seed وجود خواهد داشت.",
@@ -339,5 +339,6 @@
   "Search by domain": "جستجو توسط دامنه",
   "This transaction is expired": "این معامله منقضی شده است",
   "This transaction is for another account": "این معامله برای یک حساب دیگر است",
-  "This transaction is for another network": "این معامله برای شبکه دیگری است"
+  "This transaction is for another network": "این معامله برای شبکه دیگری است",
+  "Extended mode": "حالت گسترده"
 }

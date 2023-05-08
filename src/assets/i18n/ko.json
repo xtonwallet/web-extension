@@ -108,7 +108,7 @@
   "Loading": "로딩",
   "Network": "회로망",
   "Deploy": "배포",
-  "Deploy wallet instructions": "지갑 사용은 스마트 계약을 배포해야합니다. 이 지갑의 주소에 필요한 금액은 비용이 많이 듭니다. TestNet에 지갑을 배포하려고하면이 초기 금액을 사용하려면`Giver`를 사용할 수 있습니다.",
+  "Deploy wallet instructions": "지갑 사용은 스마트 계약을 배포해야합니다. 이 지갑의 주소에 필요한 금액은 비용이 많이 듭니다.",
   "Take from giver": "주인에서 가져 가라",
   "Balance": "밸런스",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "메시지가 만료되었습니다. 계약은 체인에서 실행되지 않았습니다. 가능한 이유 : 계정이 요청 된 작업에 대한 균형이 충분하지 않습니다. 계정 잔액에 몇 가지 가치를 보냅니다",
@@ -236,7 +236,7 @@
   "Skip this step": "이 단계를 건너 뛰",
   "Dismiss backup warning": "백업 경고를 닫습니다",
   "Max": "최대",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "계정이 요청 된 작업에 대한 균형이 충분하지 않습니다. 계정 잔액에 몇 가지 가치를 보냅니다.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "계정이 요청 된 작업에 대한 균형이 충분하지 않습니다. 계정 잔액에 몇 가지 가치를 보냅니다 (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "계약서 실행은 오류로 종료되지 않았습니다. Compute Phase가 성공하지 못하고 코드 : 107을 종료하지 않으 셨습니다. 종료 코드에 대한 자세한 정보는 계약 소스 코드를 확인하거나 계약 개발자에게 문의하십시오.",
   "Warning": "경고",
   "Warning text about restoring": "씨앗 구문 복구는 오래된 방법입니다. 첫 번째 출시시 keystore 복원 만 지원합니다. 첫 번째 지갑을 만든 후에는 씨앗 구문에서 오래된 지갑을 내보낼 수 있습니다.",
@@ -339,5 +339,6 @@
   "Search by domain": "도메인 별 검색",
   "This transaction is expired": "이 거래는 만료됩니다",
   "This transaction is for another account": "이 거래는 다른 계정을위한 것입니다",
-  "This transaction is for another network": "이 거래는 다른 네트워크를위한 것입니다"
+  "This transaction is for another network": "이 거래는 다른 네트워크를위한 것입니다",
+  "Extended mode": "확장 모드"
 }

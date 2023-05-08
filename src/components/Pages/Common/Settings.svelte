@@ -8,6 +8,7 @@
     settingsStore,
     currentLang,
     currentAutologout,
+    currentExtendedMode,
     currentRetrievingTransactionsPeriod,
     currentEnabledProxy,
     currentCurrency,
@@ -24,7 +25,7 @@
   const { switchPage } = getContext("app_functions");
 
   //DOM nodes
-  let formObj, language, autologout, pincode, retrievingTransactionsPeriod, enableProxy, currency;
+  let formObj, language, autologout, pincode, retrievingTransactionsPeriod, enableProxy, extendedMode, currency;
   let currentCurrencyValue, currentLanguageValue;
   let currenciesItems = [];
   let languagesItems = [];
@@ -45,6 +46,7 @@
     pincode = document.getElementById("pincode-input");
     retrievingTransactionsPeriod = document.getElementById("retrieving-transactions-period-input");
     enableProxy = document.getElementById("enable-proxy-input");
+    extendedMode = document.getElementById("extended-mode-input");
 
     currency = document.getElementById("currency-input");
     currency.dataset.value = $currentCurrency;
@@ -64,6 +66,7 @@
         settingsStore.setAutologout(autologout.value);
         settingsStore.setRetrievingTransactionsPeriod(retrievingTransactionsPeriod.value);
         settingsStore.setEnabledProxy(enableProxy.checked);
+        settingsStore.setExtendedMode(extendedMode.checked);
         settingsStore.setCurrency(currency.dataset.value);
 
         const currentRate = await getRate(currency.dataset.value);
@@ -87,11 +90,13 @@
             "setRetrievingTransactionsPeriod": retrievingTransactionsPeriod.value,
             "setEnabledPinPad": settingEnabledPinPad,
             "setEnabledProxy": enableProxy.checked,
+            "setExtendedMode": extendedMode.checked,
             "setCurrency": currency.dataset.value,
             "setRate": currentRate,
           }})
           .then(() => {
             switchPage("AccountMain");
+            window.location.reload();
           }).catch((error) => {
             console.error("Error on sendMessage:" + JSON.stringify(error.message));
           });
@@ -167,14 +172,25 @@
     </div>
   </Field>
   <Field grouped>
-    <div class="input-box-50">
-      <Field label={$_('Enable TON proxy')}>
-        <Checkbox
-          value="enabled"
-          id="enable-proxy-input"
-          checked={$currentEnabledProxy}
-        />
-      </Field>
+    <div class="input-box-50 inherit-direction">
+      <div class="input-box-50">
+        <Field label={$_('Enable TON proxy')}>
+          <Checkbox
+            value="enabled"
+            id="enable-proxy-input"
+            checked={$currentEnabledProxy}
+          />
+        </Field>
+      </div>
+      <div class="input-box-50">
+        <Field label={$_('Extended mode')}>
+          <Checkbox
+            value="enabled"
+            id="extended-mode-input"
+            checked={$currentExtendedMode}
+          />
+        </Field>
+      </div>
     </div>
     <div class="input-box-50">
       <Field label={$_('Autologout (in minutes)')}>

@@ -30,7 +30,6 @@
 
   import {
     accountStore,
-    networksStore,
     currentAccount,
     currentNetwork,
     currentRate,
@@ -175,12 +174,15 @@
                 accountAddress: $currentAccount.address,
                 server: $currentNetwork.server
               }
-            }).then(() => {
-              accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
-              waitingTransactionChecking = false;
+            }).then((result) => {
+              if (result) {
+                accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
+                waitingTransactionChecking = false;
+              }
             }).catch((e) => {
-              accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
-              waitingTransactionChecking = false;
+              if (devMode) {
+                console.log(e);
+              }
             });
         }, 10000);
     }

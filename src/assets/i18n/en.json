@@ -108,7 +108,7 @@
   "Loading": "Loading",
   "Network": "Network",
   "Deploy": "Deploy",
-  "Deploy wallet instructions": "For using the wallet needs to deploy smart contract. It costs some amount that you must to have on the address of this wallet. If you are trying to deploy the wallet on testnet, you can use `giver` to take this initial amount.",
+  "Deploy wallet instructions": "For using the wallet needs to deploy smart contract. It costs some amount that you must to have on the address of this wallet.",
   "Take from giver": "Take from giver",
   "Balance": "Balance",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance",
@@ -236,7 +236,7 @@
   "Skip this step": "Skip this step",
   "Dismiss backup warning": "Dismiss backup warning",
   "Max": "Max",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Account has insufficient balance for the requested operation. Send some value to account balance.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Account has insufficient balance for the requested operation. Send some value to account balance (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer",
   "Warning": "Warning",
   "Warning text about restoring": "Seed phrase recovery is an outdated method. We only support keystore restores on first launch. After creating the first wallet, it will be possible to export the old wallet from the seed phrase.",
@@ -339,5 +339,6 @@
   "Search by domain": "Search by domain",
   "This transaction is expired": "This transaction is expired",
   "This transaction is for another account": "This transaction is for another account",
-  "This transaction is for another network": "This transaction is for another network"
+  "This transaction is for another network": "This transaction is for another network",
+  "Extended mode": "Extended mode"
 }

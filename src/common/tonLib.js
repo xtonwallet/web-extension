@@ -120,7 +120,7 @@ class TonLib {
 
   async requestAccountTransactions(address, now) {
     try {
-      return await this.instance.getTransactions(address, 20, now);
+      return await this.instance.getTransactions(address, 20, now, undefined, ~~(new Date().getTime()/1000), true);
     } catch (exp) {
       throw exp;
     }

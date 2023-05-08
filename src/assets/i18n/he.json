@@ -108,7 +108,7 @@
   "Loading": "טוען",
   "Network": "רֶשֶׁת",
   "Deploy": "לפרוס",
-  "Deploy wallet instructions": "לשימוש בארנק צריך לפרוס חוזה חכם. זה עולה סכום מסוים שאתה חייב להיות על הכתובת של ארנק זה. אם אתה מנסה לפרוס את הארנק על testnet, אתה יכול להשתמש 'giver' לקחת את הסכום הראשוני.",
+  "Deploy wallet instructions": "עבור השימוש בארנק צריך לפרוס חוזה חכם. זה עולה סכום מסוים שאתה חייב שיהיה בכתובת של הארנק הזה.",
   "Take from giver": "קח מ GIRT.",
   "Balance": "איזון",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "הודעה פג. החוזה לא הוצא להורג בשרשרת. סיבה אפשרית: חשבון יש איזון מספיק עבור המבצע המבוקש. שלח ערך כלשהו לאיזון החשבון",
@@ -236,7 +236,7 @@
   "Skip this step": "דלג על שלב זה",
   "Dismiss backup warning": "לדחות אזהרת גיבוי",
   "Max": "מקס",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "לחשבון אין איזון מספיק עבור הפעולה המבוקשת. שלח ערך כלשהו לאיזון החשבון.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "לחשבון אין איזון מספיק עבור הפעולה המבוקשת. שלח ערך כלשהו לאיזון החשבון (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "ביצוע חוזה הסתיים עם שגיאה: שלב לחשב לא מצליח, קוד יציאה: 107. לקבלת מידע נוסף אודות קוד יציאה בדוק את קוד המקור החוזה או לשאול את מפתח החוזה",
   "Warning": "אַזהָרָה",
   "Warning text about restoring": "שחזור ביטויי זרע היא שיטה מיושנת. אנו תומכים בשחזורים של מאגר מפתחות רק בהפעלה הראשונה. לאחר יצירת הארנק הראשון, ניתן יהיה לייצא את הארנק הישן מביטוי הסיד.",
@@ -339,5 +339,6 @@
   "Search by domain": "חיפוש לפי דומיין",
   "This transaction is expired": "עסקה זו פגה",
   "This transaction is for another account": "עסקה זו מיועדת לחשבון אחר",
-  "This transaction is for another network": "עסקה זו מיועדת לרשת אחרת"
+  "This transaction is for another network": "עסקה זו מיועדת לרשת אחרת",
+  "Extended mode": "מצב מורחב"
 }

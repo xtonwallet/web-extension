@@ -108,7 +108,7 @@
   "Loading": "Wird geladen",
   "Network": "Netzwerk",
   "Deploy": "Einsetzen.",
-  "Deploy wallet instructions": "Für die Verwendung der Brieftasche muss Smart Contract eingesetzt werden. Es kostet einen gewünschten Betrag, den Sie an der Adresse dieser Brieftasche haben müssen. Wenn Sie versuchen, die Brieftasche auf TestNet bereitzustellen, können Sie 'Geber' verwenden, um diesen Anfangsbetrag anzunehmen.",
+  "Deploy wallet instructions": "Für die Verwendung der Brieftasche muss Smart Contract eingesetzt werden. Es kostet einen gewünschten Betrag, den Sie an der Adresse dieser Brieftasche haben müssen.",
   "Take from giver": "Vom Geber nehmen",
   "Balance": "Balance",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Nachricht abgelaufen. Der Vertrag wurde nicht an der Kette ausgeführt. Möglicher Grund: Konto hat ein unzureichendes Guthaben für den angeforderten Betrieb. Senden Sie einen Wert, um den Kontostand zu berücksichtigen",
@@ -236,7 +236,7 @@
   "Skip this step": "Überspringe diesen Schritt",
   "Dismiss backup warning": "Backup Warnung abweisen",
   "Max": "Max",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Konto hat ein unzureichendes Guthaben für den angeforderten Betrieb. Senden Sie einen Wert, um den Kontostand zu berücksichtigen.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Konto hat ein unzureichendes Guthaben für den angeforderten Betrieb. Senden Sie einen Wert, um den Kontostand zu berücksichtigen (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Die Vertragsausführung wurde mit einem Fehler beendet: Die Berechnungsphase ist nicht erfolgreich, beenden Sie den Code: 107. Weitere Informationen zum Exit-Code prüfen Sie den Vertragsquellcode oder fragen Sie den Vertragsentwickler",
   "Warning": "Warnung",
   "Warning text about restoring": "Samenphrase-Wiederherstellung ist eine veraltete Methode. Wir unterstützen nur Keystore-Wiederherstellungen beim ersten Start. Nach der Erstellung der ersten Brieftasche ist es möglich, die alte Geldbörse aus dem Samensatz zu exportieren. Bitte beachten Sie, dass wir nur die SAFEMULTIGIGYWALLET-Version der Brieftasche unterstützen, also wenn der Samenphrase zu anderen Versionen gehört. Alle Fonds müssen an die neu erstellte und bereitgestellte Brieftasche übertragen werden.",
@@ -339,5 +339,6 @@
   "Search by domain": "Suche nach Domain",
   "This transaction is expired": "Diese Transaktion ist abgelaufen",
   "This transaction is for another account": "Diese Transaktion ist für ein anderes Konto",
-  "This transaction is for another network": "Diese Transaktion ist für ein anderes Netzwerk"
+  "This transaction is for another network": "Diese Transaktion ist für ein anderes Netzwerk",
+  "Extended mode": "Erweiterter Modus"
 }

@@ -108,7 +108,7 @@
   "Loading": "Betöltés",
   "Network": "Hálózat",
   "Deploy": "Bevezet",
-  "Deploy wallet instructions": "A pénztárca használatához intelligens szerződést kell alkalmaznia. Egy kis mennyiségű, amit a pénztárca címére kell adnia. Ha megpróbálja telepíteni a pénztárcát a Testnet-en, használhatja a 'Giver' -t, hogy megtegye ezt a kezdeti összeget.",
+  "Deploy wallet instructions": "A pénztárca használatához intelligens szerződést kell alkalmaznia. Egy kis mennyiségű, amit a pénztárca címére kell adnia.",
   "Take from giver": "Adományozóból származik",
   "Balance": "Egyensúly",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Üzenet lejárt. A szerződést nem hajtották végre láncon. Lehetséges ok: A fióknak nincs elegendő egyenlege a kért működéshez. Küldje el a számlaegyenleget",
@@ -236,7 +236,7 @@
   "Skip this step": "Ugorja át ezt a lépést",
   "Dismiss backup warning": "Elutasítja a biztonsági mentés figyelmeztetését",
   "Max": "Max",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "A fióknak nincs elegendő egyenlege a kért működéshez. Küldjön valamilyen értéket a fiók egyenlegének.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "A fióknak nincs elegendő egyenlege a kért működéshez. Küldjön valamilyen értéket a fiók egyenlegének (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "A szerződés végrehajtása hibával megszűnt: A kiszámítási fázis nem sikerült, kilépési kód: 107. További információ a kilépési kódról Ellenőrizze a szerződés forráskódját, vagy kérje meg a szerződésfejlesztőt",
   "Warning": "Figyelem",
   "Warning text about restoring": "A vetőmag-kifejezés helyreállítása elavult módszer. Csak az első indításkor visszaállítottuk a Keystore-t. Miután létrehozta az első pénztárcát, lehetséges lesz exportálni a régi pénztárcát a mag mondatból.",
@@ -339,5 +339,6 @@
   "Search by domain": "Keresés domain szerint",
   "This transaction is expired": "Ez a tranzakció lejárt",
   "This transaction is for another account": "Ez a tranzakció egy másik számlára vonatkozik",
-  "This transaction is for another network": "Ez a tranzakció egy másik hálózatra vonatkozik"
+  "This transaction is for another network": "Ez a tranzakció egy másik hálózatra vonatkozik",
+  "Extended mode": "Kiterjesztett mód"
 }

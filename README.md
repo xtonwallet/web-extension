@@ -66,19 +66,19 @@ This repository provides by [Apache License 2.0](LICENSE)
 To prepare environment need to run:
 
 ```
-yarn install
+yarn
 ```
 
 To run developer mode:
 
 ```
-yarn start
+yarn dev
 ```
 
 To prepare build need to run:
 
 ```
-yarn run build
+yarn build
 ```
 
 This command will generate a zip file for each browser.

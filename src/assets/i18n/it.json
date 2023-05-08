@@ -108,7 +108,7 @@
   "Loading": "Caricamento in corso",
   "Network": "Rete",
   "Deploy": "Implementare",
-  "Deploy wallet instructions": "Per l'utilizzo del portafoglio deve distribuire il contratto intelligente. Costa un po 'di importo che devi avere sull'indirizzo di questo portafoglio. Se si sta tentando di distribuire il portafoglio su testnet, puoi usare `donatore` per prendere questa quantità iniziale.",
+  "Deploy wallet instructions": "Per l'utilizzo del portafoglio deve distribuire il contratto intelligente. Costa un po 'di importo che devi avere sull'indirizzo di questo portafoglio.",
   "Take from giver": "Prendere dal donatore",
   "Balance": "Equilibrio",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Messaggio è scaduto. Il contratto non è stato eseguito sulla catena. Ragione possibile: il conto ha un equilibrio insufficiente per l'operazione richiesta. Invia un valore per il saldo del conto",
@@ -236,7 +236,7 @@
   "Skip this step": "Salta questo passaggio",
   "Dismiss backup warning": "Licenziare avvertimento di backup",
   "Max": "Max.",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "L'account ha un equilibrio insufficiente per l'operazione richiesta. Invia qualche valore per il saldo del conto.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "L'account ha un equilibrio insufficiente per l'operazione richiesta. Invia qualche valore per il saldo del conto (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "L'esecuzione del contratto è stata interrotta con errore: la fase di calcolo non è riuscita, il codice di uscita: 107. Per ulteriori informazioni sul codice di uscita controlla il codice sorgente del contratto o chiedere allo sviluppatore del contratto",
   "Warning": "Avvertimento",
   "Warning text about restoring": "Il recupero della frase dei semi è un metodo obsoleto. Supportiamo solo il keystore ripristini il primo lancio. Dopo aver creato il primo portafoglio, sarà possibile esportare il vecchio portafoglio dalla frase dei semi.",
@@ -339,5 +339,6 @@
   "Search by domain": "Cerca per dominio",
   "This transaction is expired": "Questa transazione è scaduta",
   "This transaction is for another account": "Questa transazione è per un altro account",
-  "This transaction is for another network": "Questa transazione è per un'altra rete"
+  "This transaction is for another network": "Questa transazione è per un'altra rete",
+  "Extended mode": "Modalità estesa"
 }

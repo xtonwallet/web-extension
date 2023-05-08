@@ -108,7 +108,7 @@
   "Loading": "načítání",
   "Network": "Síť",
   "Deploy": "Nasadit",
-  "Deploy wallet instructions": "Pro použití peněženky musí nasadit inteligentní smlouvu. Stojí to určitá částka, kterou musíte mít na adrese této peněženky. Pokud se pokoušíte nasadit peněženku na testnet, můžete použít `Giver`, aby toto počáteční množství.",
+  "Deploy wallet instructions": "Pro použití peněženky musí nasadit inteligentní smlouvu. Stojí to určitá částka, kterou musíte mít na adrese této peněženky.",
   "Take from giver": "Vzít z dárce",
   "Balance": "Zůstatek",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Vypršela zpráva. Smlouva nebyla provedena na řetězci. Možný důvod: Účet nemá dostatek zůstatku pro požadovanou operaci. Poslat nějakou hodnotu na zůstatek účtu",
@@ -236,7 +236,7 @@
   "Skip this step": "Tento krok přeskočte",
   "Dismiss backup warning": "Odmítnout záložní varování",
   "Max": "Max",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Účet má nedostatek zůstatku pro požadovanou operaci. Zaslat nějakou hodnotu na zůstatek účtu.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Účet má nedostatek zůstatku pro požadovanou operaci. Zaslat nějakou hodnotu na zůstatek účtu (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Provedení smlouvy byla ukončena chybou: Počíta fáze není úspěšná, ukončit kód: 107. Další informace o ukončovacím kódu Zkontrolujte zdrojový kód smlouvy nebo požádejte o vývojáře smlouvy",
   "Warning": "Varování",
   "Warning text about restoring": "Zotavení semen fráze je zastaralá metoda. Podporujeme pouze KeyStore obnovuje na prvním spuštění. Po vytvoření první peněženky bude možné exportovat starou peněženku z fráze osiva.",
@@ -339,5 +339,6 @@
   "Search by domain": "Hledat podle domény",
   "This transaction is expired": "Tato transakce vypršela",
   "This transaction is for another account": "Tato transakce je pro jiný účet",
-  "This transaction is for another network": "Tato transakce je pro jinou síť"
+  "This transaction is for another network": "Tato transakce je pro jinou síť",
+  "Extended mode": "Rozšířený režim"
 }

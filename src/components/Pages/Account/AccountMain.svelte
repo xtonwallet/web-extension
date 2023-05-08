@@ -176,11 +176,14 @@
                 server: $currentNetwork.server
               }
             }).then(() => {
-              accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
-              waitingTransactionChecking = false;
+              if (result) {
+                accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
+                waitingTransactionChecking = false;
+              }
             }).catch((e) => {
-              accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
-              waitingTransactionChecking = false;
+              if (devMode) {
+                console.log(e);
+              }
             });
         }, 10000);
     }

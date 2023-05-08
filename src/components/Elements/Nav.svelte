@@ -3,6 +3,9 @@
   import Logo from "./Logo.svelte";
   import Controls from "./Controls.svelte";
   import AccountsList from "./AccountsList.svelte";
+
+  //Stores
+  import { currentExtendedMode } from "../../common/stores.js";
 </script>
 
 <style>
@@ -28,6 +31,8 @@
 <div class="navigation">
   <Logo />
   <div class="spacer" />
-  <Controls />
+  {#if $currentExtendedMode}
+    <Controls />
+  {/if}
   <AccountsList />
 </div>

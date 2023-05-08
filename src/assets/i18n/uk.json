@@ -108,7 +108,7 @@
   "Loading": "Навантаження",
   "Network": "Мережа",
   "Deploy": "Розгортати",
-  "Deploy wallet instructions": "Для використання гаманця потрібно розгорнути розумний контракт. Це коштує певну суму, яку ви повинні мати на адресу цього кошелею. Якщо ви намагаєтеся розгорнути гаманець на TESTNET, ви можете використовувати `Giver`, щоб прийняти цю початкову суму.",
+  "Deploy wallet instructions": "Для використання гаманця необхідно розгорнути смарт-контракт. Це коштує певну суму, яку ви повинні мати на адресу цього гаманця.",
   "Take from giver": "Візьміть",
   "Balance": "Баланс",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Повідомлення закінчилося. Контракт не був виконаний на ланцюжку. Можлива причина: обліковий запис має недостатній баланс для запитуваної операції. Надішліть деяке значення для рахунку рахунку",
@@ -236,7 +236,7 @@
   "Skip this step": "Пропустіть цей крок",
   "Dismiss backup warning": "Відхилити резервне копіювання",
   "Max": "Макс",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Обліковий запис має недостатній баланс для запитуваної операції. Надішліть своє значення для облікового запису.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Обліковий запис має недостатній баланс для запитуваної операції. Надішліть своє значення для облікового запису (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Виконання контракту була припинена з помилкою: Compute Phase не вдалося, код виходу: 107. Для отримання додаткової інформації про код виходу перевіряйте вихідний код договору або попросіть розробника контракту",
   "Warning": "Увага",
   "Warning text about restoring": "Відновлення фрази насіння - застарілий метод. Ми підтримуємо лише keystore відновлюється на першому запуску. Після створення першого гаманця можна буде експортувати старий кошелек з фрази насіння.",
@@ -339,5 +339,6 @@
   "Search by domain": "Пошук за доменом",
   "This transaction is expired": "Ця транзакція закінчилася",
   "This transaction is for another account": "Ця транзакція призначена для іншого рахунку",
-  "This transaction is for another network": "Ця транзакція призначена для іншої мережі"
+  "This transaction is for another network": "Ця транзакція призначена для іншої мережі",
+  "Extended mode": "Розширений режим"
 }

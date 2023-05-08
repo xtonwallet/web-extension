@@ -108,7 +108,7 @@
   "Loading": "Iekraušana",
   "Network": "Tīkls",
   "Deploy": "Izvietot",
-  "Deploy wallet instructions": "Lai izmantotu seifu, ir jāizmanto gudrs līgums. Tas maksā kādu summu, kas jums ir, lai būtu uz adresi šo seifu. Ja jūs mēģināt izvietot seifu testnet, jūs varat izmantot 'devēja', lai veiktu šo sākotnējo summu.",
+  "Deploy wallet instructions": "Lai izmantotu seifu, ir jāizmanto gudrs līgums. Tas maksā kādu summu, kas jums ir, lai būtu uz adresi šo seifu.",
   "Take from giver": "Ņemiet no devēja",
   "Balance": "Līdzsvars",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Ziņojums beidzies. Līgums netika izpildīts ķēdē. Iespējamais iemesls: kontam ir nepietiekams atlikums pieprasītajai darbībai. Nosūtiet vērtību konta atlikumam",
@@ -236,7 +236,7 @@
   "Skip this step": "Izlaist šo soli",
   "Dismiss backup warning": "Atlaidiet backup brīdinājumu",
   "Max": "Max",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Kontam ir nepietiekams atlikums pieprasītajai darbībai. Nosūtiet zināmu vērtību konta atlikumam.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Kontam ir nepietiekams atlikums pieprasītajai darbībai. Nosūtiet zināmu vērtību konta atlikumam (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Līguma izpilde tika izbeigta ar kļūdu: Computer fāze nav izdevies, izejas kods: 107. Lai iegūtu plašāku informāciju par izejas kodu Pārbaudiet līguma avota kodu vai jautājiet līguma izstrādātājam",
   "Warning": "Brīdinājums",
   "Warning text about restoring": "Sēklu frāzes atgūšana ir novecojusi metode. Mēs atbalstām tikai Keystore atjauno pirmo reizi. Pēc pirmās maku izveides būs iespējams eksportēt veco maku no sēklu frāzes. Lūdzu, ņemiet vērā, ka mēs atbalstām tikai seifultrisigwallet versiju maku, tādēļ, ja sēklu frāze pieder citām versijām. Visi līdzekļi jānodod jaunizveidotajam un izvietotajam maku.",
@@ -339,5 +339,6 @@
   "Search by domain": "Meklēšana pēc domēna",
   "This transaction is expired": "Šī darījuma derīguma termiņš ir beidzies",
   "This transaction is for another account": "Šis darījums ir paredzēts citam kontam",
-  "This transaction is for another network": "Šis darījums ir paredzēts citam tīklam"
+  "This transaction is for another network": "Šis darījums ir paredzēts citam tīklam",
+  "Extended mode": "Pagarināts režīms"
 }

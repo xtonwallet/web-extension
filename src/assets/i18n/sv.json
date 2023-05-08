@@ -108,7 +108,7 @@
   "Loading": "Läser in",
   "Network": "Nätverk",
   "Deploy": "Utplacera",
-  "Deploy wallet instructions": "För att använda plånboken måste distribuera smart kontrakt. Det kostar lite belopp som du måste ha på adressen till denna plånbok. Om du försöker distribuera plånboken på Testnet, kan du använda `Giver` för att ta denna ursprungliga belopp.",
+  "Deploy wallet instructions": "För att använda plånboken måste distribuera smart kontrakt. Det kostar lite belopp som du måste ha på adressen till denna plånbok.",
   "Take from giver": "Ta från givare",
   "Balance": "Balans",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Meddelandet upphörde. Kontraktet utfördes inte på kedjan. Möjlig orsak: Kontot har otillräckligt balans för den begärda operationen. Skicka lite värde till kontosaldo",
@@ -236,7 +236,7 @@
   "Skip this step": "Hoppa över det här steget",
   "Dismiss backup warning": "Avvisa backup varning",
   "Max": "Max",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Kontot har otillräckligt balans för den begärda operationen. Skicka lite värde till kontosaldo.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Kontot har otillräckligt balans för den begärda operationen. Skicka lite värde till kontosaldo (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Kontraktsexekvering avslutades med fel: beräkningsfasen är inte lyckad, avfartskod: 107. För mer information om exitkoden kontrollera kontraktskällskoden eller fråga kontraktsutvecklaren",
   "Warning": "Varning",
   "Warning text about restoring": "Frotfrasåterställning är en föråldrad metod. Vi stöder bara Keystore återställer vid första lanseringen. Efter att ha skapat den första plånboken kommer det att vara möjligt att exportera den gamla plånboken från fröfrasen.",
@@ -339,5 +339,6 @@
   "Search by domain": "Sök efter domän",
   "This transaction is expired": "Denna transaktion har löpt ut",
   "This transaction is for another account": "Denna transaktion är för ett annat konto",
-  "This transaction is for another network": "Denna transaktion är för ett annat nätverk"
+  "This transaction is for another network": "Denna transaktion är för ett annat nätverk",
+  "Extended mode": "Utökat läge"
 }

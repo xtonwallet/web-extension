@@ -108,7 +108,7 @@
   "Loading": "Загрузка",
   "Network": "Сеть",
   "Deploy": "Развернуть",
-  "Deploy wallet instructions": "Для использования кошелька необходимо развернуть смарт-контракт. Это стоит определенную сумму, которую вы должны иметь на адресе этого кошелька. Если вы пытаетесь развернуть кошелек в тестовой сети, вы можете использовать `дарителя`, чтобы получить эту первоначальную сумму.",
+  "Deploy wallet instructions": "Для использования кошелька необходимо развернуть смарт-контракт. Это стоит определенную сумму, которую вы должны иметь на адресе этого кошелька.",
   "Take from giver": "Взять у дарителя",
   "Balance": "Баланс",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Сообщение просрочено. Контракт не был выполнен на блокчейн. Возможная причина: аккаунт имеет недостаточный баланс для запрошенной операции. Пололните баланс аккаунта.",
@@ -236,7 +236,7 @@
   "Skip this step": "Пропустить этот шаг",
   "Dismiss backup warning": "Отменить предупреждение о резерв. копии",
   "Max": "Макс.",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Учётная запись имеет недостаточный баланс для запрошенной операции. Пополните баланс.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Учётная запись имеет недостаточный баланс для запрошенной операции. Пополните баланс (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Выполнение контракта было прервано с ошибкой: фаза вычисления не успешна, код выхода: 107. Для дополнительной информации о коде выхода проверьте исходный код контракта или спросите разработчика контракта.",
   "Warning": "Предупреждение",
   "Warning text about restoring": "Восстановление под сид фразе является устаревшим методом. Мы поддерживаем только восстановления по keystore при первом запуске. После создания первого кошелька будет возможно импортировать из сид фразы старый кошелек.",
@@ -339,5 +339,6 @@
   "Search by domain": "Поиск по домену",
   "This transaction is expired": "Эта транзакция устарела",
   "This transaction is for another account": "Эта транзакция для другого аккаунта",
-  "This transaction is for another network": "Эта транзакция для другой сети"
+  "This transaction is for another network": "Эта транзакция для другой сети",
+  "Extended mode": "Расширенный режим"
 }

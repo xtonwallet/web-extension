@@ -44,7 +44,7 @@ settingsStore.subscribe(async (current) => {
 });
 
 export { settingsStore, currentPage, currentThemeName, currentLang,
-         currentAutologout, currentRetrievingTransactionsPeriod,
+         currentAutologout, currentExtendedMode, currentRetrievingTransactionsPeriod,
          currentRetrievingTransactionsLastTime, needsBackup,
          currentEnabledPinPad, currentEnabledProxy, currentCurrency,
          currentRate, currentResolution

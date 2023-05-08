@@ -108,7 +108,7 @@
   "Loading": "Indlæser",
   "Network": "Netværk",
   "Deploy": "Indsætte",
-  "Deploy wallet instructions": "For at bruge tegnebogen skal du implementere smart kontrakt. Det koster et beløb, du skal have på adressen på denne tegnebog. Hvis du forsøger at implementere tegnebogen på testnet, kan du bruge `Giver` at tage dette indledende beløb.",
+  "Deploy wallet instructions": "For at bruge tegnebogen skal du implementere smart kontrakt. Det koster et beløb, du skal have på adressen på denne tegnebog.",
   "Take from giver": "Tage fra Giver.",
   "Balance": "Balance",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Meddelelsen udløbet. Kontrakt blev ikke udført på kæde. Mulig grund: Kontoen har utilstrækkelig balance for den ønskede operation. Send en vis værdi til kontosaldo",
@@ -236,7 +236,7 @@
   "Skip this step": "Spring over dette trin",
   "Dismiss backup warning": "Afvis backup advarsel",
   "Max": "Max.",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Kontoen har utilstrækkelig balance for den ønskede operation. Send en vis værdi til kontosaldo.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Kontoen har utilstrækkelig balance for den ønskede operation. Send en vis værdi til kontosaldo (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Kontraktsudførelse blev opsagt med fejl: Beregn fase er ikke lykkedes, udgangskode: 107. For mere information om exitkode Kontroller kontraktkildekoden eller spørg kontraktudvikleren",
   "Warning": "Advarsel",
   "Warning text about restoring": "Frø sætning genopretning er en forældet metode. Vi understøtter kun Keystore genopretter den første lancering. Efter at have oprettet den første tegnebog, vil det være muligt at eksportere den gamle tegnebog fra frø sætningen.",
@@ -339,5 +339,6 @@
   "Search by domain": "Søg efter domæne",
   "This transaction is expired": "Denne transaktion er udløbet",
   "This transaction is for another account": "Denne transaktion er til en anden konto",
-  "This transaction is for another network": "Denne transaktion er til et andet netværk"
+  "This transaction is for another network": "Denne transaktion er til et andet netværk",
+  "Extended mode": "Udvidet tilstand"
 }

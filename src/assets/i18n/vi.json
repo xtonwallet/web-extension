@@ -108,7 +108,7 @@
   "Loading": "Đang tải",
   "Network": "Mạng.",
   "Deploy": "Triển khai.",
-  "Deploy wallet instructions": "Để sử dụng ví cần triển khai hợp đồng thông minh. Nó tốn một số tiền mà bạn phải có trên địa chỉ của ví này. Nếu bạn đang cố gắng triển khai ví trên testnet, bạn có thể sử dụng `giver` để lấy số tiền ban đầu này.",
+  "Deploy wallet instructions": "Để sử dụng ví cần triển khai hợp đồng thông minh. Nó tốn một số tiền mà bạn phải có trên địa chỉ của ví này.",
   "Take from giver": "Lấy từ Giver.",
   "Balance": "Thăng bằng",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Tin nhắn hết hạn. Hợp đồng không được thực hiện trên chuỗi. Lý do có thể: Tài khoản không có số dư không đủ cho hoạt động được yêu cầu. Gửi một số giá trị vào số dư tài khoản",
@@ -236,7 +236,7 @@
   "Skip this step": "Bỏ qua bước này",
   "Dismiss backup warning": "Loại bỏ cảnh báo sao lưu",
   "Max": "Tối đa",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Tài khoản không có đủ số dư cho các hoạt động được yêu cầu. Gửi một số giá trị vào số dư tài khoản.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Tài khoản không có đủ số dư cho các hoạt động được yêu cầu. Gửi một số giá trị vào số dư tài khoản (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Thực thi hợp đồng đã bị chấm dứt với lỗi: Tính toán giai đoạn không thành công, thoát mã: 107. Để biết thêm thông tin về mã thoát Kiểm tra mã nguồn hợp đồng hoặc hỏi nhà phát triển hợp đồng",
   "Warning": "Cảnh báo",
   "Warning text about restoring": "Phục hồi cụm từ hạt giống là một phương pháp lỗi thời. Chúng tôi chỉ hỗ trợ khôi phục kho khóa trên lần phóng đầu tiên. Sau khi tạo ví đầu tiên, có thể xuất ví cũ từ cụm hạt giống.",
@@ -339,5 +339,6 @@
   "Search by domain": "Tìm kiếm theo tên miền",
   "This transaction is expired": "Giao dịch này đã hết hạn",
   "This transaction is for another account": "Giao dịch này dành cho một tài khoản khác",
-  "This transaction is for another network": "Giao dịch này dành cho một mạng khác"
+  "This transaction is for another network": "Giao dịch này dành cho một mạng khác",
+  "Extended mode": "Chế độ mở rộng"
 }

@@ -108,7 +108,7 @@
   "Loading": "جار التحميل",
   "Network": "شبكة الاتصال",
   "Deploy": "نشر",
-  "Deploy wallet instructions": "لاستخدام المحفظة يحتاج إلى نشر عقد ذكي. يكلف بعض المبلغ الذي يجب أن يكون لديك على عنوان هذه المحفظة. إذا كنت تحاول نشر المحفظة على TestNet، فيمكنك استخدام 'المانح' لاتخاذ هذا المبلغ الأولي.",
+  "Deploy wallet instructions": "لاستخدام المحفظة يحتاج إلى نشر عقد ذكي. يكلف بعض المبلغ الذي يجب أن يكون على عنوان هذه المحفظة.",
   "Take from giver": "خذ من المخلصة",
   "Balance": "توازن",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "رسالة منتهية الصلاحية. لم يتم تنفيذ العقد على السلسلة. السبب المحتمل: الحساب له توازن غير كاف للعملية المطلوبة. إرسال بعض القيمة إلى رصيد الحساب",
@@ -236,7 +236,7 @@
   "Skip this step": "تخطي هذه الخطوة",
   "Dismiss backup warning": "رفض تحذير النسخ الاحتياطي",
   "Max": "الأعلى",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "الحساب له توازن كاف للعملية المطلوبة. إرسال بعض القيمة إلى رصيد الحساب.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "الحساب له توازن كاف للعملية المطلوبة. إرسال بعض القيمة إلى رصيد الحساب (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "تم إنهاء الإعدام بالعقد مع الخطأ: لم تنجح مرحلة حسابية، رمز الخروج: 107. لمزيد من المعلومات حول رمز الخروج تحقق من شفرة مصدر العقد أو اسأل مطور العقد",
   "Warning": "تحذير",
   "Warning text about restoring": "استعادة عبارة البذور هي طريقة قديمة. نحن ندعم عمليات استعادة keystore عند الإطلاق الأول. بعد إنشاء المحفظة الأولى ، سيكون من الممكن تصدير المحفظة القديمة من العبارة الأولية.",
@@ -339,5 +339,6 @@
   "Search by domain": "البحث عن طريق المجال",
   "This transaction is expired": "انتهت صلاحية هذه الصفقة",
   "This transaction is for another account": "هذه الصفقة هي حساب آخر",
-  "This transaction is for another network": "هذه الصفقة لشبكة أخرى"
+  "This transaction is for another network": "هذه الصفقة لشبكة أخرى",
+  "Extended mode": "الوضع الموسع"
 }

@@ -108,7 +108,7 @@
   "Loading": "Ładowanie",
   "Network": "Sieć",
   "Deploy": "Rozmieścić",
-  "Deploy wallet instructions": "Za korzystanie z portfela musi wdrażać inteligentną umowę. Kosztuje pewną ilość, którą musisz mieć na adres tego portfela. Jeśli próbujesz wdrożyć portfel na Testnet, możesz użyć `Giver`, aby wziąć tę początkową kwotę.",
+  "Deploy wallet instructions": "Za korzystanie z portfela musi wdrażać inteligentną umowę. Kosztuje pewną ilość, którą musisz mieć na adres tego portfela.",
   "Take from giver": "Wziąć od dawcy",
   "Balance": "Saldo",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Wiadomość wygasła. Umowa nie została wykonana na łańcuchu. Możliwy powód: Konto ma niewystarczające saldo dla żądanej operacji. Wyślij pewną wartość na saldo konta",
@@ -236,7 +236,7 @@
   "Skip this step": "Pomiń ten krok",
   "Dismiss backup warning": "Odrzuć ostrzeżenie o kopii zapasowej",
   "Max": "Max.",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Konto ma niewystarczające saldo dla żądanej operacji. Wyślij pewną wartość do salda konta.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Konto ma niewystarczające saldo dla żądanej operacji. Wyślij pewną wartość do salda konta (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Egzekucja kontraktowa została zakończona błędem: Faza obliczeniowa nie zostanie udana, kod wyjścia: 107. Aby uzyskać więcej informacji na temat kodu wyjścia Sprawdź kod źródłowy kontraktu lub poprosić o deweloper",
   "Warning": "Ostrzeżenie",
   "Warning text about restoring": "Odzyskiwanie wyrażenia nasion jest przestarzałą metodą. Wspieramy tylko przywracania kluczy przy pierwszym uruchomieniu. Po utworzeniu pierwszego portfela będzie możliwe wyeksportowanie starego portfela z frazy nasion.",
@@ -339,5 +339,6 @@
   "Search by domain": "Wyszukaj według domeny",
   "This transaction is expired": "Ta transakcja jest wygasana",
   "This transaction is for another account": "Ta transakcja dotyczy innego konta",
-  "This transaction is for another network": "Ta transakcja dotyczy innej sieci"
+  "This transaction is for another network": "Ta transakcja dotyczy innej sieci",
+  "Extended mode": "Tryb rozszerzony"
 }

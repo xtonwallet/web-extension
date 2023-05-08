@@ -1,7 +1,7 @@
 import { Vault } from "../common/vault.js";
-import { toNano, generateRandomHex, encrypt, decrypt, broadcastMessage, sendNotificationToInPageScript, hexToStr, Unibabel, getRate } from "../common/utils.js";
+import { toNano, generateRandomHex, encrypt, decrypt, broadcastMessage, sendNotificationToInPageScript, hexToStr, Unibabel, getRate, sleep } from "../common/utils.js";
 import TonLib from "../common/tonLib.js";
-import { CURRENT_KS_PASSWORD, accountStore, currentRetrievingTransactionsPeriod, currentRetrievingTransactionsLastTime, settingsStore, currentEnabledPinPad, currentCurrency, messageSubscriptions } from "../common/stores.js";
+import { CURRENT_KS_PASSWORD, accountStore, currentRetrievingTransactionsPeriod, currentRetrievingTransactionsLastTime, settingsStore, currentEnabledPinPad, currentCurrency, currentExtendedMode, messageSubscriptions } from "../common/stores.js";
 import BigNumber from "bignumber.js";
 
 const devMode = __DEV_MODE__;
@@ -36,9 +36,21 @@ export const accounts = () => {
 
   browser.alarms.onAlarm.addListener(async (alarm) => {
     if (alarm.name === "retrievingTransactions") {
-      const networks = await vault.getNetworks();
+      const networks = [];
       const accounts = await vault.getAccounts();
       const allAddresses = accounts.map((item) => {return item.address});
+
+      const extendedMode = await new Promise((resolve) => {
+        currentExtendedMode.subscribe((value) => {
+          resolve(value);
+        });
+      });
+
+      if (extendedMode) {
+        networks = await vault.getNetworks();
+      } else {
+        networks.push(await vault.getNetwork("mainnet"));
+      }
 
       let needToUpdateWalletUI = false;
       for (let i in networks) {
@@ -62,17 +74,31 @@ export const accounts = () => {
               });
             }
 
-            // regular txs
-            const result = await TonLibClient.requestAccountTransactions(allAddresses[index], retrievingTransactionsLastTime);
-            if (result.length > 0) {
-              accountStore.removeWaitingTransaction(server + "-" + allAddresses[index]);
+            try {
+              // regular txs
+              const result = await TonLibClient.requestAccountTransactions(allAddresses[index], retrievingTransactionsLastTime);
+              if (result.length > 0) {
+                accountStore.removeWaitingTransaction(server + "-" + allAddresses[index]);
+              }
+              transactions = transactions.concat(result);
+            } catch(e) {
+              if (devMode) {
+                console.log(server, e);
+              }
             }
-            transactions = transactions.concat(result);
+            await sleep(1000); // timeout 1 seconds
           }
           // token wallets
           for (let walletAddress in tokenWallets) {
-            const result = await TonLibClient.requestAccountTransactions(walletAddress, retrievingTransactionsLastTime);
-            transactions = transactions.concat(result);
+            try {
+              const result = await TonLibClient.requestAccountTransactions(walletAddress, retrievingTransactionsLastTime);
+              transactions = transactions.concat(result);
+            } catch(e) {
+              if (devMode) {
+                console.log(server, e);
+              }
+            }
+            await sleep(1000); // timeout 1 seconds
           }
           if (transactions.length === 0) {
             continue;
@@ -89,17 +115,12 @@ export const accounts = () => {
           if (typeof tokenWallets[transactionsAddresses[j]] != "undefined") {
             transactionsAddresses[j] = tokenWallets[transactionsAddresses[j]];
           }
-          const lastTransactions = await vault.getTransactions(transactionsAddresses[j], server, 50, 1);
-          const txIds = lastTransactions.map((tx) => {
-            return tx.id;
-          });
+          transactions = await vault.getUniqueTransactions(transactionsAddresses[j], server, transactions);
           for (let i in transactions) {
-            if (txIds.includes(transactions[i].transaction_id.hash) ||
-                (transactions[i].in_msg.destination != transactionsAddresses[j] &&
+            if (transactions[i].in_msg.destination != transactionsAddresses[j] &&
                 (typeof tokenWallets[transactions[i].in_msg.destination] == "undefined" ||
                   tokenWallets[transactions[i].in_msg.destination] != transactionsAddresses[j]
                   )
-                )
               ) {
               continue;
             }
@@ -183,10 +204,6 @@ export const accounts = () => {
   const updateTransactionsList = async (address, server, fromStart = false) => {
     const TonLibClient     = await TonLib.getClient(server);
     const network          = await vault.getNetwork(server);
-    const lastTransactions = await vault.getTransactions(address, server, 50, 1);
-    const txIds = lastTransactions.map((tx) => {
-      return tx.id;
-    });
     let tokenWallets = {};
     let walletsTokenInfo = {};
     let retrievingTransactionsLastTime;
@@ -211,25 +228,31 @@ export const accounts = () => {
 
       // token wallets
       for (let walletAddress in tokenWallets) {
-        const result = await TonLibClient.requestAccountTransactions(walletAddress, retrievingTransactionsLastTime);
-        transactions = transactions.concat(result);
+        try {
+          const result = await TonLibClient.requestAccountTransactions(walletAddress, retrievingTransactionsLastTime);
+          transactions = transactions.concat(result);
+        } catch(e) {
+          if (devMode) {
+            console.log(e);
+          }
+        }
       }
       
       if (transactions.length === 0) {
-        return;
+        return false;
       }
     } catch(e) {
       if (devMode) {
         console.log(e);
       }
-      return;
+      return false;
     }
     let needToUpdateWalletUI = false;
-    for (let i in transactions) {
-      if (txIds.includes(transactions[i].id) === true) {
-        continue;
-      }
+    transactions = await vault.getUniqueTransactions(address, server, transactions);
+    if (transactions.length != 0) {
       accountStore.removeWaitingTransaction(server + "-" + address);
+    }
+    for (let i in transactions) {
       const txData = transactions[i];
 
       let detectedToken;
@@ -267,8 +290,7 @@ export const accounts = () => {
             await vault.markAsDeployed(transactions[i].in_msg.destination, server);
           }
           await vault.setWalletVersion(transactions[i].in_msg.destination, walletDeployed.version);
-        }
-        else if (txData.in_msg.source == "" && txData.out_msgs.length) {
+        } else if (txData.in_msg.source == "" && txData.out_msgs.length) {
           txData.type = "transfer";
           txData.amount  = txData.out_msgs[0].value * -1;
           txData.comment = getComment(txData.out_msgs[0]);
@@ -292,6 +314,7 @@ export const accounts = () => {
     if (needToUpdateWalletUI) {
       broadcastMessage("updateWalletUI");
     }
+    return needToUpdateWalletUI;
   };
 
   /*
@@ -310,7 +333,20 @@ export const accounts = () => {
   */
 
   const updateTransactionsListAllNetworks = async (address) => {
-    const networks = await vault.getNetworks();
+    const networks = [];
+
+    const extendedMode = await new Promise((resolve) => {
+      currentExtendedMode.subscribe((value) => {
+        resolve(value);
+      });
+    });
+
+    if (extendedMode) {
+      networks = await vault.getNetworks();
+    } else {
+      networks.push(await vault.getNetwork("mainnet"));
+    }
+
     for (let i in networks) {
       await updateTransactionsList(address, networks[i].server, true);
     }

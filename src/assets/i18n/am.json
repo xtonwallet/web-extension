@@ -108,7 +108,7 @@
   "Loading": "በመጫን ላይ",
   "Network": "አውታረ መረብ",
   "Deploy": "ማሰማራት",
-  "Deploy wallet instructions": "የኪስ ቦርሳውን ለመጠቀም ስማርት ኮንትራት ማሰማራት አለበት. በዚህ የኪስ ቦርሳ ላይ ሊኖርዎት የሚገባውን የተወሰነ መጠን ያስወጣል. በ CASTENTET ላይ የኪስ ቦርሳውን ለማሰማራት እየሞከሩ ከሆነ ይህንን የመጀመሪያውን መጠን ለመውሰድ 'ሰጪውን' መጠቀም ይችላሉ.",
+  "Deploy wallet instructions": "የኪስ ቦርሳውን ለመጠቀም ስማርት ኮንትራት ማሰማራት አለበት. በዚህ የኪስ ቦርሳ ላይ ሊኖርዎት የሚገባውን የተወሰነ መጠን ያስወጣል.",
   "Take from giver": "ከቅሮው ይውሰዱ",
   "Balance": "ሚዛን",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "መልእክት ጊዜው አልፎበታል. ውል በሰንሰለት አልተገደይም. ሊሆን የሚችል ምክንያት መለያ ለተጠየቀው ክዋኔ በቂ ሚዛን አለው. ለሂሳብ ሚዛን የተወሰነ እሴት ይላኩ",
@@ -236,7 +236,7 @@
   "Skip this step": "ይህንን እርምጃ ዝለል",
   "Dismiss backup warning": "የመጠባበቂያ ማስጠንቀቂያ ማስጠንቀቂያ",
   "Max": "ማክስ",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "ለተጠየቀው ክወና በቂ ያልሆነ ሂሳብ አለው. ለሂሳብ ሚዛን የተወሰነ እሴት ይላኩ.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "ለተጠየቀው ክወና በቂ ያልሆነ ሂሳብ አለው. ለሂሳብ ሚዛን የተወሰነ እሴት ይላኩ (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "የኮንትራት አፈፃፀም በስህተት ተቋረጠ-የተከፈለ ደረጃ ተተክቷል, ከድድ ኮድ: - ስለ መውጫ ደብዛድ መረጃ የኮንትራት ምንጭ ኮድ ይፈትሹ ወይም የኮንትራቱን ገንቢ ይጠይቁ",
   "Warning": "ማስጠንቀቂያ",
   "Warning text about restoring": "የዘር ሐረግ ማገገም ጊዜው ያለፈበት ዘዴ ነው. እኛ በመጀመሪያ ማስነሳት ላይ የ Keestoore መልሶ ማቋቋም ብቻ እንረዳለን. የመጀመሪያውን የኪስ ቦርሳ ከፈጠረ በኋላ የድሮውን ዎል ኳስ ከዘሩ ሐረግ ማቅረብ ይቻል ይሆናል. እባክዎን ያስተውሉ የኪስ ቦርሳ ስሪቱን ብቻ እንደገለጽን ልብ ይበሉ, ስለሆነም የዘር ሐረግ ከሌሎች ስሪቶች ከሆነ. ሁሉም ገንዘቦች ወደ አዲስ የተፈጠረ እና የተሰማሩ የኪስ ቦርሳ መወሰድ አለባቸው.",
@@ -339,5 +339,6 @@
   "Search by domain": "በ ጎራ ይፈልጉ",
   "This transaction is expired": "ይህ ግብይት ለሌላ መለያ ነው",
   "This transaction is for another account": "ይህ ግብይት ጊዜው አልፎበታል",
-  "This transaction is for another network": "ይህ ግብይት ለሌላ አውታረ መረብ ነው"
+  "This transaction is for another network": "ይህ ግብይት ለሌላ አውታረ መረብ ነው",
+  "Extended mode": "የተራዘመ ሁነታን"
 }

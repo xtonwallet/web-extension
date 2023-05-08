@@ -108,7 +108,7 @@
   "Loading": "Memuat",
   "Network": "Jaringan",
   "Deploy": "Menyebarkan",
-  "Deploy wallet instructions": "Untuk menggunakan dompet perlu menyebarkan kontrak pintar. Biayanya beberapa jumlah yang harus Anda miliki di alamat dompet ini. Jika Anda mencoba menggunakan dompet pada TestNet, Anda dapat menggunakan `giver` untuk mengambil jumlah awal ini.",
+  "Deploy wallet instructions": "Untuk menggunakan dompet perlu menyebarkan kontrak pintar. Biayanya beberapa jumlah yang harus Anda miliki di alamat dompet ini.",
   "Take from giver": "Ambil dari GIVER.",
   "Balance": "Keseimbangan",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Pesan kedaluwarsa. Kontrak tidak dijalankan pada rantai. Alasan yang mungkin: Akun memiliki keseimbangan yang tidak mencukupi untuk operasi yang diminta. Kirim beberapa nilai ke saldo akun",
@@ -236,7 +236,7 @@
   "Skip this step": "Lewati langkah ini",
   "Dismiss backup warning": "Singkirkan peringatan cadangan",
   "Max": "Max.",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Akun memiliki keseimbangan yang tidak mencukupi untuk operasi yang diminta. Kirim beberapa nilai ke saldo akun.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Akun memiliki keseimbangan yang tidak mencukupi untuk operasi yang diminta. Kirim beberapa nilai ke saldo akun (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Eksekusi kontrak dihentikan dengan kesalahan: fase komputasi tidak berhasil, keluar kode: 107. Untuk informasi lebih lanjut tentang kode keluar, periksa kode sumber kontrak atau tanyakan kepada pengembang kontrak",
   "Warning": "Peringatan",
   "Warning text about restoring": "Penyembuhan frasa benih adalah metode yang sudah ketinggalan zaman. Kami hanya mendukung keystore mengembalikan pada peluncuran pertama. Setelah membuat dompet pertama, akan mungkin untuk mengekspor dompet lama dari frasa benih. Harap dicatat bahwa kami hanya mendukung versi safemultigwallet dari dompet, jadi jika frase benih milik versi lain. Semua dana harus ditransfer ke dompet yang baru dibuat dan dikerahkan.",
@@ -339,5 +339,6 @@
   "Search by domain": "Cari dengan domain",
   "This transaction is expired": "Transaksi ini kedaluwarsa",
   "This transaction is for another account": "Transaksi ini adalah untuk akun lain",
-  "This transaction is for another network": "Transaksi ini untuk jaringan lain"
+  "This transaction is for another network": "Transaksi ini untuk jaringan lain",
+  "Extended mode": "Mode diperpanjang"
 }

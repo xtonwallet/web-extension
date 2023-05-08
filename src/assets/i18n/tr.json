@@ -108,7 +108,7 @@
   "Loading": "Yükleniyor",
   "Network": "Ağ",
   "Deploy": "Dağıtmak",
-  "Deploy wallet instructions": "Cüzdanın kullanımı için akıllı sözleşmeyi dağıtması gerekir. Bu cüzdanın adresine sahip olmalısınız bir miktar maliyeti. Cüzdanı Testnet'e dağıtmaya çalışıyorsanız, bu ilk tutarı almak için `GIVER` kullanabilirsiniz.",
+  "Deploy wallet instructions": "Cüzdanı kullanmak için akıllı sözleşmeyi dağıtmanız gerekir. Bu cüzdanın adresinde bulundurmanız gereken bir miktara mal oluyor.",
   "Take from giver": "Kapmak",
   "Balance": "Denge",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Mesajın süresi doldu. Sözleşme zincirinde yürütülmedi. Muhtemel Sebep: Hesap istenen işlem için dengeyi yetersizdir. Hesap bakiyesine biraz değer gönder",
@@ -236,7 +236,7 @@
   "Skip this step": "Bu adımı atla",
   "Dismiss backup warning": "Yedekleme uyarısını reddetme",
   "Max": "Maksimum",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Hesap istenen işlem için yetersiz dengeye sahiptir. Hesap bakiyesine biraz değer gönderin.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Hesap istenen işlem için yetersiz dengeye sahiptir. Hesap bakiyesine biraz değer gönderin (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Sözleşme Yürütme Hatası ile sonlandırıldı: hesaplama aşaması başarılı olmadı, kodu çıktı: 107. Çıkış kodu hakkında daha fazla bilgi için Sözleşme Kaynağı Kodunu kontrol et veya sözleşme geliştiricisine sor",
   "Warning": "Uyarı",
   "Warning text about restoring": "Tohum cümleleri kurtarma modası geçmiş bir yöntemdir. İlk başlamada yalnızca Anahtar Görevlisi geri yüklemelerini destekliyoruz. İlk cüzdanı oluşturduktan sonra, eski cüzdanı tohum cümlesinden dışa aktarmak mümkün olacaktır.",
@@ -339,5 +339,6 @@
   "Search by domain": "Etki alanına göre arama",
   "This transaction is expired": "Bu işlem süresi doldu",
   "This transaction is for another account": "Bu işlem başka bir hesap içindir",
-  "This transaction is for another network": "Bu işlem başka bir ağ içindir"
+  "This transaction is for another network": "Bu işlem başka bir ağ içindir",
+  "Extended mode": "Genişletilmiş Mod"
 }

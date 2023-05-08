@@ -354,6 +354,24 @@ export class Vault {
     return [];
   }
 
+  async getUniqueTransactions (accountAddress, server, transactions) {
+    await this.init();
+    const transaction = this.db.transaction('accounts', 'readwrite');
+    const store = transaction.objectStore('accounts');
+    const existingAccount = await store.get(accountAddress);
+    if (existingAccount) {
+      if (existingAccount.transactions[server]) {
+        const txIds = existingAccount.transactions[server].map((tx) => {
+          return tx.id;
+        });
+        return transactions.filter((item) => !txIds.includes(item.transaction_id.hash));
+      } else {
+        return transactions;
+      }
+    }
+    return transactions;
+  }
+
   async updateNickname (accountAddress, nickname) {
     await this.init();
     const transaction = this.db.transaction('accounts', 'readwrite');

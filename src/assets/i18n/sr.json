@@ -108,7 +108,7 @@
   "Loading": "Утоваривање",
   "Network": "Мрежа",
   "Deploy": "Развити",
-  "Deploy wallet instructions": "За употребу новчаника треба да се постави паметни уговор. То кошта неки износ који морате да имате на адреси овог новчаника. Ако покушавате да распоредите новчаник на тестнет, можете да користите 'даваоци' да узмете овај почетни износ.",
+  "Deploy wallet instructions": "За употребу новчаника треба да се постави паметни уговор. То кошта неки износ који морате да имате на адреси овог новчаника.",
   "Take from giver": "Узети од даваоца",
   "Balance": "Равнотежа",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Порука је истекла. Уговор није извршен на ланцу. Могући разлог: Рачун нема довољно равнотеже за тражену операцију. Пошаљите неку вредност за стање на рачуну",
@@ -236,7 +236,7 @@
   "Skip this step": "Прескочите овај корак",
   "Dismiss backup warning": "Одбацивање сигурносне копије",
   "Max": "Макс",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Рачун нема довољно равнотеже за тражену операцију. Пошаљите неку вредност на стање на рачуну.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Рачун нема довољно равнотеже за тражену операцију. Пошаљите неку вредност на стање на рачуну (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Извршење уговора је прекинут грешком: Цомпуте Фаза није успела, изашла Код: 107. За више информација о ЕКСИТ коду проверите Код извора уговора или поставите програмер уговора",
   "Warning": "Упозорење",
   "Warning text about restoring": "Опоравак фразе семена је застарела метода. Подржавамо само повратне кључеве на првом покретању. Након стварања првог новчаника, биће могуће извозити стари новчаник из фразе семена. Имајте на уму да подржавамо само верзију новчаника СафУМултисигВаллет, тако да ако фраза семена припада другим верзијама. Сва средства морају бити пребачена на новостворени и распоређени новчаник.",
@@ -339,5 +339,6 @@
   "Search by domain": "Претражите до домена",
   "This transaction is expired": "Ова трансакција је истекла",
   "This transaction is for another account": "Ова трансакција је за други рачун",
-  "This transaction is for another network": "Ова трансакција је за другу мрежу"
+  "This transaction is for another network": "Ова трансакција је за другу мрежу",
+  "Extended mode": "Продужени режим"
 }

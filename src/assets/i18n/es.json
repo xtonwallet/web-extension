@@ -108,7 +108,7 @@
   "Loading": "Cargando",
   "Network": "La red",
   "Deploy": "Desplegar",
-  "Deploy wallet instructions": "Para usar la billetera necesita implementar un contrato inteligente. Cuesta cuesta cierta cantidad que debe tener en la dirección de esta billetera. Si está tratando de implementar la billetera en TestNet, puede usar 'Dador' para tomar esta cantidad inicial.",
+  "Deploy wallet instructions": "Para usar la billetera necesita implementar un contrato inteligente. Cuesta cuesta cierta cantidad que debe tener en la dirección de esta billetera.",
   "Take from giver": "Tomar del dador",
   "Balance": "Equilibrio",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Mensaje expirado. El contrato no fue ejecutado en la cadena. Razón posible: la cuenta no tiene un equilibrio insuficiente para la operación solicitada. Enviar algún valor al saldo de la cuenta",
@@ -236,7 +236,7 @@
   "Skip this step": "Salta este paso",
   "Dismiss backup warning": "Despedir la advertencia de respaldo",
   "Max": "Max",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "La cuenta no tiene un equilibrio insuficiente para la operación solicitada. Enviar algún valor al saldo de la cuenta.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "La cuenta no tiene un equilibrio insuficiente para la operación solicitada. Enviar algún valor al saldo de la cuenta (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "La ejecución del contrato se terminó con error: la fase de cómputo no está sucedida, el código de salida: 107. Para obtener más información sobre el código de salida, verifique el código fuente del contrato o pídale al desarrollador del contrato",
   "Warning": "Advertencia",
   "Warning text about restoring": "La recuperación de la frase de semillas es un método obsoleto. Solo apoyamos los restauraciones de KeyStore en el primer lanzamiento. Después de crear la primera billetera, será posible exportar la billetera vieja de la frase de semillas.",
@@ -339,5 +339,6 @@
   "Search by domain": "Buscar por dominio",
   "This transaction is expired": "Esta transacción ha caducado",
   "This transaction is for another account": "Esta transacción es para otra cuenta",
-  "This transaction is for another network": "Esta transacción es para otra red"
+  "This transaction is for another network": "Esta transacción es para otra red",
+  "Extended mode": "Modo extendido"
 }

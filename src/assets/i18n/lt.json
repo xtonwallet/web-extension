@@ -108,7 +108,7 @@
   "Loading": "Pakrovimas",
   "Network": "Network.",
   "Deploy": "Diegimas.",
-  "Deploy wallet instructions": "Naudojant piniginę reikia diegti Smart sutartį. Tai kainuoja tam tikrą sumą, kurią turite turėti šios piniginės adresu. Jei bandote įdiegti piniginę 'Tesnet', galite naudoti 'davėjas', kad pasiektumėte šią pradinę sumą.",
+  "Deploy wallet instructions": "Naudojant piniginę reikia diegti Smart sutartį. Tai kainuoja tam tikrą sumą, kurią turite turėti šios piniginės adresu.",
   "Take from giver": "Paimkite iš davėjo",
   "Balance": "Balansas.",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Pasibaigęs pranešimas. Sutartis nebuvo vykdoma grandinėje. Galima priežastis: sąskaita turi nepakankamą prašomos operacijos pusiausvyrą. Siųsti tam tikrą vertę į paskyros balansą",
@@ -236,7 +236,7 @@
   "Skip this step": "Praleiskite šį žingsnį",
   "Dismiss backup warning": "Atmesti atsarginę kopiją",
   "Max": "Max.",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Sąskaita turi nepakankamą prašomos operacijos pusiausvyrą. Siųsti tam tikrą vertę į paskyros balansą.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Sąskaita turi nepakankamą prašomos operacijos pusiausvyrą. Siųsti tam tikrą vertę į paskyros balansą (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Sutarties vykdymas buvo nutrauktas su klaida.",
   "Warning": "įspėjimas",
   "Warning text about restoring": "Sėklų frazės atkūrimas yra pasenęs metodas. Palaikome tik 'Keystore' atkuria pirmąjį paleidimą. Sukūrę pirmąją piniginę, bus galima eksportuoti seną piniginę nuo sėklų frazės. Atkreipkite dėmesį, kad palaikome tik 'SafetitisigWallet' piniginės versiją, taigi, jei sėklų frazė priklauso kitoms versijoms. Visos lėšos turi būti perkeltos į naujai sukurtą ir dislokuotą piniginę.",
@@ -339,5 +339,6 @@
   "Search by domain": "Paieška pagal domeną",
   "This transaction is expired": "Ši operacija pasibaigė",
   "This transaction is for another account": "Ši operacija skirta kitai paskyrai",
-  "This transaction is for another network": "Ši operacija skirta kitam tinklui"
+  "This transaction is for another network": "Ši operacija skirta kitam tinklui",
+  "Extended mode": "Išplėstinis režimas"
 }

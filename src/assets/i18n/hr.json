@@ -108,7 +108,7 @@
   "Loading": "Učitavam",
   "Network": "Mreža",
   "Deploy": "Rasporediti",
-  "Deploy wallet instructions": "Za korištenje novčanika treba implementirati pametni ugovor. To košta neki iznos koji morate imati na adresu ovog novčanika. Ako pokušavate implementirati novčanik na testnet, možete koristiti 'davatelja' da se ovaj početni iznos.",
+  "Deploy wallet instructions": "Za korištenje novčanika treba implementirati pametni ugovor. To košta neki iznos koji morate imati na adresu ovog novčanika.",
   "Take from giver": "Uzeti od davatelja",
   "Balance": "Ravnoteža",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Poruka istekla. Ugovor nije izvršen na lancu. Mogući razlog: Račun nema dovoljno ravnoteže za traženu operaciju. Pošaljite određenu vrijednost na stanje računa",
@@ -236,7 +236,7 @@
   "Skip this step": "Preskoći ovaj korak",
   "Dismiss backup warning": "Odbacite sigurnosno kopiranje",
   "Max": "Maks",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Račun nema dovoljno ravnoteže za traženu operaciju. Pošaljite neku vrijednost na stanje računa.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Račun nema dovoljno ravnoteže za traženu operaciju. Pošaljite neku vrijednost na stanje računa (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Izvršenje ugovora prekinuta je s pogreškom: Faza izračuna nije uspjela, izlazni kod: 107. Za više informacija o izlaznim kodu Provjerite izvorni kod ugovora ili pitajte razvojnog programera ugovora",
   "Warning": "Upozorenje",
   "Warning text about restoring": "Recovery Fraza sjemena je zastarjela metoda. Podržavamo samo kvadre na prvom lansiranju. Nakon izrade prvog novčanika, bit će moguće izvesti stari novčanik iz fraze sjemena. Imajte na umu da samo podržavamo samo walette verziju novčanika, pa ako fraza sjemena pripada drugim verzijama. Sva sredstva moraju se prenijeti na novostvoreni i raspoređeni novčanik.",
@@ -339,5 +339,6 @@
   "Search by domain": "Pretražite prema domeni",
   "This transaction is expired": "Ova transakcija je istekla",
   "This transaction is for another account": "Ova je transakcija namijenjena drugom računu",
-  "This transaction is for another network": "Ova transakcija je za drugu mrežu"
+  "This transaction is for another network": "Ova transakcija je za drugu mrežu",
+  "Extended mode": "Prošireni način"
 }

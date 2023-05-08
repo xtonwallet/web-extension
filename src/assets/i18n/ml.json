@@ -108,7 +108,7 @@
   "Loading": "ലോഡിംഗ്",
   "Network": "നെറ്റ്വർക്ക്",
   "Deploy": "വിനസിക്കുക",
-  "Deploy wallet instructions": "വാലറ്റ് ഉപയോഗിക്കുന്നതിന് സ്മാർട്ട് കരാർ വിന്യസിക്കേണ്ടതുണ്ട്. ഈ വാലറ്റിന്റെ വിലാസത്തിൽ നിങ്ങൾ ഉണ്ടായിരിക്കേണ്ട ചില തുക ഇതിന് ചിലവാകും. നിങ്ങൾ ടെസ്റ്റ്നെറ്റിൽ വാലറ്റ് വിന്യസിക്കാൻ ശ്രമിക്കുകയാണെങ്കിൽ, ഈ പ്രാരംഭ തുക എടുക്കാൻ നിങ്ങൾക്ക് `ഗേവർ 'ഉപയോഗിക്കാം.",
+  "Deploy wallet instructions": "വാലറ്റ് ഉപയോഗിക്കുന്നതിന് സ്മാർട്ട് കരാർ വിന്യസിക്കേണ്ടതുണ്ട്. ഈ വാലറ്റിന്റെ വിലാസത്തിൽ നിങ്ങൾ ഉണ്ടായിരിക്കേണ്ട ചില തുക ഇതിന് ചിലവാകും.",
   "Take from giver": "ദാതാവിൽ നിന്ന് എടുക്കുക",
   "Balance": "ബാക്കി",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "സന്ദേശം കാലഹരണപ്പെട്ടു. കരാർ ശൃംഖലയിൽ വധശിക്ഷ നൽകിയില്ല. സാധ്യമായ കാരണം: അഭ്യർത്ഥിച്ച പ്രവർത്തനത്തിന് അക്കൗണ്ടിന് മതിയായ ബാലൻസ് ഉണ്ട്. അക്കൗണ്ട് ബാലൻസിലേക്ക് കുറച്ച് മൂല്യം അയയ്ക്കുക",
@@ -236,7 +236,7 @@
   "Skip this step": "ഈ ഘട്ടം ഒഴിവാക്കുക",
   "Dismiss backup warning": "ബാക്കപ്പ് മുന്നറിയിപ്പ് നിരസിക്കുക",
   "Max": "പരമാവധി",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "അഭ്യർത്ഥിച്ച പ്രവർത്തനത്തിന് അക്കൗണ്ടിന് മതിയായ ബാലൻസ് ഉണ്ട്. അക്കൗണ്ട് ബാലൻസിലേക്ക് കുറച്ച് മൂല്യം അയയ്ക്കുക.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "അഭ്യർത്ഥിച്ച പ്രവർത്തനത്തിന് അക്കൗണ്ടിന് മതിയായ ബാലൻസ് ഉണ്ട്. അക്കൗണ്ട് ബാലൻസിലേക്ക് കുറച്ച് മൂല്യം അയയ്ക്കുക (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "കരാർ എക്സിക്യൂഷൻ പിശക് അവസാനിപ്പിച്ചു: കമ്പ്യൂട്ട് ഘട്ടം വിജയിച്ചു, എക്സിറ്റ് കോഡ്: എക്സിറ്റ് കോഡിനെക്കുറിച്ചുള്ള കൂടുതൽ വിവരങ്ങൾക്ക് കരാർ സോഴ്സ് കോഡ് പരിശോധിക്കുക അല്ലെങ്കിൽ കരാർ ഡെവലപ്പർ ചോദിക്കുക",
   "Warning": "മുന്നറിയിപ്പ്",
   "Warning text about restoring": "വിത്ത് ശൈലി വീണ്ടെടുക്കൽ കാലഹരണപ്പെട്ട രീതിയാണ്. ആദ്യ സമാരംഭത്തിൽ കീസ്റ്റോർ പുന orom സ്ഥാപിക്കുന്ന ഞങ്ങൾ മാത്രമാണ് ഞങ്ങൾ പിന്തുണയ്ക്കുന്നത്. ആദ്യത്തെ വാലറ്റ് സൃഷ്ടിച്ച ശേഷം, പഴയ വാലറ്റ് വിത്ത് വാക്യത്തിൽ നിന്ന് കയറ്റുമതി ചെയ്യാൻ കഴിയും. വാലറ്റിന്റെ സുരക്ഷിതപരിന്തരൈറ്റ് പതിപ്പിനെ മാത്രമേ ഞങ്ങൾ പിന്തുണയ്ക്കുന്നത് ശ്രദ്ധിക്കുക, അതിനാൽ വിത്ത് ശൈലി മറ്റ് പതിപ്പുകളുടേതാണെങ്കിൽ. എല്ലാ ഫണ്ടുകളും പുതുതായി സൃഷ്ടിച്ചതും വിന്യസിച്ചതുമായ വാലറ്റിലേക്ക് മാറ്റണം.",
@@ -339,5 +339,6 @@
   "Search by domain": "ഡൊമെയ്ൻ ഉപയോഗിച്ച് തിരയുക",
   "This transaction is expired": "ഈ ഇടപാട് കാലഹരണപ്പെട്ടു",
   "This transaction is for another account": "ഈ ഇടപാട് മറ്റൊരു അക്കൗണ്ടിനാണ്",
-  "This transaction is for another network": "ഈ ഇടപാട് മറ്റൊരു നെറ്റ്വർക്കിനുള്ളതാണ്"
+  "This transaction is for another network": "ഈ ഇടപാട് മറ്റൊരു നെറ്റ്വർക്കിനുള്ളതാണ്",
+  "Extended mode": "വിപുലീകൃത മോഡ്"
 }

@@ -108,7 +108,7 @@
   "Loading": "Carregar",
   "Network": "Xarxa",
   "Deploy": "Desplegar",
-  "Deploy wallet instructions": "Per utilitzar la cartera ha de desplegar un contracte intel·ligent. Costa alguna quantitat que cal tenir a l'adreça d'aquesta cartera. Si esteu intentant desplegar la cartera a Testnet, podeu utilitzar `giver` per prendre aquesta quantitat inicial.",
+  "Deploy wallet instructions": "Per utilitzar la cartera ha de desplegar un contracte intel·ligent. Costa alguna quantitat que cal tenir a l'adreça d'aquesta cartera.",
   "Take from giver": "Prendre de donant",
   "Balance": "Equilibri",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Missatge caducat. El contracte no s'ha executat a la cadena. Motiu possible: el compte té un saldo insuficient per a l'operació sol·licitada. Envieu algun valor al saldo del compte",
@@ -236,7 +236,7 @@
   "Skip this step": "Ometi aquest pas",
   "Dismiss backup warning": "Descarta l'avís de còpia de seguretat",
   "Max": "Max",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "El compte té un saldo insuficient per a l'operació sol·licitada. Envieu algun valor al saldo del compte.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "El compte té un saldo insuficient per a l'operació sol·licitada. Envieu algun valor al saldo del compte (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "L'execució del contracte es va acabar amb un error: la fase de computació no ha tingut èxit, el codi de sortida: 107. Per obtenir més informació sobre el codi de sortida, comproveu el codi font del contracte o demaneu al desenvolupador de contractes",
   "Warning": "Advertència",
   "Warning text about restoring": "La recuperació de frases de llavor és un mètode obsolet. Només donem suport a la restauració del magatzem de claus al primer llançament. Després de crear la primera cartera, serà possible exportar l'antiga cartera de la frase de llavor.",
@@ -339,5 +339,6 @@
   "Search by domain": "Cerca per domini",
   "This transaction is expired": "Aquesta transacció està caducada",
   "This transaction is for another account": "Aquesta transacció és per a un altre compte",
-  "This transaction is for another network": "Aquesta transacció és per a una altra xarxa"
+  "This transaction is for another network": "Aquesta transacció és per a una altra xarxa",
+  "Extended mode": "Mode estès"
 }

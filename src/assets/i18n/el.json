@@ -108,7 +108,7 @@
   "Loading": "Φόρτωση",
   "Network": "Δίκτυο",
   "Deploy": "Παρατάσσω",
-  "Deploy wallet instructions": "Για τη χρήση του πορτοφολιού πρέπει να αναπτύξει την έξυπνη σύμβαση. Κοστίζει κάποιο ποσό που πρέπει να έχετε στη διεύθυνση αυτού του πορτοφολιού. Εάν προσπαθείτε να αναπτύξετε το πορτοφόλι στο Testnet, μπορείτε να χρησιμοποιήσετε το `Giviver 'για να πάρετε αυτό το αρχικό ποσό.",
+  "Deploy wallet instructions": "Για τη χρήση του πορτοφολιού πρέπει να αναπτύξει την έξυπνη σύμβαση. Κοστίζει κάποιο ποσό που πρέπει να έχετε στη διεύθυνση αυτού του πορτοφολιού.",
   "Take from giver": "Πάρτε από τον Giviver",
   "Balance": "Ισορροπία",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Το μήνυμα έληξε. Η σύμβαση δεν εκτελέστηκε στην αλυσίδα. Πιθανός λόγος: Ο λογαριασμός δεν έχει επαρκή ισορροπία για την απαιτούμενη λειτουργία. Στείλτε κάποια αξία για το υπόλοιπο λογαριασμού",
@@ -236,7 +236,7 @@
   "Skip this step": "Παραλείψτε αυτό το βήμα",
   "Dismiss backup warning": "Απορρίψτε την προειδοποίηση αντιγράφων ασφαλείας",
   "Max": "Μέγιστη",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Ο λογαριασμός δεν έχει επαρκή ισορροπία για την απαιτούμενη λειτουργία. Στείλτε κάποια αξία για το υπόλοιπο λογαριασμού.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Ο λογαριασμός δεν έχει επαρκή ισορροπία για την απαιτούμενη λειτουργία. Στείλτε κάποια αξία για το υπόλοιπο λογαριασμού (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Η εκτέλεση της σύμβασης τερματίστηκε με σφάλμα: η υπολογιστική φάση δεν επιτυγχάνεται, εξόδου Κωδικός: 107. Για περισσότερες πληροφορίες σχετικά με τον κωδικό εξόδου Ελέγξτε τον πηγαίο κώδικα της σύμβασης ή ζητήστε από τον προγραμματιστή συμβολαίου",
   "Warning": "Προειδοποίηση",
   "Warning text about restoring": "Η ανάκτηση φράσης σπόρων είναι μια ξεπερασμένη μέθοδος. Υποστηρίζουμε μόνο το Keystore αποκαθιστά στην πρώτη εκκίνηση. Μετά τη δημιουργία του πρώτου πορτοφολιού, θα είναι δυνατή η εξαγωγή του παλιού πορτοφολιού από τη φράση σπόρων.",
@@ -339,5 +339,6 @@
   "Search by domain": "Αναζήτηση ανά τομέα",
   "This transaction is expired": "Αυτή η συναλλαγή έχει λήξει",
   "This transaction is for another account": "Αυτή η συναλλαγή είναι για έναν άλλο λογαριασμό",
-  "This transaction is for another network": "Αυτή η συναλλαγή είναι για ένα άλλο δίκτυο"
+  "This transaction is for another network": "Αυτή η συναλλαγή είναι για ένα άλλο δίκτυο",
+  "Extended mode": "Εκτεταμένη λειτουργία"
 }

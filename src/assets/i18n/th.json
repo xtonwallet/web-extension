@@ -108,7 +108,7 @@
   "Loading": "การโหลด",
   "Network": "เครือข่าย",
   "Deploy": "ปรับใช้",
-  "Deploy wallet instructions": "สำหรับการใช้งานกระเป๋าสตางค์จำเป็นต้องปรับใช้สัญญาอัจฉริยะ มีค่าใช้จ่ายบางอย่างที่คุณต้องมีในที่อยู่ของกระเป๋าเงินนี้ หากคุณพยายามปรับใช้กระเป๋าเงินบน Testnet คุณสามารถใช้ `Giver 'เพื่อใช้จำนวนเงินเริ่มต้นนี้",
+  "Deploy wallet instructions": "สำหรับการใช้กระเป๋าเงินจำเป็นต้องปรับใช้สัญญาอัจฉริยะ มีค่าใช้จ่ายจำนวนหนึ่งที่คุณต้องมีในที่อยู่ของกระเป๋าเงินนี้",
   "Take from giver": "รับจากผู้ให้",
   "Balance": "สมดุล",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "ข้อความหมดอายุ สัญญาไม่ได้ดำเนินการในห่วงโซ่ เหตุผลที่เป็นไปได้: บัญชีมียอดคงเหลือไม่เพียงพอสำหรับการดำเนินการที่ร้องขอ ส่งค่าบางอย่างไปยังยอดเงินในบัญชี",
@@ -236,7 +236,7 @@
   "Skip this step": "ข้ามขั้นตอนนี้",
   "Dismiss backup warning": "ยกเลิกคำเตือนการสำรองข้อมูล",
   "Max": "สูงสุด",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "บัญชีมียอดคงเหลือไม่เพียงพอสำหรับการดำเนินงานที่ร้องขอ ส่งค่าไปยังยอดเงินในบัญชี",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "บัญชีมียอดคงเหลือไม่เพียงพอสำหรับการดำเนินงานที่ร้องขอ ส่งค่าไปยังยอดเงินในบัญชี (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "การดำเนินการตามสัญญาถูกยกเลิกด้วยข้อผิดพลาด: การคำนวณขั้นตอนไม่สำเร็จออกรหัส: 107 สำหรับข้อมูลเพิ่มเติมเกี่ยวกับรหัสออกตรวจสอบรหัสที่มาของสัญญาหรือถามผู้พัฒนาสัญญา",
   "Warning": "คำเตือน",
   "Warning text about restoring": "การกู้คืนวลีเมล็ดพันธุ์เป็นวิธีการที่ล้าสมัย เรารองรับการคืนค่าที่เก็บคีย์ในการเปิดใช้งานครั้งแรกเท่านั้น หลังจากสร้างกระเป๋าเงินใบแรกแล้ว จะสามารถส่งออกกระเป๋าเงินเก่าจากวลีเริ่มต้นได้",
@@ -339,5 +339,6 @@
   "Search by domain": "ค้นหาโดยโดเมน",
   "This transaction is expired": "ธุรกรรมนี้หมดอายุแล้ว",
   "This transaction is for another account": "ธุรกรรมนี้มีไว้สำหรับบัญชีอื่น",
-  "This transaction is for another network": "ธุรกรรมนี้ใช้สำหรับเครือข่ายอื่น"
+  "This transaction is for another network": "ธุรกรรมนี้ใช้สำหรับเครือข่ายอื่น",
+  "Extended mode": "โหมดขยาย"
 }

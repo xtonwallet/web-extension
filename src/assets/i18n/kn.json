@@ -108,7 +108,7 @@
   "Loading": "ಲೋಡ್ ಮಾಡುವಿಕೆ",
   "Network": "ಜಾಲಬಂಧ",
   "Deploy": "ನಿಯೋಜಿಸು",
-  "Deploy wallet instructions": "Wallet ಬಳಸಿಕೊಂಡು ಸ್ಮಾರ್ಟ್ ಒಪ್ಪಂದವನ್ನು ನಿಯೋಜಿಸಲು ಅಗತ್ಯವಿದೆ. ಈ ವಾಲೆಟ್ನ ವಿಳಾಸವನ್ನು ನೀವು ಹೊಂದಿರಬೇಕಾದ ಕೆಲವು ಮೊತ್ತವನ್ನು ಇದು ಖರ್ಚಾಗುತ್ತದೆ. ನೀವು ಟೆಸ್ಟ್ನೆಟ್ನಲ್ಲಿ ವಾಲೆಟ್ ಅನ್ನು ನಿಯೋಜಿಸಲು ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದರೆ, ಈ ಆರಂಭಿಕ ಮೊತ್ತವನ್ನು ತೆಗೆದುಕೊಳ್ಳಲು ನೀವು `ನೀಡುವವರನ್ನು 'ಬಳಸಬಹುದು.",
+  "Deploy wallet instructions": "Wallet ಬಳಸಿಕೊಂಡು ಸ್ಮಾರ್ಟ್ ಒಪ್ಪಂದವನ್ನು ನಿಯೋಜಿಸಲು ಅಗತ್ಯವಿದೆ. ಈ ವಾಲೆಟ್ನ ವಿಳಾಸವನ್ನು ನೀವು ಹೊಂದಿರಬೇಕಾದ ಕೆಲವು ಮೊತ್ತವನ್ನು ಇದು ಖರ್ಚಾಗುತ್ತದೆ.",
   "Take from giver": "ನೀಡುವವರಿಂದ ತೆಗೆದುಕೊಳ್ಳಿ",
   "Balance": "ಸಮತೋಲನ",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "ಸಂದೇಶ ಅವಧಿ ಮುಗಿದಿದೆ. ಸರಪಳಿಯಲ್ಲಿ ಒಪ್ಪಂದವನ್ನು ಕಾರ್ಯಗತಗೊಳಿಸಲಾಗಿಲ್ಲ. ಸಂಭವನೀಯ ಕಾರಣ: ವಿನಂತಿಸಿದ ಕಾರ್ಯಾಚರಣೆಗೆ ಖಾತೆಗೆ ಸಾಕಷ್ಟು ಸಮತೋಲನವಿಲ್ಲ. ಖಾತೆಯ ಸಮತೋಲನಕ್ಕೆ ಕೆಲವು ಮೌಲ್ಯವನ್ನು ಕಳುಹಿಸಿ",
@@ -236,7 +236,7 @@
   "Skip this step": "ಈ ಹಂತವನ್ನು ಬಿಡಿ",
   "Dismiss backup warning": "ಬ್ಯಾಕ್ಅಪ್ ಎಚ್ಚರಿಕೆಯನ್ನು ವಜಾಗೊಳಿಸಿ",
   "Max": "ಗರಿಷ್ಠ",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "ವಿನಂತಿಸಿದ ಕಾರ್ಯಾಚರಣೆಗೆ ಖಾತೆಗೆ ಸಾಕಷ್ಟು ಸಮತೋಲನವಿಲ್ಲ. ಖಾತೆಯ ಸಮತೋಲನಕ್ಕೆ ಕೆಲವು ಮೌಲ್ಯವನ್ನು ಕಳುಹಿಸಿ.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "ವಿನಂತಿಸಿದ ಕಾರ್ಯಾಚರಣೆಗೆ ಖಾತೆಗೆ ಸಾಕಷ್ಟು ಸಮತೋಲನವಿಲ್ಲ. ಖಾತೆಯ ಸಮತೋಲನಕ್ಕೆ ಕೆಲವು ಮೌಲ್ಯವನ್ನು ಕಳುಹಿಸಿ (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "ಕಾಂಟ್ರಾಕ್ಟ್ ಎಕ್ಸಿಕ್ಯೂಶನ್ ಅನ್ನು ದೋಷದೊಂದಿಗೆ ಕೊನೆಗೊಳಿಸಲಾಯಿತು: ಕಂಪ್ಯೂಟ್ ಹಂತವು ಯಶಸ್ವಿಯಾಗುವುದಿಲ್ಲ, ನಿರ್ಗಮಿಸಿ ಕೋಡ್: 107. ಎಕ್ಸಿಟ್ ಕೋಡ್ ಬಗ್ಗೆ ಹೆಚ್ಚಿನ ಮಾಹಿತಿಗಾಗಿ ಕಾಂಟ್ರಾಕ್ಟ್ ಮೂಲ ಕೋಡ್ ಅನ್ನು ಪರಿಶೀಲಿಸಿ ಅಥವಾ ಕಾಂಟ್ರಾಕ್ಟ್ ಡೆವಲಪರ್ ಅನ್ನು ಕೇಳಿ",
   "Warning": "ಎಚ್ಚರಿಕೆ",
   "Warning text about restoring": "ಬೀಜ ನುಡಿಗಟ್ಟು ಚೇತರಿಕೆಯು ಹಳೆಯ ವಿಧಾನವಾಗಿದೆ. ನಾವು ಮೊದಲ ಬಿಡುಗಡೆಗೆ ಕೀಸ್ಟೋರ್ ಪುನಃಸ್ಥಾಪನೆಗಳನ್ನು ಮಾತ್ರ ಬೆಂಬಲಿಸುತ್ತೇವೆ. ಮೊದಲ ಕೈಚೀಲವನ್ನು ರಚಿಸಿದ ನಂತರ, ಬೀಜ ಪದಗುಚ್ಛದಿಂದ ಹಳೆಯ ವಾಲೆಟ್ ಅನ್ನು ರಫ್ತು ಮಾಡಲು ಸಾಧ್ಯವಿದೆ. ನಾವು ವಾಲೆಟ್ನ ಸಫಾಲ್ಟ್ಸಿಗ್ವಾಲೆಟ್ ಆವೃತ್ತಿಯನ್ನು ಮಾತ್ರ ಬೆಂಬಲಿಸುತ್ತೇವೆ, ಆದ್ದರಿಂದ ಬೀಜ ನುಡಿಗಟ್ಟು ಇತರ ಆವೃತ್ತಿಗಳಿಗೆ ಸೇರಿದಿದ್ದರೆ. ಎಲ್ಲಾ ನಿಧಿಗಳನ್ನು ಹೊಸದಾಗಿ ರಚಿಸಿದ ಮತ್ತು ನಿಯೋಜಿತ ಕೈಚೀಲಕ್ಕೆ ವರ್ಗಾಯಿಸಬೇಕು.",
@@ -339,5 +339,6 @@
   "Search by domain": "ಡೊಮೇನ್ ಮೂಲಕ ಹುಡುಕಿ",
   "This transaction is expired": "ಈ ವಹಿವಾಟು ಅವಧಿ ಮುಗಿದಿದೆ",
   "This transaction is for another account": "ಈ ವಹಿವಾಟು ಮತ್ತೊಂದು ಖಾತೆಗೆ",
-  "This transaction is for another network": "ಈ ವಹಿವಾಟು ಮತ್ತೊಂದು ನೆಟ್‌ವರ್ಕ್‌ಗಾಗಿ"
+  "This transaction is for another network": "ಈ ವಹಿವಾಟು ಮತ್ತೊಂದು ನೆಟ್‌ವರ್ಕ್‌ಗಾಗಿ",
+  "Extended mode": "ವಿಸ್ತೃತ ಮೋಡ್"
 }

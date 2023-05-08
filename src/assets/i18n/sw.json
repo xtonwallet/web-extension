@@ -108,7 +108,7 @@
   "Loading": "Inapakia",
   "Network": "Mtandao",
   "Deploy": "Tumia",
-  "Deploy wallet instructions": "Kwa kutumia mkoba inahitaji kupeleka mkataba wa smart. Inachukua kiasi fulani ambacho unapaswa kuwa na anwani ya mkoba huu. Ikiwa unajaribu kupeleka mkoba kwenye testnet, unaweza kutumia `giver` kuchukua kiasi hiki cha awali.",
+  "Deploy wallet instructions": "Kwa kutumia mkoba inahitaji kupeleka mkataba wa smart. Inachukua kiasi fulani ambacho unapaswa kuwa na anwani ya mkoba huu.",
   "Take from giver": "Chukua kutoka kwa Mtoaji",
   "Balance": "Mizani",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Ujumbe umekamilika. Mkataba haukufanyika kwenye mlolongo. Sababu inayowezekana: Akaunti haina usawa wa kutosha kwa operesheni iliyoombwa. Tuma thamani kwa usawa wa akaunti.",
@@ -236,7 +236,7 @@
   "Skip this step": "Ruka hatua hii",
   "Dismiss backup warning": "Futa Onyo la Backup.",
   "Max": "Max.",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Akaunti haina usawa wa kutosha kwa operesheni iliyoombwa. Tuma thamani kwa usawa wa akaunti.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Akaunti haina usawa wa kutosha kwa operesheni iliyoombwa. Tuma thamani kwa usawa wa akaunti (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Utekelezaji wa mkataba uliondolewa na hitilafu: Awamu ya Compute haijafanikiwa, msimbo wa kuondoka: 107. Kwa habari zaidi kuhusu msimbo wa kuondoka Angalia msimbo wa chanzo cha mkataba au uulize msanidi wa mkataba",
   "Warning": "Onyo",
   "Warning text about restoring": "Ufufuo wa maneno ya mbegu ni njia isiyo ya muda. Tunasaidia tu Kurejesha KeyStore kwenye uzinduzi wa kwanza. Baada ya kuunda mkoba wa kwanza, itawezekana kuuza nje mkoba wa zamani kutoka kwa maneno ya mbegu.",
@@ -339,5 +339,6 @@
   "Search by domain": "Tafuta kwa kikoa",
   "This transaction is expired": "Shughuli hii imekwisha",
   "This transaction is for another account": "Shughuli hii ni ya akaunti nyingine",
-  "This transaction is for another network": "Shughuli hii ni ya mtandao mwingine"
+  "This transaction is for another network": "Shughuli hii ni ya mtandao mwingine",
+  "Extended mode": "Njia iliyopanuliwa"
 }

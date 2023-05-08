@@ -108,7 +108,7 @@
   "Loading": "Memuatkan",
   "Network": "Rangkaian",
   "Deploy": "Menggunakannya",
-  "Deploy wallet instructions": "Untuk menggunakan dompet perlu menggunakan kontrak pintar. Ia berharga beberapa jumlah yang perlu anda miliki di alamat dompet ini. Sekiranya anda cuba menggunakan Wallet pada TestNet, anda boleh menggunakan `Pemberi` untuk mengambil jumlah awal ini.",
+  "Deploy wallet instructions": "Untuk menggunakan dompet perlu menggunakan kontrak pintar. Ia berharga beberapa jumlah yang perlu anda miliki di alamat dompet ini.",
   "Take from giver": "Mengambil dari pemberi",
   "Balance": "Seimbang",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Mesej tamat tempoh. Kontrak tidak dilaksanakan di rantai. Sebab yang mungkin: Akaun tidak mempunyai keseimbangan untuk operasi yang diminta. Hantar beberapa nilai ke baki akaun",
@@ -236,7 +236,7 @@
   "Skip this step": "Langkaui langkah ini",
   "Dismiss backup warning": "Keluarkan amaran cadangan",
   "Max": "MAX.",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Akaun tidak mencukupi untuk operasi yang diminta. Hantar beberapa nilai ke baki akaun.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Akaun tidak mencukupi untuk operasi yang diminta. Hantar beberapa nilai ke baki akaun (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Pelaksanaan kontrak telah ditamatkan dengan kesilapan: Fasa pengiraan tidak berjaya, kod keluar: 107. Untuk maklumat lanjut mengenai kod keluar Semak kod sumber kontrak atau tanya pemaju kontrak",
   "Warning": "Amaran",
   "Warning text about restoring": "Pemulihan frasa benih adalah kaedah yang ketinggalan zaman. Kami hanya menyokong Restores Keystore pada pelancaran pertama. Selepas membuat dompet pertama, ia akan dapat mengeksport dompet lama dari frasa benih. Sila ambil perhatian bahawa kami hanya menyokong versi safeMultigWallet dompet, jadi jika frasa benih itu dimiliki oleh versi lain. Semua dana mesti dipindahkan ke dompet yang baru dibuat dan digunakan.",
@@ -339,5 +339,6 @@
   "Search by domain": "Cari oleh Domain",
   "This transaction is expired": "Transaksi ini tamat tempoh",
   "This transaction is for another account": "Transaksi ini adalah untuk akaun lain",
-  "This transaction is for another network": "Transaksi ini adalah untuk rangkaian lain"
+  "This transaction is for another network": "Transaksi ini adalah untuk rangkaian lain",
+  "Extended mode": "Mod lanjutan"
 }

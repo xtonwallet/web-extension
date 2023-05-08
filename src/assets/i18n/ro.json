@@ -108,7 +108,7 @@
   "Loading": "Se încarcă",
   "Network": "Reţea",
   "Deploy": "Depunerea",
-  "Deploy wallet instructions": "Pentru utilizarea portofelului trebuie să implementeze contracte inteligente. Costă o anumită sumă pe care trebuie să o aveți pe adresa acestui portofel. Dacă încercați să implementați portofelul pe testnet, puteți utiliza 'dăruirea' pentru a lua această sumă inițială.",
+  "Deploy wallet instructions": "Pentru utilizarea portofelului trebuie să implementeze contracte inteligente. Costă o anumită sumă pe care trebuie să o aveți pe adresa acestui portofel.",
   "Take from giver": "Ia de la dăruitor",
   "Balance": "Echilibru",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Mesajul a expirat. Contractul nu a fost executat în lanț. Motivul posibil: Contul are un echilibru insuficient pentru operațiunea solicitată. Trimiteți o valoare pentru soldul contului",
@@ -236,7 +236,7 @@
   "Skip this step": "Sari peste acest pas",
   "Dismiss backup warning": "Respinge avertizarea de rezervă",
   "Max": "Max.",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Contul are un echilibru insuficient pentru operațiunea solicitată. Trimiteți o valoare pentru soldul contului.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Contul are un echilibru insuficient pentru operațiunea solicitată. Trimiteți o valoare pentru soldul contului (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Execuția contractului a fost reziliată cu eroare: Faza de calcul nu este reușită, codul de ieșire: 107. Pentru mai multe informații despre codul de ieșire Verificați codul sursă de contract sau întrebați dezvoltatorul de contract",
   "Warning": "Avertizare",
   "Warning text about restoring": "Fraza de recuperare a semințelor este o metodă depășită. Susținem doar Keystore Restaores la prima lansare. După crearea primului portofel, va fi posibil să exportați vechea portofel din fraza de semințe.",
@@ -339,5 +339,6 @@
   "Search by domain": "Căutare după domeniu",
   "This transaction is expired": "Această tranzacție este expirată",
   "This transaction is for another account": "Această tranzacție este pentru un alt cont",
-  "This transaction is for another network": "Această tranzacție este pentru o altă rețea"
+  "This transaction is for another network": "Această tranzacție este pentru o altă rețea",
+  "Extended mode": "Mod extins"
 }

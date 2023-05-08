@@ -108,7 +108,7 @@
   "Loading": "Chargement",
   "Network": "Réseau",
   "Deploy": "Déployer",
-  "Deploy wallet instructions": "Pour utiliser le portefeuille doit déployer un contrat intelligent. Cela coûte une certaine quantité que vous devez avoir sur l'adresse de ce portefeuille. Si vous essayez de déployer le portefeuille sur Testnet, vous pouvez utiliser 'GIVER' pour prendre ce montant initial.",
+  "Deploy wallet instructions": "Pour utiliser le portefeuille doit déployer un contrat intelligent. Cela coûte une certaine quantité que vous devez avoir sur l'adresse de ce portefeuille.",
   "Take from giver": "Prendre du donneur",
   "Balance": "Équilibre",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Message expiré. Le contrat n'a pas été exécuté sur la chaîne. Raison possible: Le compte a insuffisant l'équilibre pour l'opération demandée. Envoyer une certaine valeur au solde du compte",
@@ -236,7 +236,7 @@
   "Skip this step": "Passer cette étape",
   "Dismiss backup warning": "Renvoyer l'avertissement de sauvegarde",
   "Max": "Max",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Le compte a insuffisant l'équilibre pour l'opération demandée. Envoyez une certaine valeur au solde du compte.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Le compte a insuffisant l'équilibre pour l'opération demandée. Envoyez une certaine valeur au solde du compte (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "L'exécution de contrat a été terminée avec erreur: la phase de calcul n'est pas réussi, sortie Code de sortie: 107. Pour plus d'informations sur le code de sortie, vérifiez le code source du contrat ou demandez au développeur du contrat.",
   "Warning": "Avertissement",
   "Warning text about restoring": "La récupération de la phrase de la graine est une méthode obsolète. Nous ne soutenons que KeyStore Restaure au premier lancement. Après avoir créé le premier portefeuille, il sera possible d'exporter l'ancien portefeuille de la phrase de la graine.",
@@ -339,5 +339,6 @@
   "Search by domain": "Recherche par domaine",
   "This transaction is expired": "Cette transaction est expirée",
   "This transaction is for another account": "Cette transaction est pour un autre compte",
-  "This transaction is for another network": "Cette transaction est pour un autre réseau"
+  "This transaction is for another network": "Cette transaction est pour un autre réseau",
+  "Extended mode": "Mode étendu"
 }

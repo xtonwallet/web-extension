@@ -10,7 +10,7 @@
     "build:mobile": "gulp mobile",
     "build:mobile:prod": "npm run dist && gulp mobile",
     "dist": "rollup --config",
-    "start": "rollup --config --watch",
+    "dev": "rollup --config --watch",
     "test": "mocha --recursive --timeout 30000 tests/e2e/",
     "test-firstrun": "mocha --recursive --timeout 30000 tests/e2e/firstrun/*.js",
     "test-dapps": "mocha --recursive --timeout 30000 tests/e2e/dapp/*.js",

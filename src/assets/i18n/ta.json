@@ -108,7 +108,7 @@
   "Loading": "ஏற்றுதல்",
   "Network": "வலைப்பின்னல்",
   "Deploy": "வரிசைப்படுத்த",
-  "Deploy wallet instructions": "பணப்பையை பயன்படுத்துவதற்கு ஸ்மார்ட் ஒப்பந்தத்தை பயன்படுத்த வேண்டும். இந்த பணப்பையின் முகவரியில் நீங்கள் இருக்க வேண்டும் என்று சில அளவு செலவாகும். நீங்கள் டெஸ்ட்நெட் மீது பணப்பையை வரிசைப்படுத்த முயற்சித்தால், நீங்கள் இந்த ஆரம்ப தொகையை எடுக்க 'கியர்`` ஐப் பயன்படுத்தலாம்.",
+  "Deploy wallet instructions": "பணப்பையை பயன்படுத்துவதற்கு ஸ்மார்ட் ஒப்பந்தத்தை பயன்படுத்த வேண்டும். இந்த பணப்பையின் முகவரியில் நீங்கள் இருக்க வேண்டும் என்று சில அளவு செலவாகும்.",
   "Take from giver": "கொடுப்பவர் இருந்து எடுத்து",
   "Balance": "சமநிலை",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "செய்தி காலாவதியானது. சங்கிலியில் ஒப்பந்தம் செய்யப்படவில்லை. சாத்தியமான காரணம்: கோரப்பட்ட நடவடிக்கைக்கு கணக்கு போதுமான சமநிலை இல்லை. கணக்கு சமநிலைக்கு சில மதிப்பை அனுப்புங்கள்",
@@ -236,7 +236,7 @@
   "Skip this step": "இந்த படிநிலையை தவிர்",
   "Dismiss backup warning": "காப்பு எச்சரிக்கை எச்சரிக்கை",
   "Max": "அதிகபட்சம்",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "கோரப்பட்ட நடவடிக்கைக்கு கணக்கு போதுமான சமநிலை இல்லை. கணக்கு சமநிலைக்கு சில மதிப்பை அனுப்புங்கள்.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "கோரப்பட்ட நடவடிக்கைக்கு கணக்கு போதுமான சமநிலை இல்லை. கணக்கு சமநிலைக்கு சில மதிப்பை அனுப்புங்கள் (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "ஒப்பந்தச் செயல்படுத்தல் பிழை ஏற்பட்டது: கணக்கிடப்பட்டது கட்டம் வெற்றிபெற்றது: Exit Code: 107. Exit Code பற்றிய மேலும் தகவலுக்கு ஒப்பந்த மூலக் குறியீட்டை சரிபார்க்கவும் அல்லது ஒப்பந்த டெவலப்பர் கேளுங்கள்",
   "Warning": "எச்சரிக்கை",
   "Warning text about restoring": "விதை சொற்றொடர் மீட்பு ஒரு காலாவதியான முறை. முதல் தொடக்கத்தில் KeyStore ஐ மீண்டும் ஆதரிக்கிறோம். முதல் பணப்பையை உருவாக்கிய பிறகு, விதை வாக்கியத்திலிருந்து பழைய பணப்பையை ஏற்றுமதி செய்ய முடியும்.",
@@ -339,5 +339,6 @@
   "Search by domain": "டொமைன் மூலம் தேடுங்கள்",
   "This transaction is expired": "இந்த பரிவர்த்தனை காலாவதியானது",
   "This transaction is for another account": "இந்த பரிவர்த்தனை மற்றொரு கணக்கிற்கு",
-  "This transaction is for another network": "இந்த பரிவர்த்தனை மற்றொரு நெட்வொர்க்கிற்கு"
+  "This transaction is for another network": "இந்த பரிவர்த்தனை மற்றொரு நெட்வொர்க்கிற்கு",
+  "Extended mode": "நீட்டிக்கப்பட்ட பயன்முறை"
 }

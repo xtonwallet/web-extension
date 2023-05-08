@@ -108,7 +108,7 @@
   "Loading": "లోడ్",
   "Network": "నెట్వర్క్",
   "Deploy": "మోహరించేందుకు",
-  "Deploy wallet instructions": "వాలెట్ను ఉపయోగించడం కోసం స్మార్ట్ కాంట్రాక్ట్ను అమలు చేయాలి. ఇది మీరు ఈ వాలెట్ యొక్క చిరునామాలో ఉండవలసిన కొంత మొత్తాన్ని ఖర్చవుతుంది. మీరు టెస్టెట్లో వాలెట్ను విస్తరించడానికి ప్రయత్నిస్తున్నట్లయితే, మీరు ఈ ప్రారంభ మొత్తాన్ని తీసుకోవటానికి 'కీవర్' ను ఉపయోగించవచ్చు.",
+  "Deploy wallet instructions": "వాలెట్ను ఉపయోగించడం కోసం స్మార్ట్ కాంట్రాక్ట్ను అమలు చేయాలి. ఇది మీరు ఈ వాలెట్ యొక్క చిరునామాలో ఉండవలసిన కొంత మొత్తాన్ని ఖర్చవుతుంది.",
   "Take from giver": "ఇచ్చేవాడు నుండి తీసుకోండి",
   "Balance": "సంతులనం",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "సందేశం గడువు ముగిసింది. ఒప్పందం గొలుసుపై అమలు చేయబడలేదు. సాధ్యం కారణం: అభ్యర్థించిన ఆపరేషన్ కోసం ఖాతా తగినంత సంతులనం ఉంది. ఖాతా బ్యాలెన్స్కు కొన్ని విలువను పంపండి",
@@ -236,7 +236,7 @@
   "Skip this step": "ఈ దశను దాటవేయి",
   "Dismiss backup warning": "బ్యాకప్ హెచ్చరికను తొలగించండి",
   "Max": "గరిష్టంగా",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "అభ్యర్థించిన ఆపరేషన్ కోసం ఖాతా తగినంత బ్యాలెన్స్ లేదు. ఖాతా బ్యాలెన్స్కు కొన్ని విలువను పంపండి.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "అభ్యర్థించిన ఆపరేషన్ కోసం ఖాతా తగినంత బ్యాలెన్స్ లేదు. ఖాతా బ్యాలెన్స్కు కొన్ని విలువను పంపండి (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "కాంట్రాక్ట్ ఎగ్జిక్యూషన్ లోపం తో ముగిసింది: దశ విజయవంతం కాలేదు, నిష్క్రమణ కోడ్: 107. నిష్క్రమణ కోడ్ గురించి మరింత సమాచారం కోసం కాంట్రాక్ట్ సోర్స్ కోడ్ను తనిఖీ చేయండి లేదా కాంట్రాక్ట్ డెవలపర్ను అడగండి",
   "Warning": "హెచ్చరిక",
   "Warning text about restoring": "సీడ్ పదబంధం రికవరీ ఒక పాత పద్ధతి. మేము మొదటి ప్రయోగంపై కీస్టోర్ను మాత్రమే మద్దతిస్తాము. మొదటి సంచిని సృష్టించిన తరువాత, పాత వాలెట్ను విత్తనాల పదబంధం నుండి ఎగుమతి చేయడం సాధ్యమవుతుంది.",
@@ -339,5 +339,6 @@
   "Search by domain": "డొమైన్ ద్వారా శోధించండి",
   "This transaction is expired": "ఈ లావాదేవీ గడువు ముగిసింది",
   "This transaction is for another account": "ఈ లావాదేవీ మరొక ఖాతా కోసం",
-  "This transaction is for another network": "ఈ లావాదేవీ మరొక నెట్‌వర్క్ కోసం"
+  "This transaction is for another network": "ఈ లావాదేవీ మరొక నెట్‌వర్క్ కోసం",
+  "Extended mode": "విస్తరించిన మోడ్"
 }

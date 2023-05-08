@@ -108,7 +108,7 @@
   "Loading": "Loading.",
   "Network": "Network.",
   "Deploy": "I-deploy",
-  "Deploy wallet instructions": "Para sa paggamit ng wallet ay kailangang mag-deploy ng smart kontrata. Nagkakahalaga ito ng ilang halaga na dapat mong magkaroon sa address ng wallet na ito. Kung sinusubukan mong i-deploy ang wallet sa testnet, maaari mong gamitin ang `tagabigay` upang kunin ang paunang halaga na ito.",
+  "Deploy wallet instructions": "Para sa paggamit ng wallet ay kailangang mag-deploy ng smart kontrata. Nagkakahalaga ito ng ilang halaga na dapat mong magkaroon sa address ng wallet na ito.",
   "Take from giver": "Kumuha mula sa tagabigay",
   "Balance": "Balanse",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "Nag-expire ang mensahe. Ang kontrata ay hindi isinagawa sa kadena. Posibleng Dahilan: Ang account ay hindi sapat ang balanse para sa hiniling na operasyon. Magpadala ng halaga sa balanse ng account",
@@ -236,7 +236,7 @@
   "Skip this step": "Laktawan ang hakbang na ito",
   "Dismiss backup warning": "I-dismiss ang Backup Warning.",
   "Max": "Max.",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "Hindi sapat ang balanse ng account para sa hiniling na operasyon. Magpadala ng ilang halaga sa balanse sa account.",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "Hindi sapat ang balanse ng account para sa hiniling na operasyon. Magpadala ng ilang halaga sa balanse sa account (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "Ang pagpapatupad ng kontrata ay tinapos na may error: compute phase ay hindi nagtagumpay, exit code: 107. Para sa karagdagang impormasyon tungkol sa exit code suriin ang contract source code o magtanong sa developer ng kontrata",
   "Warning": "Babala",
   "Warning text about restoring": "Ang pagbawi ng parirala ng binhi ay isang hindi napapanahong paraan. Sinusuportahan lamang namin ang keystore restores sa unang paglunsad. Pagkatapos ng paglikha ng unang wallet, posible na i-export ang lumang wallet mula sa pariralang binhi.",
@@ -339,5 +339,6 @@
   "Search by domain": "Maghanap sa pamamagitan ng domain",
   "This transaction is expired": "Ang transaksyon na ito ay nag -expire",
   "This transaction is for another account": "Ang transaksyon na ito ay para sa isa pang account",
-  "This transaction is for another network": "Ang transaksyon na ito ay para sa isa pang network"
+  "This transaction is for another network": "Ang transaksyon na ito ay para sa isa pang network",
+  "Extended mode": "Pinalawig na mode"
 }

@@ -20,7 +20,8 @@ const defaultSettingsStore = {
   "rate": "*",
   "innerHeight": 0,
   "innerWidth": 0,
-  "condition": false
+  "condition": false,
+  "extendedMode": false
 };
 
 const createSettingsStore = () => {
@@ -119,6 +120,12 @@ const createSettingsStore = () => {
       });
       enableProxy(enabled);
     },
+    setExtendedMode: (enabled) => {
+      settingsStore.update((store) => {
+        store.extendedMode = enabled;
+        return store;
+      });
+    },
     setCurrency: (currency) => {
       settingsStore.update((store) => {
         store.currency = currency;
@@ -211,6 +218,12 @@ export const currentEnabledPinPad = derived(
 export const currentEnabledProxy = derived(
   settingsStore,
   ($settingsStore) => { return $settingsStore.enabledProxy; }
+);
+
+//Derived Store to return state for extended mode - enabled or not
+export const currentExtendedMode = derived(
+  settingsStore,
+  ($settingsStore) => { return $settingsStore.extendedMode; }
 );
 
 //Derived Store to return currency

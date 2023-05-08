@@ -108,7 +108,7 @@
   "Loading": "装载",
   "Network": "网络",
   "Deploy": "部署",
-  "Deploy wallet instructions": "对于使用钱包需要部署智能合同。您必须在此钱包的地址上花费一些金额。如果您正在尝试在TestNet上部署钱包，您可以使用“Giver”以取得此初始金额。",
+  "Deploy wallet instructions": "使用钱包需要部署智能合约。 你必须在这个钱包的地址上花费一些钱。",
   "Take from giver": "从送礼",
   "Balance": "平衡",
   "Message expired. Contract was not executed on chain. Possible reason: Account has insufficient balance for the requested operation. Send some value to account balance": "消息已过期。合同未在链中执行。可能的原因：帐户对所请求的操作余额不足。向帐户余额发送一些值",
@@ -236,7 +236,7 @@
   "Skip this step": "跳过这步",
   "Dismiss backup warning": "解雇备份警告",
   "Max": "最大限度",
-  "Account has insufficient balance for the requested operation. Send some value to account balance": "帐户对请求的操作余额不足。向帐户余额发送一些值。",
+  "Account has insufficient balance for the requested operation. Send some value to account balance": "帐户对请求的操作余额不足。向帐户余额发送一些值 (> 0.02)",
   "Contract execution was terminated with error: compute phase isn't succeeded, exit code: 107. For more information about exit code check the contract source code or ask the contract developer": "契约执行已终止错误：计算阶段未成功，退出代码：107.有关退出代码的更多信息，请检查合同源代码或询问合同开发人员",
   "Warning": "警告",
   "Warning text about restoring": "种子短语恢复是一种过时的方法。我们只支持首次发布时恢复密钥库。创建第一个钱包后，可以从种子短语出口旧钱包。",
@@ -339,5 +339,6 @@
   "Search by domain": "通过域进行搜索",
   "This transaction is expired": "此交易过期",
   "This transaction is for another account": "此交易是另一个帐户",
-  "This transaction is for another network": "此交易是针对另一个网络的"
+  "This transaction is for another network": "此交易是针对另一个网络的",
+  "Extended mode": "扩展模式"
 }

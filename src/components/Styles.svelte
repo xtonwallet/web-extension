@@ -856,6 +856,11 @@
     width: 100%;
   }
 
+  .inherit-direction {
+    flex-direction: inherit;
+    display: flex;
+  }
+
   .flow-buttons {
     margin-bottom: 4rem;
   }
