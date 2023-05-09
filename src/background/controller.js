@@ -1,7 +1,7 @@
 import { accounts } from './accounts.js';
 import { networks } from './networks.js';
 import { sdk } from './sdk.js';
-import { broadcastMessage, sendNotificationToInPageScript, openRequestPopup, closeRequestPopup, sendRequestReject, fromNano, lt, Unibabel, strToHex } from '../common/utils.js';
+import { broadcastMessage, sendNotificationToInPageScript, openRequestPopup, closeRequestPopup, sendRequestReject, fromNano, toNano, lt, Unibabel, strToHex } from '../common/utils.js';
 import { APPROXIMATE_FEE, settingsStore, accountStore, currentAccount, networksStore, currentNetwork, currentEnabledPinPad, waitingTransaction } from "../common/stores.js";
 import methodsList from "../common/methodsList.js";
 
@@ -903,7 +903,7 @@ export const controller = () => {
           }
         }
         let remainMessages = parsedParams.messages.length;
-        if (remainMessages > 4) {
+        if (remainMessages == 0 || remainMessages > 4) {
           return {"id": data.id, "data": { code: 4000, data: {  error: { code: 1, message: "Bad request" },
                                                                 id: data.params.id
                                                               }}};
@@ -911,11 +911,13 @@ export const controller = () => {
         const modalDataQueue = [];
         const modalDataQueueResult = [];
         let error = false;
+        let totalBalance = 0;
         for (let i in parsedParams.messages) {
           const modalData = { ...data };
           modalData.params = {};
           modalData.params.to = parsedParams.messages[i].address;
           modalData.params.amount = parsedParams.messages[i].amount;
+          totalBalance += Number(parsedParams.messages[i].amount).valueOf();
           //(integer, optional): unix timestamp. after this moment transaction will be invalid.
           if (parsedParams.valid_until) {
             modalData.params.valid_until = parsedParams.valid_until;
@@ -930,81 +932,100 @@ export const controller = () => {
           modalData.id = modalData.id + i;
           modalDataQueue.push(modalData);
         }
-        openRequestPopup('ModalSendingRawTransaction', modalDataQueue.shift());
-        result = new Promise((resolve, reject) => {
-          const listener = (message) => {
-            if (message.type === "popupMessageResponse" && message.id.substr(0, message.id.length-1) == data.id) {
-              remainMessages--;
-              closeRequestPopup();
-
-              if (message.data.code == 4001) { // User reject
-                modalDataQueueResult.push({"error": {"code": 300, "message": "User declined the transaction"}, "id": parseInt(message.id.substr(-1))});
-                error = true;
-              } else if (message.data.code == 4300) { // Another error
-                modalDataQueueResult.push({"error": {"code": 300, "message": message.data.message}, "id": parseInt(message.id.substr(-1))});
-                error = true;
-              } else {
-                modalDataQueueResult.push({"result": "", "id": parseInt(message.id.substr(-1))});
-              }
-
-              if (remainMessages == 0) {
-                browser.runtime.onMessage.removeListener(listener);
-                // @TODO by specification we should return common result, but what else the user will decline one message?
-                // need to return  status by all messages in array - modalDataQueueResult
-                //console.log(modalDataQueueResult);
-                if (error) {
-                  resolve({"id": data.id, "data": { code: 4000, data: {error: {code: 300, message: "User declined the transaction"}, "id": message.id.substr(-1)}}}); 
-                } else {
-                  resolve({"id": data.id, "data": { code: 4000, data: {result: "", "id": message.id.substr(-1)}}});
-                }
-                return;
-              }
-
-              if (modalDataQueue != 0) {
-                // we need to wait some time before show the next in the queue, because the wallet must to change internal id to accept this new tx
-                let checkWaiting = async () => {
-                  const endpoint = await new Promise((resolve) => {
-                    currentNetwork.subscribe((value) => {
-                      resolve(value.server);
-                    });
-                  });
-                  const walletAddress = await new Promise((resolve) => {
-                    currentAccount.subscribe((value) => {
-                      resolve(value.address);
-                    });
-                  });
-
-                  let needCheckAgain = false;
-                  try {
-                    let checkNewTransactionsResult = await checkNewTransactions(walletAddress, endpoint);
-                    if (checkNewTransactionsResult) {
-                      accountStore.removeWaitingTransaction(endpoint + "-" + walletAddress);
-                    } else {
-                      const waiting = await new Promise((resolve) => {
-                        waitingTransaction.subscribe((value) => {
-                          resolve(value);
-                        });
-                      });
-                      needCheckAgain = waiting.includes(endpoint + "-" + walletAddress);
-                    }
-                  } catch(e) {
-                    needCheckAgain = true;
-                  }
-
-                  if (needCheckAgain) {
-                    setTimeout(() => {
-                      checkWaiting();
-                    }, 5000);
-                  } else {
-                    openRequestPopup('ModalSendingRawTransaction', modalDataQueue.shift());
-                  }
-                };
-                checkWaiting();
-              }
-            }
-          };
-          browser.runtime.onMessage.addListener(listener);
+        const currentEndpoint = await new Promise((resolve) => {
+          currentNetwork.subscribe((value) => {
+            resolve(value.server);
+          });
         });
+        const balance = await new Promise((resolve) => {
+          currentAccount.subscribe((value) => {
+            resolve(value.balance[currentEndpoint]);
+          });
+        });
+        if (lt(balance, totalBalance + toNano(APPROXIMATE_FEE))) {
+          return new Promise((resolve, reject) => {
+                resolve({"id": data.id, "data": {
+                  code: 4300,
+                  message: "Not enough balance",
+                }});
+          });
+        } else {
+          openRequestPopup('ModalSendingRawTransaction', modalDataQueue.shift());
+          result = new Promise((resolve, reject) => {
+            const listener = (message) => {
+              if (message.type === "popupMessageResponse" && message.id.substr(0, message.id.length-1) == data.id) {
+                remainMessages--;
+                closeRequestPopup();
+
+                if (message.data.code == 4001) { // User reject
+                  modalDataQueueResult.push({"error": {"code": 300, "message": "User declined the transaction"}, "id": parseInt(message.id.substr(-1))});
+                  error = true;
+                } else if (message.data.code == 4300) { // Another error
+                  modalDataQueueResult.push({"error": {"code": 300, "message": message.data.message}, "id": parseInt(message.id.substr(-1))});
+                  error = true;
+                } else {
+                  modalDataQueueResult.push({"result": "", "id": parseInt(message.id.substr(-1))});
+                }
+
+                if (remainMessages == 0) {
+                  browser.runtime.onMessage.removeListener(listener);
+                  // @TODO by specification we should return common result, but what else the user will decline one message?
+                  // need to return  status by all messages in array - modalDataQueueResult
+                  //console.log(modalDataQueueResult);
+                  if (error) {
+                    resolve({"id": data.id, "data": { code: 4000, data: {error: {code: 300, message: "User declined the transaction"}, "id": message.id.substr(-1)}}}); 
+                  } else {
+                    resolve({"id": data.id, "data": { code: 4000, data: {result: "", "id": message.id.substr(-1)}}});
+                  }
+                  return;
+                }
+
+                if (modalDataQueue != 0) {
+                  // we need to wait some time before show the next in the queue, because the wallet must to change internal id to accept this new tx
+                  let checkWaiting = async () => {
+                    const endpoint = await new Promise((resolve) => {
+                      currentNetwork.subscribe((value) => {
+                        resolve(value.server);
+                      });
+                    });
+                    const walletAddress = await new Promise((resolve) => {
+                      currentAccount.subscribe((value) => {
+                        resolve(value.address);
+                      });
+                    });
+
+                    let needCheckAgain = false;
+                    try {
+                      let checkNewTransactionsResult = await checkNewTransactions(walletAddress, endpoint);
+                      if (checkNewTransactionsResult) {
+                        accountStore.removeWaitingTransaction(endpoint + "-" + walletAddress);
+                      } else {
+                        const waiting = await new Promise((resolve) => {
+                          waitingTransaction.subscribe((value) => {
+                            resolve(value);
+                          });
+                        });
+                        needCheckAgain = waiting.includes(endpoint + "-" + walletAddress);
+                      }
+                    } catch(e) {
+                      needCheckAgain = true;
+                    }
+
+                    if (needCheckAgain) {
+                      setTimeout(() => {
+                        checkWaiting();
+                      }, 5000);
+                    } else {
+                      openRequestPopup('ModalSendingRawTransaction', modalDataQueue.shift());
+                    }
+                  };
+                  checkWaiting();
+                }
+              }
+            };
+            browser.runtime.onMessage.addListener(listener);
+          });
+        }
         break;
       case "signData":
         result = {"id": data.id, "data": { code: 4000, data: {  error: { code: 400, message: "Method is not supported" },
