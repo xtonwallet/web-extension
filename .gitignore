@@ -2,3 +2,4 @@ node_modules
 builds
 dist
 npm-debug.log
+DEV.md
