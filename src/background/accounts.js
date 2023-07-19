@@ -27,16 +27,20 @@ export const accounts = () => {
     retrievingTransactionsLastTime = value;
   });
 
-  const getComment = (msg) => {
+  const getComment = async (msg) => {
     if (!msg.msg_data) return '';
     if (msg.msg_data['@type'] !== 'msg.dataText') return '';
     const base64 = msg.msg_data.text;
-    return new TextDecoder().decode(TonLib.instance.utils.base64ToBytes(base64));
+    const Tlib = new TonLib();
+    const TonLibClient = await Tlib.getClient();
+    return new TextDecoder().decode(
+      TonLibClient.instance.utils.base64ToBytes(base64)
+    );
   };
 
   browser.alarms.onAlarm.addListener(async (alarm) => {
     if (alarm.name === "retrievingTransactions") {
-      const networks = [];
+      let networks = [];
       const accounts = await vault.getAccounts();
       const allAddresses = accounts.map((item) => {return item.address});
 
@@ -57,7 +61,8 @@ export const accounts = () => {
         const network          = networks[i];
         const server           = networks[i].server;
 
-        const TonLibClient     = await TonLib.getClient(server);
+        const Tlib = new TonLib();
+        const TonLibClient = await Tlib.getClient(server);
         //here can be case when network is not responded
         let transactions = [];
         let tokenWallets = {};
@@ -66,12 +71,13 @@ export const accounts = () => {
           for (let index in allAddresses) {
             const tokenList = await vault.tokenList(allAddresses[index], server);
             if (tokenList && tokenList.length != 0) {
-              tokenList.forEach((item) => {
+              for (let indexToken in tokenList) {
+                const item = tokenList[indexToken];
                 if (typeof item.wallet != "undefined") { // wallet only for jetton
                   tokenWallets[item.wallet] = allAddresses[index];
                   walletsTokenInfo[item.wallet] = item;
                 }
-              });
+              }
             }
 
             try {
@@ -109,7 +115,11 @@ export const accounts = () => {
           }
           continue;
         }
-        const transactionsAddresses = transactions.map((item) => {return item.in_msg.destination}).filter((v, i, a) => a.indexOf(v) === i);
+        let txs = {};
+        for (let i in transactions) {
+          txs[transactions[i].in_msg.destination] = 1;
+        }
+        const transactionsAddresses = Object.keys(txs);
         for (let j in transactionsAddresses) {
           // we need to replace token wallet address on the owner address
           if (typeof tokenWallets[transactionsAddresses[j]] != "undefined") {
@@ -165,11 +175,11 @@ export const accounts = () => {
               else if (txData.in_msg.source == "" && txData.out_msgs.length) {
                 txData.type = "transfer";
                 txData.amount  = txData.out_msgs[0].value * -1;
-                txData.comment = getComment(txData.out_msgs[0]);
+                txData.comment = await getComment(txData.out_msgs[0]);
               } else if (txData.in_msg.source != "" && txData.out_msgs.length == 0) {
                 txData.type    = "incoming";
                 txData.amount  = txData.in_msg.value;
-                txData.comment = getComment(txData.in_msg);
+                txData.comment = await getComment(txData.in_msg);
               } else {
                 txData.type    = "error";
                 txData.amount  = txData.in_msg.value;
@@ -202,7 +212,8 @@ export const accounts = () => {
   });
 
   const updateTransactionsList = async (address, server, fromStart = false) => {
-    const TonLibClient     = await TonLib.getClient(server);
+    const Tlib             = new TonLib();
+    const TonLibClient     = await Tlib.getClient(server);
     const network          = await vault.getNetwork(server);
     let tokenWallets = {};
     let walletsTokenInfo = {};
@@ -293,11 +304,11 @@ export const accounts = () => {
         } else if (txData.in_msg.source == "" && txData.out_msgs.length) {
           txData.type = "transfer";
           txData.amount  = txData.out_msgs[0].value * -1;
-          txData.comment = getComment(txData.out_msgs[0]);
+          txData.comment = await getComment(txData.out_msgs[0]);
         } else if (txData.in_msg.source != "" && txData.out_msgs.length == 0) {
           txData.type    = "incoming";
           txData.amount  = txData.in_msg.value;
-          txData.comment = getComment(txData.in_msg);
+          txData.comment = await getComment(txData.in_msg);
         } else {
           txData.type    = "error";
           txData.amount  = txData.in_msg.value;
@@ -333,7 +344,7 @@ export const accounts = () => {
   */
 
   const updateTransactionsListAllNetworks = async (address) => {
-    const networks = [];
+    let networks = [];
 
     const extendedMode = await new Promise((resolve) => {
       currentExtendedMode.subscribe((value) => {
@@ -369,7 +380,8 @@ export const accounts = () => {
   };
 
   const addNewAccount = async (nickname) => {
-    const TonLibClient = await TonLib.getClient();
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient();
     const seed         = await TonLibClient.generateSeed();
     const keys         = await TonLibClient.convertSeedToKeys(seed);
     //prepare for saving
@@ -420,7 +432,8 @@ export const accounts = () => {
     console.log('It is not ready', destination);
     // @TODO Create giver for testnet
     /*
-    const TonLibClient = await TonLib.getClient(server);
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient(server);
     try {
       let bounce = false;
       const accountData = await TonLibClient.requestAccountData(destination);
@@ -447,7 +460,8 @@ export const accounts = () => {
 
 /*
   const updateAllBalances = async (server) => {
-    const TonLibClient = await TonLib.getClient(server);
+    const Tlib         = new TonLib();
+    const TonLibClient = await TonTlibLib.getClient(server);
     const accounts = await vault.getAccounts();
     let balances = [];
     try {
@@ -463,7 +477,8 @@ export const accounts = () => {
 */
 
   const getCurrentBalance = async (destination, server) => {
-    const TonLibClient = await TonLib.getClient(server);
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient(server);
     let amount = 0;
     try {
       amount = await TonLibClient.requestAccountBalance(destination);
@@ -477,7 +492,8 @@ export const accounts = () => {
   const deployNewWallet = async (destination, server) => {
     try {
       const account = await vault.getAccount(destination);
-      const TonLibClient = await TonLib.getClient(server);
+      const Tlib         = new TonLib();
+      const TonLibClient = await Tlib.getClient(server);
       const keyPair = await decrypt(currentPassword, account.encrypted);
 
       await TonLibClient.sendDeployTransaction(destination, keyPair);
@@ -651,7 +667,8 @@ export const accounts = () => {
     const networks = await vault.getNetworks();
     for (let i in networks) {
       const network = networks[i];
-      const TonLibClient = await TonLib.getClient(network.server);
+      const Tlib         = new TonLib();
+      const TonLibClient = await Tlib.getClient(network.server);
       //here can be case when network is not responded
       try {
         const accountData = await TonLibClient.requestAccountData(account);
@@ -742,14 +759,16 @@ export const accounts = () => {
   };
 
   const getWalletStateInit = async (accountAddress, server) => {
-    const TonLibClient = await TonLib.getClient(server);
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient(server);
     const account = await vault.getAccount(accountAddress);
     const keyPair = await decrypt(currentPassword, account.encrypted);
     return await TonLibClient.walletStateInit(keyPair.public, account.version && account.version[server] ? account.version[server] : "");
   };
 
   const addAccountByKeys = async (nickname, keyPair, version) => {
-    const TonLibClient = await TonLib.getClient();
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient();
     const address = await TonLibClient.predictAddress(keyPair.public, version);
     const walletDeployed = await checkWalletDeployed(address, version);
     const account = {
@@ -781,7 +800,8 @@ export const accounts = () => {
   };
 
   const addAccountBySeed = async (nickname, seed, version) => {
-    const TonLibClient = await TonLib.getClient();
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient();
     const keys = await TonLibClient.convertSeedToKeys(seed.split(' '));
     //prepare for saving
     const keyPair = {
@@ -842,7 +862,8 @@ export const accounts = () => {
   const calculateFeeForWallet = async (accountAddress, server, txData) => {
     try {
       const account      = await vault.getAccount(accountAddress);
-      const TonLibClient = await TonLib.getClient(server);
+      const Tlib         = new TonLib();
+      const TonLibClient = await Tlib.getClient(server);
       const keyPair      = await decrypt(currentPassword, account.encrypted);
 
       let result;
@@ -876,14 +897,21 @@ export const accounts = () => {
   const calculateFeeForRawTransaction = async (accountAddress, server, txData) => {
     try {
       const account      = await vault.getAccount(accountAddress);
-      const TonLibClient = await TonLib.getClient(server);
+      const Tlib         = new TonLib();
+      const TonLibClient = await Tlib.getClient(server);
       const keyPair      = await decrypt(currentPassword, account.encrypted);
 
       let result, txDataPrepared;
 
       switch(txData.params.dataType) {
         case "boc":
-          txData.params.data = TonLibClient.oneFromBoc(Unibabel.base64ToBuffer(txData.params.data));
+          try {
+            txData.params.data = TonLibClient.oneFromBoc(
+              Unibabel.base64ToBuffer(txData.params.data)
+            );
+          } catch(e) {
+            // can be just text
+          }
           break;
         case "hex":
           txData.params.data = Unibabel.hexToBuffer(txData.params.data);
@@ -917,7 +945,8 @@ export const accounts = () => {
   const sendTransaction = async (accountAddress, server, txData) => {
     try {
       const account      = await vault.getAccount(accountAddress);
-      const TonLibClient = await TonLib.getClient(server);
+      const Tlib         = new TonLib();
+      const TonLibClient = await Tlib.getClient(server);
       const keyPair      = await decrypt(currentPassword, account.encrypted);
 
       let bounce = false;
@@ -955,13 +984,20 @@ export const accounts = () => {
   const sendRawTransaction = async (accountAddress, server, txData) => {
     try {
       const account      = await vault.getAccount(accountAddress);
-      const TonLibClient = await TonLib.getClient(server);
+      const Tlib         = new TonLib();
+      const TonLibClient = await Tlib.getClient(server);
       const keyPair      = await decrypt(currentPassword, account.encrypted);
 
       let result, txDataPrepared;
       switch(txData.params.dataType) {
         case "boc":
-          txData.params.data = TonLibClient.oneFromBoc(Unibabel.base64ToBuffer(txData.params.data));
+          try {
+            txData.params.data = TonLibClient.oneFromBoc(
+              Unibabel.base64ToBuffer(txData.params.data)
+            );
+          } catch(e) {
+            // can be just text
+          }
           break;
         case "hex":
           txData.params.data = Unibabel.hexToBuffer(txData.params.data);
@@ -1016,14 +1052,16 @@ export const accounts = () => {
   const getSignForData = async (accountAddress, data) => {
     const account      = await vault.getAccount(accountAddress);
     const keyPair      = await decrypt(currentPassword, account.encrypted);
-    const TonLibClient = await TonLib.getClient();
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient();
     return await TonLibClient.signMessageInBox(keyPair, data);
   };
 
   const getSignature = async (accountAddress, unsigned) => {
     const account      = await vault.getAccount(accountAddress);
     const keyPair      = await decrypt(currentPassword, account.encrypted);
-    const TonLibClient = await TonLib.getClient();
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient();
     return await TonLibClient.getSignature(keyPair.secret, unsigned);
   };
 
@@ -1050,7 +1088,8 @@ export const accounts = () => {
   const getNaclBoxPublicKey = async (accountAddress) => {
     const account = await vault.getAccount(accountAddress);
     const keyPair = await decrypt(currentPassword, account.encrypted);
-    const TonLibClient = await TonLib.getClient();
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient();
     const result = await TonLibClient.getNaclBoxKeyPair(keyPair.secret);
     return Unibabel.bufferToHex(Object.values(result.publicKey));
   };
@@ -1058,14 +1097,16 @@ export const accounts = () => {
   const doEncryptionForMessage = async (accountAddress, data) => {
     const account      = await vault.getAccount(accountAddress);
     const keyPair      = await decrypt(currentPassword, account.encrypted);
-    const TonLibClient = await TonLib.getClient();
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient();
     return Unibabel.bufferToBase64(Object.values(await TonLibClient.encryptMessageInNaclBox(keyPair, data)));
   };
 
   const doDecryptionForMessage = async (accountAddress, data) => {
     const account      = await vault.getAccount(accountAddress);
     const keyPair      = await decrypt(currentPassword, account.encrypted);
-    const TonLibClient = await TonLib.getClient();
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient();
     const result = await TonLibClient.decryptMessageInNaclBox(keyPair, data);
     return (result == null ? "" : Unibabel.bufferToUtf8(result));
   };
@@ -1184,7 +1225,8 @@ export const accounts = () => {
   };
 
   const detectTokenTransaction = async (server, message) => {
-    const TonLibClient = await TonLib.getClient(server);
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient(server);
 
     let decodedMessageForTokenTransfer;
     try {
@@ -1199,7 +1241,8 @@ export const accounts = () => {
   const calculateFeeForTokenType74 = async (accountAddress, server, txData, keyPair) => {
     try {
       const account      = await vault.getAccount(accountAddress);
-      const TonLibClient = await TonLib.getClient(server);
+      const Tlib         = new TonLib();
+      const TonLibClient = await Tlib.getClient(server);
       const walletAddressOwner = await getTokenType74WalletAddress(server, txData.params.token.address, accountAddress);
       const JtWallet = TonLibClient.getFtTokenWallet(walletAddressOwner);
       const result = await TonLibClient.estimateTransferFtTokenWallet(account.version && account.version[server] ? account.version[server]: "", JtWallet, accountAddress, walletAddressOwner, {
@@ -1220,13 +1263,15 @@ export const accounts = () => {
   };
 
   const getTokenType74WalletAddress = async (server, tokenRootAddress, ownerAddress) => {
-    const TonLibClient = await TonLib.getClient(server);
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient(server);
     const JtMinter = TonLibClient.getFtToken(tokenRootAddress);
     return await TonLibClient.getJettonWalletAddress(JtMinter, ownerAddress);
   };
 
   const getTokenType74Info = async (server, tokenRootAddress) => {
-    const TonLibClient = await TonLib.getClient(server);
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient(server);
     try {
       const FtWallet = TonLibClient.getFtToken(tokenRootAddress);
       const resultData = await FtWallet.getJettonData();
@@ -1284,7 +1329,8 @@ export const accounts = () => {
   };
 
   const getTokenType74Balance = async (server, walletAddress) => {
-    const TonLibClient = await TonLib.getClient(server);
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient(server);
     const JtWallet = TonLibClient.getFtTokenWallet(walletAddress);
     const result = await TonLibClient.getFtTokenWalletData(JtWallet);
     return result && result.balance ? result.balance.toString(): 0;
@@ -1293,7 +1339,8 @@ export const accounts = () => {
   const transferTokenType74 = async (accountAddress, server, txData, keyPair) => {
     try {
       const account      = await vault.getAccount(accountAddress);
-      const TonLibClient = await TonLib.getClient(server);
+      const Tlib         = new TonLib();
+      const TonLibClient = await Tlib.getClient(server);
       const walletAddressOwner = await getTokenType74WalletAddress(server, txData.params.token.address, accountAddress);
 
       const JtWallet = TonLibClient.getFtTokenWallet(walletAddressOwner);
@@ -1313,7 +1360,8 @@ export const accounts = () => {
   };
 
   const getTokenType64Info = async (server, tokenItemAddress) => {
-    const TonLibClient = await TonLib.getClient(server);
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient(server);
     try {
       const NftItem = TonLibClient.getNftItemToken(tokenItemAddress);
       const resultData = await NftItem.getData();
@@ -1354,7 +1402,8 @@ export const accounts = () => {
   };
 
   const getNftContent = async (server, tokenItemAddress) => {
-    const TonLibClient = await TonLib.getClient(server);
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient(server);
     try {
       const NftItem = TonLibClient.getNftItemToken(tokenItemAddress);
       const resultNftItemData = await NftItem.getData();

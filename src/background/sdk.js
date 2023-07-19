@@ -3,13 +3,15 @@ import { base64ToHex } from "../common/utils.js";
 
 export const sdk = () => {
   const cryptoGenerateRandomBytes = async (data) => {
-    const TonLibClient = await TonLib.getClient();
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient();
     const result = await TonLibClient.cryptoGenerateRandomBytes(data.length);
     return {base64: result, hex: base64ToHex(result)};
   };
 
   const getSdkVersion = async () => {
-    const TonLibClient = await TonLib.getClient();
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient();
     const result = await TonLibClient.version;
     return result;
   };
@@ -19,27 +21,32 @@ export const sdk = () => {
     if (prohibited_methods.includes(`${module}_${method}`)) {
       return false;
     }
-    const TonLibClient = await TonLib.getClient();
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient();
     return TonLibClient.checkThatSdkMethodExists(module, method);
   };
 
   const runSdkMethod = async (network, module, method, params) => {
-    const TonLibClient = await TonLib.getClient(network);
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient(network);
     return await TonLibClient.runSdkMethodDirectly(module, method, params);
   };
   
   const sha256 = async (data) => {
-    const TonLibClient = await TonLib.getClient();
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient();
     return await TonLibClient.sha256(data);
   };
 
   const parseAddress = async (data) => {
-    const TonLibClient = await TonLib.getClient();
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient();
     return TonLibClient.parseAddress(data);
   };
 
   const makeTonProof = async (walletAddress, domain, timestamp, payload) => {
-    const TonLibClient = await TonLib.getClient();
+    const Tlib         = new TonLib();
+    const TonLibClient = await Tlib.getClient();
     return TonLibClient.tonProof(walletAddress, domain, timestamp, payload);
   };
 

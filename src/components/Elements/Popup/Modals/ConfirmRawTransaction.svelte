@@ -54,8 +54,11 @@
   const confirmTransaction = () => {
     loading = true;
     disabled = true;
-  
-    if (modalData.txData.params.valid_until && new Date().getTime() > parseInt(modalData.txData.params.valid_until)) {
+
+    if (
+      modalData.txData.params.valid_until &&
+      new Date().getTime() > parseInt(modalData.txData.params.valid_until, 10)
+    ) {
       openModal("ModalError", { message: "This transaction is expired" });
       if (modalData.id) {
         // let's show 5 seconds popup with the error, then close it and send it
@@ -200,7 +203,7 @@
           <div class="flex-column flex-center-center">
             <span class="weight-500">{$_('Message')}</span>
             {#if modalData.txData.params.data}
-              <span class="text-container message">{modalData.txData.params.data} ({modalData.txData.params.dataType})</span>
+              <span class="text-container message">{modalData.txData.params.data}</span>
             {:else}
               <span class="message">&nbsp;</span>
             {/if}

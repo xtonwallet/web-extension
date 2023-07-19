@@ -572,4 +572,4 @@ class TonLib {
   }
 };
 
-export default new TonLib();
+export default TonLib;

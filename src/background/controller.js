@@ -902,6 +902,18 @@ export const controller = () => {
             });
           }
         }
+        if (!Array.isArray(parsedParams.messages)) {
+          return {
+            id: data.id,
+            data: {
+              code: 4000,
+              data: {
+                error: { code: 1, message: "Bad request" },
+                id: data.params.id,
+              },
+            },
+          };
+        }
         let remainMessages = parsedParams.messages.length;
         if (remainMessages == 0 || remainMessages > 4) {
           return {"id": data.id, "data": { code: 4000, data: {  error: { code: 1, message: "Bad request" },
