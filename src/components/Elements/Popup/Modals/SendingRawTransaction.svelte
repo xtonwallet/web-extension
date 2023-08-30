@@ -148,13 +148,13 @@
     }
     let txData, maxBalance;
     maxBalance = balance;
-    if (new BigNumber(toNano(amount.value)).gt(maxBalance)) {
+    if (new BigNumber(amount.value).gt(maxBalance)) {
       amount.value = fromNano(maxBalance);
     }
     txData = {
       type: "sendRaw",
       params: {
-        amount: toNano(amount.value),
+        amount: amount.value,
         data: data.value,
         dataType: dataType.value,
         to: to.dataset.value,

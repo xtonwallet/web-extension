@@ -285,7 +285,7 @@ export const controller = () => {
         resolve(value.balance[endpoint]);
       });
     });
-    if (lt(fromNano(balance), data.params.amount + APPROXIMATE_FEE)) {
+    if (lt(fromNano(balance), fromNano(data.params.amount) + APPROXIMATE_FEE)) {
       return new Promise((resolve, reject) => {
             resolve({"id": data.id, "data": {
               code: 4300,

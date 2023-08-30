@@ -57,7 +57,7 @@
 
     if (
       modalData.txData.params.valid_until &&
-      new Date().getTime() > parseInt(modalData.txData.params.valid_until, 10)
+      new Date().getTime()/1000 > parseInt(modalData.txData.params.valid_until, 10)
     ) {
       openModal("ModalError", { message: "This transaction is expired" });
       if (modalData.id) {

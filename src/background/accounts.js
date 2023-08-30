@@ -162,6 +162,9 @@ export const accounts = () => {
                 needToUpdateWalletUI = true;
               }
             } else {
+              if (txData.in_msg.source == "" && txData.out_msgs.length == 0 && txData.in_msg.body_hash == "PIALVup+5GPrSOg23J2j/L4eqptw/35CcTpKs+VbAmI=") {
+                continue;
+              }
               if (txData.in_msg.source == "" && txData.out_msgs.length == 0) {
                 txData.type = "deploy";
                 txData.amount  = txData.fee * -1;
@@ -292,6 +295,9 @@ export const accounts = () => {
           needToUpdateWalletUI = true;
         }
       } else {
+        if (txData.in_msg.source == "" && txData.out_msgs.length == 0 && txData.in_msg.body_hash == "PIALVup+5GPrSOg23J2j/L4eqptw/35CcTpKs+VbAmI=") {
+          continue;
+        }
         if (txData.in_msg.source == "" && txData.out_msgs.length == 0) {
           txData.type = "deploy";
           txData.amount  = txData.fee * -1;
@@ -905,13 +911,9 @@ export const accounts = () => {
 
       switch(txData.params.dataType) {
         case "boc":
-          try {
-            txData.params.data = TonLibClient.oneFromBoc(
-              Unibabel.base64ToBuffer(txData.params.data)
-            );
-          } catch(e) {
-            // can be just text
-          }
+          txData.params.data = TonLibClient.oneFromBoc(
+            Unibabel.base64ToBuffer(txData.params.data)
+          );
           break;
         case "hex":
           txData.params.data = Unibabel.hexToBuffer(txData.params.data);
@@ -1288,9 +1290,15 @@ export const accounts = () => {
                                 .then((data) => {
                                   return data;
                                 });
-          const protocol = new URL(result.image).protocol;
-          if (protocol == 'ipfs:') {
-            result.image = `https://cloudflare-ipfs.com/ipfs/${result.image.substr(7)}#x-ipfs-companion-no-redirect`
+          
+          if (result.image) {
+            const protocol = new URL(result.image).protocol;
+            if (protocol == 'ipfs:') {
+              result.image = `https://cloudflare-ipfs.com/ipfs/${result.image.substr(7)}#x-ipfs-companion-no-redirect`
+            }
+          }
+          if (result.image_data) {
+            result.image = result.image_data;
           }
           return {
             name: result.name,
