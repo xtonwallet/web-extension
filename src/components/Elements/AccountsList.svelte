@@ -21,6 +21,7 @@
   import {
     fromNano,
     shortAddress,
+    unbounceble,
   } from "../../common/utils.js";
 
   const { switchPage } = getContext("app_functions");
@@ -204,10 +205,10 @@
             on:keyup={() => changeAccount(account.address)}
             class:selected={account.address == $currentAccount.address}
             class="account-item is-vertical-align">
-            <span class="identicon">{@html indenticon(account.address)}</span>
+            <span class="identicon">{@html indenticon(unbounceble(account.address))}</span>
             <span
               class="nickname"
-              title={shortAddress(account.address)}>{account.nickname}</span>
+              title={shortAddress(unbounceble(account.address))}>{account.nickname}</span>
             <span class="balance is-center">
               {account.balance[$currentNetwork.server] ? fromNano(account.balance[$currentNetwork.server], 2) : 0}
             </span>

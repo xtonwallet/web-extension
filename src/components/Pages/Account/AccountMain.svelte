@@ -44,6 +44,7 @@
     copyToClipboard,
     fromNano,
     shortAddress,
+    unbounceble,
   } from "../../../common/utils.js";
 
   //Context
@@ -89,7 +90,7 @@
   $: showGiver = $currentNetwork.test && $currentNetwork.giver != "";
 
   const copyAddress = (event) => {
-    copyToClipboard($currentAccount.address);
+    copyToClipboard(unbounceble($currentAccount.address));
     const element = event.currentTarget;
     element.classList.toggle("fade-half");
     setTimeout(() => {
@@ -98,11 +99,11 @@
   };
 
   const showQRCode = (event) => {
-    openModal("ModalQRCode", { data: "ton://transfer/" + $currentAccount.address });
+    openModal("ModalQRCode", { data: "ton://transfer/" + unbounceble($currentAccount.address) });
   };
 
   const sendLink = (event) => {
-    openModal("ModalSendLink", { data: "ton://transfer/" + $currentAccount.address });
+    openModal("ModalSendLink", { data: "ton://transfer/" + unbounceble($currentAccount.address) });
   };
 
   const showNftContent = (event, asset) => {
@@ -213,7 +214,7 @@
 
   const viewOnExplorer = () => {
     browser.tabs.create({
-      url: `${$currentNetwork.explorer}/address/${$currentAccount.address}`,
+      url: `${$currentNetwork.explorer}/address/${unbounceble($currentAccount.address)}`,
     });
   };
 
@@ -610,9 +611,9 @@
     </div>
     <div class="address">
       {#if ($currentResolution.innerWidth < 768)}
-        <span title={$currentAccount.address}> {shortAddress($currentAccount.address)} </span>
+        <span title={unbounceble($currentAccount.address)}> {shortAddress(unbounceble($currentAccount.address))} </span>
       {:else}
-        <span title={$currentAccount.address}> {$currentAccount.address} </span>
+        <span title={unbounceble($currentAccount.address)}> {unbounceble($currentAccount.address)} </span>
       {/if}
     </div>
   </div>

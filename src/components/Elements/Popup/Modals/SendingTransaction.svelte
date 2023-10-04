@@ -14,6 +14,7 @@
     fromNano,
     toNano,
     sendRequestReject,
+    unbounceble,
   } from "../../../../common/utils.js";
 
   //Components
@@ -248,7 +249,7 @@
         params: {
           amount: toNano(amount.value),
           message: message.value,
-          destination: destination.dataset.value,
+          destination: unbounceble(destination.dataset.value),
           allBalance: allBalance,
         },
       };
@@ -258,14 +259,14 @@
         params: {
           amount: toNano(amount.value),
           message: message.value,
-          destination: destination.dataset.value,
+          destination: unbounceble(destination.dataset.value),
           token: modalData.token
         },
       };
     }
     openModal("ModalConfirmTransaction", {
       id: modalData.id,
-      accountAddress: $currentAccount.address,
+      accountAddress: unbounceble($currentAccount.address),
       server: $currentNetwork.server,
       fee: fee,
       txData: txData,

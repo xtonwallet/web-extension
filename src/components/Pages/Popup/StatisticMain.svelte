@@ -33,6 +33,7 @@
     copyToClipboard,
     fromNano,
     fromDecimal,
+    unbounceble,
   } from "../../../common/utils.js";
 
   //Context
@@ -102,7 +103,7 @@
     </div>
     <div class="address">
       <span title={$currentAccount.address}>
-        {shortAddress($currentAccount.address)}
+        {shortAddress(unbounceble($currentAccount.address))}
       </span>
     </div>
   </div>

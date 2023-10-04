@@ -12,7 +12,7 @@
   import {
     shortAddress,
     copyToClipboard,
-    serializeBufferForStorage,
+    unbounceble,
   } from "../../../common/utils.js";
 
   //Components
@@ -159,10 +159,10 @@
                   class="copy-text"
                   size="1.5"
                   color="grey"
-                  on:click={() => copyText(account.address)}
-                  on:keyup={() => copyText(account.address)}
+                  on:click={() => copyText(unbounceble(account.address))}
+                  on:keyup={() => copyText(unbounceble(account.address))}
                   />
-                <div class="key-text">{account.address}</div>
+                <div class="key-text">{unbounceble(account.address)}</div>
               </div>
             </div>
             <div>

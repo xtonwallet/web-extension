@@ -18,7 +18,7 @@
     APPROXIMATE_FEE
   } from "../../../common/stores.js";
  
-  import { shortAddress, fromNano, copyToClipboard } from "../../../common/utils.js";
+  import { shortAddress, fromNano, copyToClipboard, unbounceble } from "../../../common/utils.js";
 
   //Components
   import Loading from "../../Elements/Loading.svelte";
@@ -132,7 +132,7 @@
   };
 
   const copyAddress = (event) => {
-    copyToClipboard($currentAccount.address);
+    copyToClipboard(unbounceble($currentAccount.address));
     const element = event.currentTarget;
     element.classList.toggle("fade-half");
     setTimeout(() => {
@@ -171,7 +171,7 @@
       <Col size=6>
         <div id="qrcode"></div>
         <Icon src={mdiContentCopy} class="copy-text" size="1.5" color="grey" on:click={(e) => copyAddress(e)}/>
-        <span title="{$currentAccount.address}"> {shortAddress($currentAccount.address)} </span>
+        <span title="{unbounceble($currentAccount.address)}"> {shortAddress(unbounceble($currentAccount.address))} </span>
       </Col>
       <Col size=6>
         {$_("Balance")}: <b>{fromNano(balance)} {$currentNetwork.coinName}</b>

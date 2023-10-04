@@ -12,6 +12,7 @@
 
   import {
     shortAddress,
+    unbounceble,
   } from "../../../../common/utils.js";
 
   import "../../../../common/fileSaver.js";
@@ -46,7 +47,7 @@
 
   const viewAddressOnExplorer = (explorer, address) => {
     browser.tabs.create({
-      url: `${explorer}/address/${address}`,
+      url: `${explorer}/address/${unbounceble(address)}`,
     });
   };
 
@@ -141,9 +142,9 @@
         </p>
         <p class="owner">
           {$_("Owner")}
-          <a on:click={() => {viewAddressOnExplorer($currentNetwork.explorer, owner)}} href={"#"}>
-            <span title={owner}>
-              {shortAddress(owner)}
+          <a on:click={() => {viewAddressOnExplorer($currentNetwork.explorer, unbounceble(owner))}} href={"#"}>
+            <span title={unbounceble(owner)}>
+              {shortAddress(unbounceble(owner))}
             </span>
           </a>
         </p>

@@ -1,6 +1,7 @@
 import { writable, get } from 'svelte/store';
 import BigNumber from "bignumber.js";
 import QRCode from "./qrcode.js";
+import TonWeb from "./tonweb";
 
 const devMode = __DEV_MODE__;
 
@@ -553,6 +554,11 @@ const sleep = async (ms) => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
+const unbounceble = (address) => {
+  const parsedAddress = new TonWeb.Address(address);
+  return parsedAddress.toString(true, true, false, false);
+};
+
 export {
   Unibabel,
   // Simple methods to store in localStorage:
@@ -592,4 +598,5 @@ export {
   generateQRcode,
   getRate,
   sleep,
+  unbounceble,
 };
