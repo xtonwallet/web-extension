@@ -1,6 +1,6 @@
 {
   "name": "xtonwallet",
-  "version": "2.1.5",
+  "version": "2.2.0",
   "description": "The browser extension for TON (The Open Network) blockchain.",
   "author": "XTON wallet team <support@xtonwallet.com>",
   "license": "Apache-2.0",
