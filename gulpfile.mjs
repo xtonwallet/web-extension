@@ -1,5 +1,4 @@
 import gulp from 'gulp';
-import imagemin from 'gulp-imagemin';
 import rename from 'gulp-rename';
 import replace from 'gulp-replace';
 import jsoneditor from 'gulp-json-editor';
@@ -100,12 +99,6 @@ gulp.task('manifest:opera', function () {
     .pipe(gulp.dest('./builds/opera', { overwrite: true }));
 });
 
-gulp.task('optimize:images', function () {
-  return gulp.src('./builds/**/images/**', { base: './builds/' })
-    .pipe(imagemin())
-    .pipe(gulp.dest('./builds/', { overwrite: true }));
-});
-
 gulp.task('delete:development', function () {
   return del(
     browserPlatforms.map((platform) => `./builds/${platform}/livereload.js`)
@@ -136,7 +129,6 @@ gulp.task('build',
   gulp.series(
     'clean',
     'copy',
-    'optimize:images',
     'delete:development',
     'zip'
   )
@@ -184,12 +176,6 @@ copyTask('copy:mobile', {
   destination: './builds/mobile',
 });
 
-gulp.task('optimize:images:mobile', function () {
-  return gulp.src('./builds/mobile/images/**', { base: './builds/' })
-    .pipe(imagemin())
-    .pipe(gulp.dest('./builds/', { overwrite: true }));
-});
-
 gulp.task('delete:development:mobile', function () {
   return del(['./builds/mobile/livereload.js',
               './builds/mobile/chromereload.js',
@@ -204,7 +190,6 @@ gulp.task('mobile',
     'copy:mobile',
     'mobile:polyfill',
     'mobile:assets',
-    'optimize:images:mobile',
     'delete:development:mobile',
   )
 );
