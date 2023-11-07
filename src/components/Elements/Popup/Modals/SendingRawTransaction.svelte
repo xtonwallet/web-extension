@@ -17,7 +17,7 @@
   } from "../../../../common/utils.js";
 
   //Components
-  import { Field, Button, Input } from "svelte-chota";
+  import { Field, Button, Input, Col, Row } from "svelte-chota";
 
   export let modalData = {};
   export let closeModal;
@@ -106,25 +106,6 @@
   currentAccount.subscribe((value) => {
     loadSelectAddressesList();
   });
-
-  const validateAddressSelect = (event) => {
-    if (event.detail == null) {
-      disabled = true;
-      return;
-    }
-    const rawAddress = new RegExp(/-?[0-9]{0,10}:[a-fA-F0-9]{64}/);
-    const base64Address = new RegExp(/[_\-\/\+a-zA-Z0-9]{48}/);
-    if (
-      new String(event.detail.value).match(rawAddress) ||
-      new String(event.detail.value).match(base64Address)
-    ) {
-      disabled = false;
-      to.dataset.value = event.detail.value;
-      calculateFee();
-    } else {
-      disabled = true;
-    }
-  };
 
   const validateAddress = (event) => {
     const rawAddress = new RegExp(/-?[0-9]{0,10}:[a-fA-F0-9]{64}/);
@@ -223,17 +204,18 @@
     });
   };
 
-  const groupBy = (item) => item.group;
-
 </script>
 
 <style lang="scss">
   .token-logo {
-    width: 48px;
-    height: 48px;
+    width: 2rem;
+    height: 2rem;
     border: var(--color-black) dashed 1px;
-    margin: 0.5rem;
+    margin: 0rem;
     border-radius: 50%;
+  }
+  .token-symbol {
+    font-size: 1rem;
   }
   .sending-tx-total-wrapper {
     align-content: center;
@@ -248,33 +230,35 @@
     flex-direction: row;
   }
   #sending-tx-fee {
-    margin-right: 1rem;
+    font-size: 1.25rem;
     font-weight: 700;
   }
   #sending-tx-total {
+    font-size: 1.25rem;
     margin-left: 1rem;
   }
   .title {
     margin: 0px;
+    font-weight: 700;
+    font-size: 1.75rem;
   }
   .container {
     line-height: 1.3;
   }
   .send-raw-transaction-wrapper {
-    max-height: 35rem;
+    max-height: 40rem;
     overflow: hidden;
     .send-raw-transaction-wrapper-scroll {
-      max-height: 35rem;
+      max-height: 40rem;
       overflow-y: auto;
       width: calc(100% + 20px);
       .send-raw-transaction-wrapper-internal {
         width: fit-content;
-        margin-left: 2rem;
+        margin-left: 0rem;
         margin-right: 2rem;
       }
     }
   }
-
 </style>
 
 <div class="flex-column container">
@@ -282,36 +266,34 @@
   <div class="send-raw-transaction-wrapper">
     <div class="send-raw-transaction-wrapper-scroll">
       <div class="send-raw-transaction-wrapper-internal">
-        <div class="is-center">
-          <img alt="logo" class="token-logo" src={icon} /><br />
-          <span {title}>{symbol}</span>
-        </div>
-        <Field label={$_('To')}>
-          <Select
+        <Field label={$_('Address')}>
+          <Input
             id="sending-tx-to"
-            items={complexItems}
-            {groupBy}
             required
-            placeholder={$_('Select or enter a new one') + '...'}
-            noOptionsMessage={$_('No matches')}
-            on:select={validateAddressSelect}
-            on:clear={validateAddressSelect}
-            on:keyup={validateAddress} />
+            />
         </Field>
         <Field
           label={$_('Amount')}
           gapless
           error={typeof errorAmount === 'string' ? $_(errorAmount) : false}>
-          <Input
-            required
-            number
-            readonly
-            min="0"
-            step="any"
-            on:input={() => {
-              calculateFee();
-            }}
-            id="sending-tx-amount" />
+          <Row class="standard-order">
+            <Col size="4" class="text-center is-marginless">
+              <img alt="logo" class="token-logo" src={icon} />
+              <div title="{title}" class="token-symbol">{symbol}</div>
+            </Col>
+            <Col class="is-marginless">
+              <Input
+                required
+                number
+                readonly
+                min="0"
+                step="any"
+                on:input={() => {
+                  calculateFee();
+                }}
+                id="sending-tx-amount" />
+            </Col>
+          </Row>
         </Field>
         <div class="sending-tx-total-wrapper">
           <div id="sending-tx-fee">{$_('Fee')} ~ {fee}</div>
@@ -320,7 +302,7 @@
         <Field label={$_('Data')}>
           <Input id="sending-tx-data" readonly />
         </Field>
-        <Field label={$_('Data type')}>
+        <Field label={$_('Data type')} class="hidden">
           <Input id="sending-tx-dataType" readonly />
         </Field>
         <Field label={$_('State init')}>

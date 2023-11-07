@@ -10,7 +10,6 @@
   import { steps } from "../../../common/stores.js";
 
   import {
-    shortAddress,
     copyToClipboard,
     unbounceble,
   } from "../../../common/utils.js";

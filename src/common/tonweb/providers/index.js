@@ -1,5 +1,4 @@
-import {Cell} from "../boc";
-import {base64ToBytes} from "../utils";
+import {Cell} from "./../toncore";
 import HttpProviderUtils from './HttpProviderUtils';
 
 const SHARD_ID_ALL = '-9223372036854775808'; // 0x8000000000000000
@@ -166,7 +165,7 @@ class HttpProvider {
         if (!rawResult.config) throw new Error('getConfigParam expected config');
         if (rawResult.config['@type'] !== 'tvm.cell') throw new Error('getConfigParam expected type tvm.cell');
         if (!rawResult.config.bytes) throw new Error('getConfigParam expected bytes');
-        return Cell.oneFromBoc(base64ToBytes(rawResult.config.bytes));
+        return Cell.fromBase64(rawResult.config.bytes)[0];
     }
 
     /**

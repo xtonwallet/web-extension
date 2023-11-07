@@ -45,7 +45,6 @@ class BlockSubscription {
         if (!this.startLT) throw new Error('Cannot get startLT from provider');
 
         // MASTERCHAIN
-
         let isMcProcessing = false;
 
         const mcTick = async () => {

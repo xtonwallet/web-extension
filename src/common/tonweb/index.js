@@ -1,21 +1,22 @@
-import * as utils from "./utils";
-import {Address} from "./utils";
-import * as boc from "./boc";
-//import AppTon from "./ledger/AppTon";
+import {Address} from "./toncore";
+import {BitString, BitBuilder, Cell, Slice} from "./toncore";
 import HttpProvider from "./providers";
 import Contract from "./contract";
 import Wallets from "./contract/wallet";
 import LockupWallets from "./contract/lockup";
+import * as utils from "./utils";
 import * as NFT from "./contract/token/nft";
 import * as JETTON from "./contract/token/ft";
 import * as mnemonic from "./mnemonic";
 import {BlockSubscription, InMemoryBlockStorage} from "./providers/blockSubscription";
 import SubscriptionContract from "./contract/subscription/index";
 import {Payments, PaymentChannel} from "./contract/payments/index";
+//import AppTon from "./ledger/AppTon";
 //import TransportWebUSB from "@ledgerhq/hw-transport-webusb";
 //import TransportWebHID from "@ledgerhq/hw-transport-webhid";
 //import BluetoothTransport from "@ledgerhq/hw-transport-web-ble";
 import {Dns, DnsCollection, DnsItem} from "./contract/dns";
+import {Buffer} from "buffer";
 const version = '0.0.58';
 
 class TonWeb {
@@ -23,7 +24,7 @@ class TonWeb {
         this.version = version;
         this.utils = utils;
         this.Address = Address;
-        this.boc = boc;
+        this.boc = {BitString, BitBuilder, Cell, Slice};
         this.Contract = Contract;
         this.BlockSubscription = BlockSubscription;
         this.InMemoryBlockStorage = InMemoryBlockStorage;
@@ -65,7 +66,7 @@ class TonWeb {
      * @param bytes {Uint8Array}
      */
     async sendBoc(bytes) {
-        return this.provider.sendBoc(utils.bytesToBase64(bytes));
+        return this.provider.sendBoc(Buffer.from(bytes).toString("base64"));
     }
 
     /**
@@ -82,7 +83,7 @@ class TonWeb {
 TonWeb.version = version;
 TonWeb.utils = utils;
 TonWeb.Address = Address;
-TonWeb.boc = boc;
+TonWeb.boc = {BitString, BitBuilder, Cell, Slice};
 TonWeb.HttpProvider = HttpProvider;
 TonWeb.Contract = Contract;
 TonWeb.Wallets = Wallets;

@@ -1,33 +1,21 @@
 import nacl from "tweetnacl";
 import Contract from "../index";
-import {Cell} from "../../boc";
-import {hexToBytes} from "../../utils";
+import {Cell} from "./../../toncore";
 import {parseAddress} from "../token/nft/NftUtils";
+import BigNumber from "bignumber.js";
+import {Buffer} from "buffer";
 import {
     writePublicKey,
-    writeSignature,
-    createSignatureCell,
-    tag_init,
-    tag_cooperative_close,
-    tag_cooperative_commit,
-    tag_start_uncooperative_close,
-    tag_challenge_state,
-    tag_settle_conditionals,
-    tag_state,
-    op_top_up_balance,
     op_init_channel,
     op_cooperative_close,
     op_cooperative_commit,
     op_start_uncooperative_close,
     op_challenge_quarantined_state,
     op_settle_conditionals,
-    op_finish_uncooperative_close,
-    op_channel_closed,
     createTopUpBalance,
     createInitChannelBody,
     createCooperativeCloseChannelBody,
     createCooperativeCommitBody,
-    createConditionalPayment,
     createSemiChannelBody,
     createSemiChannelState,
     createSignedSemiChannelState,
@@ -51,8 +39,8 @@ class PaymentChannel extends Contract {
         options.publicKeyA = options.isA ? options.myKeyPair.publicKey : options.hisPublicKey;
         options.publicKeyB = !options.isA ? options.myKeyPair.publicKey : options.hisPublicKey;
 
-        options.wc = options.wc || 0;
-        options.code = options.code || Cell.oneFromBoc(PAYMENT_CHANNEL_CODE_HEX);
+        options.workChain = options.workChain || 0;
+        options.code = options.code || Cell.fromBoc(Buffer.from(PAYMENT_CHANNEL_CODE_HEX, 'hex'))[0];
         super(provider, options);
     }
 
@@ -62,31 +50,31 @@ class PaymentChannel extends Contract {
      * @return {Cell} cell contains payment channel data
      */
     createDataCell() {
-        const cell = new Cell();
-        cell.bits.writeBit(0); // inited
-        cell.bits.writeCoins(0); // balance_A
-        cell.bits.writeCoins(0); // balance_B
+        const cell = new Cell().asBuilder();
+        cell.storeBit(0); // inited
+        cell.storeCoins(0); // balance_A
+        cell.storeCoins(0); // balance_B
         writePublicKey(cell, this.options.publicKeyA); // key_A
         writePublicKey(cell, this.options.publicKeyB); // key_B
-        cell.bits.writeUint(this.options.channelId, 128); // channel_id
+        cell.storeUint(this.options.channelId, 128); // channel_id
 
-        const closingConfig = new Cell();
-        closingConfig.bits.writeUint(this.options.closingConfig?.quarantineDuration || 0, 32); // quarantin_duration
-        closingConfig.bits.writeCoins(this.options.closingConfig?.misbehaviorFine || new BigNumber(0)); // misbehavior_fine
-        closingConfig.bits.writeUint(this.options.closingConfig?.conditionalCloseDuration || 0, 32); // conditional_close_duration
-        cell.refs[0] = closingConfig;
+        const closingConfig = new Cell().asBuilder();
+        closingConfig.storeUint(this.options.closingConfig?.quarantineDuration || 0, 32); // quarantin_duration
+        closingConfig.storeCoins(this.options.closingConfig?.misbehaviorFine || new BigNumber(0)); // misbehavior_fine
+        closingConfig.storeUint(this.options.closingConfig?.conditionalCloseDuration || 0, 32); // conditional_close_duration
+        cell.storeRef(closingConfig.asCell());
 
-        cell.bits.writeUint(0, 32); // commited_seqno_A
-        cell.bits.writeUint(0, 32); // commited_seqno_B
-        cell.bits.writeBit(false); // quarantin ref
+        cell.storeUint(0, 32); // commited_seqno_A
+        cell.storeUint(0, 32); // commited_seqno_B
+        cell.storeBit(false); // quarantin ref
 
-        const paymentConfig = new Cell();
-        paymentConfig.bits.writeCoins(this.options.excessFee || new BigNumber(0)); // excess_fee
-        paymentConfig.bits.writeAddress(this.options.addressA); // addr_A
-        paymentConfig.bits.writeAddress(this.options.addressB); // addr_B
-        cell.refs[1] = paymentConfig;
+        const paymentConfig = new Cell().asBuilder();
+        paymentConfig.storeCoins(this.options.excessFee || new BigNumber(0)); // excess_fee
+        paymentConfig.storeAddress(this.options.addressA); // addr_A
+        paymentConfig.storeAddress(this.options.addressB); // addr_B
+        cell.storeRef(paymentConfig.asCell());
 
-        return cell;
+        return cell.asCell();
     }
 
     /**
@@ -95,8 +83,8 @@ class PaymentChannel extends Contract {
      * @param cellForSigning    {Cell}
      * @returns {Promise<{cell: Cell, signature: Uint8Array}>}
      */
-    async createOneSignature(op, cellForSigning) {
-        const signature = nacl.sign.detached(await cellForSigning.hash(), this.options.myKeyPair.secretKey);
+    createOneSignature(op, cellForSigning) {
+        const signature = nacl.sign.detached(cellForSigning.hash(), this.options.myKeyPair.secretKey);
 
         const cell = createOneSignature({
             op,
@@ -115,8 +103,8 @@ class PaymentChannel extends Contract {
      * @param cellForSigning    {Cell}
      * @returns {Promise<{cell: Cell, signature: Uint8Array}>}
      */
-    async createTwoSignature(op, hisSignature, cellForSigning) {
-        const signature = nacl.sign.detached(await cellForSigning.hash(), this.options.myKeyPair.secretKey);
+    createTwoSignature(op, hisSignature, cellForSigning) {
+        const signature = nacl.sign.detached(cellForSigning.hash(), this.options.myKeyPair.secretKey);
 
         const signatureA = this.options.isA ? signature : hisSignature;
         const signatureB = !this.options.isA ? signature : hisSignature;
@@ -185,7 +173,7 @@ class PaymentChannel extends Contract {
      * @param params    {{mySeqno: BigNumber, mySentCoins: BigNumber, hisSeqno?: BigNumber, hisSentCoins?: BigNumber}}
      * @returns {Promise<{cell: Cell, signature: Uint8Array}>}
      */
-    async createSignedSemiChannelState(params) {
+    createSignedSemiChannelState(params) {
         const state = createSemiChannelState({
             channelId: this.options.channelId,
             semiChannelBody: createSemiChannelBody({
@@ -199,7 +187,7 @@ class PaymentChannel extends Contract {
                 conditionals: null
             }),
         });
-        const signature = nacl.sign.detached(await state.hash(), this.options.myKeyPair.secretKey);
+        const signature = nacl.sign.detached(state.hash(), this.options.myKeyPair.secretKey);
         const cell = createSignedSemiChannelState({signature, state});
         return {cell, signature};
     }
@@ -233,7 +221,7 @@ class PaymentChannel extends Contract {
      * @param hisSignature  {Uint8Array}
      * @returns {Promise<boolean>}
      */
-    async verifyState(params, hisSignature) {
+    verifyState(params, hisSignature) {
         const mySeqno = !this.options.isA ? params.seqnoA : params.seqnoB;
         const hisSeqno = this.options.isA ? params.seqnoA : params.seqnoB;
 
@@ -256,7 +244,7 @@ class PaymentChannel extends Contract {
                 conditionals: null
             }),
         });
-        const hash = await state.hash();
+        const hash = state.hash();
         return nacl.sign.detached.verify(hash, hisSignature, this.options.isA ? this.options.publicKeyB : this.options.publicKeyA);
     }
 
@@ -274,9 +262,9 @@ class PaymentChannel extends Contract {
      * @param hisSignature {Uint8Array}
      * @return {boolean}
      */
-    async verifyClose(params, hisSignature) {
-        const cell = await createCooperativeCloseChannelBody({...params, channelId: this.options.channelId});
-        const hash = await cell.hash();
+    verifyClose(params, hisSignature) {
+        const cell = createCooperativeCloseChannelBody({...params, channelId: this.options.channelId});
+        const hash = cell.hash();
         return nacl.sign.detached.verify(hash, hisSignature, this.options.isA ? this.options.publicKeyB : this.options.publicKeyA);
     }
 
@@ -346,7 +334,7 @@ class PaymentChannel extends Contract {
         const bnToBytes = (bn) => {
             let hex = bn.toString(16);
             if (hex.length % 2 !== 0) hex = '0' + hex;
-            return hexToBytes(hex);
+            return Buffer.from(hex, 'hex');
         }
 
         const myAddress = await this.getAddress();

@@ -1,8 +1,8 @@
 import BigNumber from "bignumber.js";
 import Contract from "../../index";
-import {Cell} from "../../../boc";
+import {Cell, Address} from "./../../../toncore";
 import {createOffchainUriCell, parseOffchainUriCell, parseAddress, SNAKE_DATA_PREFIX} from "../nft/NftUtils";
-import {Address, bytesToBase64, bytesToHex, concatBytes, stringToBytes, sha256} from "../../../utils";
+import {Buffer} from "buffer";
 
 class JettonMinter extends Contract {
 
@@ -11,8 +11,8 @@ class JettonMinter extends Contract {
      * @param options   {{adminAddress: Address, jettonContentUri: string, jettonWalletCodeHex: string, address?: Address | string, code?: Cell}}
      */
     constructor(provider, options) {
-        options.wc = 0;
-        options.code = options.code || Cell.oneFromBoc('B5EE9C7241020B010001ED000114FF00F4A413F4BCF2C80B0102016202030202CC040502037A60090A03EFD9910E38048ADF068698180B8D848ADF07D201800E98FE99FF6A2687D007D206A6A18400AA9385D47181A9AA8AAE382F9702480FD207D006A18106840306B90FD001812881A28217804502A906428027D012C678B666664F6AA7041083DEECBEF29385D71811A92E001F1811802600271812F82C207F97840607080093DFC142201B82A1009AA0A01E428027D012C678B00E78B666491646580897A007A00658064907C80383A6465816503E5FFE4E83BC00C646582AC678B28027D0109E5B589666664B8FD80400FE3603FA00FA40F82854120870542013541403C85004FA0258CF1601CF16CCC922C8CB0112F400F400CB00C9F9007074C8CB02CA07CBFFC9D05008C705F2E04A12A1035024C85004FA0258CF16CCCCC9ED5401FA403020D70B01C3008E1F8210D53276DB708010C8CB055003CF1622FA0212CB6ACB1FCB3FC98042FB00915BE200303515C705F2E049FA403059C85004FA0258CF16CCCCC9ED54002E5143C705F2E049D43001C85004FA0258CF16CCCCC9ED54007DADBCF6A2687D007D206A6A183618FC1400B82A1009AA0A01E428027D012C678B00E78B666491646580897A007A00658064FC80383A6465816503E5FFE4E840001FAF16F6A2687D007D206A6A183FAA904051007F09');
+        options.workChain = 0;
+        options.code = options.code || Cell.fromBoc(Buffer.from('B5EE9C7241020B010001ED000114FF00F4A413F4BCF2C80B0102016202030202CC040502037A60090A03EFD9910E38048ADF068698180B8D848ADF07D201800E98FE99FF6A2687D007D206A6A18400AA9385D47181A9AA8AAE382F9702480FD207D006A18106840306B90FD001812881A28217804502A906428027D012C678B666664F6AA7041083DEECBEF29385D71811A92E001F1811802600271812F82C207F97840607080093DFC142201B82A1009AA0A01E428027D012C678B00E78B666491646580897A007A00658064907C80383A6465816503E5FFE4E83BC00C646582AC678B28027D0109E5B589666664B8FD80400FE3603FA00FA40F82854120870542013541403C85004FA0258CF1601CF16CCC922C8CB0112F400F400CB00C9F9007074C8CB02CA07CBFFC9D05008C705F2E04A12A1035024C85004FA0258CF16CCCCC9ED5401FA403020D70B01C3008E1F8210D53276DB708010C8CB055003CF1622FA0212CB6ACB1FCB3FC98042FB00915BE200303515C705F2E049FA403059C85004FA0258CF16CCCCC9ED54002E5143C705F2E049D43001C85004FA0258CF16CCCCC9ED54007DADBCF6A2687D007D206A6A183618FC1400B82A1009AA0A01E428027D012C678B00E78B666491646580897A007A00658064FC80383A6465816503E5FFE4E840001FAF16F6A2687D007D206A6A183FAA904051007F09', 'hex'))[0];
         super(provider, options);
         this.jettonOnChainMetadata = {
           "bf4546a6ffe1b79cfdd86bad3db874313dcde2fb05e6a74aa7f3552d9617c79d12": "name",
@@ -29,12 +29,12 @@ class JettonMinter extends Contract {
      * @return {Cell} cell contains jetton minter data
      */
     createDataCell() {
-        const cell = new Cell();
-        cell.bits.writeCoins(0); // total supply
-        cell.bits.writeAddress(this.options.adminAddress);
-        cell.refs[0] = createOffchainUriCell(this.options.jettonContentUri);
-        cell.refs[1] = Cell.oneFromBoc(this.options.jettonWalletCodeHex);
-        return cell;
+        const cell = new Cell().asBuilder();
+        cell.storeCoins(0); // total supply
+        cell.storeAddress(this.options.adminAddress);
+        cell.storeRef(createOffchainUriCell(this.options.jettonContentUri));
+        cell.storeRef(Cell.fromBoc(Buffer.from(this.options.jettonWalletCodeHex, 'hex'))[0]);
+        return cell.asCell();
     }
 
     /**
@@ -42,23 +42,23 @@ class JettonMinter extends Contract {
      * @return {Cell}
      */
      createMintBody(params) {
-        const body = new Cell();
-        body.bits.writeUint(21, 32); // OP mint
-        body.bits.writeUint(params.queryId || 0, 64); // query_id
-        body.bits.writeAddress(params.destination);
-        body.bits.writeCoins(params.amount); // in Toncoins
+        const body = new Cell().asBuilder();
+        body.storeUint(21, 32); // OP mint
+        body.storeUint(params.queryId || 0, 64); // query_id
+        body.storeAddress(params.destination);
+        body.storeCoins(params.amount); // in Toncoins
 
-        const transferBody = new Cell(); // internal transfer
-        transferBody.bits.writeUint(0x178d4519, 32); // internal_transfer op
-        transferBody.bits.writeUint(params.queryId || 0, 64);
-        transferBody.bits.writeCoins(params.jettonAmount);
-        transferBody.bits.writeAddress(null); // from_address
-        transferBody.bits.writeAddress(null); // response_address
-        transferBody.bits.writeCoins(new BigNumber(0)); // forward_amount
-        transferBody.bits.writeBit(false); // forward_payload in this slice, not separate cell
+        const transferBody = new Cell().asBuilder(); // internal transfer
+        transferBody.storeUint(0x178d4519, 32); // internal_transfer op
+        transferBody.storeUint(params.queryId || 0, 64);
+        transferBody.storeCoins(params.jettonAmount);
+        transferBody.storeAddress(null); // from_address
+        transferBody.storeAddress(null); // response_address
+        transferBody.storeCoins(new BigNumber(0)); // forward_amount
+        transferBody.storeBit(false); // forward_payload in this slice, not separate cell
 
-        body.refs[0] = transferBody;
-        return body;
+        body.storeRef(transferBody.asCell());
+        return body.asCell();
     }
 
     /**
@@ -68,11 +68,11 @@ class JettonMinter extends Contract {
     createChangeAdminBody(params) {
         if (params.newAdminAddress === undefined) throw new Error('Specify newAdminAddress');
 
-        const body = new Cell();
-        body.bits.writeUint(3, 32); // OP
-        body.bits.writeUint(params.queryId || 0, 64); // query_id
-        body.bits.writeAddress(params.newAdminAddress);
-        return body;
+        const body = new Cell().asBuilder();
+        body.storeUint(3, 32); // OP
+        body.storeUint(params.queryId || 0, 64); // query_id
+        body.storeAddress(params.newAdminAddress);
+        return body.asCell();
     }
 
     /**
@@ -80,11 +80,11 @@ class JettonMinter extends Contract {
      * @return {Cell}
      */
     createEditContentBody(params) {
-        const body = new Cell();
-        body.bits.writeUint(4, 32); // OP
-        body.bits.writeUint(params.queryId || 0, 64); // query_id
-        body.refs[0] = createOffchainUriCell(params.jettonContentUri);
-        return body;
+        const body = new Cell().asBuilder();
+        body.storeUint(4, 32); // OP
+        body.storeUint(params.queryId || 0, 64); // query_id
+        body.storeRef(createOffchainUriCell(params.jettonContentUri));
+        return body.asCell();
     }
 
     /**
@@ -100,7 +100,7 @@ class JettonMinter extends Contract {
         const jettonContentCell = result[3];
         let jettonContentUri = null;
         try {
-            jettonContentUri = parseOffchainUriCell(jettonContentCell);
+            jettonContentUri = parseOffchainUriCell(jettonContentCell.asSlice());
         } catch (e) {
         }
         const jettonWalletCode = result[4];
@@ -114,13 +114,13 @@ class JettonMinter extends Contract {
      */
     async getJettonWalletAddress(ownerAddress) {
         const myAddress = await this.getAddress();
-        const cell = new Cell()
-        cell.bits.writeAddress(ownerAddress)
+        const cell = new Cell().asBuilder();
+        cell.storeAddress(ownerAddress)
 
         const result = await this.provider.call2(
             myAddress.toString(),
             'get_wallet_address',
-            [['tvm.Slice', bytesToBase64(await cell.toBoc(false))]],
+            [['tvm.Slice', Buffer.from(cell.asCell().toBoc()).toString("base64")]],
         );
         return parseAddress(result)
     }
@@ -132,7 +132,7 @@ class JettonMinter extends Contract {
       }
 
       const loadRefs = (slice, arr) => {
-        arr.push(bytesToHex(slice.loadBits(slice.length)));
+        arr.push(Buffer.from(slice.loadBits(slice.length).toString('hex')));
         for (let k in slice.refs) {
           arr.concat(loadRefs(slice.loadRef(), arr));
         }

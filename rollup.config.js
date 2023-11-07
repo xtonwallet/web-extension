@@ -1,19 +1,26 @@
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import terser from '@rollup/plugin-terser';
+import json from '@rollup/plugin-json';
+import replace from '@rollup/plugin-replace';
 import serve from 'rollup-plugin-serve';
 import copy from 'rollup-plugin-copy-merge';
 import watchAssets from 'rollup-plugin-watch-assets';
 import postcss from 'rollup-plugin-postcss';
 import svelte from 'rollup-plugin-svelte';
-import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
-import terser from '@rollup/plugin-terser';
-import json from '@rollup/plugin-json';
+import nodePolyfills from 'rollup-plugin-polyfill-node';
 import livereload from 'rollup-plugin-livereload';
 import preprocess from 'svelte-preprocess';
-import replace from '@rollup/plugin-replace';
 
 const production = !process.env.ROLLUP_WATCH;
+function onwarn(warning) {
+  if (warning.code !== 'CIRCULAR_DEPENDENCY') { // due to ton-core, workaround on 04/11/2023
+      console.error(`(!) ${warning.message} \n${warning.frame}`);
+  }
+}
 
 const config = [{
+  onwarn,
   input: 'src/popup.js',
   output: {
     file: 'dist/popup.js',
@@ -42,6 +49,7 @@ const config = [{
       ]
     }),
     commonjs(),
+    nodePolyfills(),
     json(),
     !production && watchAssets({ assets: ['src'] }),
     // If we're building for production (npm run build
@@ -59,6 +67,7 @@ const config = [{
     clearScreen: false
   }
 },{
+  onwarn,
   input: 'src/page.js',
   output: {
     file: 'dist/page.js',
@@ -77,6 +86,7 @@ const config = [{
       sourceMap: !production
     }),
     commonjs(),
+    nodePolyfills(),
     json(),
     !production && watchAssets({ assets: ['src'] }),
     // If we're building for production (npm run build
@@ -94,6 +104,7 @@ const config = [{
     clearScreen: false
   }
 },{
+  onwarn,
   input: 'src/content.js',
   output: {
     file: 'dist/content.js',
@@ -102,6 +113,7 @@ const config = [{
   },
   plugins: [
     commonjs(),
+    nodePolyfills(),
     json(),
     !production && watchAssets({ assets: ['src'] }),
     // If we're building for production (npm run build
@@ -119,6 +131,7 @@ const config = [{
     clearScreen: false
   }
 },{
+  onwarn,
   input: 'src/inpage.js',
   output: {
     file: 'dist/inpage.js',
@@ -127,6 +140,7 @@ const config = [{
   },
   plugins: [
     commonjs(),
+    nodePolyfills(),
     json(),
     !production && watchAssets({ assets: ['src'] }),
     // If we're building for production (npm run build
@@ -144,6 +158,7 @@ const config = [{
     clearScreen: false
   }
 },{
+  onwarn,
   input: 'src/background.js',
   output: {
     file: 'dist/background.js',
@@ -152,6 +167,7 @@ const config = [{
   },
   plugins: [
     commonjs(),
+    nodePolyfills(),
     json(),
     !production && watchAssets({ assets: ['src'] }),
     // If we're building for production (npm run build
@@ -169,6 +185,7 @@ const config = [{
     clearScreen: false
   }
 },{
+  onwarn,
   input: 'src/background-wrapper.js',
   output: {
     file: 'dist/background-wrapper.js',
@@ -177,6 +194,7 @@ const config = [{
   },
   plugins: [
     commonjs(),
+    nodePolyfills(),
     json(),
     !production && copy({targets: [{ src: 'dist/livereload.js', file: 'dist/background-wrapper.js' }]}),
     !production && watchAssets({ assets: ['src'] }),

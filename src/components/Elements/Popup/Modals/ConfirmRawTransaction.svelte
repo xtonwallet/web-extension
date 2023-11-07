@@ -4,6 +4,7 @@
 
   import {
     shortAddress,
+    unbounceble,
     sendRequestReject,
     sendRequestResolve,
   } from "../../../../common/utils.js";
@@ -192,11 +193,11 @@
         <div class="flex-row">
           <div class="flex-column input-box-50 flex-center-center">
             <span class="weight-500">{$_('Address')}</span>
-            <span>{shortAddress(modalData.accountAddress)}</span>
+            <span>{shortAddress(unbounceble(modalData.accountAddress))}</span>
           </div>
           <div class="flex-column input-box-50 flex-center-center">
             <span class="weight-500">{$_('Destination')}</span>
-            <span>{shortAddress(modalData.txData.params.to)}</span>
+            <span>{shortAddress(unbounceble(modalData.txData.params.to))}</span>
           </div>
         </div>
         <div class="flex-row flex-center-center">

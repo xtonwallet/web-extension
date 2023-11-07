@@ -1,7 +1,7 @@
+import {Buffer} from "buffer";
 import nacl from "tweetnacl";
 import Contract from "../index";
-import {Cell} from "../../boc";
-import {Address} from "../../utils";
+import {Cell, Address} from "./../../toncore";
 import BigNumber from "bignumber.js";
 
 /**
@@ -10,7 +10,7 @@ import BigNumber from "bignumber.js";
 class WalletContract extends Contract {
     /**
      * @param provider    {HttpProvider}
-     * @param options?    {{code: Uint8Array, publicKey?: Uint8Array, address?: Address | string, wc?: number}}
+     * @param options?    {{code: Uint8Array, publicKey?: Uint8Array, address?: Address | string, workChain?: number}}
      */
     constructor(provider, options) {
         if (!options.publicKey && !options.address) throw new Error('WalletContract required publicKey or address in options')
@@ -57,10 +57,10 @@ class WalletContract extends Contract {
      */
     createDataCell() {
         // 4 byte seqno, 32 byte publicKey
-        const cell = new Cell();
-        cell.bits.writeUint(0, 32); // seqno
-        cell.bits.writeBytes(this.options.publicKey);
-        return cell;
+        const cell = new Cell().asBuilder();
+        cell.storeUint(0, 32); // seqno
+        cell.storeBuffer(Buffer.from(this.options.publicKey, 'binary'));
+        return cell.asCell();
     }
 
     /**
@@ -70,9 +70,9 @@ class WalletContract extends Contract {
      */
     createSigningMessage(seqno) {
         seqno = seqno || 0;
-        const cell = new Cell();
-        cell.bits.writeUint(seqno, 32);
-        return cell;
+        const cell = new Cell().asBuilder();
+        cell.storeUint(seqno, 32);
+        return cell.asCell();
     }
 
     /**
@@ -88,20 +88,19 @@ class WalletContract extends Contract {
         const {stateInit, address, code, data} = await this.createStateInit();
 
         const signingMessage = this.createSigningMessage();
-        const signature = nacl.sign.detached(await signingMessage.hash(), secretKey);
+        const signature = nacl.sign.detached(signingMessage.hash(), secretKey);
 
-        const body = new Cell();
-        body.bits.writeBytes(signature);
-        body.writeCell(signingMessage);
+        const body = new Cell().asBuilder();
+        body.storeBuffer(Buffer.from(signature, 'binary'));
+        body.storeBuilder(signingMessage.asBuilder());
 
         const header = Contract.createExternalMessageHeader(address);
-        const externalMessage = Contract.createCommonMsgInfo(header, stateInit, body);
+        const externalMessage = Contract.createCommonMsgInfo(header, {code, data}, body.asCell());
 
         return {
             address: address,
             message: externalMessage,
-
-            body,
+            body: body.asCell(),
             signingMessage,
             stateInit,
             code,
@@ -123,17 +122,17 @@ class WalletContract extends Contract {
         seqno,
         dummySignature = false
     ) {
-        const signature = dummySignature ? new Uint8Array(64) : nacl.sign.detached(await signingMessage.hash(), secretKey);
+        const signature = dummySignature ? Buffer.alloc(64) : nacl.sign.detached(signingMessage.hash(), secretKey);
 
-        const body = new Cell();
-        body.bits.writeBytes(signature);
-        body.writeCell(signingMessage);
+        const body = new Cell().asBuilder();
+        body.storeBuffer(Buffer.from(signature, 'binary'));
+        body.storeBuilder(signingMessage.asBuilder());
 
         let stateInit = null, code = null, data = null;
 
         if (seqno === 0) {
             if (!this.options.publicKey) {
-                const keyPair = nacl.sign.keyPair.fromSecretKey(secretKey)
+                const keyPair = nacl.sign.keyPair.fromSecretKey(secretKey);
                 this.options.publicKey = keyPair.publicKey;
             }
             const deploy = await this.createStateInit();
@@ -144,13 +143,13 @@ class WalletContract extends Contract {
 
         const selfAddress = await this.getAddress();
         const header = Contract.createExternalMessageHeader(selfAddress);
-        const resultMessage = Contract.createCommonMsgInfo(header, stateInit, body);
+        const resultMessage = Contract.createCommonMsgInfo(header, stateInit, body.asCell());
 
         return {
             address: selfAddress,
             message: resultMessage, // old wallet_send_generate_external_message
 
-            body: body,
+            body: body.asCell(),
             signature: signature,
             signingMessage: signingMessage,
 
@@ -183,27 +182,27 @@ class WalletContract extends Contract {
         stateInit = null,
         expireAt = undefined
     ) {
-        let payloadCell = new Cell();
+        let payloadCell = new Cell().asBuilder();
         if (payload) {
             if (payload.refs) { // is Cell
-                payloadCell = payload;
+                payloadCell = payload.asBuilder();
             } else if (typeof payload === 'string') {
                 if (payload.length > 0) {
-                    payloadCell.bits.writeUint(0, 32);
-                    payloadCell.bits.writeString(payload);
+                    payloadCell.storeUint(0, 32);
+                    payloadCell.storeStringTail(payload);
                 }
             } else {
-                payloadCell.bits.writeBytes(payload)
+                payloadCell.storeBuffer(Buffer.from(payload, 'binary'))
             }
         }
 
-        const orderHeader = Contract.createInternalMessageHeader(new Address(address), new BigNumber(amount));
-        const order = Contract.createCommonMsgInfo(orderHeader, stateInit, payloadCell);
-        const signingMessage = this.createSigningMessage(seqno, expireAt);
-        signingMessage.bits.writeUint8(sendMode);
-        signingMessage.refs.push(order);
+        const orderHeader = Contract.createInternalMessageHeader(Address.parse(address), new BigNumber(amount));
+        const order = Contract.createCommonMsgInfo(orderHeader, stateInit, payloadCell.endCell());
+        const signingMessage = this.createSigningMessage(seqno, expireAt).asBuilder();
+        signingMessage.storeUint(sendMode, 8);
+        signingMessage.storeRef(order);
 
-        return this.createExternalMessage(signingMessage, secretKey, seqno, dummySignature);
+        return this.createExternalMessage(signingMessage.asCell(), secretKey, seqno, dummySignature);
     }
 }
 

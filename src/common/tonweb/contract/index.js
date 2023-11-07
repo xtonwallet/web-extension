@@ -1,16 +1,15 @@
-import {Cell} from "../boc";
-import {Address, bytesToBase64, bytesToHex} from "../utils";
-
+import {Cell, storeStateInit, Address, storeMessage} from "./../toncore";
+import {Buffer} from "buffer";
 class Contract {
     /**
      * @param provider    {HttpProvider}
-     * @param options    {{code?: Cell, address?: Address | string, wc?: number}}
+     * @param options    {{code?: Cell, address?: Address | string, workChain?: number}}
      */
     constructor(provider, options) {
         this.provider = provider;
         this.options = options;
-        this.address = options.address ? new Address(options.address) : null;
-        if (!options.wc) options.wc = this.address ? this.address.wc : 0;
+        this.address = options.address ? (typeof options.address === "string" ? Address.parse(options.address): options.address) : null;
+        if (!options.workChain) options.workChain = this.address ? this.address.workChain : 0;
         this.methods = {};
     }
 
@@ -50,8 +49,7 @@ class Contract {
         const codeCell = this.createCodeCell();
         const dataCell = this.createDataCell();
         const stateInit = Contract.createStateInit(codeCell, dataCell);
-        const stateInitHash = await stateInit.hash();
-        const address = new Address(this.options.wc + ":" + bytesToHex(stateInitHash));
+        const address = new Address(this.options.workChain, stateInit.hash());
         return {
             stateInit: stateInit,
             address: address,
@@ -73,26 +71,16 @@ class Contract {
      */
     static createStateInit(code,
                            data,
-                           library = null,
+                           libraries = null,
                            splitDepth = null,
                            ticktock = null) {
-        if (library)
-            throw "Library in state init is not implemented";
-        if (splitDepth)
-            throw "Split depth in state init is not implemented";
-        if (ticktock)
-            throw "Ticktock in state init is not implemented";
-
-        const stateInit = new Cell();
-
-        stateInit.bits.writeBitArray([Boolean(splitDepth), Boolean(ticktock), Boolean(code), Boolean(data), Boolean(library)]);
-        if (code)
-            stateInit.refs.push(code);
-        if (data)
-            stateInit.refs.push(data);
-        if (library)
-            stateInit.refs.push(library);
-        return stateInit;
+        return new Cell().asBuilder().store(storeStateInit({
+                                                splitDepth: splitDepth,
+                                                special: ticktock,
+                                                libraries: libraries,
+                                                code: code,
+                                                data: data
+                                            })).asCell();
     }
 
     // extra_currencies$_ dict:(HashmapE 32 (VarUInteger 32))
@@ -116,7 +104,7 @@ class Contract {
      * @param fwdFees  {number | BN}
      * @param createdLt  {number | BN}
      * @param createdAt  {number | BN}
-     * @return {Cell}
+     * @return {CommonMessageInfo}
      */
     static createInternalMessageHeader(dest,
                                        gramValue = 0,
@@ -125,31 +113,23 @@ class Contract {
                                        bounced = false,
                                        src = null,
                                        currencyCollection = null,
-                                       ihrFees = 0,
-                                       fwdFees = 0,
+                                       ihrFee = 0,
+                                       forwardFee = 0,
                                        createdLt = 0,
                                        createdAt = 0) {
-        const message = new Cell();
-        message.bits.writeBit(false);
-        message.bits.writeBit(ihrDisabled);
-        if (!(bounce === null)) {
-            message.bits.writeBit(bounce);
-        } else {
-            message.bits.writeBit((new Address(dest)).isBounceable);
-        }
-        message.bits.writeBit(bounced);
-        message.bits.writeAddress(src ? new Address(src) : null);
-        message.bits.writeAddress(new Address(dest));
-        message.bits.writeGrams(gramValue);
-        if (currencyCollection) {
-            throw "Currency collections are not implemented yet";
-        }
-        message.bits.writeBit(Boolean(currencyCollection));
-        message.bits.writeGrams(ihrFees);
-        message.bits.writeGrams(fwdFees);
-        message.bits.writeUint(createdLt, 64);
-        message.bits.writeUint(createdAt, 32);
-        return message;
+        return {
+                    type: 'internal',
+                    ihrDisabled: ihrDisabled,
+                    bounce: bounce,
+                    bounced: bounced,
+                    src: src,
+                    dest: dest,
+                    value: currencyCollection == null ? {"coins": gramValue}: currencyCollection,
+                    ihrFee: ihrFee,
+                    forwardFee: forwardFee,
+                    createdLt: createdLt,
+                    createdAt: createdAt,
+                };
     }
 
     //ext_in_msg_info$10 src:MsgAddressExt dest:MsgAddressInt
@@ -163,54 +143,30 @@ class Contract {
     static createExternalMessageHeader(dest,
                                        src = null,
                                        importFee = 0) {
-        const message = new Cell();
-        message.bits.writeUint(2, 2);
-        message.bits.writeAddress(src ? new Address(src) : null);
-        message.bits.writeAddress(new Address(dest));
-        message.bits.writeGrams(importFee);
-        return message;
+        return {
+            type: 'external-in',
+            src: src,
+            dest: dest,
+            importFee: importFee
+        };
     }
 
     //tblkch.pdf, page 57
     /**
      * Create CommonMsgInfo contains header, stateInit, body
-     * @param header {Cell}
-     * @param stateInit?  {Cell}
+     * @param header {CommonMessageInfo}
+     * @param stateInit?  {stateInit}
      * @param body?  {Cell}
      * @return {Cell}
      */
-    static createCommonMsgInfo(header, stateInit = null, body = null) {
-        const commonMsgInfo = new Cell();
-        commonMsgInfo.writeCell(header);
-
-        if (stateInit) {
-            commonMsgInfo.bits.writeBit(true);
-            //-1:  need at least one bit for body
-            // TODO we also should check for free refs here
-            // TODO: temporary always push in ref because WalletQueryParser can parse only ref
-            if (false && (commonMsgInfo.bits.getFreeBits() - 1 >= stateInit.bits.getUsedBits())) {
-                commonMsgInfo.bits.writeBit(false);
-                commonMsgInfo.writeCell(stateInit);
-            } else {
-                commonMsgInfo.bits.writeBit(true);
-                commonMsgInfo.refs.push(stateInit);
-            }
-        } else {
-            commonMsgInfo.bits.writeBit(false);
-        }
-        // TODO we also should check for free refs here
-        if (body) {
-            if (commonMsgInfo.bits.getFreeBits() >= body.bits.getUsedBits()) {
-                commonMsgInfo.bits.writeBit(false);
-                commonMsgInfo.writeCell(body);
-            } else {
-                commonMsgInfo.bits.writeBit(true);
-                commonMsgInfo.refs.push(body);
-            }
-        } else {
-            commonMsgInfo.bits.writeBit(false);
-        }
-        return commonMsgInfo;
+    static createCommonMsgInfo(info, init = null, body = null) {
+        const commonMsgInfo = new Cell().asBuilder();
+        commonMsgInfo.store(storeMessage({
+            info: info,
+            init: init,
+            body: body
+        }, {forceRef: true}));
+        return commonMsgInfo.asCell();
     }
 
     static createMethod(provider, queryPromise) {
@@ -220,20 +176,20 @@ class Contract {
             },
             send: async () => {
                 const query = await queryPromise;
-                const boc = bytesToBase64(await query.message.toBoc(false));
+                const boc = Buffer.from(await query.message.toBoc()).toString("base64");
                 return provider.sendBoc(boc);
             },
             estimateFee: async () => {
                 const query = await queryPromise;
                 const serialized = query.code ? // deploy
                     {
-                        address: query.address.toString(true, true, false),
-                        body: bytesToBase64(await query.body.toBoc(false)),
-                        init_code: bytesToBase64(await query.code.toBoc(false)),
-                        init_data: bytesToBase64(await query.data.toBoc(false)),
+                        address: query.address.toString({urlSafe: true, bounceable: false, testOnly: true}),
+                        body: Buffer.from(await query.body.toBoc()).toString("base64"),
+                        init_code: Buffer.from(await query.code.toBoc()).toString("base64"),
+                        init_data: Buffer.from(await query.data.toBoc()).toString("base64"),
                     } : {
-                        address: query.address.toString(true, true, true),
-                        body: bytesToBase64(await query.body.toBoc(false)),
+                        address: query.address.toString({urlSafe: true, bounceable: true, testOnly: true}),
+                        body: Buffer.from(await query.body.toBoc()).toString("base64"),
                     };
 
                 return provider.getEstimateFee(serialized);

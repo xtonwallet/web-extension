@@ -1,4 +1,5 @@
 import BigNumber from "bignumber.js";
+import { Cell } from "./../../toncore";
 
 /**
  * @param slice {Slice}
@@ -49,19 +50,19 @@ function parseWalletV3TransferBody(slice) {
     // order body
     let payload = null;
 
-    if (order.getFreeBits() > 0) {
+    if (order.remainingBits > 0) {
         if (order.loadBit()) {
             order = order.loadRef();
         }
 
-        if (order.getFreeBits() > 32) {
+        if (order.remainingBits > 32) {
             const op = order.loadUint(32);
-            const payloadBytes = order.loadBits(order.getFreeBits());
+            const payloadBytes = order.loadBits(order.remainingBits);
             payload = op.eq(new BigNumber(0)) ? new TextDecoder().decode(payloadBytes) : '';
         }
     }
 
-    // console.log(bytesToHex(signature));
+    // console.log(Buffer.from(signature).toString('hex'));
     // console.log(walletId);
     // console.log(expireAt);
     // console.log(seqno);

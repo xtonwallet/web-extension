@@ -5,7 +5,7 @@ import TonWeb from "./tonweb";
 
 const devMode = __DEV_MODE__;
 
-const NOTIFICATION_HEIGHT = 620;
+const NOTIFICATION_HEIGHT = 600;
 const NOTIFICATION_WIDTH = 365;
 const PROXY_HOSTS = "in1.ton.org:8080 in2.ton.org:8080 in3.ton.org:8080";
 const API_RATE_URL = "https://mainnet.xtonwallet.com/currencyrate?currencyName=";
@@ -195,7 +195,10 @@ const generateQRcode = (element, data, width = 200, height = 200) => {
     text: data,
     width: width,
     height: height,
-    logo: '/assets/img/icon-128.png'
+    quietZone: 10,
+    quietZoneColor: "rgba(0,0,0,0)",
+    logo: '/assets/img/qr-logo.png',
+    logoBackgroundTransparent: true
   });
 }
 
@@ -555,8 +558,12 @@ const sleep = async (ms) => {
 };
 
 const unbounceble = (address) => {
-  const parsedAddress = new TonWeb.Address(address);
-  return parsedAddress.toString(true, true, false, false);
+  if (address != "") {
+    const parsedAddress = TonWeb.Address.parse(address);
+    return parsedAddress.toString({urlSafe: true, bounceable: false, testOnly: true});
+  } else {
+    return "";
+  }
 };
 
 export {

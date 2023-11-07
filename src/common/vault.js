@@ -398,6 +398,19 @@ export class Vault {
     return false;
   }
 
+  async getDeployed (accountAddress, server) {
+    await this.init();
+    const transaction = this.db.transaction('accounts', 'readwrite');
+    const store = transaction.objectStore('accounts');
+    const existingAccount = await store.get(accountAddress);
+    if (existingAccount) {
+      if (existingAccount.deployed) {
+        return existingAccount.deployed.includes(server)
+      }
+    }
+    return false;
+  }
+
   async markAsDeployed (accountAddress, server) {
     await this.init();
     const transaction = this.db.transaction('accounts', 'readwrite');

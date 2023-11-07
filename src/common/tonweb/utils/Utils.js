@@ -1,5 +1,4 @@
 import nacl from "tweetnacl";
-import BigNumber from "bignumber.js";
 
 /**
  * @param bytes {Uint8Array}
@@ -7,33 +6,6 @@ import BigNumber from "bignumber.js";
  */
 function sha256(bytes) {
   return crypto.subtle.digest("SHA-256", bytes);
-}
-
-/**
- * from coins to nanocoins
- * @param amount {BigNumber | string}
- * @return {BigNumber}
- */
-function toNano(amount) {
-    if (!BigNumber.isBigNumber(amount) && !(typeof amount === 'string')) {
-        throw new Error('Please pass numbers as strings or BigNumber objects to avoid precision errors.');
-    }
-
-    return new BigNumber(amount).times(10**9);
-}
-
-/**
- * from nanocoins to coins
- * @param amount  {BigNumber | string}
- * @param num  {Number}
- * @return {string}
- */
-function fromNano(amount, num = 4) {
-    if (!BigNumber.isBigNumber(amount) && !(typeof amount === 'string')) {
-        throw new Error('Please pass numbers as strings or BigNumber objects to avoid precision errors.');
-    }
-
-    return new BigNumber(amount).div(10**9).toFixed(num);
 }
 
 // look up tables
@@ -47,69 +19,6 @@ for (let ord = 0; ord <= 0xff; ord++) {
     to_hex_array.push(s);
     to_byte_map[s] = ord;
 }
-
-//  converter using lookups
-/**
- * @param buffer  {Uint8Array}
- * @return {string}
- */
-function bytesToHex(buffer) {
-    const hex_array = [];
-    //(new Uint8Array(buffer)).forEach((v) => { hex_array.push(to_hex_array[v]) });
-    for (let i = 0; i < buffer.byteLength; i++) {
-        hex_array.push(to_hex_array[buffer[i]]);
-    }
-    return hex_array.join("");
-}
-
-// reverse conversion using lookups
-/**
- * @param s {string}
- * @return {Uint8Array}
- */
-function hexToBytes(s) {
-    s = s.toLowerCase();
-    const length2 = s.length;
-    if (length2 % 2 !== 0) {
-        throw "hex string must have length a multiple of 2";
-    }
-    const length = length2 / 2;
-    const result = new Uint8Array(length);
-    for (let i = 0; i < length; i++) {
-        const i2 = i * 2;
-        const b = s.substring(i2, i2 + 2);
-        if (!to_byte_map.hasOwnProperty(b)) throw new Error('invalid hex character ' + b);
-        result[i] = to_byte_map[b];
-    }
-    return result;
-}
-
-/**
- * @param str {string}
- * @param size  {number}
- * @return {Uint8Array}
- */
-function stringToBytes(str, size = 1) {
-    let buf;
-    let bufView;
-    if (size === 1) {
-        buf = new ArrayBuffer(str.length);
-        bufView = new Uint8Array(buf);
-    }
-    if (size === 2) {
-        buf = new ArrayBuffer(str.length * 2);
-        bufView = new Uint16Array(buf);
-    }
-    if (size === 4) {
-        buf = new ArrayBuffer(str.length * 4);
-        bufView = new Uint32Array(buf);
-    }
-    for (let i = 0, strLen = str.length; i < strLen; i++) {
-        bufView[i] = str.charCodeAt(i);
-    }
-    return new Uint8Array(bufView.buffer);
-}
-
 
 /**
  * @private
@@ -177,18 +86,6 @@ function crc16(data) {
 /**
  * @param a {Uint8Array}
  * @param b {Uint8Array}
- * @return {Uint8Array}
- */
-function concatBytes(a, b) {
-    const c = new Uint8Array(a.length + b.length);
-    c.set(a);
-    c.set(b, a.length);
-    return c;
-}
-
-/**
- * @param a {Uint8Array}
- * @param b {Uint8Array}
  * @return {boolean}
  */
 function compareBytes(a, b) {
@@ -214,67 +111,6 @@ const base64abc = (() => {
     abc.push("/");
     return abc;
 })();
-
-/**
- * @param bytes {Uint8Array}
- * @return {string}
- */
-function bytesToBase64(bytes) {
-    let result = "";
-    let i;
-    const l = bytes.length;
-    for (i = 2; i < l; i += 3) {
-        result += base64abc[bytes[i - 2] >> 2];
-        result += base64abc[((bytes[i - 2] & 0x03) << 4) | (bytes[i - 1] >> 4)];
-        result += base64abc[((bytes[i - 1] & 0x0f) << 2) | (bytes[i] >> 6)];
-        result += base64abc[bytes[i] & 0x3f];
-    }
-    if (i === l + 1) {
-        // 1 octet missing
-        result += base64abc[bytes[i - 2] >> 2];
-        result += base64abc[(bytes[i - 2] & 0x03) << 4];
-        result += "==";
-    }
-    if (i === l) {
-        // 2 octets missing
-        result += base64abc[bytes[i - 2] >> 2];
-        result += base64abc[((bytes[i - 2] & 0x03) << 4) | (bytes[i - 1] >> 4)];
-        result += base64abc[(bytes[i - 1] & 0x0f) << 2];
-        result += "=";
-    }
-    return result;
-}
-
-// todo: base64 decoding process could ignore one extra character at the end of string and the byte-length check below won't be able to catch it.
-function base64toString(base64) {
-    if (typeof self === 'undefined') {
-        return Buffer.from(base64, 'base64').toString('binary'); // todo: (tolya-yanot) Buffer silently ignore incorrect base64 symbols, we need to throw error
-    } else {
-        return atob(base64);
-    }
-}
-
-function stringToBase64(s) {
-    if (typeof self === 'undefined') {
-        return Buffer.from(s, 'binary').toString('base64'); // todo: (tolya-yanot) Buffer silently ignore incorrect base64 symbols, we need to throw error
-    } else {
-        return btoa(s);
-    }
-}
-
-/**
- * @param base64  {string}
- * @return {Uint8Array}
- */
-function base64ToBytes(base64) {
-    const binary_string = base64toString(base64);
-    const len = binary_string.length;
-    const bytes = new Uint8Array(len);
-    for (let i = 0; i < len; i++) {
-        bytes[i] = binary_string.charCodeAt(i);
-    }
-    return bytes;
-}
 
 /**
  * @param n  {number}
@@ -356,18 +192,8 @@ function boxKeyPair(secret) {
 
 export {
     sha256,
-    fromNano,
-    toNano,
-    bytesToHex,
-    hexToBytes,
-    stringToBytes,
     crc32c,
     crc16,
-    concatBytes,
-    bytesToBase64,
-    base64ToBytes,
-    base64toString,
-    stringToBase64,
     compareBytes,
     readNBytesUIntFromArray,
     keyPairFromSeed,

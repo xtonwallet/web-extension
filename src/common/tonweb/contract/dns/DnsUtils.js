@@ -1,6 +1,8 @@
 import {parseAddress} from "../token/nft/NftUtils";
-import {AdnlAddress, sha256, bytesToHex, bytesToBase64} from "../../utils";
-import {Cell} from "../../boc";
+import {ADNLAddress, sha256} from "../../utils";
+import {Cell, Address} from "./../../toncore";
+import BigNumber from "bignumber.js";
+import {Buffer} from "buffer";
 
 const DNS_CATEGORY_NEXT_RESOLVER = 'dns_next_resolver'; // Smart Contract address
 const DNS_CATEGORY_WALLET = 'wallet'; // Smart Contract address
@@ -14,7 +16,7 @@ const categoryToBigNumber = async (category) => {
     if (!category) return new BigNumber(0); // all categories
     const categoryBytes = new TextEncoder().encode(category);
     const categoryHash = new Uint8Array(await sha256(categoryBytes));
-    return new BigNumber(bytesToHex(categoryHash), 16);
+    return new BigNumber(Buffer.from(categoryHash).toString('hex'), 16);
 }
 
 /**
@@ -22,23 +24,23 @@ const categoryToBigNumber = async (category) => {
  * @return {Cell}
  */
 const createSmartContractAddressRecord = (smartContractAddress) => {
-    const cell = new Cell();
-    cell.bits.writeUint(0x9fd3, 16); // https://github.com/ton-blockchain/ton/blob/7e3df93ca2ab336716a230fceb1726d81bac0a06/crypto/block/block.tlb#L827
-    cell.bits.writeAddress(smartContractAddress);
-    cell.bits.writeUint(0, 8); // flags
-    return cell;
+    const cell = new Cell().asBuilder();
+    cell.storeUint(0x9fd3, 16); // https://github.com/ton-blockchain/ton/blob/7e3df93ca2ab336716a230fceb1726d81bac0a06/crypto/block/block.tlb#L827
+    cell.storeAddress(smartContractAddress);
+    cell.storeUint(0, 8); // flags
+    return cell.asCell();
 }
 
 /**
- * @param adnlAddress   {AdnlAddress}
+ * @param ADNLAddress   {ADNLAddress}
  * @return {Cell}
  */
-const createAdnlAddressRecord = (adnlAddress) => {
-    const cell = new Cell();
-    cell.bits.writeUint(0xad01, 16); // https://github.com/ton-blockchain/ton/blob/7e3df93ca2ab336716a230fceb1726d81bac0a06/crypto/block/block.tlb#L821
-    cell.bits.writeBytes(adnlAddress.bytes);
-    cell.bits.writeUint(0, 8); // flags
-    return cell;
+const createADNLAddressRecord = (ADNLAddress) => {
+    const cell = new Cell().asBuilder();
+    cell.storeUint(0xad01, 16); // https://github.com/ton-blockchain/ton/blob/7e3df93ca2ab336716a230fceb1726d81bac0a06/crypto/block/block.tlb#L821
+    cell.storeBuffer(Buffer.from(ADNLAddress.bytes, 'binary'));
+    cell.storeUint(0, 8); // flags
+    return cell.asCell();
 }
 
 /**
@@ -46,10 +48,10 @@ const createAdnlAddressRecord = (adnlAddress) => {
  * @return {Cell}
  */
 const createNextResolverRecord = (smartContractAddress) => {
-    const cell = new Cell();
-    cell.bits.writeUint(0xba93, 16); // https://github.com/ton-blockchain/ton/blob/7e3df93ca2ab336716a230fceb1726d81bac0a06/crypto/block/block.tlb#L819
-    cell.bits.writeAddress(smartContractAddress);
-    return cell;
+    const cell = new Cell().asBuilder();
+    cell.bits.storeUint(0xba93, 16); // https://github.com/ton-blockchain/ton/blob/7e3df93ca2ab336716a230fceb1726d81bac0a06/crypto/block/block.tlb#L819
+    cell.bits.storeAddress(smartContractAddress);
+    return cell.asCell();
 }
 
 /**
@@ -83,12 +85,12 @@ const parseNextResolverRecord = (cell) => {
 
 /**
  * @param cell  {Cell}
- * @return {AdnlAddress}
+ * @return {ADNLAddress}
  */
-const parseAdnlAddressRecord = (cell) => {
+const parseADNLAddressRecord = (cell) => {
     if (cell.bits.array[0] !== 0xad || cell.bits.array[1] !== 0x01) throw new Error('Invalid dns record value prefix');
     const bytes = cell.bits.array.slice(2, 2 + 32); // skip prefix - first 16 bits
-    return new AdnlAddress(bytes);
+    return new ADNLAddress(bytes);
 }
 
 /**
@@ -98,16 +100,16 @@ const parseAdnlAddressRecord = (cell) => {
  * @param rawDomainBytes {Uint8Array}
  * @param category  {string | undefined} category of requested DNS record
  * @param oneStep {boolean | undefined} non-recursive
- * @returns {Promise<Cell | Address | AdnlAddress | null>}
+ * @returns {Promise<Cell | Address | ADNLAddress | null>}
  */
 const dnsResolveImpl = async (provider, dnsAddress, rawDomainBytes, category, oneStep) => {
     const len = rawDomainBytes.length * 8;
 
-    const domainCell = new Cell();
-    domainCell.bits.writeBytes(rawDomainBytes);
+    const domainCell = new Cell().asBuilder();
+    domainCell.storeBuffer(Buffer.from(rawDomainBytes, 'binary'));
 
     const categoryBigNumber = await categoryBigNumber(category);
-    const result = await provider.call2(dnsAddress, 'dnsresolve', [['tvm.Slice', bytesToBase64(await domainCell.toBoc(false))], ['num', categoryBN.toString()]]);
+    const result = await provider.call2(dnsAddress, 'dnsresolve', [['tvm.Slice', Buffer.from(domainCell.asCell().toBoc()).toString("base64")], ['num', categoryBigNumber.toString()]]);
     if (result.length !== 2) {
         throw new Error('Invalid dnsresolve response');
     }
@@ -140,7 +142,7 @@ const dnsResolveImpl = async (provider, dnsAddress, rawDomainBytes, category, on
         } else if (category === DNS_CATEGORY_WALLET) {
             return cell ? parseSmartContractAddressRecord(cell) : null;
         } else if (category === DNS_CATEGORY_SITE) {
-            return cell ? parseAdnlAddressRecord(cell) : null;
+            return cell ? parseADNLAddressRecord(cell) : null;
         } else {
             return cell;
         }
@@ -214,7 +216,7 @@ const domainToBytes = (domain) => {
  * @param domain    {string} e.g "sub.alice.ton"
  * @param category  {string | undefined} category of requested DNS record
  * @param oneStep {boolean | undefined} non-recursive
- * @returns {Promise<Cell | Address | AdnlAddress | null>}
+ * @returns {Promise<Cell | Address | ADNLAddress | null>}
  */
 const dnsResolve = async (provider, rootDnsAddress, domain, category, oneStep) => {
     const rawDomainBytes = domainToBytes(domain);
@@ -229,10 +231,10 @@ export {
     categoryToBigNumber,
     domainToBytes,
     createSmartContractAddressRecord,
-    createAdnlAddressRecord,
+    createADNLAddressRecord,
     createNextResolverRecord,
     parseSmartContractAddressRecord,
-    parseAdnlAddressRecord,
+    parseADNLAddressRecord,
     parseNextResolverRecord,
     dnsResolve
 }

@@ -4,6 +4,7 @@ import { sdk } from './sdk.js';
 import { broadcastMessage, sendNotificationToInPageScript, openRequestPopup, closeRequestPopup, sendRequestReject, fromNano, toNano, lt, Unibabel, strToHex } from '../common/utils.js';
 import { APPROXIMATE_FEE, settingsStore, accountStore, currentAccount, networksStore, currentNetwork, currentEnabledPinPad, waitingTransaction } from "../common/stores.js";
 import methodsList from "../common/methodsList.js";
+import TonWeb from '../common/tonweb/index.js';
 
 export const controller = () => {
   const accountsController = Object.freeze(accounts());
@@ -888,7 +889,7 @@ export const controller = () => {
           //from (string in : format, optional) - The sender address from which DApp intends to send the transaction. If not set, wallet allows user 
           //to select the sender's address at the moment of transaction approval. If from parameter is set, the wallet should DO NOT ALLOW user to select 
           //the sender's address; If sending from the specified address is impossible, the wallet should show an alert and DO NOT ALLOW TO SEND this transaction.
-          if (parsedAddress.toString(true, true, true, false) != walletAddress) {
+          if (parsedAddress.toString() != walletAddress) {
             openRequestPopup("ModalError", { message: "This transaction is for another account" });
             return new Promise((resolve, reject) => {
               // let's show 5 seconds popup with the error, then close it and send it
@@ -924,10 +925,11 @@ export const controller = () => {
         const modalDataQueueResult = [];
         let error = false;
         let totalBalance = 0;
+
         for (let i in parsedParams.messages) {
           const modalData = { ...data };
           modalData.params = {};
-          modalData.params.to = parsedParams.messages[i].address;
+          modalData.params.to = TonWeb.Address.parse(parsedParams.messages[i].address).toString({urlSafe: true, bounceable: false, testOnly: true});
           modalData.params.amount = parsedParams.messages[i].amount;
           totalBalance += Number(parsedParams.messages[i].amount).valueOf();
           //(integer, optional): unix timestamp. after this moment transaction will be invalid.
@@ -1066,7 +1068,7 @@ export const controller = () => {
     const parsedAddress = await sdkController.parseAddress(accountAddress);
     return {
       name: 'ton_addr',
-      address: parsedAddress.toString(false),
+      address: parsedAddress.toRawString(),
       network: endpoint === 'mainnet' ? '-239' : '-3',
       walletStateInit: stateInit,
     };

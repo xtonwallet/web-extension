@@ -15,7 +15,7 @@ import {Contract} from 'web3-eth-contract';
 
 export class MyContract extends Contract {
     constructor(provider, options) {
-        options.code = hexToBytes('abcd..');
+        options.code = Buffer.from('abcd..', 'hex');
         super(provider, options);
 
         this.method.myMethod = ...
@@ -50,7 +50,7 @@ You can see an example of extending Contract class and using these functions in 
 ```js
 /**
 * @param provider    {HttpProvider}
-* @param options    {{code?: Uint8Array, address?: Address, wc?: number}}
+* @param options    {{code?: Uint8Array, address?: Address, workChain?: number}}
 */
 const contract = new Contract(provider, options)
 

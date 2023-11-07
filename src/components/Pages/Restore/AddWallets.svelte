@@ -9,6 +9,7 @@
 
   import {
     shortAddress,
+    unbounceble,
   } from "../../../common/utils.js";
 
   //Context
@@ -193,7 +194,7 @@
           {#if $currentResolution.innerWidth > 768 && !$currentResolution.condition}
             <div title="{key.address}">{key.address}</div>
           {:else}
-            <div title="{key.address}">{shortAddress(key.address)}</div>
+            <div title="{key.address}">{shortAddress(unbounceble(key.address))}</div>
           {/if}
         </div>
       </div>

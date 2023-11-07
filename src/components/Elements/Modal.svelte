@@ -39,7 +39,7 @@
         left: 50%;
         transform: translate(-50%, 0px);
         padding: 2rem;
-        margin: 2rem 0;
+        margin: 1rem 0;
         background: var(--bg-color);
         box-shadow: var(--box-shadow-4);
         -webkit-box-shadow: var(--box-shadow-4);

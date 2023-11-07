@@ -18,7 +18,7 @@
     position: fixed;
     top: 0.5rem;
     right: 0.5rem;
-    z-index: 1000;
+    z-index: 9;
     .wrapper {
       position: relative;
       display: flex;

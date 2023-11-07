@@ -1,6 +1,5 @@
 import BigNumber from "bignumber.js";
-import {base64ToBytes} from "../utils";
-import {Cell} from "../boc";
+import {Cell} from "./../toncore";
 
 class HttpProviderUtils {
 
@@ -11,7 +10,7 @@ class HttpProviderUtils {
             case 'tvm.tuple':
                 return x.elements.map(HttpProviderUtils.parseObject);
             case 'tvm.cell':
-                return Cell.oneFromBoc(base64ToBytes(x.bytes));
+                return Cell.fromBase64(x.bytes);
             case 'tvm.stackEntryCell':
                 return HttpProviderUtils.parseObject(x.cell);
             case 'tvm.stackEntryTuple':
@@ -40,8 +39,7 @@ class HttpProviderUtils {
             case 'tuple':
                 return HttpProviderUtils.parseObject(value);
             case 'cell':
-                const contentBytes = base64ToBytes(value.bytes);
-                return Cell.oneFromBoc(contentBytes);
+                return Cell.fromBase64(value.bytes);
             default:
                 throw new Error('unknown type ' + typeName);
         }

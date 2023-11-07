@@ -2,18 +2,8 @@ import BigNumber from "bignumber.js";
 
 import {
     sha256,
-    fromNano,
-    toNano,
-    bytesToHex,
-    hexToBytes,
-    stringToBytes,
     crc32c,
     crc16,
-    concatBytes,
-    bytesToBase64,
-    base64ToBytes,
-    base64toString,
-    stringToBase64,
     compareBytes,
     readNBytesUIntFromArray,
     keyPairFromSeed,
@@ -27,8 +17,7 @@ import {
     cryptoGenerateRandomBytes
 } from "./Utils";
 
-import Address from "./Address";
-import AdnlAddress from "./AdnlAddress";
+import {Address, ADNLAddress} from "./../toncore";
 
 // ton://transfer/<address>
 // ton://transfer/<address>?amount=<nanocoins>
@@ -54,7 +43,7 @@ function parseTransferUrl(url) {
     }
 
     const address = arr[0];
-    if (!Address.isValid(address)) {
+    if (!Address.isAddress(address)) {
         throw new Error('invalid address format ' + address);
     }
     const result = {
@@ -133,20 +122,10 @@ function formatTransferUrl(address, amount, text) {
 
 export {
     Address,
-    AdnlAddress,
+    ADNLAddress,
     sha256,
-    fromNano,
-    toNano,
-    bytesToHex,
-    hexToBytes,
-    stringToBytes,
     crc32c,
     crc16,
-    concatBytes,
-    bytesToBase64,
-    base64ToBytes,
-    base64toString,
-    stringToBase64,
     compareBytes,
     readNBytesUIntFromArray,
     parseTransferUrl,

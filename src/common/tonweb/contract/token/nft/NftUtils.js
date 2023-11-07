@@ -1,5 +1,6 @@
-import {Address} from "../../../utils";
-import {Cell} from "../../../boc";
+import "bigint-polyfill";
+import {Cell, Address} from "../../../toncore";
+import {Buffer} from "buffer";
 
 const SNAKE_DATA_PREFIX = 0x00;
 const CHUNK_DATA_PREFIX = 0x01;
@@ -15,64 +16,26 @@ const serializeUri = (uri) => {
 }
 
 /**
- * @param bytes {Uint8Array}
- * @return {string}
- */
-const parseUri = (bytes) => {
-    return new TextDecoder().decode(bytes);
-}
-
-/**
  * @param uri {string}
  * @return {Cell}
  */
 const createOffchainUriCell = (uri) => {
-    const cell = new Cell();
-    cell.bits.writeUint(OFFCHAIN_CONTENT_PREFIX, 8);
-    cell.bits.writeBytes(serializeUri(uri));
-    return cell;
+    const cell = new Cell().asBuilder();
+    cell.storeUint(OFFCHAIN_CONTENT_PREFIX, 8);
+    cell.storeBuffer(Buffer.from(serializeUri(uri), 'binary'));
+    return cell.asCell();
 }
 
 /**
  * @param cell {Cell}
  * @returns {string}
  */
-const parseOffchainUriCell = (cell) => {
-    if (cell.bits.array[0] !== OFFCHAIN_CONTENT_PREFIX) {
+const parseOffchainUriCell = (slice) => {
+    if (slice.loadUint(8) !== OFFCHAIN_CONTENT_PREFIX) {
         throw new Error('no OFFCHAIN_CONTENT_PREFIX');
     }
 
-    let length = 0;
-    let c = cell;
-    while (c) {
-        length += c.bits.array.length;
-        c = c.refs[0];
-    }
-
-    const bytes = new Uint8Array(length);
-    length = 0;
-    c = cell;
-    while (c) {
-        bytes.set(c.bits.array, length)
-        length += c.bits.array.length;
-        c = c.refs[0];
-    }
-    return parseUri(bytes.slice(1)); // slice OFFCHAIN_CONTENT_PREFIX
-}
-
-/**
- * @param bs    {BitString}
- * @param cursor    {number}
- * @param bits  {number}
- * @return {BigInt}
- */
-const readIntFromBitString = (bs, cursor, bits) => {
-    let n = BigInt(0);
-    for (let i = 0; i < bits; i++) {
-        n *= BigInt(2);
-        n += BigInt(bs.get(cursor + i));
-    }
-    return n;
+    return slice.loadStringTail();
 }
 
 /**
@@ -80,14 +43,7 @@ const readIntFromBitString = (bs, cursor, bits) => {
  * @return {Address|null}
  */
 const parseAddress = cell => {
-    let n = readIntFromBitString(cell.bits, 3, 8);
-    if (n > BigInt(127)) {
-        n = n - BigInt(256);
-    }
-    const hashPart = readIntFromBitString(cell.bits, 3 + 8, 256);
-    if (n.toString(10) + ":" + hashPart.toString(16) === '0:0') return null;
-    const s = n.toString(10) + ":" + hashPart.toString(16).padStart(64, '0');
-    return new Address(s);
+    return cell.asSlice().loadAddress().toString({urlSafe: true, bounceable: true, testOnly: false});
 };
 
 /**
@@ -113,7 +69,6 @@ export {
     OFFCHAIN_CONTENT_PREFIX,
     parseAddress,
     serializeUri,
-    parseUri,
     createOffchainUriCell,
     parseOffchainUriCell,
     getRoyaltyParams

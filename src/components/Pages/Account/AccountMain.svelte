@@ -62,6 +62,7 @@
 
   const walletUIUpdateListener = (message) => {
     if (message.type === "page-updateWalletUI") {
+      checkDeployed($currentAccount.address, $currentNetwork.server);
       checkBalance($currentAccount.address, $currentNetwork.server);
       getTransactions($currentAccount.address, $currentNetwork.server, 10, 1);
       getTokenList($currentAccount.address, $currentNetwork.server);
@@ -111,6 +112,21 @@
     openModal("ModalShowNftContent", { data: asset });
   };
 
+  const checkDeployed = (accountAddress, server) => {
+    browser.runtime
+      .sendMessage({
+        type: "getDeployedState",
+        data: { accountAddress: accountAddress, server: server },
+      })
+      .then((result) => {
+        showDeploy = !result;
+      })
+      .catch((e) => {
+        showDeploy = true;
+        console.log(e); // here don't need to show any error for user, usually it is the network issue in the development environment
+      });
+  };
+  
   const checkBalance = (accountAddress, server) => {
     browser.runtime
       .sendMessage({

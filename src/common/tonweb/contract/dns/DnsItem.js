@@ -1,8 +1,9 @@
+import {Buffer} from "buffer";
 import Contract from "../../contract/index";
-import {Cell} from "../../boc";
-import {Address} from "../../utils";
+import {Cell, Address} from "./../../toncore";
 import {parseAddress} from './../token/nft/NftUtils';
 import {dnsResolve, categoryToBigNumber} from "./DnsUtils";
+import BigNumber from "bignumber.js";
 
 class DnsItem extends Contract {
     /**
@@ -10,7 +11,7 @@ class DnsItem extends Contract {
      * @param options   {{index: BigNumber, collectionAddress: Address, address?: Address | string, code?: Cell}}
      */
     constructor(provider, options) {
-        options.wc = 0;
+        options.workChain = 0;
         options.code = options.code;
         super(provider, options);
 
@@ -27,10 +28,10 @@ class DnsItem extends Contract {
      * @return {Cell} cell contains nft data
      */
     createDataCell() {
-        const cell = new Cell();
-        cell.bits.writeUint(this.options.index, 256);
-        cell.bits.writeAddress(this.options.collectionAddress);
-        return cell;
+        const cell = new Cell().asBuilder();
+        cell.storeUint(this.options.index, 256);
+        cell.storeAddress(this.options.collectionAddress);
+        return cell.asCell();
     }
 
     /**
@@ -53,19 +54,18 @@ class DnsItem extends Contract {
      * @param params    {{queryId?: number, newOwnerAddress: Address, forwardAmount?: BN, forwardPayload?: Uint8Array, responseAddress: Address}}
      */
     async createTransferBody(params) {
-        const cell = new Cell();
-        cell.bits.writeUint(0x5fcc3d14, 32); // transfer op
-        cell.bits.writeUint(params.queryId || 0, 64);
-        cell.bits.writeAddress(params.newOwnerAddress);
-        cell.bits.writeAddress(params.responseAddress);
-        cell.bits.writeBit(false); // null custom_payload
-        cell.bits.writeCoins(params.forwardAmount || new BigNumber(0));
-        cell.bits.writeBit(false); // forward_payload in this slice, not separate cell
-
+        const cell = new Cell().asBuilder();
+        cell.storeUint(0x5fcc3d14, 32); // transfer op
+        cell.storeUint(params.queryId || 0, 64);
+        cell.storeAddress(params.newOwnerAddress);
+        cell.storeAddress(params.responseAddress);
+        cell.storeBit(false); // null custom_payload
+        cell.storeCoins(params.forwardAmount || new BigNumber(0));
+        cell.storeBit(false); // forward_payload in this slice, not separate cell
         if (params.forwardPayload) {
-            cell.bits.writeBytes(params.forwardPayload);
+            cell.storeBuffer(Buffer.from(params.forwardPayload, 'binary'));
         }
-        return cell;
+        return cell.asCell();
     }
 
     /**
@@ -73,10 +73,10 @@ class DnsItem extends Contract {
      * @return {Cell}
      */
     createGetStaticDataBody(params) {
-        const body = new Cell();
-        body.bits.writeUint(0x2fcb26a2, 32); // OP
-        body.bits.writeUint(params.queryId || 0, 64); // query_id
-        return body;
+        const body = new Cell().asBuilder();
+        body.storeUint(0x2fcb26a2, 32); // OP
+        body.storeUint(params.queryId || 0, 64); // query_id
+        return body.asCell();
     }
 
     /**
@@ -113,7 +113,7 @@ class DnsItem extends Contract {
      * @param domain    {string} e.g "sub.alice.ton"
      * @param category?  {string} category of requested DNS record, null for all categories
      * @param oneStep? {boolean} non-recursive
-     * @returns {Promise<Cell | Address | AdnlAddress | null>}
+     * @returns {Promise<Cell | Address | ADNLAddress | null>}
      */
     async resolve(domain, category, oneStep) {
         const myAddress = await this.getAddress();
@@ -126,14 +126,14 @@ class DnsItem extends Contract {
  * @return {Cell}
  */
 DnsItem.createChangeContentEntryBody = async (params) => {
-    const body = new Cell();
-    body.bits.writeUint(0x4eb1f0f9, 32); // OP
-    body.bits.writeUint(params.queryId || 0, 64); // query_id
-    body.bits.writeUint(await categoryToBigNumber(params.category), 256);
+    const body = new Cell().asBuilder();
+    body.storeUint(0x4eb1f0f9, 32); // OP
+    body.storeUint(params.queryId || 0, 64); // query_id
+    body.storeUint(categoryToBigNumber(params.category), 256);
     if (params.value) {
-        body.refs[0] = params.value;
+        body.storeRef(params.value);
     }
-    return body;
+    return body.asCell();
 }
 
 export default DnsItem;

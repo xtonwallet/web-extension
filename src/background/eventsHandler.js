@@ -238,6 +238,8 @@ export const eventsHandler = (controller) => {
 
           if (message.type === 'takeFromGiver') return Promise.resolve(controller.accounts.takeFromGiver(message.data.accountAddress, message.data.server));
 
+          if (message.type === 'getDeployedState') return Promise.resolve(controller.accounts.getDeployedState(message.data.accountAddress, message.data.server));
+
           if (message.type === 'getCurrentBalance') return Promise.resolve(controller.accounts.getCurrentBalance(message.data.accountAddress, message.data.server));
 
           if (message.type === 'changeAccountNickname') return Promise.resolve(controller.accounts.changeAccountNickname(message.data.accountAddress, message.data.nickname));

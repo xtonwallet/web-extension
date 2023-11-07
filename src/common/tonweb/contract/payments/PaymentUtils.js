@@ -1,5 +1,5 @@
-import {Cell} from "../../boc";
-
+import {Cell} from "../../toncore";
+import {Buffer} from "buffer";
 /**
  * @param cell  {Cell}
  * @param publicKey {Uint8Array}
@@ -8,7 +8,7 @@ const writePublicKey = (cell, publicKey) => {
     if (publicKey.length !== 256 / 8) {
         throw new Error('invalid publicKey length');
     }
-    cell.bits.writeBytes(publicKey);
+    cell.storeBuffer(Buffer.from(publicKey, 'binary'));
 }
 
 /**
@@ -19,7 +19,7 @@ const writeSignature = (cell, signature) => {
     if (signature.length !== 512 / 8) {
         throw new Error('invalid signature length');
     }
-    cell.bits.writeBytes(signature);
+    cell.storeBuffer(Buffer.from(signature, 'binary'));
 }
 
 /**
@@ -27,9 +27,9 @@ const writeSignature = (cell, signature) => {
  * @returns {Cell}
  */
 const createSignatureCell = (signature) => {
-    const cell = new Cell();
+    const cell = new Cell().asBuilder();
     writeSignature(cell, signature);
-    return cell;
+    return cell.asCell();
 }
 
 /**
@@ -38,13 +38,13 @@ const createSignatureCell = (signature) => {
  */
 const writeMayBe = (cell, ref) => {
     if (ref) {
-        cell.bits.writeBit(1);
+        cell.storeBit(1);
         if (cell.refs.length >= 4) {
             throw new Error('refs overflow')
         }
-        cell.refs.push(ref);
+        cell.storeRef(ref);
     } else {
-        cell.bits.writeBit(0);
+        cell.storeBit(0);
     }
 }
 
@@ -77,11 +77,11 @@ const op_channel_closed = -572749638; // crc32("channel_closed channel_id:uint12
  * @returns {Cell}
  */
 const createTopUpBalance = (params) => {
-    const cell = new Cell();
-    cell.bits.writeUint(op_top_up_balance, 32); // OP
-    cell.bits.writeCoins(params.coinsA);
-    cell.bits.writeCoins(params.coinsB);
-    return cell;
+    const cell = new Cell().asBuilder();
+    cell.storeUint(op_top_up_balance, 32); // OP
+    cell.storeCoins(params.coinsA);
+    cell.storeCoins(params.coinsB);
+    return cell.asCell();
 }
 
 /**
@@ -89,12 +89,12 @@ const createTopUpBalance = (params) => {
  * @returns {Cell}
  */
 const createInitChannelBody = (params) => {
-    const cell = new Cell();
-    cell.bits.writeUint(tag_init, 32);
-    cell.bits.writeUint(params.channelId, 128);
-    cell.bits.writeCoins(params.balanceA);
-    cell.bits.writeCoins(params.balanceB);
-    return cell;
+    const cell = new Cell().asBuilder();
+    cell.storeUint(tag_init, 32);
+    cell.storeUint(params.channelId, 128);
+    cell.storeCoins(params.balanceA);
+    cell.storeCoins(params.balanceB);
+    return cell.asCell();
 }
 
 /**
@@ -102,14 +102,14 @@ const createInitChannelBody = (params) => {
  * @returns {Cell}
  */
 const createCooperativeCloseChannelBody = (params) => {
-    const cell = new Cell();
-    cell.bits.writeUint(tag_cooperative_close, 32);
-    cell.bits.writeUint(params.channelId, 128);
-    cell.bits.writeCoins(params.balanceA);
-    cell.bits.writeCoins(params.balanceB);
-    cell.bits.writeUint(params.seqnoA, 64);
-    cell.bits.writeUint(params.seqnoB, 64);
-    return cell;
+    const cell = new Cell().asBuilder();
+    cell.storeUint(tag_cooperative_close, 32);
+    cell.storeUint(params.channelId, 128);
+    cell.storeCoins(params.balanceA);
+    cell.storeCoins(params.balanceB);
+    cell.storeUint(params.seqnoA, 64);
+    cell.storeUint(params.seqnoB, 64);
+    return cell.asCell();
 }
 
 /**
@@ -117,12 +117,12 @@ const createCooperativeCloseChannelBody = (params) => {
  * @returns {Cell}
  */
 const createCooperativeCommitBody = (params) => {
-    const cell = new Cell();
-    cell.bits.writeUint(tag_cooperative_commit, 32);
-    cell.bits.writeUint(params.channelId, 128);
-    cell.bits.writeUint(params.seqnoA, 64);
-    cell.bits.writeUint(params.seqnoB, 64);
-    return cell;
+    const cell = new Cell().asBuilder();
+    cell.storeUint(tag_cooperative_commit, 32);
+    cell.storeUint(params.channelId, 128);
+    cell.storeUint(params.seqnoA, 64);
+    cell.storeUint(params.seqnoB, 64);
+    return cell.asCell();
 }
 
 /**
@@ -130,10 +130,10 @@ const createCooperativeCommitBody = (params) => {
  * @returns {Cell}
  */
 const createConditionalPayment = (params) => {
-    const cell = new Cell();
-    cell.bits.writeCoins(params.amount);
-    cell.writeCell(params.condition);
-    return cell;
+    const cell = new Cell().asBuilder();
+    cell.storeCoins(params.amount);
+    cell.storeBuilder(params.condition.asBuilder());
+    return cell.asCell();
 }
 
 /**
@@ -141,11 +141,11 @@ const createConditionalPayment = (params) => {
  * @returns {Cell}
  */
 const createSemiChannelBody = (params) => {
-    const cell = new Cell();
-    cell.bits.writeUint(params.seqno, 64); // body start
-    cell.bits.writeCoins(params.sentCoins);
+    const cell = new Cell().asBuilder();
+    cell.storeUint(params.seqno, 64); // body start
+    cell.storeCoins(params.sentCoins);
     writeDict(cell, params.conditionals);  // HashmapE 32 ConditionalPayment
-    return cell;
+    return cell.asCell();
 }
 
 /**
@@ -153,22 +153,22 @@ const createSemiChannelBody = (params) => {
  * @returns {Cell}
  */
 const createSemiChannelState = (params) => {
-    const cell = new Cell();
-    cell.bits.writeUint(tag_state, 32);
-    cell.bits.writeUint(params.channelId, 128);
-    cell.writeCell(params.semiChannelBody);
+    const cell = new Cell().asBuilder();
+    cell.storeUint(tag_state, 32);
+    cell.storeUint(params.channelId, 128);
+    cell.storeBuilder(params.semiChannelBody.asBuilder());
     writeMayBe(cell, params.counterpartySemiChannelBody)
-    return cell;
+    return cell.asCell();
 }
 
 /**
  * @param params    {{signature: Uint8Array, state: Cell}}  `state` created by `createSemiChannelState`
  */
 const createSignedSemiChannelState = (params) => {
-    const cell = new Cell();
+    const cell = new Cell().asBuilder();
     writeSignature(cell, params.signature);
-    cell.writeCell(params.state);
-    return cell;
+    cell.storeBuilder(params.state.asBuilder());
+    return cell.asCell();
 }
 
 /**
@@ -176,12 +176,12 @@ const createSignedSemiChannelState = (params) => {
  * @returns {Cell}
  */
 const createStartUncooperativeCloseBody = (params) => {
-    const cell = new Cell();
-    cell.bits.writeUint(tag_start_uncooperative_close, 32);
-    cell.bits.writeUint(params.channelId, 128);
-    cell.refs[0] = params.signedSemiChannelStateA;
-    cell.refs[1] = params.signedSemiChannelStateB;
-    return cell;
+    const cell = new Cell().asBuilder();
+    cell.storeUint(tag_start_uncooperative_close, 32);
+    cell.storeUint(params.channelId, 128);
+    cell.storeRef(params.signedSemiChannelStateA);
+    cell.storeRef(params.signedSemiChannelStateB);
+    return cell.asCell();
 }
 
 /**
@@ -189,12 +189,12 @@ const createStartUncooperativeCloseBody = (params) => {
  * @returns {Cell}
  */
 const createChallengeQuarantinedStateBody = (params) => {
-    const cell = new Cell();
-    cell.bits.writeUint(tag_challenge_state, 32);
-    cell.bits.writeUint(params.channelId, 128);
-    cell.refs[0] = params.signedSemiChannelStateA;
-    cell.refs[1] = params.signedSemiChannelStateB;
-    return cell;
+    const cell = new Cell().asBuilder();
+    cell.storeUint(tag_challenge_state, 32);
+    cell.storeUint(params.channelId, 128);
+    cell.storeRef(params.signedSemiChannelStateA);
+    cell.storeRef(params.signedSemiChannelStateB);
+    return cell.asCell();
 }
 
 /**
@@ -202,20 +202,20 @@ const createChallengeQuarantinedStateBody = (params) => {
  * @returns {Cell}
  */
 const createSettleConditionalsBody = (params) => {
-    const cell = new Cell();
-    cell.bits.writeUint(tag_settle_conditionals, 32);
-    cell.bits.writeUint(params.channelId, 128);
+    const cell = new Cell().asBuilder();
+    cell.storeUint(tag_settle_conditionals, 32);
+    cell.storeUint(params.channelId, 128);
     writeDict(cell, params.conditionalsToSettle); // HashmapE 32 Cell
-    return cell;
+    return cell.asCell();
 }
 
 /**
  * @returns {Cell}
  */
 const createFinishUncooperativeClose = () => {
-    const cell = new Cell();
-    cell.bits.writeUint(op_finish_uncooperative_close, 32); // OP
-    return cell;
+    const cell = new Cell().asBuilder();
+    cell.storeUint(op_finish_uncooperative_close, 32); // OP
+    return cell.asCell();
 }
 
 /**
@@ -223,12 +223,12 @@ const createFinishUncooperativeClose = () => {
  * @return {Cell}
  */
 const createOneSignature = (params) => {
-    const cell = new Cell();
-    cell.bits.writeUint(params.op, 32); // OP
-    cell.bits.writeBit(params.isA);
+    const cell = new Cell().asBuilder();
+    cell.storeUint(params.op, 32); // OP
+    cell.storeBit(params.isA);
     writeSignature(cell, params.signature);
-    cell.writeCell(params.cell);
-    return cell;
+    cell.storeBuilder(params.cell.asBuilder());
+    return cell.asCell();
 }
 
 /**
@@ -236,12 +236,12 @@ const createOneSignature = (params) => {
  * @return {Cell}
  */
 const createTwoSignature = (params) => {
-    const cell = new Cell();
-    cell.bits.writeUint(params.op, 32); // OP
-    cell.refs[0] = createSignatureCell(params.signatureA);
-    cell.refs[1] = createSignatureCell(params.signatureB);
-    cell.writeCell(params.cell);
-    return cell;
+    const cell = new Cell().asBuilder();
+    cell.storeUint(params.op, 32); // OP
+    cell.storeRef(createSignatureCell(params.signatureA));
+    cell.storeRef(createSignatureCell(params.signatureB));
+    cell.storeBuilder(params.cell.asBuilder());
+    return cell.asCell();
 }
 
 export {

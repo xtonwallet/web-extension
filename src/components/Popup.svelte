@@ -288,9 +288,14 @@
     flex-grow: 1;
   }
 
+  /*
+  .openedModal{
+    padding-top: 0px;
+  }
+  */
 </style>
 
-<div class="container">
+<div class="container {showModal && !walletIsLocked ? "openedModal" : ""}">
   {#if !$isLoading && $loaded && $locale && typeof firstRun !== 'undefined'}
     {#if firstRun}
       <svelte:component this={Pages[$currentPage.name]} />
@@ -303,15 +308,15 @@
               <svelte:component this={Pages[$currentPage.name]} />
             </div>
           </div>
-          {#if showModal}
-            <Modal>
-              <svelte:component
-                this={Modals[currentModal]}
-                {modalData}
-                {closeModal} />
-            </Modal>
-          {/if}
         </div>
+        {#if showModal}
+          <Modal>
+            <svelte:component
+              this={Modals[currentModal]}
+              {modalData}
+              {closeModal} />
+          </Modal>
+        {/if}
       {/if}
       {#if walletIsLocked}
         <svelte:component this={Pages['LockScreen']} {enabledPinPad} {loaded} />

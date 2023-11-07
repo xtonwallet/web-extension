@@ -1,6 +1,6 @@
-import {Cell} from "../boc";
-import {Address, bytesToHex} from "../utils";
+import {Cell, Address} from "./toncore";
 import Contract from "../contract";
+import {Buffer} from "buffer";
 
 class AppTon {
 
@@ -18,7 +18,7 @@ class AppTon {
         this.ADDRESS_FORMAT_BOUNCEABLE = 4;
         this.ADDRESS_FORMAT_TEST_ONLY = 8;
 
-        // todo: узнать зачем вызывается decorateAppAPIMethods
+        // todo: ask why need to call the decorateAppAPIMethods
         // const scrambleKey = "w0w";
         // transport.decorateAppAPIMethods(
         //     this,
@@ -87,7 +87,7 @@ class AppTon {
             );
         const len = response[0];
         const addressHex = new Uint8Array(response.slice(1, 1 + len));
-        const address = new Address('0:' + bytesToHex(addressHex));
+        const address = new Address(0,  addressHex);
         return {address};
     }
 
@@ -134,7 +134,7 @@ class AppTon {
 
         const accountNumberBuffer = Buffer.alloc(4);
         accountNumberBuffer.writeInt32BE(accountNumber);
-        const msgBuffer = Buffer.concat([accountNumberBuffer, Buffer.from(await query.signingMessage.toBoc())]);
+        const msgBuffer = Buffer.concat([accountNumberBuffer, Buffer.from(await query.signingMessage.toBoc({idx: true, crc32: true}))]);
 
         const response = await this.transport
             .send(
@@ -149,9 +149,9 @@ class AppTon {
         const signatureBuffer = response.slice(1, 1 + len);
         const signature = new Uint8Array(signatureBuffer);
 
-        const body = new Cell();
-        body.bits.writeBytes(signature);
-        body.writeCell(query.signingMessage);
+        const body = new Cell().asBuilder();
+        body.storeBuffer(Buffer.from(signature, 'binary'));
+        body.storeBuilder(query.signingMessage.asBuilder());
 
         let stateInit = null, code = null, data = null;
 
@@ -164,7 +164,7 @@ class AppTon {
 
         const selfAddress = await wallet.getAddress();
         const header = Contract.createExternalMessageHeader(selfAddress);
-        const resultMessage = Contract.createCommonMsgInfo(header, stateInit, body);
+        const resultMessage = Contract.createCommonMsgInfo(header, stateInit, body.asCell());
 
         const resultPromise = new Promise(resolve => {
             resolve({
