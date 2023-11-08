@@ -46,6 +46,8 @@
     unbounceble,
   } from "../../../common/utils.js";
 
+  const devMode = __DEV_MODE__;
+  
   //Context
   const { openModal } = getContext("app_functions");
 
