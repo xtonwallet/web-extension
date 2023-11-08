@@ -1350,11 +1350,11 @@ export const accounts = () => {
           try {
             const result = await FtWallet.getOnchainMetadata(resultData.jettonContentCell);
             return {
-              name: hexToStr(result.name.substring(2)),
-              symbol: hexToStr(result.symbol.substring(2)),
-              decimals: result.decimal ? Number(hexToStr(result.decimal.substring(2))): 9,
+              name: Buffer(result.name.substr(2), 'hex').toString('utf-8'),
+              symbol: Buffer(result.symbol.substr(2), 'hex').toString('utf-8'),
+              decimals: result.decimal ? Number(result.decimal): 9,
               totalSupply: Number(resultData.totalSupply),
-              icon: hexToStr(result.image.substring(2))
+              icon: Buffer(result.image.substr(2), 'hex').toString('utf-8')
             }
           } catch(e) {
             if (devMode) {

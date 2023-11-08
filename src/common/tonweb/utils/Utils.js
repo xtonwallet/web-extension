@@ -8,18 +8,6 @@ function sha256(bytes) {
   return crypto.subtle.digest("SHA-256", bytes);
 }
 
-// look up tables
-const to_hex_array = [];
-const to_byte_map = {};
-for (let ord = 0; ord <= 0xff; ord++) {
-    let s = ord.toString(16);
-    if (s.length < 2) {
-        s = "0" + s;
-    }
-    to_hex_array.push(s);
-    to_byte_map[s] = ord;
-}
-
 /**
  * @private
  * @param crc {number}
@@ -92,25 +80,6 @@ function compareBytes(a, b) {
     // TODO Make it smarter
     return a.toString() === b.toString();
 }
-
-const base64abc = (() => {
-    const abc = []
-    const A = "A".charCodeAt(0);
-    const a = "a".charCodeAt(0);
-    const n = "0".charCodeAt(0);
-    for (let i = 0; i < 26; ++i) {
-        abc.push(String.fromCharCode(A + i));
-    }
-    for (let i = 0; i < 26; ++i) {
-        abc.push(String.fromCharCode(a + i));
-    }
-    for (let i = 0; i < 10; ++i) {
-        abc.push(String.fromCharCode(n + i));
-    }
-    abc.push("+");
-    abc.push("/");
-    return abc;
-})();
 
 /**
  * @param n  {number}

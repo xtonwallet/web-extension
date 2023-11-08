@@ -15,11 +15,11 @@ class JettonMinter extends Contract {
         options.code = options.code || Cell.fromBoc(Buffer.from('B5EE9C7241020B010001ED000114FF00F4A413F4BCF2C80B0102016202030202CC040502037A60090A03EFD9910E38048ADF068698180B8D848ADF07D201800E98FE99FF6A2687D007D206A6A18400AA9385D47181A9AA8AAE382F9702480FD207D006A18106840306B90FD001812881A28217804502A906428027D012C678B666664F6AA7041083DEECBEF29385D71811A92E001F1811802600271812F82C207F97840607080093DFC142201B82A1009AA0A01E428027D012C678B00E78B666491646580897A007A00658064907C80383A6465816503E5FFE4E83BC00C646582AC678B28027D0109E5B589666664B8FD80400FE3603FA00FA40F82854120870542013541403C85004FA0258CF1601CF16CCC922C8CB0112F400F400CB00C9F9007074C8CB02CA07CBFFC9D05008C705F2E04A12A1035024C85004FA0258CF16CCCCC9ED5401FA403020D70B01C3008E1F8210D53276DB708010C8CB055003CF1622FA0212CB6ACB1FCB3FC98042FB00915BE200303515C705F2E049FA403059C85004FA0258CF16CCCCC9ED54002E5143C705F2E049D43001C85004FA0258CF16CCCCC9ED54007DADBCF6A2687D007D206A6A183618FC1400B82A1009AA0A01E428027D012C678B00E78B666491646580897A007A00658064FC80383A6465816503E5FFE4E840001FAF16F6A2687D007D206A6A183FAA904051007F09', 'hex'))[0];
         super(provider, options);
         this.jettonOnChainMetadata = {
-          "bf4546a6ffe1b79cfdd86bad3db874313dcde2fb05e6a74aa7f3552d9617c79d12": "name",
-          "bf5208def46f5a1d4f9dce66ab309f4a851305f166f91ef79d923ef58e34f9a208": "description",
-          "bff082eb663b57a00192f4a6ac467288df2dfeddb9da1bee28f6521c8bebd21f1e80": "image",
-          "bf5d01fa5e3c06901c45046c6b2ddcea5af764fea0eed72a10d404f2312ceb247c": "decimals",
-          "bf6ed4f942a7848ce2cb066b77a1128c6a1ff8c43f438a2dce24612ba9ffab8b02": "symbol"
+          "BF4546A6FFE1B79CFDD86BAD3DB874313DCDE2FB05E6A74AA7F3552D9617C79D13_": "name",
+          "BF5208DEF46F5A1D4F9DCE66AB309F4A851305F166F91EF79D923EF58E34F9A209_": "description",
+          "BFF082EB663B57A00192F4A6AC467288DF2DFEDDB9DA1BEE28F6521C8BEBD21F1EC_": "image",
+          "BF5D01FA5E3C06901C45046C6B2DDCEA5AF764FEA0EED72A10D404F2312CEB247D_": "decimals",
+          "BF6ED4F942A7848CE2CB066B77A1128C6A1FF8C43F438A2DCE24612BA9FFAB8B03_": "symbol"
         };
     }
 
@@ -94,7 +94,7 @@ class JettonMinter extends Contract {
         const myAddress = await this.getAddress();
         const result = await this.provider.call2(myAddress.toString(), 'get_jetton_data');
 
-        const totalSupply = result[0];
+        const totalSupply = result[0].toNumber();
         const isMutable = result[1].toNumber() === -1;
         const adminAddress = parseAddress(result[2]);
         const jettonContentCell = result[3];
@@ -126,14 +126,15 @@ class JettonMinter extends Contract {
     }
 
     async getOnchainMetadata(cell) {
-      const slice = cell.beginParse();
-      if (slice.loadUint(8).toNumber() !== SNAKE_DATA_PREFIX) {
+      let slice = cell.asSlice();
+      if (slice.loadUint(8) !== SNAKE_DATA_PREFIX) {
         throw new Error("Only snake format is supported");
       }
 
-      const loadRefs = (slice, arr) => {
-        arr.push(Buffer.from(slice.loadBits(slice.length).toString('hex')));
-        for (let k in slice.refs) {
+      const loadRefs = (cell, arr) => {
+        let slice = cell.asSlice();
+        arr.push(slice.loadBits(slice.remainingBits).toString());
+        for (let k in cell.refs) {
           arr.concat(loadRefs(slice.loadRef(), arr));
         }
         return arr;

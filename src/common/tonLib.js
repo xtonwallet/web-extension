@@ -487,12 +487,12 @@ class TonLib {
             type = "tokenTransfer";
             queryId = slice.loadUint(64);
             amount = slice.loadCoins();
-            toAddress = slice.loadAddress();
-            responseAddress = slice.loadAddress();
+            toAddress = slice.loadMaybeAddress();
+            responseAddress = slice.loadMaybeAddress();
             slice.loadBit(); // null custom_payload
             forwardAmount = slice.loadCoins();
             slice.loadBit(); // forward_payload in this slice, not separate cell
-            forwardPayload = slice.loadBits(slice.remainingBits);
+            forwardPayload = slice.loadBuffer(slice.remainingBits/8);
             try {
               // if text
               forwardPayload = Buffer.from(forwardPayload, 'binary').toString('utf-8');
@@ -505,12 +505,12 @@ class TonLib {
             type = "tokenIncoming";
             queryId = slice.loadUint(64);
             amount = slice.loadCoins();
-            toAddress = slice.loadAddress();
-            responseAddress = slice.loadAddress();
+            toAddress = slice.loadMaybeAddress();
+            responseAddress = slice.loadMaybeAddress();
             //slice.loadBit(); // here no null custom_payload
             forwardAmount = slice.loadCoins();
             slice.loadBit(); // forward_payload in this slice, not separate cell
-            forwardPayload = slice.loadBits(slice.remainingBits-1);
+            forwardPayload = slice.loadBuffer(slice.remainingBits/8);
             try {
               // if text
               forwardPayload = Buffer.from(forwardPayload, 'binary').toString('utf-8');
@@ -522,7 +522,7 @@ class TonLib {
         }
         return {
           type: type,
-          amount: amount.toNumber(),
+          amount: amount.toString(10),
           toAddress: toAddress.toString({urlSafe: true, bounceable: false, testOnly: true}),
           forwardPayload: forwardPayload
         }
@@ -537,12 +537,12 @@ class TonLib {
           case "5fcc3d14":
             type = "tokenTransfer";
             queryId = slice.loadUint(64);
-            newOwnerAddress = slice.loadAddress();
-            responseAddress = slice.loadAddress();
+            newOwnerAddress = slice.loadMaybeAddress();
+            responseAddress = slice.loadMaybeAddress();
             slice.loadBit(); // null custom_payload
             forwardAmount = slice.loadCoins();
             slice.loadBit(); // forward_payload in this slice, not separate cell
-            forwardPayload = slice.loadBits(slice.remainingBits);
+            forwardPayload = slice.loadBuffer(slice.remainingBits/8);
             try {
               // if text
               forwardPayload = Buffer.from(forwardPayload, 'binary').toString('utf-8');
@@ -555,12 +555,12 @@ class TonLib {
             type = "tokenIncoming";
             queryId = slice.loadUint(64);
             amount = slice.loadCoins();
-            toAddress = slice.loadAddress();
-            responseAddress = slice.loadAddress();
+            toAddress = slice.loadMaybeAddress();
+            responseAddress = slice.loadMaybeAddress();
             //slice.loadBit(); // here no null custom_payload
             forwardAmount = slice.loadCoins();
             slice.loadBit(); // forward_payload in this slice, not separate cell
-            forwardPayload = slice.loadBits(slice.remainingBits-1);
+            forwardPayload = slice.loadBuffer(slice.remainingBits/8);
             try {
               // if text
               forwardPayload = Buffer.from(forwardPayload, 'binary').toString('utf-8');
@@ -572,7 +572,7 @@ class TonLib {
         }
         return {
           type: type,
-          amount: amount.toNumber(),
+          amount: amount.toString(10),
           toAddress: toAddress.toString({urlSafe: true, bounceable: false, testOnly: true}),
           forwardPayload: forwardPayload
         }
