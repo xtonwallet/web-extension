@@ -1,5 +1,5 @@
 
-export default [
+const wordlist = [
   'abandon',
   'ability',
   'able',
@@ -2049,3 +2049,5 @@ export default [
   'zone',
   'zoo'
 ];
+
+export default wordlist;

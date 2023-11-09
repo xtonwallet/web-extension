@@ -11,20 +11,20 @@
  * @returns AccountState
  */
 export function loadAccountStatus(slice) {
-    const status = slice.loadUint(2);
-    if (status === 0x00) {
-        return 'uninitialized';
-    }
-    if (status === 0x01) {
-        return 'frozen';
-    }
-    if (status === 0x02) {
-        return 'active';
-    }
-    if (status === 0x03) {
-        return 'non-existing';
-    }
-    throw Error('Invalid data');
+  const status = slice.loadUint(2);
+  if (status === 0x00) {
+    return 'uninitialized';
+  }
+  if (status === 0x01) {
+    return 'frozen';
+  }
+  if (status === 0x02) {
+    return 'active';
+  }
+  if (status === 0x03) {
+    return 'non-existing';
+  }
+  throw Error('Invalid data');
 }
 /**
  * Store account state to builder
@@ -32,22 +32,22 @@ export function loadAccountStatus(slice) {
  * @param builder buidler
  */
 export function storeAccountStatus(src) {
-    return (builder) => {
-        if (src === 'uninitialized') {
-            builder.storeUint(0x00, 2);
-        }
-        else if (src === 'frozen') {
-            builder.storeUint(0x01, 2);
-        }
-        else if (src === 'active') {
-            builder.storeUint(0x02, 2);
-        }
-        else if (src === 'non-existing') {
-            builder.storeUint(0x03, 2);
-        }
-        else {
-            throw Error('Invalid data');
-        }
-        return builder;
-    };
+  return (builder) => {
+    if (src === 'uninitialized') {
+      builder.storeUint(0x00, 2);
+    }
+    else if (src === 'frozen') {
+      builder.storeUint(0x01, 2);
+    }
+    else if (src === 'active') {
+      builder.storeUint(0x02, 2);
+    }
+    else if (src === 'non-existing') {
+      builder.storeUint(0x03, 2);
+    }
+    else {
+      throw Error('Invalid data');
+    }
+    return builder;
+  };
 }

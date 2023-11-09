@@ -6,85 +6,85 @@ import { Cell } from "./../../toncore";
  * @return {{seqno: number, bounce: boolean, payload: string, expireAt: number, toAddress: Address, value: BigNumber}}
  */
 function parseWalletV3TransferBody(slice) {
-    const signature = slice.loadBits(512);
+  const signature = slice.loadBits(512);
 
-    // signing message
+  // signing message
 
-    const walletId = slice.loadUint(32).toNumber();
-    if (walletId !== 698983191) throw new Error('invalid walletId');
+  const walletId = slice.loadUint(32).toNumber();
+  if (walletId !== 698983191) throw new Error('invalid walletId');
 
-    const expireAt = slice.loadUint(32).toNumber();
+  const expireAt = slice.loadUint(32).toNumber();
 
-    const seqno = slice.loadUint(32).toNumber();
+  const seqno = slice.loadUint(32).toNumber();
 
-    const sendMode = slice.loadUint(8).toNumber();
-    if (sendMode !== 3) throw new Error('invalid sendMode');
+  const sendMode = slice.loadUint(8).toNumber();
+  if (sendMode !== 3) throw new Error('invalid sendMode');
 
-    let order = slice.loadRef();
+  let order = slice.loadRef();
 
-    // order internal header
-    if (order.loadBit()) throw Error('invalid internal header');
-    if (!order.loadBit()) throw Error('invalid ihrDisabled');
-    const bounce = order.loadBit();
-    if (order.loadBit()) throw Error('invalid bounced');
-    const sourceAddress = order.loadAddress();
-    if (sourceAddress !== null) throw Error('invalid externalSourceAddress');
-    const destAddress = order.loadAddress();
-    const value = order.loadCoins();
+  // order internal header
+  if (order.loadBit()) throw Error('invalid internal header');
+  if (!order.loadBit()) throw Error('invalid ihrDisabled');
+  const bounce = order.loadBit();
+  if (order.loadBit()) throw Error('invalid bounced');
+  const sourceAddress = order.loadAddress();
+  if (sourceAddress !== null) throw Error('invalid externalSourceAddress');
+  const destAddress = order.loadAddress();
+  const value = order.loadCoins();
 
-    if (order.loadBit()) throw Error('invalid currencyCollection');
-    const ihrFees = order.loadCoins();
-    if (!ihrFees.eq(new BigNumber(0))) throw new Error('invalid ihrFees');
-    const fwdFees = order.loadCoins();
-    if (!fwdFees.eq(new BigNumber(0))) throw new Error('invalid fwdFees');
-    const createdLt = order.loadUint(64);
-    if (!createdLt.eq(new BigNumber(0))) throw new Error('invalid createdLt');
-    const createdAt = order.loadUint(32);
-    if (!createdAt.eq(new BigNumber(0))) throw new Error('invalid createdAt');
+  if (order.loadBit()) throw Error('invalid currencyCollection');
+  const ihrFees = order.loadCoins();
+  if (!ihrFees.eq(new BigNumber(0))) throw new Error('invalid ihrFees');
+  const fwdFees = order.loadCoins();
+  if (!fwdFees.eq(new BigNumber(0))) throw new Error('invalid fwdFees');
+  const createdLt = order.loadUint(64);
+  if (!createdLt.eq(new BigNumber(0))) throw new Error('invalid createdLt');
+  const createdAt = order.loadUint(32);
+  if (!createdAt.eq(new BigNumber(0))) throw new Error('invalid createdAt');
 
-    // order stateInit
+  // order stateInit
+  if (order.loadBit()) {
+    order.loadRef();  // don't parse stateInit
+  }
+
+  // order body
+  let payload = null;
+
+  if (order.remainingBits > 0) {
     if (order.loadBit()) {
-        order.loadRef();  // don't parse stateInit
+      order = order.loadRef();
     }
 
-    // order body
-    let payload = null;
-
-    if (order.remainingBits > 0) {
-        if (order.loadBit()) {
-            order = order.loadRef();
-        }
-
-        if (order.remainingBits > 32) {
-            const op = order.loadUint(32);
-            const payloadBytes = order.loadBits(order.remainingBits);
-            payload = op.eq(new BigNumber(0)) ? new TextDecoder().decode(payloadBytes) : '';
-        }
+    if (order.remainingBits > 32) {
+      const op = order.loadUint(32);
+      const payloadBytes = order.loadBits(order.remainingBits);
+      payload = op.eq(new BigNumber(0)) ? new TextDecoder().decode(payloadBytes) : '';
     }
+  }
 
-    // console.log(Buffer.from(signature).toString('hex'));
-    // console.log(walletId);
-    // console.log(expireAt);
-    // console.log(seqno);
-    // console.log(sendMode);
-    // console.log(bounce);
-    // console.log(sourceAddress?.toString(true, true, true));
-    // console.log(destAddress?.toString(true, true, true));
-    // console.log(value.toNumber());
-    // console.log(ihrFees);
-    // console.log(fwdFees);
-    // console.log(createdLt);
-    // console.log(createdAt);
-    // console.log(payload);
+  // console.log(Buffer.from(signature).toString('hex'));
+  // console.log(walletId);
+  // console.log(expireAt);
+  // console.log(seqno);
+  // console.log(sendMode);
+  // console.log(bounce);
+  // console.log(sourceAddress?.toString(true, true, true));
+  // console.log(destAddress?.toString(true, true, true));
+  // console.log(value.toNumber());
+  // console.log(ihrFees);
+  // console.log(fwdFees);
+  // console.log(createdLt);
+  // console.log(createdAt);
+  // console.log(payload);
 
-    return {
-        toAddress: destAddress,
-        value,
-        bounce,
-        seqno,
-        expireAt,
-        payload
-    };
+  return {
+    toAddress: destAddress,
+    value,
+    bounce,
+    seqno,
+    expireAt,
+    payload
+  };
 }
 
 /**
@@ -92,40 +92,40 @@ function parseWalletV3TransferBody(slice) {
  * @return {{seqno: number, bounce: boolean, payload: string, fromAddress: Address|null, expireAt: number, toAddress: Address, value: BigNumber}}
  */
 function parseWalletV3TransferQuery(cell) {
-    const slice = cell.beginParse();
+  const slice = cell.beginParse();
 
-    // header
+  // header
 
-    if (slice.loadUint(2).toNumber() !== 2) throw Error('invalid header');
+  if (slice.loadUint(2).toNumber() !== 2) throw Error('invalid header');
 
-    const externalSourceAddress = slice.loadAddress();
-    if (externalSourceAddress !== null) throw Error('invalid externalSourceAddress');
+  const externalSourceAddress = slice.loadAddress();
+  if (externalSourceAddress !== null) throw Error('invalid externalSourceAddress');
 
-    const externalDestAddress = slice.loadAddress();
+  const externalDestAddress = slice.loadAddress();
 
-    const externalImportFee = slice.loadCoins();
-    if (!externalImportFee.eq(new BigNumber(0))) throw new Error('invalid externalImportFee');
+  const externalImportFee = slice.loadCoins();
+  if (!externalImportFee.eq(new BigNumber(0))) throw new Error('invalid externalImportFee');
 
-    // stateInit
+  // stateInit
 
+  if (slice.loadBit()) {
     if (slice.loadBit()) {
-        if (slice.loadBit()) {
-            slice.loadRef(); // don't parse stateInit
-        }
+      slice.loadRef(); // don't parse stateInit
     }
+  }
 
-    // body
+  // body
 
-    const bodySlice = slice.loadBit() ? slice.loadRef() : slice;
+  const bodySlice = slice.loadBit() ? slice.loadRef() : slice;
 
-    // console.log(externalSourceAddress);
-    // console.log(externalDestAddress.toString(true, true, true));
-    // console.log(externalImportFee);
+  // console.log(externalSourceAddress);
+  // console.log(externalDestAddress.toString(true, true, true));
+  // console.log(externalImportFee);
 
-    return {
-        fromAddress: externalDestAddress,
-        ...parseWalletV3TransferBody(bodySlice)
-    };
+  return {
+    fromAddress: externalDestAddress,
+    ...parseWalletV3TransferBody(bodySlice)
+  };
 }
 
 export {parseWalletV3TransferQuery, parseWalletV3TransferBody};

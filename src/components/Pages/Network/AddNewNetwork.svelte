@@ -30,28 +30,28 @@
     try {
       if (formObj.checkValidity()) {
         browser.runtime
-        .sendMessage({
-          type: "addNewNetwork",
-          data: {
-            name: name.value,
-            server: server.value,
-            endpoints: [server.value],
-            explorer: explorer.value,
-            test: test.value == "on",
-            giver: giver.value,
-            coinName: coinName.value,
-          },
-        })
-        .then((result) => {
-          if (!result.error) {
-            switchPage("AccountMain");
-          } else {
-            error = result.error;
-          }
-        })
-        .catch((error) => {
-          console.error("Error on sendMessage:" + JSON.stringify(error.message));
-        });
+          .sendMessage({
+            type: "addNewNetwork",
+            data: {
+              name: name.value,
+              server: server.value,
+              endpoints: [server.value],
+              explorer: explorer.value,
+              test: test.value == "on",
+              giver: giver.value,
+              coinName: coinName.value,
+            },
+          })
+          .then((result) => {
+            if (!result.error) {
+              switchPage("AccountMain");
+            } else {
+              error = result.error;
+            }
+          })
+          .catch((error) => {
+            console.error("Error on sendMessage:" + JSON.stringify(error.message));
+          });
       }
     } catch (e) {
       formObj.reportValidity();

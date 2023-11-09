@@ -187,24 +187,24 @@
     if (value.includes($currentNetwork.server + "-" + $currentAccount.address) && !waitingTransactionChecking) {
       waitingTransactionChecking = true;
       setTimeout(() => {
-          browser.runtime
-            .sendMessage({
-              type: "checkNewTransactions",
-              data: {
-                accountAddress: $currentAccount.address,
-                server: $currentNetwork.server
-              }
-            }).then((result) => {
-              if (result) {
-                accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
-                waitingTransactionChecking = false;
-              }
-            }).catch((e) => {
-              if (devMode) {
-                console.log(e);
-              }
-            });
-        }, 10000);
+        browser.runtime
+          .sendMessage({
+            type: "checkNewTransactions",
+            data: {
+              accountAddress: $currentAccount.address,
+              server: $currentNetwork.server
+            }
+          }).then((result) => {
+            if (result) {
+              accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
+              waitingTransactionChecking = false;
+            }
+          }).catch((e) => {
+            if (devMode) {
+              console.log(e);
+            }
+          });
+      }, 10000);
     }
   });
 
@@ -356,12 +356,12 @@
       transactionPage--;
       getTransactions($currentAccount.address, $currentNetwork.server, 10, transactionPage);
     }
-  }
+  };
 
   const transactionPageForward = () => {
     transactionPage++;
     getTransactions($currentAccount.address, $currentNetwork.server, 10, transactionPage);
-  }
+  };
 </script>
 
 <style lang="scss">

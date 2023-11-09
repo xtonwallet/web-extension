@@ -37,26 +37,26 @@
       if (formObj.checkValidity()) {
         loading = true;
         browser.runtime.sendMessage({type: "addAccountByKeys",
-                                     data: {"nickname": nickname.value, 
-                                            "keyPair": {"public": publicKey.value, 
-                                                        "secret": secretKey.value},
-                                            "version": version.dataset.value
-                                            }
-                                    })
-        .then((result) => {
-          loading = false;
-          if (!result.error) {
-            settingsStore.setLastChangeDate();
-            accountStore.changeAccount(result);
-            setKeys({"encrypted": [result]});
-            changeStep(6);
-          } else {
-            error = result.error;
+          data: {"nickname": nickname.value, 
+            "keyPair": {"public": publicKey.value, 
+              "secret": secretKey.value},
+            "version": version.dataset.value
           }
         })
-        .catch((error) => {
-          console.error("Error on sendMessage:" + JSON.stringify(error.message));
-        });
+          .then((result) => {
+            loading = false;
+            if (!result.error) {
+              settingsStore.setLastChangeDate();
+              accountStore.changeAccount(result);
+              setKeys({"encrypted": [result]});
+              changeStep(6);
+            } else {
+              error = result.error;
+            }
+          })
+          .catch((error) => {
+            console.error("Error on sendMessage:" + JSON.stringify(error.message));
+          });
       }
     } catch(e) {
       publicKey.setCustomValidity("Specify right public key");
@@ -72,16 +72,16 @@
   };
 
   const complexItems = [{value: 'v2R1', label: 'Version 2r1'},
-                        {value: 'v2R2', label: 'Version 2r2'},
-                        {value: 'v3R1', label: 'Version 3r1'},
-                        {value: 'v3R2', label: 'Version 3r2'},
-                        {value: 'v4R1', label: 'Version 4r1'},
-                        {value: 'v4R2', label: 'Version 4r2'},
-                        ];
+    {value: 'v2R2', label: 'Version 2r2'},
+    {value: 'v3R1', label: 'Version 3r1'},
+    {value: 'v3R2', label: 'Version 3r2'},
+    {value: 'v4R1', label: 'Version 4r1'},
+    {value: 'v4R2', label: 'Version 4r2'},
+  ];
 
   const setVersion = (event) => {
     version.dataset.value = event.detail.value;
-  }
+  };
 </script>
 
 <style>
@@ -111,7 +111,7 @@
           placeholder={$_('Version')}
           noOptionsMessage={$_('No matches')}
           on:select={setVersion}
-          on:clear={() => {version.dataset.value = "v4R2"}}
+          on:clear={() => {version.dataset.value = "v4R2";}}
           on:keyup={setVersion} />
         </Field>
       </div>

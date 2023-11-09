@@ -31,22 +31,22 @@
 
   onMount(() => {
     browser.runtime
-    .sendMessage({
-      type: "getPermissionsList",
-      data: {},
-    })
-    .then((result) => {
-      originsList = Object.keys(result.permissionsList);
-      permissionsList = result.permissionsList;
+      .sendMessage({
+        type: "getPermissionsList",
+        data: {},
+      })
+      .then((result) => {
+        originsList = Object.keys(result.permissionsList);
+        permissionsList = result.permissionsList;
 
-      filteredOriginsList = originsList;
+        filteredOriginsList = originsList;
 
-      methodsList = result.methodsList;
-      permissionsLoaded = true;
-    })
-    .catch((e) => {
-      console.log(e); // here don't need to show any error for user, usually it is the network issue in the development environment
-    });
+        methodsList = result.methodsList;
+        permissionsLoaded = true;
+      })
+      .catch((e) => {
+        console.log(e); // here don't need to show any error for user, usually it is the network issue in the development environment
+      });
   });
 
   const handleSubmit = async () => {
@@ -64,20 +64,20 @@
         }
 
         browser.runtime
-        .sendMessage({
-          type: "savePermissionsList",
-          data: preparedSelectedList,
-        })
-        .then((result) => {
-          if (!result.error) {
-            switchPage("AccountMain");
-          } else {
-            error = result.error;
-          }
-        })
-        .catch((error) => {
-          console.error("Error on sendMessage:" + JSON.stringify(error.message));
-        });
+          .sendMessage({
+            type: "savePermissionsList",
+            data: preparedSelectedList,
+          })
+          .then((result) => {
+            if (!result.error) {
+              switchPage("AccountMain");
+            } else {
+              error = result.error;
+            }
+          })
+          .catch((error) => {
+            console.error("Error on sendMessage:" + JSON.stringify(error.message));
+          });
       }
     } catch (e) {
       formObj.reportValidity();
@@ -90,7 +90,7 @@
 
   const filterOrigin = () => {
     filteredOriginsList = originsList.filter((item) => {
-      return item.includes(searchOrigin)
+      return item.includes(searchOrigin);
     });
     selectedList = [];
   };

@@ -7,17 +7,18 @@
  */
 import { loadAccountState, storeAccountState } from "./AccountState";
 import { loadCurrencyCollection, storeCurrencyCollection } from "./CurrencyCollection";
+
 export function loadAccountStorage(slice) {
-    return {
-        lastTransLt: slice.loadUintBig(64),
-        balance: loadCurrencyCollection(slice),
-        state: loadAccountState(slice)
-    };
+  return {
+    lastTransLt: slice.loadUintBig(64),
+    balance: loadCurrencyCollection(slice),
+    state: loadAccountState(slice)
+  };
 }
 export function storeAccountStorage(src) {
-    return (builder) => {
-        builder.storeUint(src.lastTransLt, 64);
-        builder.store(storeCurrencyCollection(src.balance));
-        builder.store(storeAccountState(src.state));
-    };
+  return (builder) => {
+    builder.storeUint(src.lastTransLt, 64);
+    builder.store(storeCurrencyCollection(src.balance));
+    builder.store(storeAccountState(src.state));
+  };
 }

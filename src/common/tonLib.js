@@ -3,6 +3,7 @@ import { Vault } from "../common/vault.js";
 import TonWeb from "./tonweb";
 import { Unibabel } from "./utils.js";
 import {Buffer} from "buffer";
+
 const devMode = __DEV_MODE__;
 
 class TonLib {
@@ -59,8 +60,8 @@ class TonLib {
       }
       const WalletClass = this.instance.wallet.all[version];
       const walletContract = new WalletClass(this.instance.provider, {
-            publicKey: Unibabel.hexToBuffer(publicKey),
-            workChain: 0
+        publicKey: Unibabel.hexToBuffer(publicKey),
+        workChain: 0
       });
       return (await walletContract.getAddress()).toString(true, true, true);
     } catch (exp) {
@@ -76,8 +77,8 @@ class TonLib {
       }
       const WalletClass = this.instance.wallet.all[version];
       const walletContract = new WalletClass(this.instance.provider, {
-            publicKey: Unibabel.hexToBuffer(publicKey),
-            workChain: 0
+        publicKey: Unibabel.hexToBuffer(publicKey),
+        workChain: 0
       });
       const { stateInit } = await walletContract.createStateInit();
       return Unibabel.bufferToBase64(await stateInit.toBoc({idx: true, crc32: true}));
@@ -200,7 +201,7 @@ class TonLib {
     }
   }
 
-/*
+  /*
   async requestManyAccountBalances(accountsList) {
     try {
       let filter = "";
@@ -332,8 +333,8 @@ class TonLib {
     try {
       const WalletClass = this.instance.wallet.all[this.defaultWalletVersion];
       const walletContract = new WalletClass(this.instance.provider, {
-            publicKey: Buffer.from(keyPair.public, 'hex'),
-            workChain: 0
+        publicKey: Buffer.from(keyPair.public, 'hex'),
+        workChain: 0
       });
 
       const deploy = walletContract.deploy(Buffer.from(keyPair.secret, 'hex')); // deploy method
@@ -483,49 +484,49 @@ class TonLib {
       ) {
         let type, queryId, amount, toAddress, responseAddress, forwardAmount, forwardPayload;
         switch(typeTx) {
-          case "f8a7ea5":
-            type = "tokenTransfer";
-            queryId = slice.loadUint(64);
-            amount = slice.loadCoins();
-            toAddress = slice.loadMaybeAddress();
-            responseAddress = slice.loadMaybeAddress();
-            slice.loadBit(); // null custom_payload
-            forwardAmount = slice.loadCoins();
-            slice.loadBit(); // forward_payload in this slice, not separate cell
-            forwardPayload = slice.loadBuffer(slice.remainingBits/8);
-            try {
-              // if text
-              forwardPayload = Buffer.from(forwardPayload, 'binary').toString('utf-8');
-            } catch(e) {
-              // if something else
-              forwardPayload = Buffer.from(forwardPayload, 'binary').toString('base64');
-            }
-            break;
-          case "178d4519":
-            type = "tokenIncoming";
-            queryId = slice.loadUint(64);
-            amount = slice.loadCoins();
-            toAddress = slice.loadMaybeAddress();
-            responseAddress = slice.loadMaybeAddress();
-            //slice.loadBit(); // here no null custom_payload
-            forwardAmount = slice.loadCoins();
-            slice.loadBit(); // forward_payload in this slice, not separate cell
-            forwardPayload = slice.loadBuffer(slice.remainingBits/8);
-            try {
-              // if text
-              forwardPayload = Buffer.from(forwardPayload, 'binary').toString('utf-8');
-            } catch(e) {
-              // if something else
-              forwardPayload = Buffer.from(forwardPayload, 'binary').toString('base64');
-            }
-            break;
+        case "f8a7ea5":
+          type = "tokenTransfer";
+          queryId = slice.loadUint(64);
+          amount = slice.loadCoins();
+          toAddress = slice.loadMaybeAddress();
+          responseAddress = slice.loadMaybeAddress();
+          slice.loadBit(); // null custom_payload
+          forwardAmount = slice.loadCoins();
+          slice.loadBit(); // forward_payload in this slice, not separate cell
+          forwardPayload = slice.loadBuffer(slice.remainingBits/8);
+          try {
+            // if text
+            forwardPayload = Buffer.from(forwardPayload, 'binary').toString('utf-8');
+          } catch(e) {
+            // if something else
+            forwardPayload = Buffer.from(forwardPayload, 'binary').toString('base64');
+          }
+          break;
+        case "178d4519":
+          type = "tokenIncoming";
+          queryId = slice.loadUint(64);
+          amount = slice.loadCoins();
+          toAddress = slice.loadMaybeAddress();
+          responseAddress = slice.loadMaybeAddress();
+          //slice.loadBit(); // here no null custom_payload
+          forwardAmount = slice.loadCoins();
+          slice.loadBit(); // forward_payload in this slice, not separate cell
+          forwardPayload = slice.loadBuffer(slice.remainingBits/8);
+          try {
+            // if text
+            forwardPayload = Buffer.from(forwardPayload, 'binary').toString('utf-8');
+          } catch(e) {
+            // if something else
+            forwardPayload = Buffer.from(forwardPayload, 'binary').toString('base64');
+          }
+          break;
         }
         return {
           type: type,
           amount: amount.toString(10),
           toAddress: toAddress.toString({urlSafe: true, bounceable: false, testOnly: true}),
           forwardPayload: forwardPayload
-        }
+        };
       }
 
       if (standard == "64" &&
@@ -534,48 +535,48 @@ class TonLib {
       ) {
         let type, queryId, newOwnerAddress, toAddress, responseAddress, forwardAmount, forwardPayload;
         switch(typeTx) {
-          case "5fcc3d14":
-            type = "tokenTransfer";
-            queryId = slice.loadUint(64);
-            newOwnerAddress = slice.loadMaybeAddress();
-            responseAddress = slice.loadMaybeAddress();
-            slice.loadBit(); // null custom_payload
-            forwardAmount = slice.loadCoins();
-            slice.loadBit(); // forward_payload in this slice, not separate cell
-            forwardPayload = slice.loadBuffer(slice.remainingBits/8);
-            try {
-              // if text
-              forwardPayload = Buffer.from(forwardPayload, 'binary').toString('utf-8');
-            } catch(e) {
-              // if something else
-              forwardPayload = Buffer.from(forwardPayload, 'binary').toString('base64');
-            }
-            break;
-          case "05138d91":
-            type = "tokenIncoming";
-            queryId = slice.loadUint(64);
-            amount = slice.loadCoins();
-            toAddress = slice.loadMaybeAddress();
-            responseAddress = slice.loadMaybeAddress();
-            //slice.loadBit(); // here no null custom_payload
-            forwardAmount = slice.loadCoins();
-            slice.loadBit(); // forward_payload in this slice, not separate cell
-            forwardPayload = slice.loadBuffer(slice.remainingBits/8);
-            try {
-              // if text
-              forwardPayload = Buffer.from(forwardPayload, 'binary').toString('utf-8');
-            } catch(e) {
-              // if something else
-              forwardPayload = Buffer.from(forwardPayload, 'binary').toString('base64');
-            }
-            break;
+        case "5fcc3d14":
+          type = "tokenTransfer";
+          queryId = slice.loadUint(64);
+          newOwnerAddress = slice.loadMaybeAddress();
+          responseAddress = slice.loadMaybeAddress();
+          slice.loadBit(); // null custom_payload
+          forwardAmount = slice.loadCoins();
+          slice.loadBit(); // forward_payload in this slice, not separate cell
+          forwardPayload = slice.loadBuffer(slice.remainingBits/8);
+          try {
+            // if text
+            forwardPayload = Buffer.from(forwardPayload, 'binary').toString('utf-8');
+          } catch(e) {
+            // if something else
+            forwardPayload = Buffer.from(forwardPayload, 'binary').toString('base64');
+          }
+          break;
+        case "05138d91":
+          type = "tokenIncoming";
+          queryId = slice.loadUint(64);
+          amount = slice.loadCoins();
+          toAddress = slice.loadMaybeAddress();
+          responseAddress = slice.loadMaybeAddress();
+          //slice.loadBit(); // here no null custom_payload
+          forwardAmount = slice.loadCoins();
+          slice.loadBit(); // forward_payload in this slice, not separate cell
+          forwardPayload = slice.loadBuffer(slice.remainingBits/8);
+          try {
+            // if text
+            forwardPayload = Buffer.from(forwardPayload, 'binary').toString('utf-8');
+          } catch(e) {
+            // if something else
+            forwardPayload = Buffer.from(forwardPayload, 'binary').toString('base64');
+          }
+          break;
         }
         return {
           type: type,
           amount: amount.toString(10),
           toAddress: toAddress.toString({urlSafe: true, bounceable: false, testOnly: true}),
           forwardPayload: forwardPayload
-        }
+        };
       }
 
       throw new Error("no standard");

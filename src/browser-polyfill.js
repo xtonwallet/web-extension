@@ -31,7 +31,7 @@
     // never actually need to be called, this allows the polyfill to be included
     // in Firefox nearly for free.
 
-    const wrapAPIs = extensionAPIs => {
+    const wrapAPIs = (extensionAPIs) => {
       // NOTE: apiMetadata is associated to the content of the api-metadata.json file
       // at build time by replacing the following "include" with the content of the
       // JSON file.
@@ -747,7 +747,7 @@
        */
 
 
-      const isThenable = value => {
+      const isThenable = (value) => {
         return value && typeof value === "object" && typeof value.then === "function";
       };
       /**
@@ -791,7 +791,7 @@
         };
       };
 
-      const pluralizeArguments = numArgs => numArgs == 1 ? "argument" : "arguments";
+      const pluralizeArguments = (numArgs) => numArgs == 1 ? "argument" : "arguments";
       /**
        * Creates a wrapper function for a method with the given name and metadata.
        *
@@ -1027,7 +1027,7 @@
        */
 
 
-      const wrapEvent = wrapperMap => ({
+      const wrapEvent = (wrapperMap) => ({
         addListener(target, listener, ...args) {
           target.addListener(wrapperMap.get(listener), ...args);
         },
@@ -1044,7 +1044,7 @@
 
 
       let loggedSendResponseDeprecationWarning = false;
-      const onMessageWrappers = new DefaultWeakMap(listener => {
+      const onMessageWrappers = new DefaultWeakMap((listener) => {
         if (typeof listener !== "function") {
           return listener;
         }
@@ -1070,7 +1070,7 @@
         return function onMessage(message, sender, sendResponse) {
           let didCallSendResponse = false;
           let wrappedSendResponse;
-          let sendResponsePromise = new Promise(resolve => {
+          let sendResponsePromise = new Promise((resolve) => {
             wrappedSendResponse = function (response) {
               if (!loggedSendResponseDeprecationWarning) {
                 console.warn(SEND_RESPONSE_DEPRECATION_WARNING, new Error().stack);
@@ -1101,11 +1101,11 @@
           // promise).
 
 
-          const sendPromisedResult = promise => {
-            promise.then(msg => {
+          const sendPromisedResult = (promise) => {
+            promise.then((msg) => {
               // send the message value.
               sendResponse(msg);
-            }, error => {
+            }, (error) => {
               // Send a JSON representation of the error if the rejected value
               // is an instance of error, or the object itself otherwise.
               let message;
@@ -1120,7 +1120,7 @@
                 __mozWebExtensionPolyfillReject__: true,
                 message
               });
-            }).catch(err => {
+            }).catch((err) => {
               // Print an error on the console if unable to send the response.
               console.error("Failed to send onMessage rejected reply", err);
             });

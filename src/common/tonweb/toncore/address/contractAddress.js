@@ -8,10 +8,11 @@
 import { beginCell } from "../boc/Builder";
 import { storeStateInit } from "../types/StateInit";
 import { Address } from "./Address";
+
 export function contractAddress(workchain, init) {
-    let hash = beginCell()
-        .store(storeStateInit(init))
-        .endCell()
-        .hash();
-    return new Address(workchain, hash);
+  let hash = beginCell()
+    .store(storeStateInit(init))
+    .endCell()
+    .hash();
+  return new Address(workchain, hash);
 }

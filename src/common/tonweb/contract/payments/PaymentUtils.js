@@ -5,48 +5,48 @@ import {Buffer} from "buffer";
  * @param publicKey {Uint8Array}
  */
 const writePublicKey = (cell, publicKey) => {
-    if (publicKey.length !== 256 / 8) {
-        throw new Error('invalid publicKey length');
-    }
-    cell.storeBuffer(Buffer.from(publicKey, 'binary'));
-}
+  if (publicKey.length !== 256 / 8) {
+    throw new Error('invalid publicKey length');
+  }
+  cell.storeBuffer(Buffer.from(publicKey, 'binary'));
+};
 
 /**
  * @param cell  {Cell}
  * @param signature {Uint8Array}
  */
 const writeSignature = (cell, signature) => {
-    if (signature.length !== 512 / 8) {
-        throw new Error('invalid signature length');
-    }
-    cell.storeBuffer(Buffer.from(signature, 'binary'));
-}
+  if (signature.length !== 512 / 8) {
+    throw new Error('invalid signature length');
+  }
+  cell.storeBuffer(Buffer.from(signature, 'binary'));
+};
 
 /**
  * @param signature {Uint8Array}
  * @returns {Cell}
  */
 const createSignatureCell = (signature) => {
-    const cell = new Cell().asBuilder();
-    writeSignature(cell, signature);
-    return cell.asCell();
-}
+  const cell = new Cell().asBuilder();
+  writeSignature(cell, signature);
+  return cell.asCell();
+};
 
 /**
  * @param cell  {Cell}
  * @param ref   {Cell}
  */
 const writeMayBe = (cell, ref) => {
-    if (ref) {
-        cell.storeBit(1);
-        if (cell.refs.length >= 4) {
-            throw new Error('refs overflow')
-        }
-        cell.storeRef(ref);
-    } else {
-        cell.storeBit(0);
+  if (ref) {
+    cell.storeBit(1);
+    if (cell.refs.length >= 4) {
+      throw new Error('refs overflow');
     }
-}
+    cell.storeRef(ref);
+  } else {
+    cell.storeBit(0);
+  }
+};
 
 /**
  * @param cell  {Cell}
@@ -77,205 +77,205 @@ const op_channel_closed = -572749638; // crc32("channel_closed channel_id:uint12
  * @returns {Cell}
  */
 const createTopUpBalance = (params) => {
-    const cell = new Cell().asBuilder();
-    cell.storeUint(op_top_up_balance, 32); // OP
-    cell.storeCoins(params.coinsA);
-    cell.storeCoins(params.coinsB);
-    return cell.asCell();
-}
+  const cell = new Cell().asBuilder();
+  cell.storeUint(op_top_up_balance, 32); // OP
+  cell.storeCoins(params.coinsA);
+  cell.storeCoins(params.coinsB);
+  return cell.asCell();
+};
 
 /**
  * @param params    {{channelId: BigNumber, balanceA: BigNumber, balanceB: BigNumber}}
  * @returns {Cell}
  */
 const createInitChannelBody = (params) => {
-    const cell = new Cell().asBuilder();
-    cell.storeUint(tag_init, 32);
-    cell.storeUint(params.channelId, 128);
-    cell.storeCoins(params.balanceA);
-    cell.storeCoins(params.balanceB);
-    return cell.asCell();
-}
+  const cell = new Cell().asBuilder();
+  cell.storeUint(tag_init, 32);
+  cell.storeUint(params.channelId, 128);
+  cell.storeCoins(params.balanceA);
+  cell.storeCoins(params.balanceB);
+  return cell.asCell();
+};
 
 /**
  * @param params    {{channelId: BigNumber, balanceA: BigNumber, balanceB: BigNumber, seqnoA: BigNumber, seqnoB: BigNumber}}
  * @returns {Cell}
  */
 const createCooperativeCloseChannelBody = (params) => {
-    const cell = new Cell().asBuilder();
-    cell.storeUint(tag_cooperative_close, 32);
-    cell.storeUint(params.channelId, 128);
-    cell.storeCoins(params.balanceA);
-    cell.storeCoins(params.balanceB);
-    cell.storeUint(params.seqnoA, 64);
-    cell.storeUint(params.seqnoB, 64);
-    return cell.asCell();
-}
+  const cell = new Cell().asBuilder();
+  cell.storeUint(tag_cooperative_close, 32);
+  cell.storeUint(params.channelId, 128);
+  cell.storeCoins(params.balanceA);
+  cell.storeCoins(params.balanceB);
+  cell.storeUint(params.seqnoA, 64);
+  cell.storeUint(params.seqnoB, 64);
+  return cell.asCell();
+};
 
 /**
  * @param params    {{channelId: BigNumber, seqnoA: BigNumber, seqnoB: BigNumber}}
  * @returns {Cell}
  */
 const createCooperativeCommitBody = (params) => {
-    const cell = new Cell().asBuilder();
-    cell.storeUint(tag_cooperative_commit, 32);
-    cell.storeUint(params.channelId, 128);
-    cell.storeUint(params.seqnoA, 64);
-    cell.storeUint(params.seqnoB, 64);
-    return cell.asCell();
-}
+  const cell = new Cell().asBuilder();
+  cell.storeUint(tag_cooperative_commit, 32);
+  cell.storeUint(params.channelId, 128);
+  cell.storeUint(params.seqnoA, 64);
+  cell.storeUint(params.seqnoB, 64);
+  return cell.asCell();
+};
 
 /**
  * @param params    {{amount: BigNumber, condition: Cell}} condition is code
  * @returns {Cell}
  */
 const createConditionalPayment = (params) => {
-    const cell = new Cell().asBuilder();
-    cell.storeCoins(params.amount);
-    cell.storeBuilder(params.condition.asBuilder());
-    return cell.asCell();
-}
+  const cell = new Cell().asBuilder();
+  cell.storeCoins(params.amount);
+  cell.storeBuilder(params.condition.asBuilder());
+  return cell.asCell();
+};
 
 /**
  * @param params    {{seqno: BigNumber, sentCoins: BigNumber, conditionals: Cell | null}} conditionals - dictionary with uint32 keys and values created by `createConditionalPayment`
  * @returns {Cell}
  */
 const createSemiChannelBody = (params) => {
-    const cell = new Cell().asBuilder();
-    cell.storeUint(params.seqno, 64); // body start
-    cell.storeCoins(params.sentCoins);
-    writeDict(cell, params.conditionals);  // HashmapE 32 ConditionalPayment
-    return cell.asCell();
-}
+  const cell = new Cell().asBuilder();
+  cell.storeUint(params.seqno, 64); // body start
+  cell.storeCoins(params.sentCoins);
+  writeDict(cell, params.conditionals);  // HashmapE 32 ConditionalPayment
+  return cell.asCell();
+};
 
 /**
  * @param params    {{channelId: BigNumber, semiChannelBody: Cell, counterpartySemiChannelBody?: Cell}} created by `createSemiChannelBody`
  * @returns {Cell}
  */
 const createSemiChannelState = (params) => {
-    const cell = new Cell().asBuilder();
-    cell.storeUint(tag_state, 32);
-    cell.storeUint(params.channelId, 128);
-    cell.storeBuilder(params.semiChannelBody.asBuilder());
-    writeMayBe(cell, params.counterpartySemiChannelBody)
-    return cell.asCell();
-}
+  const cell = new Cell().asBuilder();
+  cell.storeUint(tag_state, 32);
+  cell.storeUint(params.channelId, 128);
+  cell.storeBuilder(params.semiChannelBody.asBuilder());
+  writeMayBe(cell, params.counterpartySemiChannelBody);
+  return cell.asCell();
+};
 
 /**
  * @param params    {{signature: Uint8Array, state: Cell}}  `state` created by `createSemiChannelState`
  */
 const createSignedSemiChannelState = (params) => {
-    const cell = new Cell().asBuilder();
-    writeSignature(cell, params.signature);
-    cell.storeBuilder(params.state.asBuilder());
-    return cell.asCell();
-}
+  const cell = new Cell().asBuilder();
+  writeSignature(cell, params.signature);
+  cell.storeBuilder(params.state.asBuilder());
+  return cell.asCell();
+};
 
 /**
  * @param params    {{channelId: BigNumber, signedSemiChannelStateA: Cell, signedSemiChannelStateB: Cell}} `signedSemiChannelState` created by `createSignedSemiChannelState`
  * @returns {Cell}
  */
 const createStartUncooperativeCloseBody = (params) => {
-    const cell = new Cell().asBuilder();
-    cell.storeUint(tag_start_uncooperative_close, 32);
-    cell.storeUint(params.channelId, 128);
-    cell.storeRef(params.signedSemiChannelStateA);
-    cell.storeRef(params.signedSemiChannelStateB);
-    return cell.asCell();
-}
+  const cell = new Cell().asBuilder();
+  cell.storeUint(tag_start_uncooperative_close, 32);
+  cell.storeUint(params.channelId, 128);
+  cell.storeRef(params.signedSemiChannelStateA);
+  cell.storeRef(params.signedSemiChannelStateB);
+  return cell.asCell();
+};
 
 /**
  * @param params    {{channelId: BigNumber, signedSemiChannelStateA: Cell, signedSemiChannelStateB: Cell}} `signedSemiChannelState` created by `createSignedSemiChannelState`
  * @returns {Cell}
  */
 const createChallengeQuarantinedStateBody = (params) => {
-    const cell = new Cell().asBuilder();
-    cell.storeUint(tag_challenge_state, 32);
-    cell.storeUint(params.channelId, 128);
-    cell.storeRef(params.signedSemiChannelStateA);
-    cell.storeRef(params.signedSemiChannelStateB);
-    return cell.asCell();
-}
+  const cell = new Cell().asBuilder();
+  cell.storeUint(tag_challenge_state, 32);
+  cell.storeUint(params.channelId, 128);
+  cell.storeRef(params.signedSemiChannelStateA);
+  cell.storeRef(params.signedSemiChannelStateB);
+  return cell.asCell();
+};
 
 /**
  * @param params    {{channelId: BigNumber, conditionalsToSettle: Cell | null}} conditionalsToSettle - dictionary with uint32 keys and values created by `createConditionalPayment`
  * @returns {Cell}
  */
 const createSettleConditionalsBody = (params) => {
-    const cell = new Cell().asBuilder();
-    cell.storeUint(tag_settle_conditionals, 32);
-    cell.storeUint(params.channelId, 128);
-    writeDict(cell, params.conditionalsToSettle); // HashmapE 32 Cell
-    return cell.asCell();
-}
+  const cell = new Cell().asBuilder();
+  cell.storeUint(tag_settle_conditionals, 32);
+  cell.storeUint(params.channelId, 128);
+  writeDict(cell, params.conditionalsToSettle); // HashmapE 32 Cell
+  return cell.asCell();
+};
 
 /**
  * @returns {Cell}
  */
 const createFinishUncooperativeClose = () => {
-    const cell = new Cell().asBuilder();
-    cell.storeUint(op_finish_uncooperative_close, 32); // OP
-    return cell.asCell();
-}
+  const cell = new Cell().asBuilder();
+  cell.storeUint(op_finish_uncooperative_close, 32); // OP
+  return cell.asCell();
+};
 
 /**
  * @param params    {{op: number, isA: boolean, signature: Uint8Array, cell: Cell}}
  * @return {Cell}
  */
 const createOneSignature = (params) => {
-    const cell = new Cell().asBuilder();
-    cell.storeUint(params.op, 32); // OP
-    cell.storeBit(params.isA);
-    writeSignature(cell, params.signature);
-    cell.storeBuilder(params.cell.asBuilder());
-    return cell.asCell();
-}
+  const cell = new Cell().asBuilder();
+  cell.storeUint(params.op, 32); // OP
+  cell.storeBit(params.isA);
+  writeSignature(cell, params.signature);
+  cell.storeBuilder(params.cell.asBuilder());
+  return cell.asCell();
+};
 
 /**
  * @param params    {{op: number, signatureA: Uint8Array, signatureB: Uint8Array, cell: Cell}}
  * @return {Cell}
  */
 const createTwoSignature = (params) => {
-    const cell = new Cell().asBuilder();
-    cell.storeUint(params.op, 32); // OP
-    cell.storeRef(createSignatureCell(params.signatureA));
-    cell.storeRef(createSignatureCell(params.signatureB));
-    cell.storeBuilder(params.cell.asBuilder());
-    return cell.asCell();
-}
+  const cell = new Cell().asBuilder();
+  cell.storeUint(params.op, 32); // OP
+  cell.storeRef(createSignatureCell(params.signatureA));
+  cell.storeRef(createSignatureCell(params.signatureB));
+  cell.storeBuilder(params.cell.asBuilder());
+  return cell.asCell();
+};
 
 export {
-    writePublicKey,
-    writeSignature,
-    createSignatureCell,
-    tag_init,
-    tag_cooperative_close,
-    tag_cooperative_commit,
-    tag_start_uncooperative_close,
-    tag_challenge_state,
-    tag_settle_conditionals,
-    tag_state,
-    op_top_up_balance,
-    op_init_channel,
-    op_cooperative_close,
-    op_cooperative_commit,
-    op_start_uncooperative_close,
-    op_challenge_quarantined_state,
-    op_settle_conditionals,
-    op_finish_uncooperative_close,
-    op_channel_closed,
-    createTopUpBalance,
-    createInitChannelBody,
-    createCooperativeCloseChannelBody,
-    createCooperativeCommitBody,
-    createConditionalPayment,
-    createSemiChannelBody,
-    createSemiChannelState,
-    createSignedSemiChannelState,
-    createStartUncooperativeCloseBody,
-    createChallengeQuarantinedStateBody,
-    createSettleConditionalsBody,
-    createFinishUncooperativeClose,
-    createOneSignature,
-    createTwoSignature
+  writePublicKey,
+  writeSignature,
+  createSignatureCell,
+  tag_init,
+  tag_cooperative_close,
+  tag_cooperative_commit,
+  tag_start_uncooperative_close,
+  tag_challenge_state,
+  tag_settle_conditionals,
+  tag_state,
+  op_top_up_balance,
+  op_init_channel,
+  op_cooperative_close,
+  op_cooperative_commit,
+  op_start_uncooperative_close,
+  op_challenge_quarantined_state,
+  op_settle_conditionals,
+  op_finish_uncooperative_close,
+  op_channel_closed,
+  createTopUpBalance,
+  createInitChannelBody,
+  createCooperativeCloseChannelBody,
+  createCooperativeCommitBody,
+  createConditionalPayment,
+  createSemiChannelBody,
+  createSemiChannelState,
+  createSignedSemiChannelState,
+  createStartUncooperativeCloseBody,
+  createChallengeQuarantinedStateBody,
+  createSettleConditionalsBody,
+  createFinishUncooperativeClose,
+  createOneSignature,
+  createTwoSignature
 };

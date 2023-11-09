@@ -1,4 +1,4 @@
-import { default as defaultWordlist } from '../bip39-wordlists';
+import { defaultW as defaultWordlist } from '../bip39-wordlists';
 import { isBasicSeed, mnemonicToEntropy } from './common';
 import { isPasswordNeeded } from './is-password-needed';
 

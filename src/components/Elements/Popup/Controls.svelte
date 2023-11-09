@@ -28,12 +28,12 @@
     if (newCurrentNetwork.length) {
       networksStore.changeNetwork(newCurrentNetwork[0]);
       browser.runtime
-      .sendMessage({
-        type: "changeNetwork",
-        data: newCurrentNetwork[0],
-      }).catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error.message));
-      });
+        .sendMessage({
+          type: "changeNetwork",
+          data: newCurrentNetwork[0],
+        }).catch((error) => {
+          console.error("Error on sendMessage:" + JSON.stringify(error.message));
+        });
     }
   };
 

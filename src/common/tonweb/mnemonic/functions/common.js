@@ -51,20 +51,20 @@ export function stringToIntArray(str, size = 1) {
   let bufferView;
 
   switch (size) {
-    case 1:
-      buffer = new ArrayBuffer(str.length);
-      bufferView = new Uint8Array(buffer);
-      break;
-    case 2:
-      buffer = new ArrayBuffer(str.length * 2);
-      bufferView = new Uint16Array(buffer);
-      break;
-    case 4:
-      buffer = new ArrayBuffer(str.length * 4);
-      bufferView = new Uint32Array(buffer);
-      break;
-    default:
-      throw new Error(`Incorrect size specified: ${size}`);
+  case 1:
+    buffer = new ArrayBuffer(str.length);
+    bufferView = new Uint8Array(buffer);
+    break;
+  case 2:
+    buffer = new ArrayBuffer(str.length * 2);
+    bufferView = new Uint16Array(buffer);
+    break;
+  case 4:
+    buffer = new ArrayBuffer(str.length * 4);
+    bufferView = new Uint32Array(buffer);
+    break;
+  default:
+    throw new Error(`Incorrect size specified: ${size}`);
   }
 
   for (let i = 0, strLen = str.length; i < strLen; i++) {

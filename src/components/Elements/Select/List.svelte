@@ -12,10 +12,10 @@
     export let items = [];
     export let labelIdentifier = 'label';
     export let getOptionLabel = (option, filterText) => {
-        if (option)
-            return option.isCreator
-                ? `Create \"${filterText}\"`
-                : option[labelIdentifier];
+      if (option)
+        return option.isCreator
+          ? `Create \"${filterText}\"`
+          : option[labelIdentifier];
     };
     export let getGroupHeaderLabel = null;
     export let itemHeight = 40;
@@ -37,198 +37,198 @@
     let prev_items;
 
     onMount(() => {
-        if (items.length > 0 && !isMulti && value) {
-            const _hoverItemIndex = items.findIndex(
-                (item) => item[optionIdentifier] === value[optionIdentifier]
-            );
-
-            if (_hoverItemIndex) {
-                hoverItemIndex = _hoverItemIndex;
-            }
-        }
-
-        scrollToActiveItem('active');
-
-        container.addEventListener(
-            'scroll',
-            () => {
-                clearTimeout(isScrollingTimer);
-
-                isScrollingTimer = setTimeout(() => {
-                    isScrolling = false;
-                }, 100);
-            },
-            false
+      if (items.length > 0 && !isMulti && value) {
+        const _hoverItemIndex = items.findIndex(
+          (item) => item[optionIdentifier] === value[optionIdentifier]
         );
+
+        if (_hoverItemIndex) {
+          hoverItemIndex = _hoverItemIndex;
+        }
+      }
+
+      scrollToActiveItem('active');
+
+      container.addEventListener(
+        'scroll',
+        () => {
+          clearTimeout(isScrollingTimer);
+
+          isScrollingTimer = setTimeout(() => {
+            isScrolling = false;
+          }, 100);
+        },
+        false
+      );
     });
 
     beforeUpdate(() => {
-        if (!items) items = [];
-        if (items !== prev_items && items.length > 0) {
-            hoverItemIndex = 0;
-        }
+      if (!items) items = [];
+      if (items !== prev_items && items.length > 0) {
+        hoverItemIndex = 0;
+      }
 
-        prev_items = items;
+      prev_items = items;
     });
 
     function handleSelect(item) {
-        if (item.isCreator) return;
-        dispatch('itemSelected', item);
+      if (item.isCreator) return;
+      dispatch('itemSelected', item);
     }
 
     function handleHover(i) {
-        if (isScrolling) return;
-        hoverItemIndex = i;
+      if (isScrolling) return;
+      hoverItemIndex = i;
     }
 
     function handleClick(args) {
-        const { item, i, event } = args;
-        event.stopPropagation();
+      const { item, i, event } = args;
+      event.stopPropagation();
 
-        if (
-            value &&
+      if (
+        value &&
             !isMulti &&
             value[optionIdentifier] === item[optionIdentifier]
-        )
-            return closeList();
+      )
+        return closeList();
 
-        if (item.isCreator) {
-            dispatch('itemCreated', filterText);
-        } else {
-            activeItemIndex = i;
-            hoverItemIndex = i;
-            handleSelect(item);
-        }
+      if (item.isCreator) {
+        dispatch('itemCreated', filterText);
+      } else {
+        activeItemIndex = i;
+        hoverItemIndex = i;
+        handleSelect(item);
+      }
     }
 
     function closeList() {
-        dispatch('closeList');
+      dispatch('closeList');
     }
 
     async function updateHoverItem(increment) {
-        if (isVirtualList) return;
+      if (isVirtualList) return;
 
-        let isNonSelectableItem = true;
+      let isNonSelectableItem = true;
 
-        while (isNonSelectableItem) {
-            if (increment > 0 && hoverItemIndex === items.length - 1) {
-                hoverItemIndex = 0;
-            } else if (increment < 0 && hoverItemIndex === 0) {
-                hoverItemIndex = items.length - 1;
-            } else {
-                hoverItemIndex = hoverItemIndex + increment;
-            }
-
-            isNonSelectableItem =
-                items[hoverItemIndex].isGroupHeader &&
-                !items[hoverItemIndex].isSelectable;
+      while (isNonSelectableItem) {
+        if (increment > 0 && hoverItemIndex === items.length - 1) {
+          hoverItemIndex = 0;
+        } else if (increment < 0 && hoverItemIndex === 0) {
+          hoverItemIndex = items.length - 1;
+        } else {
+          hoverItemIndex = hoverItemIndex + increment;
         }
 
-        await tick();
+        isNonSelectableItem =
+                items[hoverItemIndex].isGroupHeader &&
+                !items[hoverItemIndex].isSelectable;
+      }
 
-        scrollToActiveItem('hover');
+      await tick();
+
+      scrollToActiveItem('hover');
     }
 
     function handleKeyDown(e) {
-        switch (e.key) {
-            case 'Escape':
-                e.preventDefault();
-                closeList();
-                break;
-            case 'ArrowDown':
-                e.preventDefault();
-                items.length && updateHoverItem(1);
-                break;
-            case 'ArrowUp':
-                e.preventDefault();
-                items.length && updateHoverItem(-1);
-                break;
-            case 'Enter':
-                e.preventDefault();
-                if (items.length === 0) break;
-                const hoverItem = items[hoverItemIndex];
-                if (
-                    value &&
+      switch (e.key) {
+      case 'Escape':
+        e.preventDefault();
+        closeList();
+        break;
+      case 'ArrowDown':
+        e.preventDefault();
+        items.length && updateHoverItem(1);
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        items.length && updateHoverItem(-1);
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (items.length === 0) break;
+        const hoverItem = items[hoverItemIndex];
+        if (
+          value &&
                     !isMulti &&
                     value[optionIdentifier] === hoverItem[optionIdentifier]
-                ) {
-                    closeList();
-                    break;
-                }
-                if (hoverItem.isCreator) {
-                    dispatch('itemCreated', filterText);
-                } else {
-                    activeItemIndex = hoverItemIndex;
-                    handleSelect(items[hoverItemIndex]);
-                }
-                break;
-            case 'Tab':
-                e.preventDefault();
-                if (items.length === 0) {
-                    return closeList();
-                }
-                if (
-                    value &&
+        ) {
+          closeList();
+          break;
+        }
+        if (hoverItem.isCreator) {
+          dispatch('itemCreated', filterText);
+        } else {
+          activeItemIndex = hoverItemIndex;
+          handleSelect(items[hoverItemIndex]);
+        }
+        break;
+      case 'Tab':
+        e.preventDefault();
+        if (items.length === 0) {
+          return closeList();
+        }
+        if (
+          value &&
                     value[optionIdentifier] ===
                         items[hoverItemIndex][optionIdentifier]
-                )
-                    return closeList();
-                activeItemIndex = hoverItemIndex;
-                handleSelect(items[hoverItemIndex]);
-                break;
-        }
+        )
+          return closeList();
+        activeItemIndex = hoverItemIndex;
+        handleSelect(items[hoverItemIndex]);
+        break;
+      }
     }
 
     function scrollToActiveItem(className) {
-        if (isVirtualList || !container) return;
+      if (isVirtualList || !container) return;
 
-        let offsetBounding;
-        const focusedElemBounding = container.querySelector(
-            `.listItem .${className}`
-        );
+      let offsetBounding;
+      const focusedElemBounding = container.querySelector(
+        `.listItem .${className}`
+      );
 
-        if (focusedElemBounding) {
-            offsetBounding =
+      if (focusedElemBounding) {
+        offsetBounding =
                 container.getBoundingClientRect().bottom -
                 focusedElemBounding.getBoundingClientRect().bottom;
-        }
+      }
 
-        container.scrollTop -= offsetBounding;
+      container.scrollTop -= offsetBounding;
     }
 
     function isItemActive(item, value, optionIdentifier) {
-        return value && value[optionIdentifier] === item[optionIdentifier];
+      return value && value[optionIdentifier] === item[optionIdentifier];
     }
 
     function isItemFirst(itemIndex) {
-        return itemIndex === 0;
+      return itemIndex === 0;
     }
 
     function isItemHover(hoverItemIndex, item, itemIndex, items) {
-        return hoverItemIndex === itemIndex || items.length === 1;
+      return hoverItemIndex === itemIndex || items.length === 1;
     }
 
     let listStyle;
     function computePlacement() {
-        const { top, height, width } = parent.getBoundingClientRect();
+      const { top, height, width } = parent.getBoundingClientRect();
 
-        listStyle = '';
-        listStyle += `min-width:${width}px;width:${
-            listAutoWidth ? 'auto' : '100%'
-        };`;
+      listStyle = '';
+      listStyle += `min-width:${width}px;width:${
+        listAutoWidth ? 'auto' : '100%'
+      };`;
 
-        if (
-            listPlacement === 'top' ||
+      if (
+        listPlacement === 'top' ||
             (listPlacement === 'auto' && isOutOfViewport(parent).bottom)
-        ) {
-            listStyle += `bottom:${height + listOffset}px;`;
-        } else {
-            listStyle += `top:${height + listOffset}px;`;
-        }
+      ) {
+        listStyle += `bottom:${height + listOffset}px;`;
+      } else {
+        listStyle += `top:${height + listOffset}px;`;
+      }
     }
 
     $: {
-        if (parent && container) computePlacement();
+      if (parent && container) computePlacement();
     }
 </script>
 

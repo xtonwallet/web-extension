@@ -22,16 +22,16 @@
     browser.runtime.sendMessage({type: 'changeAccountNickname',
       data: {"accountAddress": $currentAccount.address, "nickname": nickname.value}
     })
-    .then((result) => {
-      if (result) {
-        const account = $currentAccount;
-        account.nickname = nickname.value;
-        accountStore.changeAccount(account);
-      }
-      closeModal();
-    }).catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error.message));
-    });
+      .then((result) => {
+        if (result) {
+          const account = $currentAccount;
+          account.nickname = nickname.value;
+          accountStore.changeAccount(account);
+        }
+        closeModal();
+      }).catch((error) => {
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
+      });
   };
 
 </script>

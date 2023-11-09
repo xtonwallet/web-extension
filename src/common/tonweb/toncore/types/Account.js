@@ -7,17 +7,18 @@
  */
 import { loadAccountStorage, storeAccountStorage } from "./AccountStorage";
 import { loadStorageInfo, storeStorageInfo } from "./StorageInto";
+
 export function loadAccount(slice) {
-    return {
-        addr: slice.loadAddress(),
-        storageStats: loadStorageInfo(slice),
-        storage: loadAccountStorage(slice)
-    };
+  return {
+    addr: slice.loadAddress(),
+    storageStats: loadStorageInfo(slice),
+    storage: loadAccountStorage(slice)
+  };
 }
 export function storeAccount(src) {
-    return (builder) => {
-        builder.storeAddress(src.addr);
-        builder.store(storeStorageInfo(src.storageStats));
-        builder.store(storeAccountStorage(src.storage));
-    };
+  return (builder) => {
+    builder.storeAddress(src.addr);
+    builder.store(storeStorageInfo(src.storageStats));
+    builder.store(storeAccountStorage(src.storage));
+  };
 }

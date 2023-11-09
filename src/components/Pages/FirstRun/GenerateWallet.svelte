@@ -65,23 +65,23 @@
 
   const createStartingWallet = (resolve) => {
     browser.runtime
-    .sendMessage({ type: "addNewAccount", data: `Account ${allAccounts.length+1}` })
-    .then((result) => {
-      if (result.error) {
-        message = result.error;
-      } else {
-        if (result.added) {
-          settingsStore.setLastChangeDate();
-          seed = result.seed;
-          accountStore.changeAccount(result.account);
-          resolve();
+      .sendMessage({ type: "addNewAccount", data: `Account ${allAccounts.length+1}` })
+      .then((result) => {
+        if (result.error) {
+          message = result.error;
+        } else {
+          if (result.added) {
+            settingsStore.setLastChangeDate();
+            seed = result.seed;
+            accountStore.changeAccount(result.account);
+            resolve();
+          }
+          message = result.reason;
         }
-        message = result.reason;
-      }
-    })
-    .catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error.message));
-    });
+      })
+      .catch((error) => {
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
+      });
   };
 
   const print = () => {

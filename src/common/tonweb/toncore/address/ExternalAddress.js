@@ -7,17 +7,18 @@
  */
 var _a;
 import inspectSymbol from 'symbol.inspect';
+
 export class ExternalAddress {
-    static isAddress(src) {
-        return src instanceof ExternalAddress;
-    }
-    constructor(value, bits) {
-        this[_a] = () => this.toString();
-        this.value = value;
-        this.bits = bits;
-    }
-    toString() {
-        return `External<${this.bits}:${this.value}>`;
-    }
+  static isAddress(src) {
+    return src instanceof ExternalAddress;
+  }
+  constructor(value, bits) {
+    this[_a] = () => this.toString();
+    this.value = value;
+    this.bits = bits;
+  }
+  toString() {
+    return `External<${this.bits}:${this.value}>`;
+  }
 }
 _a = inspectSymbol;

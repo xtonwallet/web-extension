@@ -6,182 +6,182 @@
  * LICENSE file in the root directory of this source tree.
  */
 export class TupleReader {
-    constructor(items) {
-        this.items = [...items];
+  constructor(items) {
+    this.items = [...items];
+  }
+  get remaining() {
+    return this.items.length;
+  }
+  peek() {
+    if (this.items.length === 0) {
+      throw Error('EOF');
     }
-    get remaining() {
-        return this.items.length;
+    return this.items[0];
+  }
+  pop() {
+    if (this.items.length === 0) {
+      throw Error('EOF');
     }
-    peek() {
-        if (this.items.length === 0) {
-            throw Error('EOF');
-        }
-        return this.items[0];
+    let res = this.items[0];
+    this.items.splice(0, 1);
+    return res;
+  }
+  skip(num = 1) {
+    for (let i = 0; i < num; i++) {
+      this.pop();
     }
-    pop() {
-        if (this.items.length === 0) {
-            throw Error('EOF');
-        }
-        let res = this.items[0];
-        this.items.splice(0, 1);
-        return res;
+    return this;
+  }
+  readBigNumber() {
+    let popped = this.pop();
+    if (popped.type !== 'int') {
+      throw Error('Not a number');
     }
-    skip(num = 1) {
-        for (let i = 0; i < num; i++) {
-            this.pop();
-        }
-        return this;
+    return popped.value;
+  }
+  readBigNumberOpt() {
+    let popped = this.pop();
+    if (popped.type === 'null') {
+      return null;
     }
-    readBigNumber() {
-        let popped = this.pop();
-        if (popped.type !== 'int') {
-            throw Error('Not a number');
-        }
-        return popped.value;
+    if (popped.type !== 'int') {
+      throw Error('Not a number');
     }
-    readBigNumberOpt() {
-        let popped = this.pop();
-        if (popped.type === 'null') {
-            return null;
-        }
-        if (popped.type !== 'int') {
-            throw Error('Not a number');
-        }
-        return popped.value;
+    return popped.value;
+  }
+  readNumber() {
+    return Number(this.readBigNumber());
+  }
+  readNumberOpt() {
+    let r = this.readBigNumberOpt();
+    if (r !== null) {
+      return Number(r);
     }
-    readNumber() {
-        return Number(this.readBigNumber());
+    else {
+      return null;
     }
-    readNumberOpt() {
-        let r = this.readBigNumberOpt();
-        if (r !== null) {
-            return Number(r);
-        }
-        else {
-            return null;
-        }
+  }
+  readBoolean() {
+    let res = this.readNumber();
+    return res === 0 ? false : true;
+  }
+  readBooleanOpt() {
+    let res = this.readNumberOpt();
+    if (res !== null) {
+      return res === 0 ? false : true;
     }
-    readBoolean() {
-        let res = this.readNumber();
-        return res === 0 ? false : true;
+    else {
+      return null;
     }
-    readBooleanOpt() {
-        let res = this.readNumberOpt();
-        if (res !== null) {
-            return res === 0 ? false : true;
-        }
-        else {
-            return null;
-        }
+  }
+  readAddress() {
+    let r = this.readCell().beginParse().loadAddress();
+    if (r !== null) {
+      return r;
     }
-    readAddress() {
-        let r = this.readCell().beginParse().loadAddress();
-        if (r !== null) {
-            return r;
-        }
-        else {
-            throw Error('Not an address');
-        }
+    else {
+      throw Error('Not an address');
     }
-    readAddressOpt() {
-        let r = this.readCellOpt();
-        if (r !== null) {
-            return r.beginParse().loadMaybeAddress();
-        }
-        else {
-            return null;
-        }
+  }
+  readAddressOpt() {
+    let r = this.readCellOpt();
+    if (r !== null) {
+      return r.beginParse().loadMaybeAddress();
     }
-    readCell() {
-        let popped = this.pop();
-        if (popped.type !== 'cell' && popped.type !== 'slice' && popped.type !== 'builder') {
-            throw Error('Not a cell: ' + popped.type);
-        }
-        return popped.cell;
+    else {
+      return null;
     }
-    readCellOpt() {
-        let popped = this.pop();
-        if (popped.type === 'null') {
-            return null;
-        }
-        if (popped.type !== 'cell' && popped.type !== 'slice' && popped.type !== 'builder') {
-            throw Error('Not a cell');
-        }
-        return popped.cell;
+  }
+  readCell() {
+    let popped = this.pop();
+    if (popped.type !== 'cell' && popped.type !== 'slice' && popped.type !== 'builder') {
+      throw Error('Not a cell: ' + popped.type);
     }
-    readTuple() {
-        let popped = this.pop();
-        if (popped.type !== 'tuple') {
-            throw Error('Not a tuple');
-        }
-        return new TupleReader(popped.items);
+    return popped.cell;
+  }
+  readCellOpt() {
+    let popped = this.pop();
+    if (popped.type === 'null') {
+      return null;
     }
-    readTupleOpt() {
-        let popped = this.pop();
-        if (popped.type === 'null') {
-            return null;
-        }
-        if (popped.type !== 'tuple') {
-            throw Error('Not a tuple');
-        }
-        return new TupleReader(popped.items);
+    if (popped.type !== 'cell' && popped.type !== 'slice' && popped.type !== 'builder') {
+      throw Error('Not a cell');
     }
-    static readLispList(reader) {
-        const result = [];
-        let tail = reader;
-        while (tail !== null) {
-            var head = tail.pop();
-            if (tail.items.length === 0 || (tail.items[0].type !== 'tuple' && tail.items[0].type !== 'null')) {
-                throw Error('Lisp list consists only from (any, tuple) elements and ends with null');
-            }
-            tail = tail.readTupleOpt();
-            result.push(head);
-        }
-        return result;
+    return popped.cell;
+  }
+  readTuple() {
+    let popped = this.pop();
+    if (popped.type !== 'tuple') {
+      throw Error('Not a tuple');
     }
-    readLispListDirect() {
-        if (this.items.length === 1 && this.items[0].type === 'null') {
-            return [];
-        }
-        return TupleReader.readLispList(this);
+    return new TupleReader(popped.items);
+  }
+  readTupleOpt() {
+    let popped = this.pop();
+    if (popped.type === 'null') {
+      return null;
     }
-    readLispList() {
-        return TupleReader.readLispList(this.readTupleOpt());
+    if (popped.type !== 'tuple') {
+      throw Error('Not a tuple');
     }
-    readBuffer() {
-        let s = this.readCell().beginParse();
-        if (s.remainingRefs !== 0) {
-            throw Error('Not a buffer');
-        }
-        if (s.remainingBits % 8 !== 0) {
-            throw Error('Not a buffer');
-        }
-        return s.loadBuffer(s.remainingBits / 8);
+    return new TupleReader(popped.items);
+  }
+  static readLispList(reader) {
+    const result = [];
+    let tail = reader;
+    while (tail !== null) {
+      var head = tail.pop();
+      if (tail.items.length === 0 || (tail.items[0].type !== 'tuple' && tail.items[0].type !== 'null')) {
+        throw Error('Lisp list consists only from (any, tuple) elements and ends with null');
+      }
+      tail = tail.readTupleOpt();
+      result.push(head);
     }
-    readBufferOpt() {
-        let popped = this.peek();
-        if (popped.type === 'null') {
-            return null;
-        }
-        let s = this.readCell().beginParse();
-        if (s.remainingRefs !== 0) {
-            throw Error('Not a buffer');
-        }
-        if (s.remainingBits % 8 !== 0) {
-            throw Error('Not a buffer');
-        }
-        return s.loadBuffer(s.remainingBits / 8);
+    return result;
+  }
+  readLispListDirect() {
+    if (this.items.length === 1 && this.items[0].type === 'null') {
+      return [];
     }
-    readString() {
-        let s = this.readCell().beginParse();
-        return s.loadStringTail();
+    return TupleReader.readLispList(this);
+  }
+  readLispList() {
+    return TupleReader.readLispList(this.readTupleOpt());
+  }
+  readBuffer() {
+    let s = this.readCell().beginParse();
+    if (s.remainingRefs !== 0) {
+      throw Error('Not a buffer');
     }
-    readStringOpt() {
-        let popped = this.peek();
-        if (popped.type === 'null') {
-            return null;
-        }
-        let s = this.readCell().beginParse();
-        return s.loadStringTail();
+    if (s.remainingBits % 8 !== 0) {
+      throw Error('Not a buffer');
     }
+    return s.loadBuffer(s.remainingBits / 8);
+  }
+  readBufferOpt() {
+    let popped = this.peek();
+    if (popped.type === 'null') {
+      return null;
+    }
+    let s = this.readCell().beginParse();
+    if (s.remainingRefs !== 0) {
+      throw Error('Not a buffer');
+    }
+    if (s.remainingBits % 8 !== 0) {
+      throw Error('Not a buffer');
+    }
+    return s.loadBuffer(s.remainingBits / 8);
+  }
+  readString() {
+    let s = this.readCell().beginParse();
+    return s.loadStringTail();
+  }
+  readStringOpt() {
+    let popped = this.peek();
+    if (popped.type === 'null') {
+      return null;
+    }
+    let s = this.readCell().beginParse();
+    return s.loadStringTail();
+  }
 }

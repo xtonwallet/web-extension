@@ -4,8 +4,8 @@ import NftMarketplace from "./NftMarketplace";
 import NftSale from "./NftSale";
 
 export {
-    NftCollection,
-    NftItem,
-    NftMarketplace,
-    NftSale
+  NftCollection,
+  NftItem,
+  NftMarketplace,
+  NftSale
 };

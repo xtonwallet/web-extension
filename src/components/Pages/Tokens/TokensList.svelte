@@ -30,22 +30,22 @@
 
   const getTokenList = (accountAddress, server) => {
     browser.runtime
-    .sendMessage({
-      type: "tokenList",
-      data: {
-        accountAddress: accountAddress,
-        server: server,
-      },
-    })
-    .then((result) => {
-      if (server == $currentNetwork.server) {
-        assets = result;
-        assetsLoaded = true;
-      }
-    })
-    .catch((e) => {
-      console.log(e); // here don't need to show any error for user, usually it is the network issue in the development environment
-    });
+      .sendMessage({
+        type: "tokenList",
+        data: {
+          accountAddress: accountAddress,
+          server: server,
+        },
+      })
+      .then((result) => {
+        if (server == $currentNetwork.server) {
+          assets = result;
+          assetsLoaded = true;
+        }
+      })
+      .catch((e) => {
+        console.log(e); // here don't need to show any error for user, usually it is the network issue in the development environment
+      });
   };
 
   onMount(() => {
@@ -56,20 +56,20 @@
     try {
       if (formObj.checkValidity()) {
         browser.runtime
-        .sendMessage({
-          type: "removeTokens",
-          data: selectedList,
-        })
-        .then((result) => {
-          if (!result.error) {
-            switchPage("AccountMain");
-          } else {
-            error = result.error;
-          }
-        })
-        .catch((error) => {
-          console.error("Error on sendMessage:" + JSON.stringify(error.message));
-        });
+          .sendMessage({
+            type: "removeTokens",
+            data: selectedList,
+          })
+          .then((result) => {
+            if (!result.error) {
+              switchPage("AccountMain");
+            } else {
+              error = result.error;
+            }
+          })
+          .catch((error) => {
+            console.error("Error on sendMessage:" + JSON.stringify(error.message));
+          });
       }
     } catch (e) {
       formObj.reportValidity();

@@ -96,10 +96,10 @@
   $: enabledPinPad = false;
   $: firstRun = undefined;
 
-  let innerWidth = 0
-  let innerHeight = 0
+  let innerWidth = 0;
+  let innerHeight = 0;
   
-  $: condition = innerWidth*1.33 <= innerHeight
+  $: condition = innerWidth*1.33 <= innerHeight;
 
   const walletIsLockedListener = (message, origin) => {
     if (message.type === "page-walletIsLocked") {
@@ -219,23 +219,23 @@
       settingsStore.setThemeName("light");
       // need to change storage on background
       browser.runtime
-      .sendMessage({ type: "setSettings", data: {
-        "setThemeName": "light",
-      }})
-      .catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error.message));
-      });
+        .sendMessage({ type: "setSettings", data: {
+          "setThemeName": "light",
+        }})
+        .catch((error) => {
+          console.error("Error on sendMessage:" + JSON.stringify(error.message));
+        });
     } else {
       body.classList.remove("light");
       settingsStore.setThemeName("dark");
       // need to change storage on background
       browser.runtime
-      .sendMessage({ type: "setSettings", data: {
-        "setThemeName": "dark",
-      }})
-      .catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error.message));
-      });
+        .sendMessage({ type: "setSettings", data: {
+          "setThemeName": "dark",
+        }})
+        .catch((error) => {
+          console.error("Error on sendMessage:" + JSON.stringify(error.message));
+        });
     }
   }
 

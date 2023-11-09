@@ -9,63 +9,63 @@ const NFT_SALE_HEX_CODE = 'B5EE9C7241020A010001B4000114FF00F4A413F4BCF2C80B01020
  */
 class NftSale extends Contract {
 
-    /**
+  /**
      * @param provider
      * @param options   {{marketplaceAddress: Address, nftAddress: Address, fullPrice: BigNumber, marketplaceFee: BigNumber, royaltyAddress: Address, royaltyAmount: BigNumber, address?: Address | string, code?: Cell}}
      */
-    constructor(provider, options) {
-        options.workChain = 0;
-        options.code = options.code || Cell.fromBoc(Buffer.from(NFT_SALE_HEX_CODE, 'hex'))[0];
-        super(provider, options);
+  constructor(provider, options) {
+    options.workChain = 0;
+    options.code = options.code || Cell.fromBoc(Buffer.from(NFT_SALE_HEX_CODE, 'hex'))[0];
+    super(provider, options);
 
-        this.methods.getData = this.getData.bind(this);
-    }
+    this.methods.getData = this.getData.bind(this);
+  }
 
-    /**
+  /**
      * @override
      * @private
      * @return {Cell} cell contains nft sale data
      */
-    createDataCell() {
-        const cell = new Cell().asBuilder();
-        cell.storeAddress(this.options.marketplaceAddress);
-        cell.storeAddress(this.options.nftAddress);
-        cell.storeAddress(null); // nft_owner_address
-        cell.storeCoins(this.options.fullPrice);
+  createDataCell() {
+    const cell = new Cell().asBuilder();
+    cell.storeAddress(this.options.marketplaceAddress);
+    cell.storeAddress(this.options.nftAddress);
+    cell.storeAddress(null); // nft_owner_address
+    cell.storeCoins(this.options.fullPrice);
 
-        const feesCell = new Cell().asBuilder();
-        feesCell.storeCoins(this.options.marketplaceFee);
-        feesCell.storeAddress(this.options.royaltyAddress);
-        feesCell.storeCoins(this.options.royaltyAmount);
-        cell.storeRef(feesCell);
+    const feesCell = new Cell().asBuilder();
+    feesCell.storeCoins(this.options.marketplaceFee);
+    feesCell.storeAddress(this.options.royaltyAddress);
+    feesCell.storeCoins(this.options.royaltyAmount);
+    cell.storeRef(feesCell);
 
-        return cell.asCell();
-    }
+    return cell.asCell();
+  }
 
-    async getData() {
-        const myAddress = await this.getAddress();
-        const result = await this.provider.call2(myAddress.toString(), 'get_sale_data');
+  async getData() {
+    const myAddress = await this.getAddress();
+    const result = await this.provider.call2(myAddress.toString(), 'get_sale_data');
 
-        const marketplaceAddress = parseAddress(result[0]);
-        const nftAddress = parseAddress(result[1]);
-        const nftOwnerAddress = parseAddress(result[2]);
-        const fullPrice = result[3];
-        const marketplaceFee = result[4];
-        const royaltyAddress = parseAddress(result[5]);
-        const royaltyAmount = result[6];
+    const marketplaceAddress = parseAddress(result[0]);
+    const nftAddress = parseAddress(result[1]);
+    const nftOwnerAddress = parseAddress(result[2]);
+    const fullPrice = result[3];
+    const marketplaceFee = result[4];
+    const royaltyAddress = parseAddress(result[5]);
+    const royaltyAmount = result[6];
 
-        return {marketplaceAddress, nftAddress, nftOwnerAddress, fullPrice, marketplaceFee, royaltyAddress, royaltyAmount};
-    }
+    return {marketplaceAddress, nftAddress, nftOwnerAddress, fullPrice, marketplaceFee, royaltyAddress, royaltyAmount};
+  }
 
-    /**
+  /**
      * @param params    {{queryId?: number}}
      */
-    async createCancelBody(params) {
-        const cell = new Cell().asBuilder();
-        cell.storeUint(3, 32); // cancel op
-        cell.storeUint(params.queryId || 0, 64);
-        return cell.asCell();
-    }
+  async createCancelBody(params) {
+    const cell = new Cell().asBuilder();
+    cell.storeUint(3, 32); // cancel op
+    cell.storeUint(params.queryId || 0, 64);
+    return cell.asCell();
+  }
 }
 
 export default NftSale;

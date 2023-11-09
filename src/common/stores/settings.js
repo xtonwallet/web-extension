@@ -242,10 +242,10 @@ export const currentRate = derived(
 export const currentResolution = derived(
   settingsStore,
   ($settingsStore) => { return {"innerHeight": $settingsStore.innerHeight,
-                                "innerWidth": $settingsStore.innerWidth,
-                                "condition": $settingsStore.condition
-                                };
-                      }
+    "innerWidth": $settingsStore.innerWidth,
+    "condition": $settingsStore.condition
+  };
+  }
 );
 
 //Derived Store to return if the user needs to make another backup

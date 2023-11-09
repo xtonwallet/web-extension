@@ -1,320 +1,321 @@
 import TonWeb from "./index";
-import {NftItem} from "./contract/token/nft/NftItem";
-import {NftCollection} from "./contract/token/nft/NftCollection";
-import {NftMarketplace} from "./contract/token/nft/NftMarketplace";
-import {NftSale} from "./contract/token/nft/NftSale";
+import NftItem from "./contract/token/nft/NftItem";
+import NftCollection from "./contract/token/nft/NftCollection";
+import NftMarketplace from "./contract/token/nft/NftMarketplace";
+import NftSale from "./contract/token/nft/NftSale";
 import {Cell, toNano, Address} from "./toncore";
 import {Buffer} from "buffer";
+
 const BN = TonWeb.utils.BN;
 
 async function init() {
-    const tonweb = new TonWeb(new TonWeb.HttpProvider('https://testnet.toncenter.com/api/v2/jsonRPC'));
+  const tonweb = new TonWeb(new TonWeb.HttpProvider('https://testnet.toncenter.com/api/v2/jsonRPC'));
 
-    const seed = Buffer.from('vt58J2v6FaSuXFGcyGtqT5elpVxcZ+I1zgu/GUfA5uY=', 'base64');
-    // const seed = Buffer.from('at58J2v6FaSuXFGcyGtqT5elpVxcZ+I1zgu/GUfA5uY=', 'base64');
-    const WALLET2_ADDRESS = 'EQB6-6po0yspb68p7RRetC-hONAz-JwxG9514IEOKw_llXd5';
-    const keyPair = TonWeb.utils.nacl.sign.keyPair.fromSeed(seed);
-    const WalletClass = tonweb.wallet.all['v3R1'];
-    const wallet = new WalletClass(tonweb.provider, {
-        publicKey: keyPair.publicKey,
-        workChain: 0
-    });
-    const walletAddress = await wallet.getAddress();
-    console.log('wallet address=', walletAddress.toString(true, true, true));
+  const seed = Buffer.from('vt58J2v6FaSuXFGcyGtqT5elpVxcZ+I1zgu/GUfA5uY=', 'base64');
+  // const seed = Buffer.from('at58J2v6FaSuXFGcyGtqT5elpVxcZ+I1zgu/GUfA5uY=', 'base64');
+  const WALLET2_ADDRESS = 'EQB6-6po0yspb68p7RRetC-hONAz-JwxG9514IEOKw_llXd5';
+  const keyPair = TonWeb.utils.nacl.sign.keyPair.fromSeed(seed);
+  const WalletClass = tonweb.wallet.all['v3R1'];
+  const wallet = new WalletClass(tonweb.provider, {
+    publicKey: keyPair.publicKey,
+    workChain: 0
+  });
+  const walletAddress = await wallet.getAddress();
+  console.log('wallet address=', walletAddress.toString(true, true, true));
 
-    const nftCollection = new NftCollection(tonweb.provider, {
-        ownerAddress: walletAddress,
-        royalty: 0.13,
-        royaltyAddress: walletAddress,
-        collectionContentUri: 'http://localhost:63342/nft-marketplace/my_collection.json',
-        nftItemContentBaseUri: 'http://localhost:63342/nft-marketplace/',
-        nftItemCodeHex: NftItem.codeHex
-    });
-    const nftCollectionAddress = await nftCollection.getAddress();
-    console.log('collection address=', nftCollectionAddress.toString(true, true, true));
+  const nftCollection = new NftCollection(tonweb.provider, {
+    ownerAddress: walletAddress,
+    royalty: 0.13,
+    royaltyAddress: walletAddress,
+    collectionContentUri: 'http://localhost:63342/nft-marketplace/my_collection.json',
+    nftItemContentBaseUri: 'http://localhost:63342/nft-marketplace/',
+    nftItemCodeHex: NftItem.codeHex
+  });
+  const nftCollectionAddress = await nftCollection.getAddress();
+  console.log('collection address=', nftCollectionAddress.toString(true, true, true));
 
-    const deployNftCollection = async () => {
-        const seqno = (await wallet.methods.seqno().call()) || 0;
-        console.log({seqno})
+  const deployNftCollection = async () => {
+    const seqno = (await wallet.methods.seqno().call()) || 0;
+    console.log({seqno});
 
-        console.log(
-            await wallet.methods.transfer({
-                secretKey: keyPair.secretKey,
-                toAddress: nftCollectionAddress.toString(true, true, true),
-                amount: toNano('1'),
-                seqno: seqno,
-                payload: null, // body
-                sendMode: 3,
-                stateInit: (await nftCollection.createStateInit()).stateInit
-            }).send()
-        );
-    }
+    console.log(
+      await wallet.methods.transfer({
+        secretKey: keyPair.secretKey,
+        toAddress: nftCollectionAddress.toString(true, true, true),
+        amount: toNano('1'),
+        seqno: seqno,
+        payload: null, // body
+        sendMode: 3,
+        stateInit: (await nftCollection.createStateInit()).stateInit
+      }).send()
+    );
+  };
 
-    const getNftCollectionInfo = async () => {
-        const data = await nftCollection.getCollectionData();
-        data.itemsCount = data.itemsCount.toString();
-        data.ownerAddress = data.ownerAddress?.toString(true, true, true);
-        console.log(data);
-        const royaltyParams = await nftCollection.getRoyaltyParams();
-        royaltyParams.royaltyAddress = royaltyParams.royaltyAddress.toString(true, true, true);
-        console.log(royaltyParams);
-        console.log((await nftCollection.getNftItemAddressByIndex(0)).toString(true, true, true));
-        console.log((await nftCollection.getNftItemAddressByIndex(new BN('1'))).toString(true, true, true));
-    }
+  const getNftCollectionInfo = async () => {
+    const data = await nftCollection.getCollectionData();
+    data.itemsCount = data.itemsCount.toString();
+    data.ownerAddress = data.ownerAddress?.toString(true, true, true);
+    console.log(data);
+    const royaltyParams = await nftCollection.getRoyaltyParams();
+    royaltyParams.royaltyAddress = royaltyParams.royaltyAddress.toString(true, true, true);
+    console.log(royaltyParams);
+    console.log((await nftCollection.getNftItemAddressByIndex(0)).toString(true, true, true));
+    console.log((await nftCollection.getNftItemAddressByIndex(new BN('1'))).toString(true, true, true));
+  };
 
-    const deployNftItem = async () => {
-        const seqno = (await wallet.methods.seqno().call()) || 0;
-        console.log({seqno})
+  const deployNftItem = async () => {
+    const seqno = (await wallet.methods.seqno().call()) || 0;
+    console.log({seqno});
 
-        const amount = toNano('0.05');
+    const amount = toNano('0.05');
 
-        console.log(
-            await wallet.methods.transfer({
-                secretKey: keyPair.secretKey,
-                toAddress: nftCollectionAddress.toString(true, true, true),
-                amount: amount,
-                seqno: seqno,
-                payload: await nftCollection.createMintBody({
-                    amount,
-                    itemIndex: 0,
-                    itemOwnerAddress: walletAddress,
-                    itemContentUri: 'my_nft.json'
-                }),
-                sendMode: 3,
-            }).send()
-        );
-    }
+    console.log(
+      await wallet.methods.transfer({
+        secretKey: keyPair.secretKey,
+        toAddress: nftCollectionAddress.toString(true, true, true),
+        amount: amount,
+        seqno: seqno,
+        payload: await nftCollection.createMintBody({
+          amount,
+          itemIndex: 0,
+          itemOwnerAddress: walletAddress,
+          itemContentUri: 'my_nft.json'
+        }),
+        sendMode: 3,
+      }).send()
+    );
+  };
 
-    const changeCollectionOwner = async () => {
-        const seqno = (await wallet.methods.seqno().call()) || 0;
-        console.log({seqno})
+  const changeCollectionOwner = async () => {
+    const seqno = (await wallet.methods.seqno().call()) || 0;
+    console.log({seqno});
 
-        const amount = toNano('0.05');
+    const amount = toNano('0.05');
 
-        console.log(
-            await wallet.methods.transfer({
-                secretKey: keyPair.secretKey,
-                toAddress: nftCollectionAddress.toString(true, true, true),
-                amount: amount,
-                seqno: seqno,
-                payload: await nftCollection.createChangeOwnerBody({
-                    newOwnerAddress: Address.parse(WALLET2_ADDRESS)
-                }),
-                sendMode: 3,
-            }).send()
-        );
-    }
+    console.log(
+      await wallet.methods.transfer({
+        secretKey: keyPair.secretKey,
+        toAddress: nftCollectionAddress.toString(true, true, true),
+        amount: amount,
+        seqno: seqno,
+        payload: await nftCollection.createChangeOwnerBody({
+          newOwnerAddress: Address.parse(WALLET2_ADDRESS)
+        }),
+        sendMode: 3,
+      }).send()
+    );
+  };
 
-    const editCollectionContent = async () => {
-        const seqno = (await wallet.methods.seqno().call()) || 0;
-        console.log({seqno})
+  const editCollectionContent = async () => {
+    const seqno = (await wallet.methods.seqno().call()) || 0;
+    console.log({seqno});
 
-        const amount = toNano('0.05');
+    const amount = toNano('0.05');
 
-        console.log(
-            await wallet.methods.transfer({
-                secretKey: keyPair.secretKey,
-                toAddress: nftCollectionAddress.toString(true, true, true),
-                amount: amount,
-                seqno: seqno,
-                payload: await nftCollection.createEditContentBody({
-                    royalty: 0.16,
-                    royaltyAddress: Address.parse('EQBvI0aFLnw2QbZgjMPCLRdtRHxhUyinQudg6sdiohIwg5jL'),
-                    collectionContentUri: 'ton://my-nft/collection.json',
-                    nftItemContentBaseUri: 'ton://my-nft/',
-                }),
-                sendMode: 3,
-            }).send()
-        );
-    }
+    console.log(
+      await wallet.methods.transfer({
+        secretKey: keyPair.secretKey,
+        toAddress: nftCollectionAddress.toString(true, true, true),
+        amount: amount,
+        seqno: seqno,
+        payload: await nftCollection.createEditContentBody({
+          royalty: 0.16,
+          royaltyAddress: Address.parse('EQBvI0aFLnw2QbZgjMPCLRdtRHxhUyinQudg6sdiohIwg5jL'),
+          collectionContentUri: 'ton://my-nft/collection.json',
+          nftItemContentBaseUri: 'ton://my-nft/',
+        }),
+        sendMode: 3,
+      }).send()
+    );
+  };
 
-    const getRoyaltyParams = async () => {
-        const seqno = (await wallet.methods.seqno().call()) || 0;
-        console.log({seqno})
+  const getRoyaltyParams = async () => {
+    const seqno = (await wallet.methods.seqno().call()) || 0;
+    console.log({seqno});
 
-        const amount = toNano('0.05');
+    const amount = toNano('0.05');
 
-        console.log(
-            await wallet.methods.transfer({
-                secretKey: keyPair.secretKey,
-                toAddress: nftCollectionAddress.toString(true, true, true),
-                amount: amount,
-                seqno: seqno,
-                payload: await nftCollection.createGetRoyaltyParamsBody({
-                    queryId: 132
-                }),
-                sendMode: 3,
-            }).send()
-        );
-    }
+    console.log(
+      await wallet.methods.transfer({
+        secretKey: keyPair.secretKey,
+        toAddress: nftCollectionAddress.toString(true, true, true),
+        amount: amount,
+        seqno: seqno,
+        payload: await nftCollection.createGetRoyaltyParamsBody({
+          queryId: 132
+        }),
+        sendMode: 3,
+      }).send()
+    );
+  };
 
-    const nftItemAddress = Address.parse('EQDhZBNuiJoWgq-0xEc0A46-nIcEKAQbS-0MkWU_I2LEp3Ty');
-    console.log('nft item address=', nftItemAddress.toString(true, true, true));
-    const nftItem = new NftItem(tonweb.provider, {address: nftItemAddress});
+  const nftItemAddress = Address.parse('EQDhZBNuiJoWgq-0xEc0A46-nIcEKAQbS-0MkWU_I2LEp3Ty');
+  console.log('nft item address=', nftItemAddress.toString(true, true, true));
+  const nftItem = new NftItem(tonweb.provider, {address: nftItemAddress});
 
-    const getNftItemInfo = async () => {
-        const data = await nftCollection.methods.getNftItemContent(nftItem);
-        data.itemIndex = data.itemIndex.toString();
-        data.collectionAddress = data.collectionAddress.toString(true, true, true);
-        data.ownerAddress = data.ownerAddress?.toString(true, true, true);
-        console.log(data);
-    }
+  const getNftItemInfo = async () => {
+    const data = await nftCollection.methods.getNftItemContent(nftItem);
+    data.itemIndex = data.itemIndex.toString();
+    data.collectionAddress = data.collectionAddress.toString(true, true, true);
+    data.ownerAddress = data.ownerAddress?.toString(true, true, true);
+    console.log(data);
+  };
 
-    const getSingleNftItemInfo = async () => {
-        const nftItem = new NftItem(tonweb.provider, {address: 'EQC4FOmjcQAw2U-e00I-7Fs-NLiEF7lNQUxVpqOJ-ZKh-dGt'});
+  const getSingleNftItemInfo = async () => {
+    const nftItem = new NftItem(tonweb.provider, {address: 'EQC4FOmjcQAw2U-e00I-7Fs-NLiEF7lNQUxVpqOJ-ZKh-dGt'});
 
-        const data = await nftItem.methods.getData(nftItem);
-        data.ownerAddress = data.ownerAddress?.toString(true, true, true);
-        console.log(data);
+    const data = await nftItem.methods.getData(nftItem);
+    data.ownerAddress = data.ownerAddress?.toString(true, true, true);
+    console.log(data);
 
-        const nftRoyalty = await nftItem.getRoyaltyParams();
-        nftRoyalty.royaltyAddress = nftRoyalty.royaltyAddress.toString(true, true, true);
-        console.log('nft item royalty = ', nftRoyalty);
-    }
+    const nftRoyalty = await nftItem.getRoyaltyParams();
+    nftRoyalty.royaltyAddress = nftRoyalty.royaltyAddress.toString(true, true, true);
+    console.log('nft item royalty = ', nftRoyalty);
+  };
 
-    const marketplace = new NftMarketplace(tonweb.provider, {ownerAddress: walletAddress});
-    const marketplaceAddress = await marketplace.getAddress();
-    console.log('matketplace address=', marketplaceAddress.toString(true, true, true));
+  const marketplace = new NftMarketplace(tonweb.provider, {ownerAddress: walletAddress});
+  const marketplaceAddress = await marketplace.getAddress();
+  console.log('matketplace address=', marketplaceAddress.toString(true, true, true));
 
-    const deployMarketplace = async () => {
-        const seqno = (await wallet.methods.seqno().call()) || 0;
-        console.log({seqno})
+  const deployMarketplace = async () => {
+    const seqno = (await wallet.methods.seqno().call()) || 0;
+    console.log({seqno});
 
-        console.log(
-            await wallet.methods.transfer({
-                secretKey: keyPair.secretKey,
-                toAddress: marketplaceAddress.toString(true, true, false), // non-bounceable
-                amount: toNano('1'),
-                seqno: seqno,
-                payload: null, // body
-                sendMode: 3,
-                stateInit: (await marketplace.createStateInit()).stateInit
-            }).send()
-        );
-    }
+    console.log(
+      await wallet.methods.transfer({
+        secretKey: keyPair.secretKey,
+        toAddress: marketplaceAddress.toString(true, true, false), // non-bounceable
+        amount: toNano('1'),
+        seqno: seqno,
+        payload: null, // body
+        sendMode: 3,
+        stateInit: (await marketplace.createStateInit()).stateInit
+      }).send()
+    );
+  };
 
-    const sale = new NftSale(tonweb.provider, {
-        marketplaceAddress: marketplaceAddress,
-        nftAddress: nftItemAddress,
-        fullPrice: toNano('1.1'),
-        marketplaceFee: toNano('0.2'),
-        royaltyAddress: nftCollectionAddress,
-        royaltyAmount: toNano('0.1'),
-    });
-    const saleAddress =  await sale.getAddress();
-    console.log('sale address', saleAddress.toString(true, true, true));
+  const sale = new NftSale(tonweb.provider, {
+    marketplaceAddress: marketplaceAddress,
+    nftAddress: nftItemAddress,
+    fullPrice: toNano('1.1'),
+    marketplaceFee: toNano('0.2'),
+    royaltyAddress: nftCollectionAddress,
+    royaltyAmount: toNano('0.1'),
+  });
+  const saleAddress =  await sale.getAddress();
+  console.log('sale address', saleAddress.toString(true, true, true));
 
-    const transferNftItem = async () => {
-        const seqno = (await wallet.methods.seqno().call()) || 0;
-        console.log({seqno})
+  const transferNftItem = async () => {
+    const seqno = (await wallet.methods.seqno().call()) || 0;
+    console.log({seqno});
 
-        const amount = toNano('0.05');
+    const amount = toNano('0.05');
 
-        console.log(
-            await wallet.methods.transfer({
-                secretKey: keyPair.secretKey,
-                toAddress: await nftItem.getAddress(),
-                amount: amount,
-                seqno: seqno,
-                payload: await nftItem.createTransferBody({
-                    newOwnerAddress: saleAddress,
-                    forwardAmount: toNano('0.02'),
-                    forwardPayload: new TextEncoder().encode('gift'),
-                    responseAddress: walletAddress
-                }),
-                sendMode: 3,
-            }).send()
-        );
-    }
+    console.log(
+      await wallet.methods.transfer({
+        secretKey: keyPair.secretKey,
+        toAddress: await nftItem.getAddress(),
+        amount: amount,
+        seqno: seqno,
+        payload: await nftItem.createTransferBody({
+          newOwnerAddress: saleAddress,
+          forwardAmount: toNano('0.02'),
+          forwardPayload: new TextEncoder().encode('gift'),
+          responseAddress: walletAddress
+        }),
+        sendMode: 3,
+      }).send()
+    );
+  };
 
-    const getStaticData = async () => {
-        const seqno = (await wallet.methods.seqno().call()) || 0;
-        console.log({seqno})
+  const getStaticData = async () => {
+    const seqno = (await wallet.methods.seqno().call()) || 0;
+    console.log({seqno});
 
-        const amount = toNano('0.05');
+    const amount = toNano('0.05');
 
-        console.log(
-            await wallet.methods.transfer({
-                secretKey: keyPair.secretKey,
-                toAddress: await nftItem.getAddress(),
-                amount: amount,
-                seqno: seqno,
-                payload: await nftItem.createGetStaticDataBody({
-                    queryId: 661
-                }),
-                sendMode: 3,
-            }).send()
-        );
-    }
+    console.log(
+      await wallet.methods.transfer({
+        secretKey: keyPair.secretKey,
+        toAddress: await nftItem.getAddress(),
+        amount: amount,
+        seqno: seqno,
+        payload: await nftItem.createGetStaticDataBody({
+          queryId: 661
+        }),
+        sendMode: 3,
+      }).send()
+    );
+  };
 
-    const deploySale = async () => {
-        const seqno = (await wallet.methods.seqno().call()) || 0;
-        console.log({seqno})
+  const deploySale = async () => {
+    const seqno = (await wallet.methods.seqno().call()) || 0;
+    console.log({seqno});
 
-        const amount = toNano('0.05');
+    const amount = toNano('0.05');
 
-        const body = new Cell().asBuilder();
-        body.storeUint(1, 32); // OP deploy new auction
-        body.storeCoins(amount);
-        body.storeRef((await sale.createStateInit()).stateInit);
-        body.storeRef(Cell.EMPTY);
+    const body = new Cell().asBuilder();
+    body.storeUint(1, 32); // OP deploy new auction
+    body.storeCoins(amount);
+    body.storeRef((await sale.createStateInit()).stateInit);
+    body.storeRef(Cell.EMPTY);
 
-        console.log(
-            await wallet.methods.transfer({
-                secretKey: keyPair.secretKey,
-                toAddress: marketplaceAddress,
-                amount: amount,
-                seqno: seqno,
-                payload: body.asCell(),
-                sendMode: 3,
-            }).send()
-        );
-    }
+    console.log(
+      await wallet.methods.transfer({
+        secretKey: keyPair.secretKey,
+        toAddress: marketplaceAddress,
+        amount: amount,
+        seqno: seqno,
+        payload: body.asCell(),
+        sendMode: 3,
+      }).send()
+    );
+  };
 
-    const cancelSale = async () => {
-        const seqno = (await wallet.methods.seqno().call()) || 0;
-        console.log({seqno})
+  const cancelSale = async () => {
+    const seqno = (await wallet.methods.seqno().call()) || 0;
+    console.log({seqno});
 
-        const amount = toNano('1');
+    const amount = toNano('1');
 
-        console.log(
-            await wallet.methods.transfer({
-                secretKey: keyPair.secretKey,
-                toAddress: saleAddress,
-                amount: amount,
-                seqno: seqno,
-                payload: await sale.createCancelBody({}),
-                sendMode: 3,
-            }).send()
-        );
-    }
+    console.log(
+      await wallet.methods.transfer({
+        secretKey: keyPair.secretKey,
+        toAddress: saleAddress,
+        amount: amount,
+        seqno: seqno,
+        payload: await sale.createCancelBody({}),
+        sendMode: 3,
+      }).send()
+    );
+  };
 
-    const getSaleInfo = async () => {
-        const data = await sale.methods.getData();
-        data.marketplaceAddress = data.marketplaceAddress.toString(true, true, true);
-        data.nftAddress = data.nftAddress.toString(true, true, true);
-        data.nftOwnerAddress = data.nftOwnerAddress?.toString(true, true, true);
-        data.fullPrice = data.fullPrice.toString();
-        data.marketplaceFee = data.marketplaceFee.toString();
-        data.royaltyAmount = data.royaltyAmount.toString();
-        data.royaltyAddress = data.royaltyAddress.toString(true, true, true);
-        console.log(data);
-    };
+  const getSaleInfo = async () => {
+    const data = await sale.methods.getData();
+    data.marketplaceAddress = data.marketplaceAddress.toString(true, true, true);
+    data.nftAddress = data.nftAddress.toString(true, true, true);
+    data.nftOwnerAddress = data.nftOwnerAddress?.toString(true, true, true);
+    data.fullPrice = data.fullPrice.toString();
+    data.marketplaceFee = data.marketplaceFee.toString();
+    data.royaltyAmount = data.royaltyAmount.toString();
+    data.royaltyAddress = data.royaltyAddress.toString(true, true, true);
+    console.log(data);
+  };
 
-    // await deployNftCollection();
-    // await getNftCollectionInfo();
-    // await deployNftItem();
-    // await getNftItemInfo();
-    // await getSingleNftItemInfo();
-    // await deployMarketplace();
-    // await deploySale();
-    // await getSaleInfo();
-    // await getStaticData();
-    // await transferNftItem();
-    // await cancelSale();
-    // await changeCollectionOwner();
-    // await editCollectionContent();
-    // await getRoyaltyParams();
+  // await deployNftCollection();
+  // await getNftCollectionInfo();
+  // await deployNftItem();
+  // await getNftItemInfo();
+  // await getSingleNftItemInfo();
+  // await deployMarketplace();
+  // await deploySale();
+  // await getSaleInfo();
+  // await getStaticData();
+  // await transferNftItem();
+  // await cancelSale();
+  // await changeCollectionOwner();
+  // await editCollectionContent();
+  // await getRoyaltyParams();
 }
 
 

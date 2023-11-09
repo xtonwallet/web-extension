@@ -1,6 +1,6 @@
 try {
-    importScripts('./browser-polyfill.js');
-    importScripts("background.js");
+  importScripts('./browser-polyfill.js');
+  importScripts("background.js");
 } catch (e) {
-    console.error(e);
+  console.error(e);
 }

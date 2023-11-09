@@ -6,14 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 export function loadTickTock(slice) {
-    return {
-        tick: slice.loadBit(),
-        tock: slice.loadBit()
-    };
+  return {
+    tick: slice.loadBit(),
+    tock: slice.loadBit()
+  };
 }
 export function storeTickTock(src) {
-    return (builder) => {
-        builder.storeBit(src.tick);
-        builder.storeBit(src.tock);
-    };
+  return (builder) => {
+    builder.storeBit(src.tick);
+    builder.storeBit(src.tock);
+  };
 }

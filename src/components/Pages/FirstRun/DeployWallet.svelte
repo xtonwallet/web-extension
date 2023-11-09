@@ -47,18 +47,18 @@
       return current;
     });
     browser.runtime.sendMessage({ type: "getAllNetworks", data: {} })
-    .then((result) => {
-      if ($currentExtendedMode) {
-        allNetworks = result;
-      } else {
-        allNetworks = result.filter((item) => item.server == 'mainnet');
-      }
-      const network = allNetworks.filter((item) => item.server == $currentNetwork.server)[0];
-      giver = (network.giver != "");
-      checkBalance();
-    }).catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error.message));
-    });
+      .then((result) => {
+        if ($currentExtendedMode) {
+          allNetworks = result;
+        } else {
+          allNetworks = result.filter((item) => item.server == 'mainnet');
+        }
+        const network = allNetworks.filter((item) => item.server == $currentNetwork.server)[0];
+        giver = (network.giver != "");
+        checkBalance();
+      }).catch((error) => {
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
+      });
 
     qrCode = generateQRcode(document.getElementById("qrcode"), $currentAccount.address);
     qrCode.resize(200, 200);
@@ -85,17 +85,17 @@
       message   = "Deployment process";
       deploying = true;
       browser.runtime.sendMessage({ type: "deployNewWallet", data: {"accountAddress": $currentAccount.address, "server": $currentNetwork.server} })
-      .then((result) => {
-        deploying = false;
-        if (!result.success) {
-          error = result.reason;
-        } else {
-          error = "";
-          changeStep(newAccount ? 2: 5);
-        }
-      }).catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error.message));
-      });
+        .then((result) => {
+          deploying = false;
+          if (!result.success) {
+            error = result.reason;
+          } else {
+            error = "";
+            changeStep(newAccount ? 2: 5);
+          }
+        }).catch((error) => {
+          console.error("Error on sendMessage:" + JSON.stringify(error.message));
+        });
     }
   };
 
@@ -105,30 +105,30 @@
 
   const checkBalance = () => {
     browser.runtime.sendMessage({ type: "getCurrentBalance", data: {"accountAddress": $currentAccount.address, "server": $currentNetwork.server} })
-    .then((result) => {
-      balance = result;
-    })
-    .catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error.message));
-    });
+      .then((result) => {
+        balance = result;
+      })
+      .catch((error) => {
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
+      });
   };
 
   const takeFromGiver = () => {
     message = "Awaiting the transaction from the giver";
     takingFromGiver = true;
     browser.runtime.sendMessage({ type: "takeFromGiver", data: {"accountAddress": $currentAccount.address, "server": $currentNetwork.server} })
-    .then((result) => {
-      if (!result.added) {
-        error = result.reason;
-      } else {
-        error = "";
-        checkBalance();
-        takingFromGiver = false;
-      }
-    })
-    .catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error.message));
-    });
+      .then((result) => {
+        if (!result.added) {
+          error = result.reason;
+        } else {
+          error = "";
+          checkBalance();
+          takingFromGiver = false;
+        }
+      })
+      .catch((error) => {
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
+      });
   };
 
   const copyAddress = (event) => {

@@ -6,31 +6,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 export function loadAccountStatusChange(slice) {
-    if (!slice.loadBit()) {
-        return 'unchanged';
-    }
-    if (slice.loadBit()) {
-        return 'frozen';
-    }
-    else {
-        return 'deleted';
-    }
+  if (!slice.loadBit()) {
+    return 'unchanged';
+  }
+  if (slice.loadBit()) {
+    return 'frozen';
+  }
+  else {
+    return 'deleted';
+  }
 }
 export function storeAccountStatusChange(src) {
-    return (builder) => {
-        if (src == 'unchanged') {
-            builder.storeBit(0);
-        }
-        else if (src === 'frozen') {
-            builder.storeBit(1);
-            builder.storeBit(0);
-        }
-        else if (src === 'deleted') {
-            builder.storeBit(1);
-            builder.storeBit(1);
-        }
-        else {
-            throw Error('Invalid account status change');
-        }
-    };
+  return (builder) => {
+    if (src == 'unchanged') {
+      builder.storeBit(0);
+    }
+    else if (src === 'frozen') {
+      builder.storeBit(1);
+      builder.storeBit(0);
+    }
+    else if (src === 'deleted') {
+      builder.storeBit(1);
+      builder.storeBit(1);
+    }
+    else {
+      throw Error('Invalid account status change');
+    }
+  };
 }

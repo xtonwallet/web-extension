@@ -10,8 +10,8 @@
     export let getSelectionLabel = undefined;
 
     function handleClear(i, event) {
-        event.stopPropagation();
-        dispatch('multiItemClear', { i });
+      event.stopPropagation();
+      dispatch('multiItemClear', { i });
     }
 </script>
 

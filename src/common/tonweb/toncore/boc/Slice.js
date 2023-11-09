@@ -14,493 +14,493 @@ import { readString } from "./utils/strings";
  * Slice is a class that allows to read cell data
  */
 export class Slice {
-    constructor(reader, refs) {
-        this[_a] = () => this.toString();
-        this._reader = reader.clone();
-        this._refs = [...refs];
-        this._refsOffset = 0;
-    }
-    /**
+  constructor(reader, refs) {
+    this[_a] = () => this.toString();
+    this._reader = reader.clone();
+    this._refs = [...refs];
+    this._refsOffset = 0;
+  }
+  /**
      * Get remaining bits
      */
-    get remainingBits() {
-        return this._reader.remaining;
-    }
-    /**
+  get remainingBits() {
+    return this._reader.remaining;
+  }
+  /**
      * Get offset bits
      */
-    get offsetBits() {
-        return this._reader.offset;
-    }
-    /**
+  get offsetBits() {
+    return this._reader.offset;
+  }
+  /**
      * Get remaining refs
      */
-    get remainingRefs() {
-        return this._refs.length - this._refsOffset;
-    }
-    /**
+  get remainingRefs() {
+    return this._refs.length - this._refsOffset;
+  }
+  /**
      * Get offset refs
      */
-    get offsetRefs() {
-        return this._refsOffset;
-    }
-    /**
+  get offsetRefs() {
+    return this._refsOffset;
+  }
+  /**
      * Skip bits
      * @param bits
      */
-    skip(bits) {
-        this._reader.skip(bits);
-        return this;
-    }
-    /**
+  skip(bits) {
+    this._reader.skip(bits);
+    return this;
+  }
+  /**
      * Load a single bit
      * @returns true or false depending on the bit value
      */
-    loadBit() {
-        return this._reader.loadBit();
-    }
-    /**
+  loadBit() {
+    return this._reader.loadBit();
+  }
+  /**
      * Preload a signle bit
      * @returns true or false depending on the bit value
      */
-    preloadBit() {
-        return this._reader.preloadBit();
-    }
-    /**
+  preloadBit() {
+    return this._reader.preloadBit();
+  }
+  /**
      * Load a boolean
      * @returns true or false depending on the bit value
      */
-    loadBoolean() {
-        return this.loadBit();
-    }
-    /**
+  loadBoolean() {
+    return this.loadBit();
+  }
+  /**
      * Load maybe boolean
      * @returns true or false depending on the bit value or null
      */
-    loadMaybeBoolean() {
-        if (this.loadBit()) {
-            return this.loadBoolean();
-        }
-        else {
-            return null;
-        }
+  loadMaybeBoolean() {
+    if (this.loadBit()) {
+      return this.loadBoolean();
     }
-    /**
+    else {
+      return null;
+    }
+  }
+  /**
      * Load bits as a new BitString
      * @param bits number of bits to read
      * @returns new BitString
      */
-    loadBits(bits) {
-        return this._reader.loadBits(bits);
-    }
-    /**
+  loadBits(bits) {
+    return this._reader.loadBits(bits);
+  }
+  /**
      * Preload bits as a new BitString
      * @param bits number of bits to read
      * @returns new BitString
      */
-    preloadBits(bits) {
-        return this._reader.preloadBits(bits);
-    }
-    /**
+  preloadBits(bits) {
+    return this._reader.preloadBits(bits);
+  }
+  /**
      * Load uint
      * @param bits number of bits to read
      * @returns uint value
      */
-    loadUint(bits) {
-        return this._reader.loadUint(bits);
-    }
-    /**
+  loadUint(bits) {
+    return this._reader.loadUint(bits);
+  }
+  /**
      * Load uint
      * @param bits number of bits to read
      * @returns uint value
      */
-    loadUintBig(bits) {
-        return this._reader.loadUintBig(bits);
-    }
-    /**
+  loadUintBig(bits) {
+    return this._reader.loadUintBig(bits);
+  }
+  /**
      * Preload uint
      * @param bits number of bits to read
      * @returns uint value
      */
-    preloadUint(bits) {
-        return this._reader.preloadUint(bits);
-    }
-    /**
+  preloadUint(bits) {
+    return this._reader.preloadUint(bits);
+  }
+  /**
      * Preload uint
      * @param bits number of bits to read
      * @returns uint value
      */
-    preloadUintBig(bits) {
-        return this._reader.preloadUintBig(bits);
-    }
-    /**
+  preloadUintBig(bits) {
+    return this._reader.preloadUintBig(bits);
+  }
+  /**
      * Load maybe uint
      * @param bits number of bits to read
      * @returns uint value or null
      */
-    loadMaybeUint(bits) {
-        if (this.loadBit()) {
-            return this.loadUint(bits);
-        }
-        else {
-            return null;
-        }
+  loadMaybeUint(bits) {
+    if (this.loadBit()) {
+      return this.loadUint(bits);
     }
-    /**
+    else {
+      return null;
+    }
+  }
+  /**
      * Load maybe uint
      * @param bits number of bits to read
      * @returns uint value or null
      */
-    loadMaybeUintBig(bits) {
-        if (this.loadBit()) {
-            return this.loadUintBig(bits);
-        }
-        else {
-            return null;
-        }
+  loadMaybeUintBig(bits) {
+    if (this.loadBit()) {
+      return this.loadUintBig(bits);
     }
-    /**
+    else {
+      return null;
+    }
+  }
+  /**
      * Load int
      * @param bits number of bits to read
      * @returns int value
      */
-    loadInt(bits) {
-        return this._reader.loadInt(bits);
-    }
-    /**
+  loadInt(bits) {
+    return this._reader.loadInt(bits);
+  }
+  /**
      * Load int
      * @param bits number of bits to read
      * @returns int value
      */
-    loadIntBig(bits) {
-        return this._reader.loadIntBig(bits);
-    }
-    /**
+  loadIntBig(bits) {
+    return this._reader.loadIntBig(bits);
+  }
+  /**
      * Preload int
      * @param bits number of bits to read
      * @returns int value
      */
-    preloadInt(bits) {
-        return this._reader.preloadInt(bits);
-    }
-    /**
+  preloadInt(bits) {
+    return this._reader.preloadInt(bits);
+  }
+  /**
      * Preload int
      * @param bits number of bits to read
      * @returns int value
      */
-    preloadIntBig(bits) {
-        return this._reader.preloadIntBig(bits);
-    }
-    /**
+  preloadIntBig(bits) {
+    return this._reader.preloadIntBig(bits);
+  }
+  /**
      * Load maybe uint
      * @param bits number of bits to read
      * @returns uint value or null
      */
-    loadMaybeInt(bits) {
-        if (this.loadBit()) {
-            return this.loadInt(bits);
-        }
-        else {
-            return null;
-        }
+  loadMaybeInt(bits) {
+    if (this.loadBit()) {
+      return this.loadInt(bits);
     }
-    /**
+    else {
+      return null;
+    }
+  }
+  /**
      * Load maybe uint
      * @param bits number of bits to read
      * @returns uint value or null
      */
-    loadMaybeIntBig(bits) {
-        if (this.loadBit()) {
-            return this.loadIntBig(bits);
-        }
-        else {
-            return null;
-        }
+  loadMaybeIntBig(bits) {
+    if (this.loadBit()) {
+      return this.loadIntBig(bits);
     }
-    /**
+    else {
+      return null;
+    }
+  }
+  /**
      * Load varuint
      * @param bits number of bits to read in header
      * @returns varuint value
      */
-    loadVarUint(bits) {
-        return this._reader.loadVarUint(bits);
-    }
-    /**
+  loadVarUint(bits) {
+    return this._reader.loadVarUint(bits);
+  }
+  /**
      * Load varuint
      * @param bits number of bits to read in header
      * @returns varuint value
      */
-    loadVarUintBig(bits) {
-        return this._reader.loadVarUintBig(bits);
-    }
-    /**
+  loadVarUintBig(bits) {
+    return this._reader.loadVarUintBig(bits);
+  }
+  /**
      * Preload varuint
      * @param bits number of bits to read in header
      * @returns varuint value
      */
-    preloadVarUint(bits) {
-        return this._reader.preloadVarUint(bits);
-    }
-    /**
+  preloadVarUint(bits) {
+    return this._reader.preloadVarUint(bits);
+  }
+  /**
      * Preload varuint
      * @param bits number of bits to read in header
      * @returns varuint value
      */
-    preloadVarUintBig(bits) {
-        return this._reader.preloadVarUintBig(bits);
-    }
-    /**
+  preloadVarUintBig(bits) {
+    return this._reader.preloadVarUintBig(bits);
+  }
+  /**
      * Load varint
      * @param bits number of bits to read in header
      * @returns varint value
      */
-    loadVarInt(bits) {
-        return this._reader.loadVarInt(bits);
-    }
-    /**
+  loadVarInt(bits) {
+    return this._reader.loadVarInt(bits);
+  }
+  /**
      * Load varint
      * @param bits number of bits to read in header
      * @returns varint value
      */
-    loadVarIntBig(bits) {
-        return this._reader.loadVarIntBig(bits);
-    }
-    /**
+  loadVarIntBig(bits) {
+    return this._reader.loadVarIntBig(bits);
+  }
+  /**
      * Preload varint
      * @param bits number of bits to read in header
      * @returns varint value
      */
-    preloadVarInt(bits) {
-        return this._reader.preloadVarInt(bits);
-    }
-    /**
+  preloadVarInt(bits) {
+    return this._reader.preloadVarInt(bits);
+  }
+  /**
      * Preload varint
      * @param bits number of bits to read in header
      * @returns varint value
      */
-    preloadVarIntBig(bits) {
-        return this._reader.preloadVarIntBig(bits);
-    }
-    /**
+  preloadVarIntBig(bits) {
+    return this._reader.preloadVarIntBig(bits);
+  }
+  /**
      * Load coins
      * @returns coins value
      */
-    loadCoins() {
-        return this._reader.loadCoins();
-    }
-    /**
+  loadCoins() {
+    return this._reader.loadCoins();
+  }
+  /**
      * Preload coins
      * @returns coins value
      */
-    preloadCoins() {
-        return this._reader.preloadCoins();
-    }
-    /**
+  preloadCoins() {
+    return this._reader.preloadCoins();
+  }
+  /**
      * Load maybe coins
      * @returns coins value or null
      */
-    loadMaybeCoins() {
-        if (this._reader.loadBit()) {
-            return this._reader.loadCoins();
-        }
-        else {
-            return null;
-        }
+  loadMaybeCoins() {
+    if (this._reader.loadBit()) {
+      return this._reader.loadCoins();
     }
-    /**
+    else {
+      return null;
+    }
+  }
+  /**
      * Load internal Address
      * @returns Address
      */
-    loadAddress() {
-        return this._reader.loadAddress();
-    }
-    /**
+  loadAddress() {
+    return this._reader.loadAddress();
+  }
+  /**
      * Load optional internal Address
      * @returns Address or null
      */
-    loadMaybeAddress() {
-        return this._reader.loadMaybeAddress();
-    }
-    /**
+  loadMaybeAddress() {
+    return this._reader.loadMaybeAddress();
+  }
+  /**
      * Load external address
      * @returns ExternalAddress
      */
-    loadExternalAddress() {
-        return this._reader.loadExternalAddress();
-    }
-    /**
+  loadExternalAddress() {
+    return this._reader.loadExternalAddress();
+  }
+  /**
      * Load optional external address
      * @returns ExternalAddress or null
      */
-    loadMaybeExternalAddress() {
-        return this._reader.loadMaybeExternalAddress();
-    }
-    /**
+  loadMaybeExternalAddress() {
+    return this._reader.loadMaybeExternalAddress();
+  }
+  /**
      * Load address
      * @returns Address, ExternalAddress or null
      */
-    loadAddressAny() {
-        return this._reader.loadAddressAny();
-    }
-    /**
+  loadAddressAny() {
+    return this._reader.loadAddressAny();
+  }
+  /**
      * Load reference
      * @returns Cell
      */
-    loadRef() {
-        if (this._refsOffset >= this._refs.length) {
-            throw new Error("No more references");
-        }
-        return this._refs[this._refsOffset++];
+  loadRef() {
+    if (this._refsOffset >= this._refs.length) {
+      throw new Error("No more references");
     }
-    /**
+    return this._refs[this._refsOffset++];
+  }
+  /**
      * Preload reference
      * @returns Cell
      */
-    preloadRef() {
-        if (this._refsOffset >= this._refs.length) {
-            throw new Error("No more references");
-        }
-        return this._refs[this._refsOffset];
+  preloadRef() {
+    if (this._refsOffset >= this._refs.length) {
+      throw new Error("No more references");
     }
-    /**
+    return this._refs[this._refsOffset];
+  }
+  /**
      * Load optional reference
      * @returns Cell or null
      */
-    loadMaybeRef() {
-        if (this.loadBit()) {
-            return this.loadRef();
-        }
-        else {
-            return null;
-        }
+  loadMaybeRef() {
+    if (this.loadBit()) {
+      return this.loadRef();
     }
-    /**
+    else {
+      return null;
+    }
+  }
+  /**
      * Preload optional reference
      * @returns Cell or null
      */
-    preloadMaybeRef() {
-        if (this.preloadBit()) {
-            return this.preloadRef();
-        }
-        else {
-            return null;
-        }
+  preloadMaybeRef() {
+    if (this.preloadBit()) {
+      return this.preloadRef();
     }
-    /**
+    else {
+      return null;
+    }
+  }
+  /**
      * Load byte buffer
      * @param bytes number of bytes to load
      * @returns Buffer
      */
-    loadBuffer(bytes) {
-        return this._reader.loadBuffer(bytes);
-    }
-    /**
+  loadBuffer(bytes) {
+    return this._reader.loadBuffer(bytes);
+  }
+  /**
      * Load byte buffer
      * @param bytes number of bytes to load
      * @returns Buffer
      */
-    preloadBuffer(bytes) {
-        return this._reader.preloadBuffer(bytes);
-    }
-    /**
+  preloadBuffer(bytes) {
+    return this._reader.preloadBuffer(bytes);
+  }
+  /**
      * Load string tail
      */
-    loadStringTail() {
-        return readString(this);
-    }
-    /**
+  loadStringTail() {
+    return readString(this);
+  }
+  /**
      * Load maybe string tail
      * @returns string or null
      */
-    loadMaybeStringTail() {
-        if (this.loadBit()) {
-            return readString(this);
-        }
-        else {
-            return null;
-        }
+  loadMaybeStringTail() {
+    if (this.loadBit()) {
+      return readString(this);
     }
-    /**
+    else {
+      return null;
+    }
+  }
+  /**
      * Load string tail from ref
      * @returns string
      */
-    loadStringRefTail() {
-        return readString(this.loadRef().beginParse());
-    }
-    /**
+  loadStringRefTail() {
+    return readString(this.loadRef().beginParse());
+  }
+  /**
      * Load maybe string tail from ref
      * @returns string or null
      */
-    loadMaybeStringRefTail() {
-        const ref = this.loadMaybeRef();
-        if (ref) {
-            return readString(ref.beginParse());
-        }
-        else {
-            return null;
-        }
+  loadMaybeStringRefTail() {
+    const ref = this.loadMaybeRef();
+    if (ref) {
+      return readString(ref.beginParse());
     }
-    /**
+    else {
+      return null;
+    }
+  }
+  /**
      * Loads dictionary
      * @param key key description
      * @param value value description
      * @returns Dictionary<K, V>
      */
-    loadDict(key, value) {
-        return Dictionary.load(key, value, this);
-    }
-    /**
+  loadDict(key, value) {
+    return Dictionary.load(key, value, this);
+  }
+  /**
      * Loads dictionary directly from current slice
      * @param key key description
      * @param value value description
      * @returns Dictionary<K, V>
      */
-    loadDictDirect(key, value) {
-        return Dictionary.loadDirect(key, value, this);
-    }
-    /**
+  loadDictDirect(key, value) {
+    return Dictionary.loadDirect(key, value, this);
+  }
+  /**
      * Checks if slice is empty
      */
-    endParse() {
-        if (this.remainingBits > 0 || this.remainingRefs > 0) {
-            throw new Error("Slice is not empty");
-        }
+  endParse() {
+    if (this.remainingBits > 0 || this.remainingRefs > 0) {
+      throw new Error("Slice is not empty");
     }
-    /**
+  }
+  /**
      * Convert slice to cell
      */
-    asCell() {
-        return beginCell().storeSlice(this).endCell();
-    }
-    /**
+  asCell() {
+    return beginCell().storeSlice(this).endCell();
+  }
+  /**
      *
      * @returns
      */
-    asBuilder() {
-        return beginCell().storeSlice(this);
-    }
-    /**
+  asBuilder() {
+    return beginCell().storeSlice(this);
+  }
+  /**
      * Clone slice
      * @returns cloned slice
      */
-    clone(fromStart = false) {
-        if (fromStart) {
-            let reader = this._reader.clone();
-            reader.reset();
-            return new Slice(reader, this._refs);
-        }
-        else {
-            let res = new Slice(this._reader, this._refs);
-            res._refsOffset = this._refsOffset;
-            return res;
-        }
+  clone(fromStart = false) {
+    if (fromStart) {
+      let reader = this._reader.clone();
+      reader.reset();
+      return new Slice(reader, this._refs);
     }
-    /**
+    else {
+      let res = new Slice(this._reader, this._refs);
+      res._refsOffset = this._refsOffset;
+      return res;
+    }
+  }
+  /**
      * Print slice as string by converting it to cell
      * @returns string
      */
-    toString() {
-        return this.asCell().toString();
-    }
+  toString() {
+    return this.asCell().toString();
+  }
 }
 _a = inspectSymbol;

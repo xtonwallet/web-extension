@@ -9,23 +9,23 @@
     let itemClasses = '';
 
     $: {
-        const classes = [];
-        if (isActive) {
-            classes.push('active');
-        }
-        if (isFirst) {
-            classes.push('first');
-        }
-        if (isHover) {
-            classes.push('hover');
-        }
-        if (item.isGroupHeader) {
-            classes.push('groupHeader');
-        }
-        if (item.isGroupItem) {
-            classes.push('groupItem');
-        }
-        itemClasses = classes.join(' ');
+      const classes = [];
+      if (isActive) {
+        classes.push('active');
+      }
+      if (isFirst) {
+        classes.push('first');
+      }
+      if (isHover) {
+        classes.push('hover');
+      }
+      if (item.isGroupHeader) {
+        classes.push('groupHeader');
+      }
+      if (item.isGroupItem) {
+        classes.push('groupItem');
+      }
+      itemClasses = classes.join(' ');
     }
 </script>
 

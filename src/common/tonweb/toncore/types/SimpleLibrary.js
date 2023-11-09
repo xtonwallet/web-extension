@@ -6,22 +6,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 export function loadSimpleLibrary(slice) {
-    return {
-        public: slice.loadBit(),
-        root: slice.loadRef()
-    };
+  return {
+    public: slice.loadBit(),
+    root: slice.loadRef()
+  };
 }
 export function storeSimpleLibrary(src) {
-    return (builder) => {
-        builder.storeBit(src.public);
-        builder.storeRef(src.root);
-    };
+  return (builder) => {
+    builder.storeBit(src.public);
+    builder.storeRef(src.root);
+  };
 }
 export const SimpleLibraryValue = {
-    serialize(src, builder) {
-        storeSimpleLibrary(src)(builder);
-    },
-    parse(src) {
-        return loadSimpleLibrary(src);
-    },
+  serialize(src, builder) {
+    storeSimpleLibrary(src)(builder);
+  },
+  parse(src) {
+    return loadSimpleLibrary(src);
+  },
 };

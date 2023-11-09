@@ -18,14 +18,14 @@
   const handleSubmit = (event) => {
     if (formObj.checkValidity()) {
       browser.runtime
-      .sendMessage({ type: "unlockWallet", data: {"type": "password", "value": document.getElementById("pwd-input").value } })
-      .then((unlocked) => {
-        if (!unlocked || browser.runtime.lastError) {
-          setValidity(document.getElementById("pwd-input"), $_("Incorrect password"));
-        }
-      }).catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error.message));
-      });
+        .sendMessage({ type: "unlockWallet", data: {"type": "password", "value": document.getElementById("pwd-input").value } })
+        .then((unlocked) => {
+          if (!unlocked || browser.runtime.lastError) {
+            setValidity(document.getElementById("pwd-input"), $_("Incorrect password"));
+          }
+        }).catch((error) => {
+          console.error("Error on sendMessage:" + JSON.stringify(error.message));
+        });
     }
     event.preventDefault();
   };
@@ -45,15 +45,15 @@
   let pinCodeError;
   const handlePinPadSubmit = () => {
     browser.runtime
-    .sendMessage({ type: "unlockWallet", data: {"type": "pincode", "value": pinCode}})
-    .then((unlocked) => {
-      if (!unlocked || browser.runtime.lastError) {
-        pinCodeError = "Incorrect pin code";
-        pinCode = "";
-      }
-    }).catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error.message));
-    });
+      .sendMessage({ type: "unlockWallet", data: {"type": "pincode", "value": pinCode}})
+      .then((unlocked) => {
+        if (!unlocked || browser.runtime.lastError) {
+          pinCodeError = "Incorrect pin code";
+          pinCode = "";
+        }
+      }).catch((error) => {
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
+      });
   };
 </script>
 

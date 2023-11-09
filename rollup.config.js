@@ -15,7 +15,7 @@ import preprocess from 'svelte-preprocess';
 const production = !process.env.ROLLUP_WATCH;
 function onwarn(warning) {
   if (warning.code !== 'CIRCULAR_DEPENDENCY') { // due to ton-core, workaround on 04/11/2023
-      console.error(`(!) ${warning.message} \n${warning.frame}`);
+    console.error(`(!) ${warning.message} \n${warning.frame}`);
   }
 }
 

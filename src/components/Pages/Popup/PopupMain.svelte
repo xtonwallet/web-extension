@@ -4,6 +4,7 @@
   import { Tabs, Tab, Icon, Button } from "svelte-chota";
   import { _ } from "svelte-i18n";
   import BigNumber from "bignumber.js";
+  
   let active_tab = "tx";
 
   /* Icons https://materialdesignicons.com/ */
@@ -186,24 +187,24 @@
     if (value.includes($currentNetwork.server + "-" + $currentAccount.address) && !waitingTransactionChecking) {
       waitingTransactionChecking = true;
       setTimeout(() => {
-          browser.runtime
-            .sendMessage({
-              type: "checkNewTransactions",
-              data: {
-                accountAddress: $currentAccount.address,
-                server: $currentNetwork.server
-              }
-            }).then((result) => {
-              if (result) {
-                accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
-                waitingTransactionChecking = false;
-              }
-            }).catch((e) => {
-              if (devMode) {
-                console.log(e);
-              }
-            });
-        }, 10000);
+        browser.runtime
+          .sendMessage({
+            type: "checkNewTransactions",
+            data: {
+              accountAddress: $currentAccount.address,
+              server: $currentNetwork.server
+            }
+          }).then((result) => {
+            if (result) {
+              accountStore.removeWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
+              waitingTransactionChecking = false;
+            }
+          }).catch((e) => {
+            if (devMode) {
+              console.log(e);
+            }
+          });
+      }, 10000);
     }
   });
 
@@ -274,29 +275,29 @@
   const giver = () => {
     giverLoading = true;
     browser.runtime
-    .sendMessage({
-      type: "takeFromGiver",
-      data: {
-        accountAddress: $currentAccount.address,
-        server: $currentNetwork.server,
-      },
-    })
-    .then((result) => {
-      giverLoading = false;
-      if (result.error) {
-        openModal("ModalError", { message: result.error });
-      } else {
-        if (!result.added) {
-          openModal("ModalError", { message: result.reason });
+      .sendMessage({
+        type: "takeFromGiver",
+        data: {
+          accountAddress: $currentAccount.address,
+          server: $currentNetwork.server,
+        },
+      })
+      .then((result) => {
+        giverLoading = false;
+        if (result.error) {
+          openModal("ModalError", { message: result.error });
         } else {
-          checkBalance($currentAccount.address, $currentNetwork.server);
-          openModal("ModalSuccess", { message: "Amount is received" });
+          if (!result.added) {
+            openModal("ModalError", { message: result.reason });
+          } else {
+            checkBalance($currentAccount.address, $currentNetwork.server);
+            openModal("ModalSuccess", { message: "Amount is received" });
+          }
         }
-      }
-    })
-    .catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error.message));
-    });
+      })
+      .catch((error) => {
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
+      });
   };
   /*
   const swap = () => {
@@ -367,12 +368,12 @@
       transactionPage--;
       getTransactions($currentAccount.address, $currentNetwork.server, 10, transactionPage);
     }
-  }
+  };
 
   const transactionPageForward = () => {
     transactionPage++;
     getTransactions($currentAccount.address, $currentNetwork.server, 10, transactionPage);
-  }
+  };
 </script>
 
 <style lang="scss">

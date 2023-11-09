@@ -227,17 +227,17 @@ export const controller = () => {
     });
     if (data.params.token == 'native' && lt(fromNano(balance), data.params.amount + APPROXIMATE_FEE)) {
       return new Promise((resolve, reject) => {
-            resolve({"id": data.id, "data": {
-              code: 4300,
-              message: "Not enough balance",
-            }});
+        resolve({"id": data.id, "data": {
+          code: 4300,
+          message: "Not enough balance",
+        }});
       });
     } else if(lt(fromNano(balance), APPROXIMATE_FEE)) { // for asset case
       return new Promise((resolve, reject) => {
-            resolve({"id": data.id, "data": {
-              code: 4300,
-              message: "Not enough balance",
-            }});
+        resolve({"id": data.id, "data": {
+          code: 4300,
+          message: "Not enough balance",
+        }});
       });
     }
     if (data.params.token != 'native') {
@@ -246,18 +246,18 @@ export const controller = () => {
         data.token = tokenData;
         if (lt(fromNano(data.token.balance, data.token.decimals), data.params.amount)) {
           return new Promise((resolve, reject) => {
-                resolve({"id": data.id, "data": {
-                  code: 4300,
-                  message: "Not enough asset balance",
-                }});
+            resolve({"id": data.id, "data": {
+              code: 4300,
+              message: "Not enough asset balance",
+            }});
           });
         }
       } else {
         return new Promise((resolve, reject) => {
-              resolve({"id": data.id, "data": {
-                code: 4300,
-                message: "No such asset",
-              }});
+          resolve({"id": data.id, "data": {
+            code: 4300,
+            message: "No such asset",
+          }});
         });
       }
     }
@@ -288,10 +288,10 @@ export const controller = () => {
     });
     if (lt(fromNano(balance), fromNano(data.params.amount) + APPROXIMATE_FEE)) {
       return new Promise((resolve, reject) => {
-            resolve({"id": data.id, "data": {
-              code: 4300,
-              message: "Not enough balance",
-            }});
+        resolve({"id": data.id, "data": {
+          code: 4300,
+          message: "Not enough balance",
+        }});
       });
     } else {
       openRequestPopup('ModalSendingRawTransaction', data);
@@ -629,22 +629,22 @@ export const controller = () => {
         for (let i in data.params.items) {
           const item = data.params.items[i];
           switch(item.name) {
-            case 'ton_addr':
-              const tonAddrItem = await tonConnectTonAddrItem(walletAddress);
-              payloads.push(tonAddrItem);
+          case 'ton_addr':
+            const tonAddrItem = await tonConnectTonAddrItem(walletAddress);
+            payloads.push(tonAddrItem);
             break;
-            case 'ton_proof':
-              const tonProofItem = await tonConnectTonProofItem(walletAddress, new URL(origin).hostname, item.payload)
-              payloads.push(tonProofItem);
+          case 'ton_proof':
+            const tonProofItem = await tonConnectTonProofItem(walletAddress, new URL(origin).hostname, item.payload);
+            payloads.push(tonProofItem);
             break;
-            default:
-              payloads.push({
-                name: item.name,
-                error: {
-                  code: 400,
-                  message: "Method is not supported"
-                }
-              });
+          default:
+            payloads.push({
+              name: item.name,
+              error: {
+                code: 400,
+                message: "Method is not supported"
+              }
+            });
             break;
           }
         }
@@ -662,9 +662,9 @@ export const controller = () => {
       manifest = await fetch(data.params.manifestUrl);
     } catch(e) {
       return {"id": data.id, "data": { code: 4000, data: {event: "connect_error", payload: {
-                  code: 2, //2 App manifest not found
-                  message: "App manifest not found"
-                }}}};
+        code: 2, //2 App manifest not found
+        message: "App manifest not found"
+      }}}};
     }
     data.manifest = await manifest.json();
     if (typeof data.manifest.url == "undefined" || typeof data.manifest.name == "undefined" || typeof data.manifest.iconUrl == "undefined") {
@@ -683,34 +683,34 @@ export const controller = () => {
           closeRequestPopup();
           if (message.data.code != 4000) {
             resolve({"id": data.id, "data": { "code": 4000, 
-                "data": {"event": "connect_error",
-                  "payload": {
-                    "code": message.data.code == 4001 ? 300: 1,//1 Bad request, 300 User rejected
-                    "message": message.data.message
-                  }
+              "data": {"event": "connect_error",
+                "payload": {
+                  "code": message.data.code == 4001 ? 300: 1,//1 Bad request, 300 User rejected
+                  "message": message.data.message
                 }
               }
+            }
             });
             return;
           }
           getPayloads(data).then((payloads) => {
             if (payloads.length == 0) {
               resolve({"id": data.id, "data": { "code": 4000, 
-                                                "data": { "event": "connect_error",
-                                                          "payload": {
-                                                            "code": 1,
-                                                            "message": "Empty response due to wrong incoming items"
-                                                          }
-                                                        }
-                                              }
-                      });
+                "data": { "event": "connect_error",
+                  "payload": {
+                    "code": 1,
+                    "message": "Empty response due to wrong incoming items"
+                  }
+                }
+              }
+              });
             } else {
               resolve({"id": data.id, "data": { "code": 4000, 
-                                                "data": { "event": "connect", 
-                                                          "payload": { "items": payloads }
-                                                        }
-                                              }
-                      });
+                "data": { "event": "connect", 
+                  "payload": { "items": payloads }
+                }
+              }
+              });
             }
           });
         }
@@ -743,21 +743,21 @@ export const controller = () => {
         getPayloads().then((payloads) => {
           if (payloads.length == 0) {
             resolve({"id": data.id, "data": { code: 4000, 
-                                              data: {event: "connect_error",
-                                                      payload: {
-                                                        code: 1,
-                                                        message: "Empty response due to wrong incoming items"
-                                                      }
-                                                    }
-                                            }
-                    });
+              data: {event: "connect_error",
+                payload: {
+                  code: 1,
+                  message: "Empty response due to wrong incoming items"
+                }
+              }
+            }
+            });
           } else {
             resolve({"id": data.id, "data": { code: 4000, 
-                                            data: { event: 'connect', 
-                                                    payload: {items: payloads}
-                                                  }
-                                          }
-                  });
+              data: { event: 'connect', 
+                payload: {items: payloads}
+              }
+            }
+            });
           }
         });
       });
@@ -772,34 +772,34 @@ export const controller = () => {
               closeRequestPopup();
               if (message.data.code != 4000) {
                 resolve({"id": data.id, "data": { "code": 4000, 
-                    "data": {"event": "connect_error",
-                      "payload": {
-                        "code": message.data.code == 4001 ? 300: 1,//1	Bad request, 300 User rejected
-                        "message": message.data.message
-                      }
+                  "data": {"event": "connect_error",
+                    "payload": {
+                      "code": message.data.code == 4001 ? 300: 1,//1	Bad request, 300 User rejected
+                      "message": message.data.message
                     }
                   }
+                }
                 });
                 return;
               }
               getPayloads().then((payloads) => {
                 if (payloads.length == 0) {
                   resolve({"id": data.id, "data": { code: 4000, 
-                                                    data: {event: "connect_error",
-                                                            payload: {
-                                                              code: 1,
-                                                              message: "Empty response due to wrong incoming items"
-                                                            }
-                                                          }
-                                                  }
-                          });
+                    data: {event: "connect_error",
+                      payload: {
+                        code: 1,
+                        message: "Empty response due to wrong incoming items"
+                      }
+                    }
+                  }
+                  });
                 } else {
                   resolve({"id": data.id, "data": { code: 4000, 
-                                                  data: { event: 'connect', 
-                                                          payload: {items: payloads}
-                                                        }
-                                                }
-                        });
+                    data: { event: 'connect', 
+                      payload: {items: payloads}
+                    }
+                  }
+                  });
                 }
               });
             }
@@ -808,14 +808,14 @@ export const controller = () => {
         });
       } else {
         return {"id": data.id, "data": { code: 4000, 
-                                          data: {event: "connect_error",
-                                                  payload: {
-                                                    code: 1,
-                                                    message: "No permission for reconnect, maybe it is another account"
-                                                  }
-                                                }
-                                        }
-                };
+          data: {event: "connect_error",
+            payload: {
+              code: 1,
+              message: "No permission for reconnect, maybe it is another account"
+            }
+          }
+        }
+        };
       }
     }
   };
@@ -829,232 +829,232 @@ export const controller = () => {
 
     await accountsController.removePermissions(account, origin, ['tonConnect_connect', 'tonConnect_disconnect', 'tonConnect_reconnect']);
     return {"id": data.id, "data": { code: 4000, data: {  event: 'disconnect',
-                                                          payload: {},
-                                                        }
-                                    }
-            };
+      payload: {},
+    }
+    }
+    };
   };
 
   const tonConnectSendTransaction = async (data, origin) => {
     let result;
     switch(data.params.method) {
-      case "sendTransaction":
-        const parsedParams = JSON.parse(data.params.params);
-        if (parsedParams.network) {
-          const endpoint = await new Promise((resolve) => {
-            currentNetwork.subscribe((value) => {
-              resolve(value.server);
-            });
-          });
-          //network (NETWORK, optional): The network (mainnet or testnet) where DApp intends to send the transaction. If not set, the transaction 
-          //is sent to the network currently set in the wallet, but this is not safe and DApp should always strive to set the network. If the network 
-          //parameter is set, but the wallet has a different network set, the wallet should show an alert and DO NOT ALLOW TO SEND this transaction.
-          if (parsedParams.network != (endpoint === 'mainnet' ? '-239' : '-3')) {
-            openRequestPopup("ModalError", { message: "This transaction is for another network" });
-            return new Promise((resolve, reject) => {
-              // let's show 5 seconds popup with the error, then close it and send it
-              setTimeout(() => {
-                sendRequestReject(data.id);
-                closeRequestPopup();
-                resolve({"id": data.id, "data": { code: 4000, data: {  error: { code: 1, message: "Another network" },
-                                                                      id: data.params.id
-                                                                    }}});
-              }, 5000);
-            });
-          }
-        }
-        if (parsedParams.from) {
-          let parsedAddress = "";
-          try {
-            parsedAddress = await sdkController.parseAddress(parsedParams.from);
-          } catch(e) {
-            openRequestPopup("ModalError", { message: "This transaction is for another account" });
-            return new Promise((resolve, reject) => {
-              // let's show 5 seconds popup with the error, then close it and send it
-              setTimeout(() => {
-                sendRequestReject(data.id);
-                closeRequestPopup();
-                resolve({"id": data.id, "data": { code: 4000, data: {  error: { code: 1, message: "Not valid address in `from` parameter" },
-                                                                      id: data.params.id
-                                                                    }}});
-              }, 5000)
-            });
-          }
-
-          const walletAddress = await new Promise((resolve) => {
-            currentAccount.subscribe(async (value) => {
-              resolve(value.address);
-            });
-          });
-          //from (string in : format, optional) - The sender address from which DApp intends to send the transaction. If not set, wallet allows user 
-          //to select the sender's address at the moment of transaction approval. If from parameter is set, the wallet should DO NOT ALLOW user to select 
-          //the sender's address; If sending from the specified address is impossible, the wallet should show an alert and DO NOT ALLOW TO SEND this transaction.
-          if (parsedAddress.toString() != walletAddress) {
-            openRequestPopup("ModalError", { message: "This transaction is for another account" });
-            return new Promise((resolve, reject) => {
-              // let's show 5 seconds popup with the error, then close it and send it
-              setTimeout(() => {
-                sendRequestReject(data.id);
-                closeRequestPopup();
-                resolve({"id": data.id, "data": { code: 4000, data: {  error: { code: 1, message: "Another account" },
-                                                                      id: data.params.id
-                                                                    }}});
-              }, 5000)
-            });
-          }
-        }
-        if (!Array.isArray(parsedParams.messages)) {
-          return {
-            id: data.id,
-            data: {
-              code: 4000,
-              data: {
-                error: { code: 1, message: "Bad request" },
-                id: data.params.id,
-              },
-            },
-          };
-        }
-        let remainMessages = parsedParams.messages.length;
-        if (remainMessages == 0 || remainMessages > 4) {
-          return {"id": data.id, "data": { code: 4000, data: {  error: { code: 1, message: "Bad request" },
-                                                                id: data.params.id
-                                                              }}};
-        }
-        const modalDataQueue = [];
-        const modalDataQueueResult = [];
-        let error = false;
-        let totalBalance = 0;
-
-        for (let i in parsedParams.messages) {
-          const modalData = { ...data };
-          modalData.params = {};
-          modalData.params.to = TonWeb.Address.parse(parsedParams.messages[i].address).toString({urlSafe: true, bounceable: false, testOnly: true});
-          modalData.params.amount = parsedParams.messages[i].amount;
-          totalBalance += Number(parsedParams.messages[i].amount).valueOf();
-          //(integer, optional): unix timestamp. after this moment transaction will be invalid.
-          if (parsedParams.valid_until) {
-            modalData.params.valid_until = parsedParams.valid_until;
-          }
-          if (parsedParams.messages[i].payload) {
-            modalData.params.data = parsedParams.messages[i].payload;
-            modalData.params.dataType = "boc";
-          }
-          if (parsedParams.messages[i].stateInit) {
-            modalData.params.stateInit = parsedParams.messages[i].stateInit;
-          }
-          modalData.id = modalData.id + i;
-          modalDataQueue.push(modalData);
-        }
-        const currentEndpoint = await new Promise((resolve) => {
+    case "sendTransaction":
+      const parsedParams = JSON.parse(data.params.params);
+      if (parsedParams.network) {
+        const endpoint = await new Promise((resolve) => {
           currentNetwork.subscribe((value) => {
             resolve(value.server);
           });
         });
-        const balance = await new Promise((resolve) => {
-          currentAccount.subscribe((value) => {
-            resolve(value.balance[currentEndpoint]);
-          });
-        });
-        if (lt(balance, totalBalance + toNano(APPROXIMATE_FEE))) {
+          //network (NETWORK, optional): The network (mainnet or testnet) where DApp intends to send the transaction. If not set, the transaction 
+          //is sent to the network currently set in the wallet, but this is not safe and DApp should always strive to set the network. If the network 
+          //parameter is set, but the wallet has a different network set, the wallet should show an alert and DO NOT ALLOW TO SEND this transaction.
+        if (parsedParams.network != (endpoint === 'mainnet' ? '-239' : '-3')) {
+          openRequestPopup("ModalError", { message: "This transaction is for another network" });
           return new Promise((resolve, reject) => {
-                resolve({"id": data.id, "data": {
-                  code: 4300,
-                  message: "Not enough balance",
-                }});
-          });
-        } else {
-          openRequestPopup('ModalSendingRawTransaction', modalDataQueue.shift());
-          result = new Promise((resolve, reject) => {
-            const listener = (message) => {
-              if (message.type === "popupMessageResponse" && message.id.substr(0, message.id.length-1) == data.id) {
-                remainMessages--;
-                closeRequestPopup();
-
-                if (message.data.code == 4001) { // User reject
-                  modalDataQueueResult.push({"error": {"code": 300, "message": "User declined the transaction"}, "id": parseInt(message.id.substr(-1))});
-                  error = true;
-                } else if (message.data.code == 4300) { // Another error
-                  modalDataQueueResult.push({"error": {"code": 300, "message": message.data.message}, "id": parseInt(message.id.substr(-1))});
-                  error = true;
-                } else {
-                  modalDataQueueResult.push({"result": "", "id": parseInt(message.id.substr(-1))});
-                }
-
-                if (remainMessages == 0) {
-                  browser.runtime.onMessage.removeListener(listener);
-                  // @TODO by specification we should return common result, but what else the user will decline one message?
-                  // need to return  status by all messages in array - modalDataQueueResult
-                  //console.log(modalDataQueueResult);
-                  if (error) {
-                    resolve({"id": data.id, "data": { code: 4000, data: {error: {code: 300, message: "User declined the transaction"}, "id": message.id.substr(-1)}}}); 
-                  } else {
-                    resolve({"id": data.id, "data": { code: 4000, data: {result: "", "id": message.id.substr(-1)}}});
-                  }
-                  return;
-                }
-
-                if (modalDataQueue != 0) {
-                  // we need to wait some time before show the next in the queue, because the wallet must to change internal id to accept this new tx
-                  let checkWaiting = async () => {
-                    const endpoint = await new Promise((resolve) => {
-                      currentNetwork.subscribe((value) => {
-                        resolve(value.server);
-                      });
-                    });
-                    const walletAddress = await new Promise((resolve) => {
-                      currentAccount.subscribe((value) => {
-                        resolve(value.address);
-                      });
-                    });
-
-                    let needCheckAgain = false;
-                    try {
-                      let checkNewTransactionsResult = await checkNewTransactions(walletAddress, endpoint);
-                      if (checkNewTransactionsResult) {
-                        accountStore.removeWaitingTransaction(endpoint + "-" + walletAddress);
-                      } else {
-                        const waiting = await new Promise((resolve) => {
-                          waitingTransaction.subscribe((value) => {
-                            resolve(value);
-                          });
-                        });
-                        needCheckAgain = waiting.includes(endpoint + "-" + walletAddress);
-                      }
-                    } catch(e) {
-                      needCheckAgain = true;
-                    }
-
-                    if (needCheckAgain) {
-                      setTimeout(() => {
-                        checkWaiting();
-                      }, 5000);
-                    } else {
-                      openRequestPopup('ModalSendingRawTransaction', modalDataQueue.shift());
-                    }
-                  };
-                  checkWaiting();
-                }
-              }
-            };
-            browser.runtime.onMessage.addListener(listener);
+            // let's show 5 seconds popup with the error, then close it and send it
+            setTimeout(() => {
+              sendRequestReject(data.id);
+              closeRequestPopup();
+              resolve({"id": data.id, "data": { code: 4000, data: {  error: { code: 1, message: "Another network" },
+                id: data.params.id
+              }}});
+            }, 5000);
           });
         }
-        break;
-      case "signData":
-        result = {"id": data.id, "data": { code: 4000, data: {  error: { code: 400, message: "Method is not supported" },
-                                                                id: data.params.id
-                                                              }}};
-        break;
-      case "disconnect":
-        // we don't need to receive any confirmations from the user side
-        result = {"id": data.id, "data": { code: 4000, data: {  result: { }, id: data.params.id }}};
-        break;
-      default:
-        result = {"id": data.id, "data": { code: 4000, data: {  error: { code: 400, message: "Method is not supported" },
-                                                                id: data.params.id
-                                                              }}};
       }
+      if (parsedParams.from) {
+        let parsedAddress = "";
+        try {
+          parsedAddress = await sdkController.parseAddress(parsedParams.from);
+        } catch(e) {
+          openRequestPopup("ModalError", { message: "This transaction is for another account" });
+          return new Promise((resolve, reject) => {
+            // let's show 5 seconds popup with the error, then close it and send it
+            setTimeout(() => {
+              sendRequestReject(data.id);
+              closeRequestPopup();
+              resolve({"id": data.id, "data": { code: 4000, data: {  error: { code: 1, message: "Not valid address in `from` parameter" },
+                id: data.params.id
+              }}});
+            }, 5000);
+          });
+        }
+
+        const walletAddress = await new Promise((resolve) => {
+          currentAccount.subscribe(async (value) => {
+            resolve(value.address);
+          });
+        });
+          //from (string in : format, optional) - The sender address from which DApp intends to send the transaction. If not set, wallet allows user 
+          //to select the sender's address at the moment of transaction approval. If from parameter is set, the wallet should DO NOT ALLOW user to select 
+          //the sender's address; If sending from the specified address is impossible, the wallet should show an alert and DO NOT ALLOW TO SEND this transaction.
+        if (parsedAddress.toString() != walletAddress) {
+          openRequestPopup("ModalError", { message: "This transaction is for another account" });
+          return new Promise((resolve, reject) => {
+            // let's show 5 seconds popup with the error, then close it and send it
+            setTimeout(() => {
+              sendRequestReject(data.id);
+              closeRequestPopup();
+              resolve({"id": data.id, "data": { code: 4000, data: {  error: { code: 1, message: "Another account" },
+                id: data.params.id
+              }}});
+            }, 5000);
+          });
+        }
+      }
+      if (!Array.isArray(parsedParams.messages)) {
+        return {
+          id: data.id,
+          data: {
+            code: 4000,
+            data: {
+              error: { code: 1, message: "Bad request" },
+              id: data.params.id,
+            },
+          },
+        };
+      }
+      let remainMessages = parsedParams.messages.length;
+      if (remainMessages == 0 || remainMessages > 4) {
+        return {"id": data.id, "data": { code: 4000, data: {  error: { code: 1, message: "Bad request" },
+          id: data.params.id
+        }}};
+      }
+      const modalDataQueue = [];
+      const modalDataQueueResult = [];
+      let error = false;
+      let totalBalance = 0;
+
+      for (let i in parsedParams.messages) {
+        const modalData = { ...data };
+        modalData.params = {};
+        modalData.params.to = TonWeb.Address.parse(parsedParams.messages[i].address).toString({urlSafe: true, bounceable: false, testOnly: true});
+        modalData.params.amount = parsedParams.messages[i].amount;
+        totalBalance += Number(parsedParams.messages[i].amount).valueOf();
+        //(integer, optional): unix timestamp. after this moment transaction will be invalid.
+        if (parsedParams.valid_until) {
+          modalData.params.valid_until = parsedParams.valid_until;
+        }
+        if (parsedParams.messages[i].payload) {
+          modalData.params.data = parsedParams.messages[i].payload;
+          modalData.params.dataType = "boc";
+        }
+        if (parsedParams.messages[i].stateInit) {
+          modalData.params.stateInit = parsedParams.messages[i].stateInit;
+        }
+        modalData.id = modalData.id + i;
+        modalDataQueue.push(modalData);
+      }
+      const currentEndpoint = await new Promise((resolve) => {
+        currentNetwork.subscribe((value) => {
+          resolve(value.server);
+        });
+      });
+      const balance = await new Promise((resolve) => {
+        currentAccount.subscribe((value) => {
+          resolve(value.balance[currentEndpoint]);
+        });
+      });
+      if (lt(balance, totalBalance + toNano(APPROXIMATE_FEE))) {
+        return new Promise((resolve, reject) => {
+          resolve({"id": data.id, "data": {
+            code: 4300,
+            message: "Not enough balance",
+          }});
+        });
+      } else {
+        openRequestPopup('ModalSendingRawTransaction', modalDataQueue.shift());
+        result = new Promise((resolve, reject) => {
+          const listener = (message) => {
+            if (message.type === "popupMessageResponse" && message.id.substr(0, message.id.length-1) == data.id) {
+              remainMessages--;
+              closeRequestPopup();
+
+              if (message.data.code == 4001) { // User reject
+                modalDataQueueResult.push({"error": {"code": 300, "message": "User declined the transaction"}, "id": parseInt(message.id.substr(-1))});
+                error = true;
+              } else if (message.data.code == 4300) { // Another error
+                modalDataQueueResult.push({"error": {"code": 300, "message": message.data.message}, "id": parseInt(message.id.substr(-1))});
+                error = true;
+              } else {
+                modalDataQueueResult.push({"result": "", "id": parseInt(message.id.substr(-1))});
+              }
+
+              if (remainMessages == 0) {
+                browser.runtime.onMessage.removeListener(listener);
+                // @TODO by specification we should return common result, but what else the user will decline one message?
+                // need to return  status by all messages in array - modalDataQueueResult
+                //console.log(modalDataQueueResult);
+                if (error) {
+                  resolve({"id": data.id, "data": { code: 4000, data: {error: {code: 300, message: "User declined the transaction"}, "id": message.id.substr(-1)}}}); 
+                } else {
+                  resolve({"id": data.id, "data": { code: 4000, data: {result: "", "id": message.id.substr(-1)}}});
+                }
+                return;
+              }
+
+              if (modalDataQueue != 0) {
+                // we need to wait some time before show the next in the queue, because the wallet must to change internal id to accept this new tx
+                let checkWaiting = async () => {
+                  const endpoint = await new Promise((resolve) => {
+                    currentNetwork.subscribe((value) => {
+                      resolve(value.server);
+                    });
+                  });
+                  const walletAddress = await new Promise((resolve) => {
+                    currentAccount.subscribe((value) => {
+                      resolve(value.address);
+                    });
+                  });
+
+                  let needCheckAgain = false;
+                  try {
+                    let checkNewTransactionsResult = await checkNewTransactions(walletAddress, endpoint);
+                    if (checkNewTransactionsResult) {
+                      accountStore.removeWaitingTransaction(endpoint + "-" + walletAddress);
+                    } else {
+                      const waiting = await new Promise((resolve) => {
+                        waitingTransaction.subscribe((value) => {
+                          resolve(value);
+                        });
+                      });
+                      needCheckAgain = waiting.includes(endpoint + "-" + walletAddress);
+                    }
+                  } catch(e) {
+                    needCheckAgain = true;
+                  }
+
+                  if (needCheckAgain) {
+                    setTimeout(() => {
+                      checkWaiting();
+                    }, 5000);
+                  } else {
+                    openRequestPopup('ModalSendingRawTransaction', modalDataQueue.shift());
+                  }
+                };
+                checkWaiting();
+              }
+            }
+          };
+          browser.runtime.onMessage.addListener(listener);
+        });
+      }
+      break;
+    case "signData":
+      result = {"id": data.id, "data": { code: 4000, data: {  error: { code: 400, message: "Method is not supported" },
+        id: data.params.id
+      }}};
+      break;
+    case "disconnect":
+      // we don't need to receive any confirmations from the user side
+      result = {"id": data.id, "data": { code: 4000, data: {  result: { }, id: data.params.id }}};
+      break;
+    default:
+      result = {"id": data.id, "data": { code: 4000, data: {  error: { code: 400, message: "Method is not supported" },
+        id: data.params.id
+      }}};
+    }
     return result;
   };
 

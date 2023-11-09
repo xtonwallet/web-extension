@@ -9,98 +9,99 @@ import "bigint-polyfill";
 import { beginCell } from "../boc/Builder";
 import { Cell } from "../boc/Cell";
 import { Slice } from "../boc/Slice";
+
 export class TupleBuilder {
-    constructor() {
-        this._tuple = [];
+  constructor() {
+    this._tuple = [];
+  }
+  writeNumber(v) {
+    if (v === null || v === undefined) {
+      this._tuple.push({ type: 'null' });
     }
-    writeNumber(v) {
-        if (v === null || v === undefined) {
-            this._tuple.push({ type: 'null' });
-        }
-        else {
-            this._tuple.push({ type: 'int', value: BigInt(v) });
-        }
+    else {
+      this._tuple.push({ type: 'int', value: BigInt(v) });
     }
-    writeBoolean(v) {
-        if (v === null || v === undefined) {
-            this._tuple.push({ type: 'null' });
-        }
-        else {
-            this._tuple.push({ type: 'int', value: v ? -1n : 0n });
-        }
+  }
+  writeBoolean(v) {
+    if (v === null || v === undefined) {
+      this._tuple.push({ type: 'null' });
     }
-    writeBuffer(v) {
-        if (v === null || v === undefined) {
-            this._tuple.push({ type: 'null' });
-        }
-        else {
-            this._tuple.push({ type: 'slice', cell: beginCell().storeBuffer(v).endCell() });
-        }
+    else {
+      this._tuple.push({ type: 'int', value: v ? -1n : 0n });
     }
-    writeString(v) {
-        if (v === null || v === undefined) {
-            this._tuple.push({ type: 'null' });
-        }
-        else {
-            this._tuple.push({ type: 'slice', cell: beginCell().storeStringTail(v).endCell() });
-        }
+  }
+  writeBuffer(v) {
+    if (v === null || v === undefined) {
+      this._tuple.push({ type: 'null' });
     }
-    writeCell(v) {
-        if (v === null || v === undefined) {
-            this._tuple.push({ type: 'null' });
-        }
-        else {
-            if (v instanceof Cell) {
-                this._tuple.push({ type: 'cell', cell: v });
-            }
-            else if (v instanceof Slice) {
-                this._tuple.push({ type: 'cell', cell: v.asCell() });
-            }
-        }
+    else {
+      this._tuple.push({ type: 'slice', cell: beginCell().storeBuffer(v).endCell() });
     }
-    writeSlice(v) {
-        if (v === null || v === undefined) {
-            this._tuple.push({ type: 'null' });
-        }
-        else {
-            if (v instanceof Cell) {
-                this._tuple.push({ type: 'slice', cell: v });
-            }
-            else if (v instanceof Slice) {
-                this._tuple.push({ type: 'slice', cell: v.asCell() });
-            }
-        }
+  }
+  writeString(v) {
+    if (v === null || v === undefined) {
+      this._tuple.push({ type: 'null' });
     }
-    writeBuilder(v) {
-        if (v === null || v === undefined) {
-            this._tuple.push({ type: 'null' });
-        }
-        else {
-            if (v instanceof Cell) {
-                this._tuple.push({ type: 'builder', cell: v });
-            }
-            else if (v instanceof Slice) {
-                this._tuple.push({ type: 'builder', cell: v.asCell() });
-            }
-        }
+    else {
+      this._tuple.push({ type: 'slice', cell: beginCell().storeStringTail(v).endCell() });
     }
-    writeTuple(v) {
-        if (v === null || v === undefined) {
-            this._tuple.push({ type: 'null' });
-        }
-        else {
-            this._tuple.push({ type: 'tuple', items: v });
-        }
+  }
+  writeCell(v) {
+    if (v === null || v === undefined) {
+      this._tuple.push({ type: 'null' });
     }
-    writeAddress(v) {
-        if (v === null || v === undefined) {
-            this._tuple.push({ type: 'null' });
-        }
-        else {
-            this._tuple.push({ type: 'slice', cell: beginCell().storeAddress(v).endCell() });
-        }
+    else {
+      if (v instanceof Cell) {
+        this._tuple.push({ type: 'cell', cell: v });
+      }
+      else if (v instanceof Slice) {
+        this._tuple.push({ type: 'cell', cell: v.asCell() });
+      }
     }
-    build() {
-        return [...this._tuple];
+  }
+  writeSlice(v) {
+    if (v === null || v === undefined) {
+      this._tuple.push({ type: 'null' });
     }
+    else {
+      if (v instanceof Cell) {
+        this._tuple.push({ type: 'slice', cell: v });
+      }
+      else if (v instanceof Slice) {
+        this._tuple.push({ type: 'slice', cell: v.asCell() });
+      }
+    }
+  }
+  writeBuilder(v) {
+    if (v === null || v === undefined) {
+      this._tuple.push({ type: 'null' });
+    }
+    else {
+      if (v instanceof Cell) {
+        this._tuple.push({ type: 'builder', cell: v });
+      }
+      else if (v instanceof Slice) {
+        this._tuple.push({ type: 'builder', cell: v.asCell() });
+      }
+    }
+  }
+  writeTuple(v) {
+    if (v === null || v === undefined) {
+      this._tuple.push({ type: 'null' });
+    }
+    else {
+      this._tuple.push({ type: 'tuple', items: v });
+    }
+  }
+  writeAddress(v) {
+    if (v === null || v === undefined) {
+      this._tuple.push({ type: 'null' });
+    }
+    else {
+      this._tuple.push({ type: 'slice', cell: beginCell().storeAddress(v).endCell() });
+    }
+  }
+  build() {
+    return [...this._tuple];
+  }
 }

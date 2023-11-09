@@ -25,16 +25,16 @@
 
   const updateAllNetworks = () => {
     browser.runtime
-    .sendMessage({ type: "getAllNetworks", data: {} })
-    .then((result) => {
-      allNetworks = result.filter((item) => {
-        return item.custom;
+      .sendMessage({ type: "getAllNetworks", data: {} })
+      .then((result) => {
+        allNetworks = result.filter((item) => {
+          return item.custom;
+        });
+        networksLoaded = true;
+      })
+      .catch((error) => {
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
       });
-      networksLoaded = true;
-    })
-    .catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error.message));
-    });
   };
 
   onMount(() => {
@@ -45,20 +45,20 @@
     try {
       if (formObj.checkValidity()) {
         browser.runtime
-        .sendMessage({
-          type: "removeNetworks",
-          data: selectedList,
-        })
-        .then((result) => {
-          if (!result.error) {
-            switchPage("AccountMain");
-          } else {
-            error = result.error;
-          }
-        })
-        .catch((error) => {
-          console.error("Error on sendMessage:" + JSON.stringify(error.message));
-        });
+          .sendMessage({
+            type: "removeNetworks",
+            data: selectedList,
+          })
+          .then((result) => {
+            if (!result.error) {
+              switchPage("AccountMain");
+            } else {
+              error = result.error;
+            }
+          })
+          .catch((error) => {
+            console.error("Error on sendMessage:" + JSON.stringify(error.message));
+          });
       }
     } catch (e) {
       formObj.reportValidity();

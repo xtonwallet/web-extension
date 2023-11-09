@@ -10,15 +10,16 @@
   /* Icons https://materialdesignicons.com/ */
   import { mdiCloseBox, mdiLogin } from "@mdi/js";
 
-	import { createEventDispatcher } from 'svelte';
+import { createEventDispatcher } from 'svelte';
+  
   const dispatch = createEventDispatcher();
-	const select = num => () => {
+const select = (num) => () => {
     pinCodeError = '';
     if (pinCode.length <= pinCodeMaxLength) {
-      pinCode += num
+      pinCode += num;
     }
   };
-	const clear  = () => pinCode = '';
+const clear  = () => pinCode = '';
   const submit = () => dispatch('submit');
 
   $: pinCodeLimit = pinCode.length >= pinCodeMinLength && pinCode.length <= pinCodeMaxLength;

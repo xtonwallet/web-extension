@@ -142,7 +142,7 @@
         </p>
         <p class="owner">
           {$_("Owner")}
-          <a on:click={() => {viewAddressOnExplorer($currentNetwork.explorer, unbounceble(owner))}} href={"#"}>
+          <a on:click={() => {viewAddressOnExplorer($currentNetwork.explorer, unbounceble(owner));}} href={"#"}>
             <span title={unbounceble(owner)}>
               {shortAddress(unbounceble(owner))}
             </span>

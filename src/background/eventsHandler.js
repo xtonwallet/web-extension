@@ -92,14 +92,14 @@ export const eventsHandler = (controller) => {
                 }
               }
               if (wrongParams) {
-                return Promise.resolve({"id": message.data.id, "data": {code: 4201, message: `Wrong parameters. Parameters for this method: '${methodsList[data.method].RequiredParams.map((item) => {return `${Object.keys(item)[0]}' must be '${Object.values(item)[0]}'`} ).join(', ')}`}});
+                return Promise.resolve({"id": message.data.id, "data": {code: 4201, message: `Wrong parameters. Parameters for this method: '${methodsList[data.method].RequiredParams.map((item) => {return `${Object.keys(item)[0]}' must be '${Object.values(item)[0]}'`;} ).join(', ')}`}});
               }
             }
           } else {
             //Maybe this request try to run SDK method
             const arrMethodName= data.method.split('_');
             const parsedMethodName = arrMethodName.splice(0,2);
-                  parsedMethodName.push(arrMethodName.join('_'));
+            parsedMethodName.push(arrMethodName.join('_'));
 
             const methodExist = await controller.sdk.checkThatSdkMethodExists(parsedMethodName[1], parsedMethodName[2]);
             if (parsedMethodName[0] == "ton" && methodExist) {

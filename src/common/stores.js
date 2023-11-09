@@ -44,11 +44,11 @@ settingsStore.subscribe(async (current) => {
 });
 
 export { settingsStore, currentPage, currentThemeName, currentLang,
-         currentAutologout, currentExtendedMode, currentRetrievingTransactionsPeriod,
-         currentRetrievingTransactionsLastTime, needsBackup,
-         currentEnabledPinPad, currentEnabledProxy, currentCurrency,
-         currentRate, currentResolution
-       } from './stores/settings.js';
+  currentAutologout, currentExtendedMode, currentRetrievingTransactionsPeriod,
+  currentRetrievingTransactionsLastTime, needsBackup,
+  currentEnabledPinPad, currentEnabledProxy, currentCurrency,
+  currentRate, currentResolution
+} from './stores/settings.js';
 export { networksStore, currentNetwork } from './stores/networks.js';
 export { accountStore, currentAccount, waitingTransaction, messageSubscriptions } from './stores/account.js';
 
@@ -60,35 +60,35 @@ export const steps = writable({current:0, stepList:[]});
 export const lastActionTimestamp = writable();
 export const ASSET_TYPES = {"74": "Jetton", "64": "NFT", "81": "DNS"};
 export const CURRENCIES_LIST = {"USD": "United States of America dollar",
-                                "GBP": "Great Britain pound",
-                                "EUR": "Economic and Monetary Union euro",
-                                "RUB": "Russia ruble",
-                                "JPY": "Japan yen",
-                                "COP": "Colombia peso",
-                                "CNY": "China yuan_renminbi",
-                                "AED": "United Arab Emirates dirham",
-                                "ARS": "Argentina peso",
-                                "AUD": "Australia dollar",
-                                "BRL": "Brazil real",
-                                "CAD": "Canada dollar",
-                                "CHF": "Switzerland franc",
-                                "HKD": "Hong Kong dollar",
-                                "ILS": "Israel shekel",
-                                "INR": "India rupee",
-                                "IRR": "Iran rial",
-                                "KRW": "Korea (South) won",
-                                "MXN": "Mexico peso",
-                                "NZD": "New Zealand dollar",
-                                "PKR": "Pakistan rupee",
-                                "SAR": "Saudi Arabia riyal",
-                                "SEK": "Sweden krona",
-                                "SGD": "Singapore dollar",
-                                "THB": "Thailand baht",
-                                "TRY": "Turkey lira",
-                                "UAH": "Ukraine hryvnia",
-                                "VEF": "Venezuela bolivar",
-                                "ZAR": "South Africa rand",
-                              };
+  "GBP": "Great Britain pound",
+  "EUR": "Economic and Monetary Union euro",
+  "RUB": "Russia ruble",
+  "JPY": "Japan yen",
+  "COP": "Colombia peso",
+  "CNY": "China yuan_renminbi",
+  "AED": "United Arab Emirates dirham",
+  "ARS": "Argentina peso",
+  "AUD": "Australia dollar",
+  "BRL": "Brazil real",
+  "CAD": "Canada dollar",
+  "CHF": "Switzerland franc",
+  "HKD": "Hong Kong dollar",
+  "ILS": "Israel shekel",
+  "INR": "India rupee",
+  "IRR": "Iran rial",
+  "KRW": "Korea (South) won",
+  "MXN": "Mexico peso",
+  "NZD": "New Zealand dollar",
+  "PKR": "Pakistan rupee",
+  "SAR": "Saudi Arabia riyal",
+  "SEK": "Sweden krona",
+  "SGD": "Singapore dollar",
+  "THB": "Thailand baht",
+  "TRY": "Turkey lira",
+  "UAH": "Ukraine hryvnia",
+  "VEF": "Venezuela bolivar",
+  "ZAR": "South Africa rand",
+};
 export function copyItem(item) {
   return JSON.parse(JSON.stringify(item));
 }

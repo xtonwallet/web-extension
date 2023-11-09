@@ -259,7 +259,7 @@ export class Vault {
       let tokenObject = {};
       for (const i in existingAccount.tokenList[server]) {
         if (existingAccount.tokenList[server][i].address == tokenAddress) {
-          tokenObject = existingAccount.tokenList[server][i]
+          tokenObject = existingAccount.tokenList[server][i];
           break;
         }
       }
@@ -405,7 +405,7 @@ export class Vault {
     const existingAccount = await store.get(accountAddress);
     if (existingAccount) {
       if (existingAccount.deployed) {
-        return existingAccount.deployed.includes(server)
+        return existingAccount.deployed.includes(server);
       }
     }
     return false;
@@ -558,7 +558,7 @@ export class Vault {
         existingAccount.permissions[origin] = permissions;
       } else {
         if (existingAccount.permissions[origin]) {
-          existingAccount.permissions[origin] = [...new Set([...existingAccount.permissions[origin],...permissions])]
+          existingAccount.permissions[origin] = [...new Set([...existingAccount.permissions[origin],...permissions])];
         } else {
           existingAccount.permissions[origin] = permissions;
         }

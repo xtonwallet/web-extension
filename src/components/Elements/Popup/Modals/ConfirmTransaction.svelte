@@ -67,12 +67,12 @@
       })
       .then((result) => {
         browser.runtime
-        .sendMessage({
-          type: "addWaitingTransaction",
-          data: $currentNetwork.server + "-" + $currentAccount.address,
-        }).then(() => {
-          accountStore.addWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
-        })
+          .sendMessage({
+            type: "addWaitingTransaction",
+            data: $currentNetwork.server + "-" + $currentAccount.address,
+          }).then(() => {
+            accountStore.addWaitingTransaction($currentNetwork.server + "-" + $currentAccount.address);
+          });
         //here need to set by default for the next same window
         loading = false;
         disabled = false;
@@ -105,7 +105,7 @@
             })
             .catch((error) => {
               console.error("Error on sendMessage:" + JSON.stringify(error.message));
-            })
+            });
         }
       }).catch((error) => {
         console.error("Error on sendMessage:" + JSON.stringify(error.message));

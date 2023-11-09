@@ -38,7 +38,7 @@ export const accounts = () => {
     if (alarm.name === "retrievingTransactions") {
       let networks = [];
       const accounts = await vault.getAccounts();
-      const allAddresses = accounts.map((item) => {return item.address});
+      const allAddresses = accounts.map((item) => {return item.address;});
 
       const extendedMode = await new Promise((resolve) => {
         currentExtendedMode.subscribe((value) => {
@@ -126,8 +126,8 @@ export const accounts = () => {
             if (transactions[i].in_msg.destination != transactionsAddresses[j] &&
                 (typeof tokenWallets[transactions[i].in_msg.destination] == "undefined" ||
                   tokenWallets[transactions[i].in_msg.destination] != transactionsAddresses[j]
-                  )
-              ) {
+                )
+            ) {
               continue;
             }
             const txData = transactions[i];
@@ -460,7 +460,7 @@ export const accounts = () => {
     */
   };
 
-/*
+  /*
   const updateAllBalances = async (server) => {
     const Tlib         = new TonLib();
     const TonLibClient = await TonTlibLib.getClient(server);
@@ -684,7 +684,7 @@ export const accounts = () => {
         if (accountData.account_state === "active") {
           deployed.push(network.server);
           switch(accountData.wallet_type) {
-            /* 
+          /* 
             //for dinos?
             case 'wallet simple r1':
               version[network.server] = 'simpleR1';
@@ -696,23 +696,23 @@ export const accounts = () => {
               version[network.server] = 'simpleR3';
             break;
             */
-            case 'wallet v2 r1':
-              version[network.server] = 'v2R1';
+          case 'wallet v2 r1':
+            version[network.server] = 'v2R1';
             break;
-            case 'wallet v2 r2':
-              version[network.server] = 'v2R2';
+          case 'wallet v2 r2':
+            version[network.server] = 'v2R2';
             break;
-            case 'wallet v3 r1':
-              version[network.server] = 'v3R1';
+          case 'wallet v3 r1':
+            version[network.server] = 'v3R1';
             break;
-            case 'wallet v3 r2':
-              version[network.server] = 'v3R2';
+          case 'wallet v3 r2':
+            version[network.server] = 'v3R2';
             break;
-            case 'wallet v4 r1':
-              version[network.server] = 'v4R1';
+          case 'wallet v4 r1':
+            version[network.server] = 'v4R1';
             break;
-            case 'wallet v4 r2':
-              version[network.server] = 'v4R2';
+          case 'wallet v4 r2':
+            version[network.server] = 'v4R2';
             break;
           }
         } else if (defaultVersion != "") {
@@ -919,17 +919,17 @@ export const accounts = () => {
       let result, txDataPrepared;
 
       switch(txData.params.dataType) {
-        case "boc":
-          txData.params.data = TonLibClient.oneFromBoc(
-            Buffer.from(txData.params.data, 'base64')
-          );
-          break;
-        case "hex":
-          txData.params.data = Unibabel.hexToBuffer(txData.params.data);
-          break;
-        case "base64":
-          txData.params.data = Unibabel.base64ToBuffer(txData.params.data);
-          break;
+      case "boc":
+        txData.params.data = TonLibClient.oneFromBoc(
+          Buffer.from(txData.params.data, 'base64')
+        );
+        break;
+      case "hex":
+        txData.params.data = Unibabel.hexToBuffer(txData.params.data);
+        break;
+      case "base64":
+        txData.params.data = Unibabel.base64ToBuffer(txData.params.data);
+        break;
       }
       txDataPrepared = {
         toAddress: txData.params.to,
@@ -1009,21 +1009,21 @@ export const accounts = () => {
 
       let result, txDataPrepared;
       switch(txData.params.dataType) {
-        case "boc":
-          try {
-            txData.params.data = TonLibClient.oneFromBoc(
-              Buffer.from(txData.params.data, 'base64')
-            );
-          } catch(e) {
-            // can be just text
-          }
-          break;
-        case "hex":
-          txData.params.data = Buffer.from(txData.params.data, 'hex');
-          break;
-        case "base64":
-          txData.params.data = Buffer.from(txData.params.data, 'base64');
-          break;
+      case "boc":
+        try {
+          txData.params.data = TonLibClient.oneFromBoc(
+            Buffer.from(txData.params.data, 'base64')
+          );
+        } catch(e) {
+          // can be just text
+        }
+        break;
+      case "hex":
+        txData.params.data = Buffer.from(txData.params.data, 'hex');
+        break;
+      case "base64":
+        txData.params.data = Buffer.from(txData.params.data, 'base64');
+        break;
       }
       txDataPrepared = {
         toAddress: txData.params.to,
@@ -1149,32 +1149,32 @@ export const accounts = () => {
    */
   const getFamousTokens = () => {
     return {"mainnet": [
-            {
-              "name": "Kote Coin",
-              "symbol": "KOTE",
-              "decimals": 9,
-              "address": "EQBlU_tKISgpepeMFT9t3xTDeiVmo25dW_4vUOl6jId_BNIj",
-              "icon": "https://kotecoin.com/coin.png",
-              "type": "74"
-            },
-            {
-              "name": "Tegro",
-              "symbol": "TGR",
-              "decimals": 9,
-              "address": "EQAvDfWFG0oYX19jwNDNBBL1rKNT9XfaGP9HyTb5nb2Eml6y",
-              "icon": "https://tegro.io/tgr.png",
-              "type": "74"
-            },
-            {
-              "name": "Wrapped TON",
-              "symbol": "wTON",
-              "decimals": 9,
-              "address": "EQDMB1pfK3wFtZWckWrMBgQ7zFH05iVC4kFsBumNyvKYUOZp",
-              "icon": "https://wton.dev/logo256.png",
-              "type": "74"
-            }
-            ],
-           };
+      {
+        "name": "Kote Coin",
+        "symbol": "KOTE",
+        "decimals": 9,
+        "address": "EQBlU_tKISgpepeMFT9t3xTDeiVmo25dW_4vUOl6jId_BNIj",
+        "icon": "https://kotecoin.com/coin.png",
+        "type": "74"
+      },
+      {
+        "name": "Tegro",
+        "symbol": "TGR",
+        "decimals": 9,
+        "address": "EQAvDfWFG0oYX19jwNDNBBL1rKNT9XfaGP9HyTb5nb2Eml6y",
+        "icon": "https://tegro.io/tgr.png",
+        "type": "74"
+      },
+      {
+        "name": "Wrapped TON",
+        "symbol": "wTON",
+        "decimals": 9,
+        "address": "EQDMB1pfK3wFtZWckWrMBgQ7zFH05iVC4kFsBumNyvKYUOZp",
+        "icon": "https://wton.dev/logo256.png",
+        "type": "74"
+      }
+    ],
+    };
   };
 
   const importToken = async (accountAddress, server, tokenObject) => {
@@ -1224,7 +1224,7 @@ export const accounts = () => {
       throw e;
     }
     return tokenObject;
-  }
+  };
 
   const getCurrentTokenBalance = async (destination, server, tokenRootAddress) => {
     let amount = 0;
@@ -1319,20 +1319,20 @@ export const accounts = () => {
         if (resultData.jettonContentUri) {
           const protocolContentUri = new URL(resultData.jettonContentUri).protocol;
           if (protocolContentUri == 'ipfs:') {
-            resultData.jettonContentUri = `https://cloudflare-ipfs.com/ipfs/${resultData.jettonContentUri.substr(7)}#x-ipfs-companion-no-redirect`
+            resultData.jettonContentUri = `https://cloudflare-ipfs.com/ipfs/${resultData.jettonContentUri.substr(7)}#x-ipfs-companion-no-redirect`;
           }
           const result = await fetch(resultData.jettonContentUri)
-                                .then((response) => {
-                                  return response.json();
-                                })
-                                .then((data) => {
-                                  return data;
-                                });
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              return data;
+            });
           
           if (result.image) {
             const protocol = new URL(result.image).protocol;
             if (protocol == 'ipfs:') {
-              result.image = `https://cloudflare-ipfs.com/ipfs/${result.image.substr(7)}#x-ipfs-companion-no-redirect`
+              result.image = `https://cloudflare-ipfs.com/ipfs/${result.image.substr(7)}#x-ipfs-companion-no-redirect`;
             }
           }
           if (result.image_data) {
@@ -1344,7 +1344,7 @@ export const accounts = () => {
             decimals: result.decimal ? Number(result.decimal): 9,
             totalSupply: Number(resultData.totalSupply),
             icon: result.image
-          }
+          };
         }
         if (resultData.jettonContentCell) {
           try {
@@ -1355,7 +1355,7 @@ export const accounts = () => {
               decimals: result.decimal ? Number(result.decimal): 9,
               totalSupply: Number(resultData.totalSupply),
               icon: Buffer(result.image.substr(2), 'hex').toString('utf-8')
-            }
+            };
           } catch(e) {
             if (devMode) {
               console.log(e);
@@ -1421,12 +1421,12 @@ export const accounts = () => {
         if (resultDataCollection) {
           if (resultDataCollection.collectionContentUri) {
             const result = await fetch(resultDataCollection.collectionContentUri)
-                                  .then((response) => {
-                                    return response.json();
-                                  })
-                                  .then((data) => {
-                                    return data;
-                                  });
+              .then((response) => {
+                return response.json();
+              })
+              .then((data) => {
+                return data;
+              });
             return {
               name: result.name,
               description: result.description,
@@ -1435,7 +1435,7 @@ export const accounts = () => {
               itemIndex: new BigNumber(resultData.itemIndex).toString(),
               itemsCount: new BigNumber(resultDataCollection.itemsCount).toString(),
               ownerAddress: resultDataCollection.ownerAddress != null? resultDataCollection.ownerAddress.toString(true, true, true): ""
-            }
+            };
           }
         }
         //OnChanin content for NFT is not supported yet
@@ -1462,19 +1462,19 @@ export const accounts = () => {
       if (typeof (resultData.contentUri) != "undefined" && resultData.contentUri != "") {
         try {
           const result = await fetch(resultData.contentUri)
-                                    .then((response) => {
-                                      return response.json();
-                                    })
-                                    .then((data) => {
-                                      return data;
-                                    });
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              return data;
+            });
           return {
             "name": result.name,
             "description": result.description,
             "image": result.image,
             "attributes": typeof(result.attributes) != "undefined" ? result.attributes: [],
             "owner": resultData.ownerAddress.toString(true, true, true)
-          }
+          };
         } catch(e) {
           return {
             "name": "No metadata",
@@ -1482,25 +1482,25 @@ export const accounts = () => {
             "image": "",
             "attributes": [],
             "owner": ""
-          }
+          };
         }
       }
       if (typeof (resultData.content) != "undefined" && resultData.content != "") {
         try {
           const result = await fetch(Unibabel.bufferToUtf8(resultData.content).substr(1))
-                                    .then((response) => {
-                                      return response.json();
-                                    })
-                                    .then((data) => {
-                                      return data;
-                                    });
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              return data;
+            });
           return {
             "name": result.name,
             "description": result.description,
             "image": result.image,
             "attributes": typeof(result.attributes) != "undefined" ? result.attributes: [],
             "owner": resultData.ownerAddress.toString(true, true, true)
-          }
+          };
         } catch(e) {
           return {
             "name": "No metadata",
@@ -1508,7 +1508,7 @@ export const accounts = () => {
             "image": "",
             "attributes": [],
             "owner": ""
-          }
+          };
         }
       }
     } catch(e) {

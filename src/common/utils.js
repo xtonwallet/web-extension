@@ -72,17 +72,17 @@ const requestsStore = createRequestsStore();
 
 const broadcastMessage = (type, data) => {
   browser.runtime.sendMessage({type: `page-${type}`, data})
-  .catch((error) => {
-    if (devMode)  {
-      console.error(`Error on sendMessage ${type}: ${JSON.stringify(error)}`);
-    }
-  });
+    .catch((error) => {
+      if (devMode)  {
+        console.error(`Error on sendMessage ${type}: ${JSON.stringify(error)}`);
+      }
+    });
   browser.runtime.sendMessage({type: `popup-${type}`, data})
-  .catch((error) => {
-    if (devMode)  {
-      console.error(`Error on sendMessage ${type}: ${JSON.stringify(error)}`);
-    }
-  });
+    .catch((error) => {
+      if (devMode)  {
+        console.error(`Error on sendMessage ${type}: ${JSON.stringify(error)}`);
+      }
+    });
 };
 
 const sendNotificationToInPageScript = (type, data) => {
@@ -99,7 +99,7 @@ const sendNotificationToInPageScript = (type, data) => {
                     JSON.stringify({"type": type, "data": data}) +
                     " " + 
                     JSON.stringify(tabs[i])
-                    );
+                  );
                 }
               });
           });
@@ -161,33 +161,33 @@ const openRequestPopup = (modalName, data) => {
     //send information to the opened Popup
     setTimeout(() => {
       browser.runtime.sendMessage({ type: 'popupMessage', data: {'modalName': modalName, 'data': data} })
-      .catch((error) => {
-        if (devMode) {
-          console.error("Error on sendMessage:" + JSON.stringify(error.message));
-        }
-      });
+        .catch((error) => {
+          if (devMode) {
+            console.error("Error on sendMessage:" + JSON.stringify(error.message));
+          }
+        });
     }, 1000); // let's wait for 1 seconds, because maybe will be some delay on the window opening
   };
 
   browser.runtime.sendMessage({ type: 'popupView'})
-  .then(async (popupView) => {
-    if (popupView) {
-      browser.runtime.sendMessage({ type: 'popupMessage', data: {'modalName': modalName, 'data': data} })
-      .catch((error) => {
-        if (devMode)  {
-          console.error("Error on sendMessage:" + JSON.stringify(error.message));
-        }
-      });
-    } else {
+    .then(async (popupView) => {
+      if (popupView) {
+        browser.runtime.sendMessage({ type: 'popupMessage', data: {'modalName': modalName, 'data': data} })
+          .catch((error) => {
+            if (devMode)  {
+              console.error("Error on sendMessage:" + JSON.stringify(error.message));
+            }
+          });
+      } else {
+        await openPopup(modalName, data);
+      }
+    })
+    .catch(async (e) => {
+      if (devMode) {
+        console.log(e);
+      }
       await openPopup(modalName, data);
-    }
-  })
-  .catch(async (e) => {
-    if (devMode) {
-      console.log(e);
-    }
-    await openPopup(modalName, data);
-  });
+    });
 };
 
 const generateQRcode = (element, data, width = 200, height = 200) => {
@@ -200,7 +200,7 @@ const generateQRcode = (element, data, width = 200, height = 200) => {
     logo: '/assets/img/qr-logo.png',
     logoBackgroundTransparent: true
   });
-}
+};
 
 const closeRequestPopup = () => {
   if (_popupId !== 0) {
@@ -212,29 +212,29 @@ const closeRequestPopup = () => {
 const sendRequestReject = (id) => {
   const newRequestQueue = get(requestsStore);
   requestsStore.update((store) => {
-    store = newRequestQueue.filter(item => item.data.id != id);
+    store = newRequestQueue.filter((item) => item.data.id != id);
     return store;
   });
   browser.runtime.sendMessage({ type: 'popupMessageResponse', id: id, data: {code: 4001, message: 'User rejected request'} })
-  .catch((error) => {
-    if (devMode)  {
-      console.error("Error on sendMessage:" + JSON.stringify(error.message));
-    }
-  });
+    .catch((error) => {
+      if (devMode)  {
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
+      }
+    });
 };
 
 const sendRequestResolve = (id, data) => {
   const newRequestQueue = get(requestsStore);
   requestsStore.update((store) => {
-    store = newRequestQueue.filter(item => item.data.id != id);
+    store = newRequestQueue.filter((item) => item.data.id != id);
     return store;
   });
   browser.runtime.sendMessage({ type: 'popupMessageResponse', id: id, data: data })
-  .catch((error) => {
-    if (devMode)  {
-      console.error("Error on sendMessage:" + JSON.stringify(error.message));
-    }
-  });
+    .catch((error) => {
+      if (devMode)  {
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
+      }
+    });
 };
 
 const generateRandomBytes = (len) => {
@@ -331,7 +331,7 @@ class Unibabel {
   }
 
   static bufferToHex(buffer) {
-    return buffer.map(x => x.toString(16).padStart(2, '0')).join('');
+    return buffer.map((x) => x.toString(16).padStart(2, '0')).join('');
   }
 
   static hexToBuffer(hex) {
@@ -544,17 +544,17 @@ const enableProxy = async (isEnabled) => {
 const getRate = async (сurrency) => {
   //Receive the rate by this time
   const result = await fetch(API_RATE_URL + сurrency)
-                        .then((response) => {
-                          return response.text();
-                        })
-                        .then((data) => {
-                          return data;
-                        });
+    .then((response) => {
+      return response.text();
+    })
+    .then((data) => {
+      return data;
+    });
   return result;
 };
 
 const sleep = async (ms) => {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
 const unbounceble = (address) => {

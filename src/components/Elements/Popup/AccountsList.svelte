@@ -51,13 +51,13 @@
     if (newCurrentAccount.length) {
       accountStore.changeAccount(newCurrentAccount[0]);
       browser.runtime
-      .sendMessage({
-        type: "changeAccount",
-        data: newCurrentAccount[0],
-      })
-      .catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error.message));
-      });
+        .sendMessage({
+          type: "changeAccount",
+          data: newCurrentAccount[0],
+        })
+        .catch((error) => {
+          console.error("Error on sendMessage:" + JSON.stringify(error.message));
+        });
     }
   };
 
@@ -80,9 +80,9 @@
 
   const lock = () => {
     browser.runtime.sendMessage({ type: "lockWallet" })
-    .catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error.message));
-    });
+      .catch((error) => {
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
+      });
     return;
   };
 

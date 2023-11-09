@@ -61,7 +61,7 @@ const createAccountStore = () => {
     },
     removeWaitingTransaction: (state) => {
       accountStore.update((store) => {
-        store.waitingTransaction = store.waitingTransaction.filter((item) => {return item != state});
+        store.waitingTransaction = store.waitingTransaction.filter((item) => {return item != state;});
         return store;
       });
     },

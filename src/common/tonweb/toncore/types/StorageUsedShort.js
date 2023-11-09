@@ -6,16 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 export function loadStorageUsedShort(slice) {
-    let cells = slice.loadVarUintBig(3);
-    let bits = slice.loadVarUintBig(3);
-    return {
-        cells,
-        bits
-    };
+  let cells = slice.loadVarUintBig(3);
+  let bits = slice.loadVarUintBig(3);
+  return {
+    cells,
+    bits
+  };
 }
 export function storeStorageUsedShort(src) {
-    return (builder) => {
-        builder.storeVarUint(src.cells, 3);
-        builder.storeVarUint(src.bits, 3);
-    };
+  return (builder) => {
+    builder.storeVarUint(src.cells, 3);
+    builder.storeVarUint(src.bits, 3);
+  };
 }

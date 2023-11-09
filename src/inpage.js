@@ -36,45 +36,45 @@ const runSendTransaction = (destination, amount, message) => {
     .catch((result) => {
       console.log(result);
     });
-}
+};
 
 const tonLinkListener = (event) => {
   const url = event.target.href;
   const resultURI = url.match(/ton:\/\/([^\/]*)\/([^\?]*)\?(.*)$/);
   switch(resultURI[1]) {
-    case "transfer":
-      let URIparams = {};
-      resultURI[3].split("&").map((item) => {
-        const res = item.split("=");
-        URIparams[res[0]] = res[1];
-      });
-      if (resultURI[2]) {
-        window.ton
-          .request({
-            method: "wallet_getPermissions",
-            params: {},
-          })
-          .then((result) => {
-            if (result.includes("ton_sendTransaction")) {
-              runSendTransaction(resultURI[2], typeof URIparams["amount"] == "undefined" ? 0 : parseInt(URIparams["amount"]), typeof URIparams["text"] == "undefined" ? "" : URIparams["text"]);
-            } else {
-              window.ton
-                .request({
-                  method: "wallet_requestPermissions",
-                  params: { permissions: ["ton_sendTransaction"] },
-                })
-                .then((result) => {
-                  if (result.includes("ton_sendTransaction")) {
-                    runSendTransaction(resultURI[2], typeof URIparams["amount"] == "undefined" ? 0 : parseInt(URIparams["amount"]), typeof URIparams["text"] == "undefined" ? "" : URIparams["text"]);
-                  }
-                });
-            }
-          });
-        event.preventDefault();
-      }
+  case "transfer":
+    let URIparams = {};
+    resultURI[3].split("&").map((item) => {
+      const res = item.split("=");
+      URIparams[res[0]] = res[1];
+    });
+    if (resultURI[2]) {
+      window.ton
+        .request({
+          method: "wallet_getPermissions",
+          params: {},
+        })
+        .then((result) => {
+          if (result.includes("ton_sendTransaction")) {
+            runSendTransaction(resultURI[2], typeof URIparams["amount"] == "undefined" ? 0 : parseInt(URIparams["amount"]), typeof URIparams["text"] == "undefined" ? "" : URIparams["text"]);
+          } else {
+            window.ton
+              .request({
+                method: "wallet_requestPermissions",
+                params: { permissions: ["ton_sendTransaction"] },
+              })
+              .then((result) => {
+                if (result.includes("ton_sendTransaction")) {
+                  runSendTransaction(resultURI[2], typeof URIparams["amount"] == "undefined" ? 0 : parseInt(URIparams["amount"]), typeof URIparams["text"] == "undefined" ? "" : URIparams["text"]);
+                }
+              });
+          }
+        });
+      event.preventDefault();
+    }
     break;
-    default:
-      console.log('Specified ton:// URL format is not supported');
+  default:
+    console.log('Specified ton:// URL format is not supported');
     break;
   }
 };
@@ -104,38 +104,38 @@ window.ton.send = async function(methodRaw, initialParams = []) {
   let method, params;
   //translate method name
   switch(methodRaw) {
-    case 'ton_requestAccounts':
-      method = "ton_account";
-      break;
-    case 'ton_requestWallets':
-      method = "ton_account";
-      break;
-    case 'ton_getBalance':
-      method = "ton_account";
-      break;
-    case 'ton_sendTransaction':
-      method = "ton_sendRawTransaction";
-      params = initialParams.shift();
-      if (typeof params.value != "undefined") {
-        params.amount = Number(params.value).valueOf()/10**9; // simple conversion to TON coin
-      }
-      if (typeof params.data == "undefined") {
-        params.data = "";
-      }
-      if (typeof params.dataType == "undefined") {
-        params.dataType = "";
-      }
-      if (typeof params.stateInit == "undefined") {
-        params.stateInit = "";
-      }
-      break;
-    case 'ton_rawSign':
-      method = "ton_signMessage";
-      params = initialParams.shift();
-      break;
-    case 'flushMemoryCache':
-      // nothing to do
-      break;
+  case 'ton_requestAccounts':
+    method = "ton_account";
+    break;
+  case 'ton_requestWallets':
+    method = "ton_account";
+    break;
+  case 'ton_getBalance':
+    method = "ton_account";
+    break;
+  case 'ton_sendTransaction':
+    method = "ton_sendRawTransaction";
+    params = initialParams.shift();
+    if (typeof params.value != "undefined") {
+      params.amount = Number(params.value).valueOf()/10**9; // simple conversion to TON coin
+    }
+    if (typeof params.data == "undefined") {
+      params.data = "";
+    }
+    if (typeof params.dataType == "undefined") {
+      params.dataType = "";
+    }
+    if (typeof params.stateInit == "undefined") {
+      params.stateInit = "";
+    }
+    break;
+  case 'ton_rawSign':
+    method = "ton_signMessage";
+    params = initialParams.shift();
+    break;
+  case 'flushMemoryCache':
+    // nothing to do
+    break;
   }
   return new Promise((resolve) => {
     window.ton
@@ -161,7 +161,7 @@ window.ton.send = async function(methodRaw, initialParams = []) {
         }
       });
   });
-}
+};
 
 /* Connection handling */
 window.ton._connect = () => {};
@@ -176,31 +176,31 @@ window.ton._emitConnect = () => {};
 window.ton._emitClose = (code, reason) => {};
 window.ton._emitChainChanged = (chainId) => {};
 window.ton._emitAccountsChanged = (accounts) => {};
-window.ton._handleJsonRpcMessage = async() => {}
+window.ton._handleJsonRpcMessage = async() => {};
 
 window.ton._transformResult = (method, result) => {
   let output;
   switch(method) {
-    case "ton_requestAccounts":
-      output = [result.address]
-      break;
-    case "ton_requestWallets":
-      output = [{ address: result.address,
-                  publicKey: result.publicKey,
-                  walletVersion: result.walletVersion}]
-      break;
-    case "ton_getBalance":
-      output = result.balance;
-      break;
-    case "ton_sendTransaction":
-      output = true;
-      break;
-    case "ton_rawSign":
-      output = result;
-      break;
+  case "ton_requestAccounts":
+    output = [result.address];
+    break;
+  case "ton_requestWallets":
+    output = [{ address: result.address,
+      publicKey: result.publicKey,
+      walletVersion: result.walletVersion}];
+    break;
+  case "ton_getBalance":
+    output = result.balance;
+    break;
+  case "ton_sendTransaction":
+    output = true;
+    break;
+  case "ton_rawSign":
+    output = result;
+    break;
   }
   return output;
-}
+};
 
 // TON Connect
 
@@ -348,7 +348,7 @@ export class TonConnect {
         "key": "xtonwallet"
       }
     ]
-  }
+  };
 }
 
 window.xtonwallet = {

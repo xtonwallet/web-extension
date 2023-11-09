@@ -157,35 +157,35 @@
 
   const checkFirstRun = () => {
     browser.runtime.sendMessage({ type: "isFirstRun" })
-    .then((isFirstRun) => {
-      firstRun = isFirstRun;
-      if (firstRun) {
-        const openApp = () => {
-          browser.tabs.create({ url: "/page.html" });
-        };
-        browser.tabs.query({}).then((tabs) => {
-          const foundTab = tabs.find((tab) => {
-            if (typeof tab.url !== "undefined") {
-              return tab.url.includes(
-                `chrome-extension://${browser.runtime.id}/page.html`
-              );
+      .then((isFirstRun) => {
+        firstRun = isFirstRun;
+        if (firstRun) {
+          const openApp = () => {
+            browser.tabs.create({ url: "/page.html" });
+          };
+          browser.tabs.query({}).then((tabs) => {
+            const foundTab = tabs.find((tab) => {
+              if (typeof tab.url !== "undefined") {
+                return tab.url.includes(
+                  `chrome-extension://${browser.runtime.id}/page.html`
+                );
+              } else {
+                return false;
+              }
+            });
+
+            if (foundTab) {
+              browser.tabs.update(foundTab.id, { highlighted: true });
             } else {
-              return false;
+              openApp();
             }
           });
-
-          if (foundTab) {
-            browser.tabs.update(foundTab.id, { highlighted: true });
-          } else {
-            openApp();
-          }
-        });
-      } else {
-        settingsStore.changePage({ name: "PopupMain" });
-      }
-    }).catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error.message));
-    });
+        } else {
+          settingsStore.changePage({ name: "PopupMain" });
+        }
+      }).catch((error) => {
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
+      });
   };
 
   const switchPage = (name, data) => {
@@ -216,9 +216,9 @@
           setThemeName: "light",
         },
       })
-      .catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error.message));
-      });
+        .catch((error) => {
+          console.error("Error on sendMessage:" + JSON.stringify(error.message));
+        });
     } else {
       body.classList.remove("light");
       settingsStore.setThemeName("dark");
@@ -229,9 +229,9 @@
           setThemeName: "dark",
         },
       })
-      .catch((error) => {
-        console.error("Error on sendMessage:" + JSON.stringify(error.message));
-      });
+        .catch((error) => {
+          console.error("Error on sendMessage:" + JSON.stringify(error.message));
+        });
     }
   }
 

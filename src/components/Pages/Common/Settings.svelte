@@ -76,7 +76,7 @@
         if (pincode.value.length > 0 ) {
           settingEnabledPinPad = true;
           settingsStore.setEnabledPinPad(true);
-          browser.runtime.sendMessage({ type: "setPincode", data: pincode.value })
+          browser.runtime.sendMessage({ type: "setPincode", data: pincode.value });
         } else {
           settingEnabledPinPad = false;
           settingsStore.setEnabledPinPad(false);
@@ -138,7 +138,7 @@
           placeholder={$_('Select or enter a new one') + '...'}
           noOptionsMessage={$_('No matches')}
           on:select={(event) => {language.dataset.value = event.detail.value; $locale = event.detail.value;}}
-          on:clear={(event) => {language.dataset.value = ""}}
+          on:clear={(event) => {language.dataset.value = "";}}
           />
       </Field>
     </div>
@@ -150,8 +150,8 @@
           value={currentCurrencyValue}
           placeholder={$_('Select or enter a new one') + '...'}
           noOptionsMessage={$_('No matches')}
-          on:select={(event) => {currency.dataset.value = event.detail.value}}
-          on:clear={(event) => {currency.dataset.value = ""}}
+          on:select={(event) => {currency.dataset.value = event.detail.value;}}
+          on:clear={(event) => {currency.dataset.value = "";}}
           />
       </Field>
     </div>

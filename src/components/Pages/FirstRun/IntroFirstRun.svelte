@@ -18,8 +18,8 @@
     // need to change storage on background
     browser.runtime
       .sendMessage({ type: "setSettings", 
-                     data: {"setLang": localeFromNavigator != null ? localeFromNavigator.split('-')[0]: "en"}
-                    });
+        data: {"setLang": localeFromNavigator != null ? localeFromNavigator.split('-')[0]: "en"}
+      });
   });
 </script>
 

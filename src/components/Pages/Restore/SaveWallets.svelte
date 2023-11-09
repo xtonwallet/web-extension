@@ -19,20 +19,20 @@
     let checkedKeys = keys.encrypted.filter((key) => key.checked);
     keys.encrypted = checkedKeys;
     browser.runtime.sendMessage({type: "addAccounts", data: keys})
-    .then((result) => {
-      if (!result.error) {
-        keys.encrypted = result;
-        settingsStore.setLastChangeDate();
-        accountStore.changeAccount(keys.encrypted[0]);
-        setKeys(keys);
-        nextPage();
-      } else {
-        error = result.error;
-      }
-    })
-    .catch((error) => {
-      console.error("Error on sendMessage:" + JSON.stringify(error.message));
-    });
+      .then((result) => {
+        if (!result.error) {
+          keys.encrypted = result;
+          settingsStore.setLastChangeDate();
+          accountStore.changeAccount(keys.encrypted[0]);
+          setKeys(keys);
+          nextPage();
+        } else {
+          error = result.error;
+        }
+      })
+      .catch((error) => {
+        console.error("Error on sendMessage:" + JSON.stringify(error.message));
+      });
   });
 
   const goBack = () => {

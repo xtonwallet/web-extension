@@ -81,9 +81,9 @@
   const collectGrantedPermissions = () => {
     const items = document.getElementsByClassName("check-permission");
     grantedPermissions = Array.prototype.filter.call(items, (item) => {return item.checked == true;})
-                          .map(function(item){
-                              return item.value;
-                          });
+      .map(function(item){
+        return item.value;
+      });
   };
 </script>
 

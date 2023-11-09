@@ -6,17 +6,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { BitReader } from "../BitReader";
+
 export function exoticLibrary(bits, refs) {
-    const reader = new BitReader(bits);
-    // type + hash
-    const size = 8 + 256;
-    if (bits.length !== size) {
-        throw new Error(`Library cell must have exactly (8 + 256) bits, got "${bits.length}"`);
-    }
-    // Check type
-    let type = reader.loadUint(8);
-    if (type !== 2) {
-        throw new Error(`Library cell must have type 2, got "${type}"`);
-    }
-    return {};
+  const reader = new BitReader(bits);
+  // type + hash
+  const size = 8 + 256;
+  if (bits.length !== size) {
+    throw new Error(`Library cell must have exactly (8 + 256) bits, got "${bits.length}"`);
+  }
+  // Check type
+  let type = reader.loadUint(8);
+  if (type !== 2) {
+    throw new Error(`Library cell must have type 2, got "${type}"`);
+  }
+  return {};
 }
