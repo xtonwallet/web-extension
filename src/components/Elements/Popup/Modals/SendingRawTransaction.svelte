@@ -135,7 +135,7 @@
     txData = {
       type: "sendRaw",
       params: {
-        amount: amount.value,
+        amount: toNano(amount.value),
         data: data.value,
         dataType: dataType.value,
         to: to.dataset.value,

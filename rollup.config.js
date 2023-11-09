@@ -172,7 +172,7 @@ const config = [{
     !production && watchAssets({ assets: ['src'] }),
     // If we're building for production (npm run build
     // instead of npm run dev), minify
-    production && terser(),
+    production && terser({"compress": false}),
     resolve({ browser: true }),
     replace({
       preventAssignment: true,

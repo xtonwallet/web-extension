@@ -1072,19 +1072,19 @@ export const accounts = () => {
   };
 
   const getSignForData = async (accountAddress, data) => {
-    const keyPair      = await decrypt(currentPassword, account.encrypted);
     const Tlib         = new TonLib();
     accountAddress = Tlib.parseAddress(accountAddress).toString({urlSafe: true, bounceable: true, testOnly: false});
     const account      = await vault.getAccount(accountAddress);
+    const keyPair      = await decrypt(currentPassword, account.encrypted);
     const TonLibClient = await Tlib.getClient();
     return await TonLibClient.signMessageInBox(keyPair, data);
   };
 
   const getSignature = async (accountAddress, unsigned) => {
-    const keyPair      = await decrypt(currentPassword, account.encrypted);
     const Tlib         = new TonLib();
     accountAddress = Tlib.parseAddress(accountAddress).toString({urlSafe: true, bounceable: true, testOnly: false});
     const account      = await vault.getAccount(accountAddress);
+    const keyPair      = await decrypt(currentPassword, account.encrypted);
     const TonLibClient = await Tlib.getClient();
     return await TonLibClient.getSignature(keyPair.secret, unsigned);
   };

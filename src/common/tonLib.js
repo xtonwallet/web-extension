@@ -278,7 +278,7 @@ class TonLib {
         len -= 2;
       }
 
-      proof.writeUint(domainLengthLE.join('').padEnd(8, '0'), 32, 16); //LE
+      proof.writeUint('0x' + domainLengthLE.join('').padEnd(8, '0'), 32); //LE
       proof.writeBuffer(Buffer.from(domain, 'utf-8'));
 
       const timestampHEX = timestamp.toString(16);
@@ -289,7 +289,7 @@ class TonLib {
         len -= 2;
       }
 
-      proof.writeUint(timestampLE.join('').padEnd(16, '0'), 64, 16); //LE
+      proof.writeUint('0x' + timestampLE.join('').padEnd(16, '0'), 64); //LE
 
       proof.writeBuffer(Buffer.from(payload, 'utf-8'));
       return proof.buffer().toString('hex');
