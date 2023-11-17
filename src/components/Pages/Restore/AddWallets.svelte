@@ -12,6 +12,10 @@
     unbounceble,
   } from "../../../common/utils.js";
 
+  import {
+    currentNetwork,
+  } from "../../../common/stores.js";
+
   //Context
   const { setKeys, nextPage, cancel } = getContext("functions");
 
@@ -194,7 +198,7 @@
           {#if $currentResolution.innerWidth > 768 && !$currentResolution.condition}
             <div title="{key.address}">{key.address}</div>
           {:else}
-            <div title="{key.address}">{shortAddress(unbounceble(key.address))}</div>
+            <div title="{key.address}">{shortAddress(unbounceble(key.address, $currentNetwork.server != "mainnet"))}</div>
           {/if}
         </div>
       </div>

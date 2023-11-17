@@ -95,11 +95,11 @@ class TonLib {
       }
 
       const WalletClass = this.instance.wallet.all[version];
-      const toAddress = TonWeb.Address.parse(address).toString({urlSafe: true, bounceable: false, testOnly: true});
+      const toAddress = TonWeb.Address.parse(address).toString({urlSafe: true, bounceable: false, testOnly: false});
       const walletContract = new WalletClass(this.instance.provider, {address: toAddress});
 
       const seqno = await walletContract.methods.seqno().call();
-      data.toAddress = TonWeb.Address.parse(data.toAddress).toString({urlSafe: true, bounceable: bounce, testOnly: true});
+      data.toAddress = TonWeb.Address.parse(data.toAddress).toString({urlSafe: true, bounceable: bounce, testOnly: false});
       data.seqno = seqno;
       data.secretKey = Unibabel.hexToBuffer(keyPair.secret);
       const transfer = walletContract.methods.transfer(data);

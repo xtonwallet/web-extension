@@ -929,7 +929,7 @@ export const controller = () => {
       for (let i in parsedParams.messages) {
         const modalData = { ...data };
         modalData.params = {};
-        modalData.params.to = TonWeb.Address.parse(parsedParams.messages[i].address).toString({urlSafe: true, bounceable: false, testOnly: true});
+        modalData.params.to = TonWeb.Address.parse(parsedParams.messages[i].address).toString({urlSafe: true, bounceable: false, testOnly: parsedParams.network != -239});
         modalData.params.amount = parsedParams.messages[i].amount;
         totalBalance += Number(parsedParams.messages[i].amount).valueOf();
         //(integer, optional): unix timestamp. after this moment transaction will be invalid.

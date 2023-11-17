@@ -93,7 +93,7 @@
   $: showGiver = $currentNetwork.test && $currentNetwork.giver != "";
 
   const copyAddress = (event) => {
-    copyToClipboard(unbounceble($currentAccount.address));
+    copyToClipboard(unbounceble($currentAccount.address, $currentNetwork.server != "mainnet"));
     const element = event.currentTarget;
     element.classList.toggle("fade-half");
     setTimeout(() => {
@@ -102,11 +102,11 @@
   };
 
   const showQRCode = (event) => {
-    openModal("ModalQRCode", { data: "ton://transfer/" + unbounceble($currentAccount.address) });
+    openModal("ModalQRCode", { data: "ton://transfer/" + unbounceble($currentAccount.address, $currentNetwork.server != "mainnet") });
   };
 
   const sendLink = (event) => {
-    openModal("ModalSendLink", { data: "ton://transfer/" + unbounceble($currentAccount.address) });
+    openModal("ModalSendLink", { data: "ton://transfer/" + unbounceble($currentAccount.address, $currentNetwork.server != "mainnet") });
   };
 
   const showNftContent = (event, asset) => {
@@ -236,7 +236,7 @@
 
   const viewAddressOnExplorer = () => {
     browser.tabs.create({
-      url: `${$currentNetwork.explorer}/address/${unbounceble($currentAccount.address)}`,
+      url: `${$currentNetwork.explorer}/address/${unbounceble($currentAccount.address, $currentNetwork.server != "mainnet")}`,
     });
   };
 
@@ -622,8 +622,8 @@
       {$currentAccount.nickname}
     </div>
     <div class="address">
-      <span title={unbounceble($currentAccount.address)}>
-        {shortAddress(unbounceble($currentAccount.address))}
+      <span title={unbounceble($currentAccount.address, $currentNetwork.server != "mainnet")}>
+        {shortAddress(unbounceble($currentAccount.address, $currentNetwork.server != "mainnet"))}
       </span>
     </div>
   </div>

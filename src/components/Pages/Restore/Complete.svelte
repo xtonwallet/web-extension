@@ -15,6 +15,10 @@
     unbounceble,
   } from "../../../common/utils.js";
 
+  import {
+    currentNetwork,
+  } from "../../../common/stores.js";
+
   //Context
   const { switchPage } = getContext("app_functions");
   const { changeStep } = getContext("functions");
@@ -138,9 +142,9 @@
           </div>
           <div id={`div-address-${i}`} class="address">
             {#if $currentResolution.innerWidth > 768 && !$currentResolution.condition}
-              <div title="{key.address}">{unbounceble(key.address)}</div>
+              <div title="{key.address}">{unbounceble(key.address, $currentNetwork.server != "mainnet")}</div>
             {:else}
-              <div title="{key.address}">{shortAddress(unbounceble(key.address))}</div>
+              <div title="{key.address}">{shortAddress(unbounceble(key.address, $currentNetwork.server != "mainnet"))}</div>
             {/if}
           </div>
         </div>

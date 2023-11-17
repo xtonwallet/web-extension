@@ -184,12 +184,12 @@ class Contract {
         const query = await queryPromise;
         const serialized = query.code ? // deploy
           {
-            address: query.address.toString({urlSafe: true, bounceable: false, testOnly: true}),
+            address: query.address.toString({urlSafe: true, bounceable: false, testOnly: false}),
             body: Buffer.from(await query.body.toBoc()).toString("base64"),
             init_code: Buffer.from(await query.code.toBoc()).toString("base64"),
             init_data: Buffer.from(await query.data.toBoc()).toString("base64"),
           } : {
-            address: query.address.toString({urlSafe: true, bounceable: true, testOnly: true}),
+            address: query.address.toString({urlSafe: true, bounceable: true, testOnly: false}),
             body: Buffer.from(await query.body.toBoc()).toString("base64"),
           };
 

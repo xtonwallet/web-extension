@@ -47,7 +47,7 @@
 
   const viewAddressOnExplorer = (explorer, address) => {
     browser.tabs.create({
-      url: `${explorer}/address/${unbounceble(address)}`,
+      url: `${explorer}/address/${unbounceble(address, $currentNetwork.server != "mainnet")}`,
     });
   };
 
@@ -142,9 +142,9 @@
         </p>
         <p class="owner">
           {$_("Owner")}
-          <a on:click={() => {viewAddressOnExplorer($currentNetwork.explorer, unbounceble(owner));}} href={"#"}>
-            <span title={unbounceble(owner)}>
-              {shortAddress(unbounceble(owner))}
+          <a on:click={() => {viewAddressOnExplorer($currentNetwork.explorer, unbounceble(owner, $currentNetwork.server != "mainnet"));}} href={"#"}>
+            <span title={unbounceble(owner, $currentNetwork.server != "mainnet")}>
+              {shortAddress(unbounceble(owner, $currentNetwork.server != "mainnet"))}
             </span>
           </a>
         </p>

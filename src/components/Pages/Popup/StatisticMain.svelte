@@ -103,7 +103,7 @@
     </div>
     <div class="address">
       <span title={$currentAccount.address}>
-        {shortAddress(unbounceble($currentAccount.address))}
+        {shortAddress(unbounceble($currentAccount.address, $currentNetwork.server != "mainnet"))}
       </span>
     </div>
   </div>

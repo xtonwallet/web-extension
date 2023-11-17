@@ -4,25 +4,23 @@
   import { Button, Icon } from "svelte-chota";
   import { _ } from "svelte-i18n";
   /* Icons https://materialdesignicons.com/ */
-  import { mdiCheck, mdiContentCopy } from "@mdi/js";
+  import { mdiContentCopy } from "@mdi/js";
 
   //Stores
   import { steps } from "../../../common/stores.js";
+
+  import {
+    currentNetwork,
+  } from "../../../common/stores.js";
 
   import {
     copyToClipboard,
     unbounceble,
   } from "../../../common/utils.js";
 
-  //Components
-  import Loading from "../../Elements/Loading.svelte";
-
   //Context
   const { appHome } = getContext("app_functions");
   const { changeStep } = getContext("functions");
-
-  //DOM Nodes
-  let formObj;
 
   $: accounts = undefined;
   $: errorMsg = "";
@@ -158,10 +156,10 @@
                   class="copy-text"
                   size="1.5"
                   color="grey"
-                  on:click={() => copyText(unbounceble(account.address))}
-                  on:keyup={() => copyText(unbounceble(account.address))}
+                  on:click={() => copyText(unbounceble(account.address, $currentNetwork.server != "mainnet"))}
+                  on:keyup={() => copyText(unbounceble(account.address, $currentNetwork.server != "mainnet"))}
                   />
-                <div class="key-text">{unbounceble(account.address)}</div>
+                <div class="key-text">{unbounceble(account.address, $currentNetwork.server != "mainnet")}</div>
               </div>
             </div>
             <div>

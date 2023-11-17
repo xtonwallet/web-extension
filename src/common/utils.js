@@ -557,10 +557,10 @@ const sleep = async (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
-const unbounceble = (address) => {
+const unbounceble = (address, testOnly = false) => {
   if (address != "") {
     const parsedAddress = TonWeb.Address.parse(address);
-    return parsedAddress.toString({urlSafe: true, bounceable: false, testOnly: true});
+    return parsedAddress.toString({urlSafe: true, bounceable: false, testOnly: testOnly});
   } else {
     return "";
   }

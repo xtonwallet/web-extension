@@ -249,7 +249,7 @@
         params: {
           amount: toNano(amount.value),
           message: message.value,
-          destination: unbounceble(destination.dataset.value),
+          destination: unbounceble(destination.dataset.value, $currentNetwork.server != "mainnet"),
           allBalance: allBalance,
         },
       };
@@ -259,14 +259,14 @@
         params: {
           amount: toNano(amount.value),
           message: message.value,
-          destination: unbounceble(destination.dataset.value),
+          destination: unbounceble(destination.dataset.value, $currentNetwork.server != "mainnet"),
           token: modalData.token
         },
       };
     }
     openModal("ModalConfirmTransaction", {
       id: modalData.id,
-      accountAddress: unbounceble($currentAccount.address),
+      accountAddress: unbounceble($currentAccount.address, $currentNetwork.server != "mainnet"),
       server: $currentNetwork.server,
       fee: fee,
       txData: txData,

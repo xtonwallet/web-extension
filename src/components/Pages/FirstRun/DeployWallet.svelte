@@ -132,7 +132,7 @@
   };
 
   const copyAddress = (event) => {
-    copyToClipboard(unbounceble($currentAccount.address));
+    copyToClipboard(unbounceble($currentAccount.address, $currentNetwork.server != "mainnet"));
     const element = event.currentTarget;
     element.classList.toggle("fade-half");
     setTimeout(() => {
@@ -171,7 +171,7 @@
       <Col size=6>
         <div id="qrcode"></div>
         <Icon src={mdiContentCopy} class="copy-text" size="1.5" color="grey" on:click={(e) => copyAddress(e)}/>
-        <span title="{unbounceble($currentAccount.address)}"> {shortAddress(unbounceble($currentAccount.address))} </span>
+        <span title="{unbounceble($currentAccount.address, $currentNetwork.server != "mainnet")}"> {shortAddress(unbounceble($currentAccount.address, $currentNetwork.server != "mainnet"))} </span>
       </Col>
       <Col size=6>
         {$_("Balance")}: <b>{fromNano(balance)} {$currentNetwork.coinName}</b>
